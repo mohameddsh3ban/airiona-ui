@@ -50,7 +50,18 @@ export function scaffold(spec) {
   }
 
   /* ---- template ---- */
+  // Inside an `each` element, paths starting with "item" refer to the current list item.
+  const bindExpr = (p) => (/^item(\.|\[|$)/.test(p) ? p : `data.${p}`);
+
   function renderEl(el, section, depth) {
+    if (!el.each) return renderOne(el, section, depth);
+    const pad = '  '.repeat(depth);
+    const data = (spec.data || []).find((d) => d.name === String(el.each).split(/[.[]/)[0]);
+    const empty = el.empty || data?.states?.empty || 'Nothing here yet.';
+    return `${pad}@for (item of data.${el.each}; track $index) {\n${renderOne(el, section, depth + 1)}\n${pad}} @empty {\n${pad}  <p class="pg-empty pg-el-${el.id}">${esc(empty)}</p>\n${pad}}`;
+  }
+
+  function renderOne(el, section, depth) {
     const pad = '  '.repeat(depth);
     if (el.component === 'html') {
       const kids = (el.children || []).map((k) => renderEl(k, section, depth + 1)).join('\n');
@@ -68,13 +79,17 @@ export function scaffold(spec) {
     if (attr) parts.push(attr);
     if (el.slot) parts.push(el.slot);
     parts.push(`class="pg-el-${el.id}"`);
-    for (const [k, v] of Object.entries(el.inputs || {})) {
+    // Field-level inputs (keyboard, autofill) apply to every element that places the field; element inputs win.
+    const fd = el.field ? (forms.get(section.form)?.fields || []).find((x) => x.name === el.field) : null;
+    const inputs = { ...(fd?.inputs || {}), ...(el.inputs || {}) };
+    if (fd?.label && inputs.label === undefined && c.angular.inputs.some((i) => i.name === 'label')) inputs.label = fd.label;
+    for (const [k, v] of Object.entries(inputs)) {
       if (/^(aria-|data-|role$|title$|href$|target$|rel$|type$)/.test(k) && attrSafe(String(v))) { parts.push(`${k}="${v}"`); continue; }
       if (attrSafe(v)) parts.push(`${k}="${v}"`);
       else if (typeof v === 'number' || typeof v === 'boolean' || v === null) parts.push(`[${k}]="${v}"`);
       else parts.push(`[${k}]="${literalField(el, k, v)}"`);
     }
-    for (const [k, p] of Object.entries(el.bind || {})) parts.push(`[${k}]="data.${p}"`);
+    for (const [k, p] of Object.entries(el.bind || {})) parts.push(`[${k}]="${bindExpr(p)}"`);
     if (el.field) {
       parts.push(`formControlName="${el.field}"`);
       if (c.angular.inputs.some((i) => i.name === 'error')) parts.push(`[error]="${camel(section.form)}Form.error('${el.field}')"`);
@@ -100,10 +115,11 @@ export function scaffold(spec) {
   const sectionsHtml = (spec.sections || []).map((s) => {
     const body = (s.elements || []).map((el) => renderEl(el, s, s.form ? 4 : 3)).join('\n');
     const heading = s.title && s.heading !== false ? `    <h2 class="pg-h m-title-2" id="pg-h-${s.id}">${esc(s.title)}</h2>\n` : '';
+    const intro = s.intro ? `    <p class="pg-intro body">${esc(s.intro)}</p>\n` : '';
     const grid = s.form
       ? `    <form class="pg-g" [formGroup]="${camel(s.form)}" (ngSubmit)="submit${pascal(s.form)}()" novalidate>\n${body}\n    </form>`
       : `    <div class="pg-g">\n${body}\n    </div>`;
-    return `  <section class="pg-s pg-s--${s.id}"${heading ? ` aria-labelledby="pg-h-${s.id}"` : s.title ? ` aria-label="${esc(s.title)}"` : ''}>\n${heading}${grid}\n  </section>`;
+    return `  <section class="pg-s pg-s--${s.id}"${heading ? ` aria-labelledby="pg-h-${s.id}"` : s.title ? ` aria-label="${esc(s.title)}"` : ''}>\n${heading}${intro}${grid}\n  </section>`;
   }).join('\n\n');
 
   /* ---- forms ---- */
@@ -138,13 +154,16 @@ export function scaffold(spec) {
   /* ---- styles: mobile first ---- */
   css.push(`/* ${spec.title}: generated from docs/pages/${slug}/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */`);
   css.push(':host { display: block; }');
-  css.push('.pg { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px calc(132px + env(safe-area-inset-bottom, 0px)); }');
+  css.push('.pg { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }');
   css.push('.pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }');
   css.push('.pg-h { margin: 0; }');
+  css.push('.pg-intro { color: var(--ink-muted); max-width: 65ch; }');
   css.push('.pg-g { min-width: 0; gap: 16px; }');
   css.push('.pg-g > * { min-width: 0; }');
   css.push('.pg :is(h1, h2, h3, h4, p, ul, ol, figure) { margin: 0; }');
+  css.push('.pg img { display: block; max-width: 100%; height: auto; }');
   css.push('.pg-error { margin: -8px 0 0; font: 500 13px/18px var(--font-sans); color: var(--danger); }');
+  css.push('.pg-empty { margin: 0; padding: 16px; border-radius: 16px; background: var(--surface-sunken); color: var(--ink-muted); }');
   css.push('.pg-gap { padding: 16px; border-radius: 16px; border: 1.5px dashed var(--line-strong); color: var(--ink-subtle); font: 500 13px/18px var(--font-mono); }');
   css.push('.pg-link { font: 600 14px/20px var(--font-sans); color: var(--blue-700); text-decoration: none; justify-self: start; padding: 12px 0; }');
   css.push('.pg-link:hover { text-decoration: underline; }');
@@ -152,6 +171,28 @@ export function scaffold(spec) {
   css.push('.pg-divider::before, .pg-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }');
   css.push('.pg-muted { color: var(--ink-muted); }');
   css.push('.pg-toast { position: fixed; z-index: 60; left: 16px; right: 16px; top: calc(16px + env(safe-area-inset-top, 0px)); display: flex; justify-content: center; }');
+
+  // Per-breakpoint values cascade upward (base -> md -> lg). RANGES are exclusive, so a value set at one breakpoint
+  // and changed at the next never leaks into the other.
+  const RANGES = { base: '(max-width: 767.98px)', md: '(min-width: 768px) and (max-width: 1279.98px)', lg: '(min-width: 1280px)' };
+  const cascade = (obj, def) => { let v = def; return BPS.map(([bp]) => { if (obj && obj[bp] !== undefined) v = obj[bp]; return [bp, v]; }); };
+  const byRange = { base: [], md: [], lg: [] };
+  for (const s of spec.sections || []) {
+    const sel = `.pg-s--${s.id}`;
+    for (const [bp, shown] of cascade(s.show, true)) if (shown === false) byRange[bp].push(`${sel} { display: none !important; }`);
+    const sticky = cascade(s.sticky, 'none');
+    if (sticky.some(([, v]) => v !== 'none')) {
+      // Components such as StickyActionBar position themselves for a phone frame; in a page the section does it,
+      // so the bar has real height (the covered-content check can see it) and "none" really puts it back in the flow.
+      css.push(`${sel} > .pg-g > * { position: relative; inset: auto; }`);
+      for (const [bp, v] of sticky) {
+        if (v === 'bottom') byRange[bp].push(`${sel} { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }`, '.pg { padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }');
+        if (v === 'top') byRange[bp].push(`${sel} { position: sticky; z-index: 20; top: env(safe-area-inset-top, 0px); }`);
+      }
+    }
+  }
+  for (const { el } of walkElements(spec)) for (const [bp, shown] of cascade(el.show, true)) if (shown === false) byRange[bp].push(`.pg-el-${el.id} { display: none !important; }`);
+
   const asides = (spec.sections || []).filter((s) => s.area?.lg === 'aside');
   for (const [bp, min] of BPS) {
     const rules = [];
@@ -161,31 +202,25 @@ export function scaffold(spec) {
       if (lay) rules.push(`${sel} > .pg-g { ${LAYOUT_CSS[lay]} }`);
       if (lay === 'scroll-x') rules.push(`${sel} > .pg-g > * { scroll-snap-align: start; }`);
       else if (s.layout?.[bp] && bp !== 'base' && s.layout.base === 'scroll-x') rules.push(`${sel} > .pg-g { overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }`);
-      const st = s.sticky?.[bp];
-      if (st === 'bottom') rules.push(`${sel} { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }`);
-      if (st === 'top') rules.push(`${sel} { position: sticky; z-index: 20; top: env(safe-area-inset-top, 0px); }`);
-      if (st === 'none') rules.push(`${sel} { position: static; }`);
-      if (s.bleed?.[bp] === true) rules.push(`${sel} { margin-inline: -16px; }`);
+      if (s.bleed?.[bp] === true) rules.push(`${sel} { margin-inline: ${bp === 'base' ? '-16px' : bp === 'md' ? '-24px' : '0'}; }`);
       if (s.bleed?.[bp] === false) rules.push(`${sel} { margin-inline: 0; }`);
-      if (s.show?.[bp] === false) rules.push(`${sel} { display: none; }`);
-      if (s.show?.[bp] === true && bp !== 'base') rules.push(`${sel} { display: grid; }`);
     }
     for (const { el } of walkElements(spec)) {
-      if (el.span?.[bp]) rules.push(`.pg-el-${el.id} { grid-column: span ${el.span[bp]}; }`);
-      if (el.show?.[bp] === false) rules.push(`.pg-el-${el.id} { display: none !important; }`);
+      const span = el.span?.[bp];
+      if (span) rules.push(`.pg-el-${el.id} { grid-column: ${span === 'full' ? '1 / -1' : `span ${span}`}; }`);
     }
     if (bp === 'md') rules.unshift('.pg { padding-inline: 24px; gap: 32px; }');
     if (bp === 'lg') {
-      rules.unshift('.pg { padding: 32px 32px 64px; gap: 36px; }');
+      rules.unshift('.pg { padding-inline: 32px; padding-top: 32px; gap: 36px; }');
       if (asides.length) {
         // Rows at desktop: "full" sections span both columns and split the page into blocks; inside a block the
         // main sections stack in column 1 and the block's aside sits beside them in column 2, sticky.
-        rules.push(`.pg { grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); column-gap: 40px; align-items: start; }`);
+        rules.push('.pg { grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); column-gap: 40px; align-items: start; }');
         let row = 1, block = { start: 1, mains: 0, asides: [] };
         const close = () => {
           block.asides.forEach((s) => rules.push(`.pg > .pg-s--${s.id} { grid-column: 2; grid-row: ${block.start} / span ${Math.max(1, block.mains)}; position: sticky; top: 24px; }`));
         };
-        for (const s of (spec.sections || []).filter((x) => x.show?.lg !== false && !(x.show?.base === false && x.show?.md !== true && x.show?.lg !== true))) {
+        for (const s of (spec.sections || []).filter((x) => cascade(x.show, true)[2][1] !== false)) {
           const area = s.area?.lg || 'main';
           if (area === 'full') { close(); if (block.mains === 0 && block.asides.length) row++; rules.push(`.pg > .pg-s--${s.id} { grid-column: 1 / -1; grid-row: ${row}; }`); row++; block = { start: row, mains: 0, asides: [] }; }
           else if (area === 'aside') block.asides.push(s);
@@ -197,6 +232,7 @@ export function scaffold(spec) {
     if (!rules.length) continue;
     css.push(min ? `@media (min-width: ${min}px) {\n  ${rules.join('\n  ')}\n}` : rules.join('\n'));
   }
+  for (const [bp, rules] of Object.entries(byRange)) if (rules.length) css.push(`@media ${RANGES[bp]} {\n  ${[...new Set(rules)].join('\n  ')}\n}`);
 
   /* ---- component ---- */
   const usesForms = (spec.forms || []).length > 0;

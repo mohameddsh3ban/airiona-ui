@@ -1,32 +1,55 @@
 // `shoot`: builds the playground, opens the page at 390 (touch phone), 768 and 1280 px, saves full-page
 // screenshots and runs the mobile-first checks. Errors fail the run; warnings go in the report.
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
-import { PAGES, ROOT } from './core.mjs';
+import { PAGES, PLAYGROUND, ROOT } from './core.mjs';
 import { serve } from '../../serve.mjs';
 
 const VIEWPORTS = [
-  { name: '390', width: 390, height: 844, mobile: true },
-  { name: '768', width: 768, height: 1024, mobile: true },
-  { name: '1280', width: 1280, height: 860, mobile: false },
+  { name: '390', width: 390, height: 844, touch: true, scale: 2 },
+  { name: '768', width: 768, height: 1024, touch: true, scale: 1 },
+  { name: '1280', width: 1280, height: 860, touch: false, scale: 1 },
 ];
 
-export function buildPlayground() {
+/**
+ * Builds the playground. With a slug, builds only that page (configuration "check": a routes file and tsconfig
+ * limited to it), so one page's type error never blocks another page's check.
+ */
+export function buildPlayground(slug) {
+  if (slug) {
+    const app = join(ROOT, 'projects/playground');
+    const page = join(PLAYGROUND, slug, `${slug}.page.ts`);
+    const cls = (/^\/\/ @page \S+ (\w+)/m.exec(readFileSync(page, 'utf8')) || [])[1];
+    writeFileSync(join(PLAYGROUND, 'pages.routes.check.ts'), `// Written by tools/page/lib/shoot.mjs for a single-page build. Not committed.\nimport { Routes } from '@angular/router';\n\nexport const PAGE_ROUTES: Routes = [\n  { path: '${slug}', loadComponent: () => import('./${slug}/${slug}.page').then((m) => m.${cls}) },\n];\n`);
+    writeFileSync(join(app, 'tsconfig.check.json'), JSON.stringify({
+      extends: './tsconfig.app.json',
+      include: ['src/main.ts', 'src/app/*.ts', 'src/app/shared/**/*.ts', 'src/app/pages/pages.routes.check.ts', `src/app/pages/${slug}/**/*.ts`],
+    }, null, 2) + '\n');
+    try {
+      execSync('npx ng build playground --configuration check --base-href ./ --output-path dist/playground', { stdio: 'inherit', cwd: ROOT });
+    } finally {
+      // The single-page files exist only for this build.
+      rmSync(join(PLAYGROUND, 'pages.routes.check.ts'), { force: true });
+      rmSync(join(app, 'tsconfig.check.json'), { force: true });
+    }
+    return;
+  }
   execSync('npx ng build playground --configuration development --base-href ./ --output-path dist/playground', { stdio: 'inherit', cwd: ROOT });
 }
 
 export async function shoot(spec, { build = true, port = 4474 } = {}) {
   const { chromium } = await import('playwright');
-  if (build) buildPlayground();
+  if (build) buildPlayground(spec.page);
   const out = join(PAGES, spec.page, 'shots');
   mkdirSync(out, { recursive: true });
   const server = await serve(join(ROOT, 'dist/playground/browser'), port, { quiet: true });
   const browser = await chromium.launch();
-  const report = { page: spec.page, at: new Date().toISOString(), viewports: {}, errors: [], warnings: [] };
+  // No timestamp: the report is committed next to the shots, and an unchanged page should leave no diff.
+  const report = { page: spec.page, viewports: {}, errors: [], warnings: [] };
   try {
     for (const vp of VIEWPORTS) {
-      const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: 2, isMobile: vp.mobile, hasTouch: vp.mobile });
+      const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: vp.scale, hasTouch: vp.touch });
       const page = await ctx.newPage();
       const pageErrors = [];
       page.on('pageerror', (e) => pageErrors.push(e.message));
@@ -40,15 +63,34 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
         scrollTo(0, 0);
       });
       await page.waitForTimeout(1400);
-      const metrics = await page.evaluate(() => {
-        const vw = innerWidth;
+      const metrics = await page.evaluate((vw) => {
         const visible = (el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none'; };
         const label = (el) => `${el.tagName.toLowerCase()}${el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : ''}${el.textContent ? ` "${el.textContent.trim().slice(0, 24)}"` : ''}`;
-        const overflow = document.documentElement.scrollWidth - vw;
-        const wide = overflow > 1 ? [...document.querySelectorAll('main.pg *')].filter((el) => { const r = el.getBoundingClientRect(); return r.right > vw + 1 && visible(el) && !el.closest('[style*="overflow"], .m-snap, .m-chips, .pg-g'); }).slice(0, 5).map(label) : [];
+        // Measured against the configured width, not innerWidth (which a page that overflows can widen).
+        const overflow = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - vw;
+        const clipped = (el) => { for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; };
+        // Too wide: an element whose box, or whose content spilling out of a visible-overflow box, passes the edge.
+        const reach = (el) => { const r = el.getBoundingClientRect(); return Math.max(r.right, getComputedStyle(el).overflowX === 'visible' ? r.left + el.scrollWidth : 0); };
+        const over = overflow > 1 ? [...document.querySelectorAll('body *')].filter((el) => visible(el) && reach(el) > vw + 1 && !clipped(el)) : [];
+        // Report the innermost culprits (the element that is actually too wide, not every ancestor it pushes).
+        const wide = over.filter((el) => !over.some((o) => o !== el && el.contains(o))).slice(0, 5).map((el) => `${label(el).slice(0, 60)} (reaches ${Math.round(reach(el))}px)`);
         const targets = [...document.querySelectorAll('main.pg :is(button, a[href], input, select, textarea, [role=button], [role=tab], [role=radio], [role=switch], [role=checkbox], [role=option])')].filter(visible);
         // A visually hidden native input is operated through its label: measure the label.
-        const box = (el) => { const r = el.getBoundingClientRect(); const lab = el.closest('label'); return r.width <= 2 && lab ? lab.getBoundingClientRect() : r; };
+        // A transparent ::before/::after with negative insets enlarges the hit area without changing the look.
+        const box = (el) => {
+          const lab = el.closest('label');
+          let r = el.getBoundingClientRect();
+          if (r.width <= 2 && lab) r = lab.getBoundingClientRect();
+          let { left, top, right, bottom } = r;
+          for (const ps of ['::before', '::after']) {
+            const cs = getComputedStyle(el, ps);
+            if (cs.content === 'none' || cs.position !== 'absolute') continue;
+            const n = (v) => (v.endsWith('px') ? parseFloat(v) : 0);
+            left = Math.min(left, r.left + n(cs.left)); top = Math.min(top, r.top + n(cs.top));
+            right = Math.max(right, r.right - n(cs.right)); bottom = Math.max(bottom, r.bottom - n(cs.bottom));
+          }
+          return { width: right - left, height: bottom - top };
+        };
         const small = targets.map((el) => { const r = box(el); return { el: label(el), w: Math.round(r.width), h: Math.round(r.height) }; }).filter((t) => Math.max(t.w, t.h) < 44 || Math.min(t.w, t.h) < 24);
         const tiny = [...document.querySelectorAll('main.pg *')].filter((el) => el.childNodes.length && [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && visible(el) && parseFloat(getComputedStyle(el).fontSize) < 11).slice(0, 5).map(label);
         const fixed = [...document.querySelectorAll('main.pg *')].filter((el) => getComputedStyle(el).position === 'fixed' && visible(el));
@@ -56,7 +98,7 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
         const levels = [...document.querySelectorAll('main.pg :is(h1, h2, h3, h4)')].filter(visible).map((h) => +h.tagName[1]);
         const skips = levels.filter((l, i) => i > 0 && l > levels[i - 1] + 1).length;
         return { overflow, wide, small: small.slice(0, 12), smallCount: small.length, targetCount: targets.length, tiny, fixedCount: fixed.length, height: document.documentElement.scrollHeight, h1s, skips };
-      });
+      }, vp.width);
       // Content hidden behind a fixed bottom bar once scrolled to the end.
       const covered = await page.evaluate(() => {
         scrollTo(0, document.documentElement.scrollHeight);
@@ -71,7 +113,7 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
       const v = { ...metrics, covered, pageErrors: [...pageErrors] };
       report.viewports[vp.name] = v;
       if (pageErrors.length) report.errors.push(`${vp.name}px: script errors: ${pageErrors.slice(0, 3).join(' | ').slice(0, 300)}`);
-      if (vp.mobile && metrics.overflow > 1) report.errors.push(`${vp.name}px: page scrolls sideways by ${metrics.overflow}px (${metrics.wide.join(', ') || 'find the wide element'})`);
+      if (metrics.overflow > 1) report.errors.push(`${vp.name}px: page scrolls sideways by ${metrics.overflow}px: ${metrics.wide.join(', ') || 'an element wider than the screen'}`);
       if (vp.name === '390') {
         const bad = metrics.small.filter((t) => Math.min(t.w, t.h) < 24);
         if (bad.length) report.errors.push(`390px: ${bad.length} tap targets under 24px: ${bad.slice(0, 4).map((t) => `${t.el} ${t.w}x${t.h}`).join(', ')}`);
@@ -88,8 +130,9 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
         for (const f of spec.forms) {
           const required = (f.fields || []).filter((fd) => (fd.validators || []).some((x) => x.type === 'required' || x.type === 'requiredTrue') && (fd.default === undefined || fd.default === null || fd.default === '')).length;
           const expected = (f.fields || []).flatMap((fd) => Object.values(fd.messages || {}));
-          const res = await page.evaluate(async (expected) => {
-            const form = document.querySelector('main.pg form');
+          const section = (spec.sections || []).find((x) => x.form === f.id);
+          const res = await page.evaluate(async ({ expected, sel }) => {
+            const form = document.querySelector(sel);
             const btn = form?.querySelector('[type="submit"]');
             if (!btn) return { error: 'no submit button in the form' };
             btn.click();
@@ -99,7 +142,7 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
             const msgs = expected.filter((m) => text.some((t) => t.includes(m)));
             const active = document.activeElement;
             return { msgs, focusInForm: !!active && form.contains(active) && active !== btn, focused: active ? active.tagName.toLowerCase() + (active.getAttribute('aria-label') ? `[${active.getAttribute('aria-label')}]` : '') : null };
-          }, expected);
+          }, { expected, sel: `main.pg .pg-s--${section?.id} form` });
           report.viewports[vp.name][`submit:${f.id}`] = res;
           if (res.error) report.errors.push(`form ${f.id}: ${res.error}`);
           else {

@@ -7,7 +7,7 @@ Start from what the element does (`suggest "<what it does>"`), read the candidat
 | Need | Phone (base) | Desktop (lg) |
 |---|---|---|
 | App navigation, 3–5 destinations | `TabBar` (sticky bottom section) | `TopNav`; operator tools `SideNav` |
-| Screen title on a tab's root | `AppBar large` | `PageHeader` (operator) or an `h1` |
+| Screen title on a tab's root | `AppBar large` (its title is the page h1; `headingLevel: 2` when the page has another h1) | `PageHeader` (operator) or an `h1` |
 | Screen title with back | `AppBar` (compact, `showBack`) | `TopNav` + `h1`, back as a link |
 | Home greeting | `GreetingBar` or `HeroHeader` with search overlapping | same, wider |
 | Detail page top (stay, place) | `PlaceHero` | `PlaceHero` in the main column, booking card in `aside` |
@@ -24,7 +24,7 @@ Start from what the element does (`suggest "<what it does>"`), read the candidat
 | Category or quick filter row | `ChipScroller` (single choice) or `Chip`s (multi) | `Tabs` |
 | Full filter set | `BottomSheet` on phone, a side panel on desktop | `Dialog` |
 | Sort | `Select` (desktop) / `ActionSheet` (phone) | |
-| 2–3 view modes | `MobileSegmented` (phone), `SegmentedControl` (desktop) | `Tabs` (those are for content panels) |
+| 2–3 view modes | `MobileSegmented` (phone), `SegmentedControl` (desktop): for a form field give the field `"component": ["MobileSegmented", "SegmentedControl"]` and place both, each hidden at the other width | `Tabs` (those are for content panels) |
 
 ## Choosing one value
 

@@ -48,3 +48,5 @@ Thumbs.db
 /packages/react/dist
 /packages/react/assets
 /dist
+/projects/playground/tsconfig.check.json
+/projects/playground/src/app/pages/pages.routes.check.ts

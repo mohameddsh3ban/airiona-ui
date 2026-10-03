@@ -211,6 +211,19 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "check": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": false,
+              "namedChunks": false,
+              "tsConfig": "projects/playground/tsconfig.check.json",
+              "fileReplacements": [
+                {
+                  "replace": "projects/playground/src/app/pages/pages.routes.ts",
+                  "with": "projects/playground/src/app/pages/pages.routes.check.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

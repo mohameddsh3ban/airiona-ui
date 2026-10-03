@@ -1948,7 +1948,7 @@
       return h("header", { className: cx("m-appbar", "m-appbar--large", "is-" + tone, props.className) },
         h("div", { className: "m-appbar__row" }, back || h("span", null), h("div", { className: "m-appbar__actions" }, props.actions)),
         props.eyebrow ? h("span", { className: "m-appbar__eyebrow" }, props.eyebrow) : null,
-        h("h1", { className: "m-appbar__large" }, props.title, props.accent ? h("i", { className: "m-appbar__dot", "aria-hidden": "true" }) : null, props.titleSuffix ? h("span", { className: "m-appbar__suffix" }, props.titleSuffix) : null),
+        h(props.headingLevel === 2 ? "h2" : "h1", { className: "m-appbar__large" }, props.title, props.accent ? h("i", { className: "m-appbar__dot", "aria-hidden": "true" }) : null, props.titleSuffix ? h("span", { className: "m-appbar__suffix" }, props.titleSuffix) : null),
         props.subtitle ? h("p", { className: "m-appbar__sub" }, props.subtitle) : null);
     }
     return h("header", { className: cx("m-appbar", "is-" + tone, props.className) },

@@ -36,14 +36,19 @@ import { cx } from '../core/utils';
       @if (eyebrow()) {
         <span class="m-appbar__eyebrow">{{ eyebrow() }}</span>
       }
-      <h1 class="m-appbar__large">{{ title() }}
+      <ng-template #largeTitle>{{ title() }}
         @if (accent()) {
           <i class="m-appbar__dot" aria-hidden="true"></i>
         }
         @if (titleSuffix()) {
           <span class="m-appbar__suffix">{{ titleSuffix() }}</span>
         }
-      </h1>
+      </ng-template>
+      @if (headingLevel() === 2) {
+        <h2 class="m-appbar__large"><ng-container [ngTemplateOutlet]="largeTitle" /></h2>
+      } @else {
+        <h1 class="m-appbar__large"><ng-container [ngTemplateOutlet]="largeTitle" /></h1>
+      }
       @if (subtitle()) {
         <p class="m-appbar__sub">{{ subtitle() }}</p>
       }
@@ -72,6 +77,8 @@ export class ArAppBar {
   /** Blue square after the large title. */
   readonly accent = input(false, { transform: booleanAttribute });
   readonly titleSuffix = input<string>();
+  /** Large title heading level: 1 (default) on a tab's root screen, 2 when the page has its own h1 (for example a desktop header). */
+  readonly headingLevel = input<1 | 2>(1);
   readonly tone = input<'light' | 'dark'>('light');
   /** Shows the round back button, which emits (back). React: passing `onBack`. */
   readonly showBack = input(false, { transform: booleanAttribute });

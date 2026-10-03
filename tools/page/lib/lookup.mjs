@@ -16,13 +16,17 @@ const SYNONYMS = {
   'sticky|bottom bar|price bar|total|footer bar': ['StickyActionBar', 'BookingBar'],
   'bottom nav|tab bar|tabs bar|app navigation|navigation bar': ['TabBar', 'SideNav', 'TopNav'],
   'header|top bar|app bar|navbar|back button|title bar': ['AppBar', 'TopNav', 'PageHeader', 'GreetingBar', 'HeroHeader'],
-  'hero|banner|welcome|greeting': ['HeroHeader', 'GreetingBar', 'PlaceHero', 'RouteHeader', 'ProfileHeader'],
+  'hero|banner|welcome|greeting|headline|hero banner': ['HeroHeader', 'GreetingBar', 'PlaceHero', 'RouteHeader', 'ProfileHeader'],
   'tabs|sections|switch view|segments': ['Tabs', 'SegmentedControl', 'MobileSegmented'],
   'listing|property|hotel|stay|room|villa|cabin card|place': ['StayCard', 'PlaceCard', 'DestinationCard', 'MiniDestination', 'PlaceHero'],
   'destination|city|explore|inspiration|deal|offer': ['DestinationCard', 'MiniDestination', 'PlaceCard', 'SnapCarousel'],
-  'flight|ticket|result|itinerary|fare': ['FlightTicket', 'TicketCard', 'TripRow', 'RouteHeader', 'BoardingPass'],
+  'flight|ticket|flight result|flight results|itinerary|fare': ['FlightTicket', 'TicketCard', 'TripRow', 'RouteHeader', 'BoardingPass'],
   'boarding pass|qr|scan|e-ticket|check in pass': ['BoardingPass', 'QRCode'],
-  'carousel|slider|horizontal list|swipe cards': ['SnapCarousel', 'ChipScroller'],
+  'carousel|slider|horizontal|horizontally|swipe cards|swipeable': ['SnapCarousel', 'ChipScroller'],
+  'row of cards|scrolling row of|scrolling cards|card carousel|cards that scroll': ['SnapCarousel'],
+  'row of chips|scrolling chips|chip row': ['ChipScroller'],
+  'airport|origin|from airport|to airport|departure airport|arrival airport|destination airport|origin and destination': ['Select', 'FieldTile', 'FlightSearchSheet', 'BookingSearch'],
+  'one way|round trip|trip type|multi-city|multi city': ['MobileSegmented', 'SegmentedControl', 'FlightSearchSheet'],
   'list|rows|items|history|upcoming trips': ['TripRow', 'LetterRow', 'ActivityFeed', 'DetailList', 'SwipeRow'],
   'details|facts|summary|price breakdown|receipt|key value': ['DetailList', 'InfoStatRow', 'AmenityList', 'Badge'],
   'amenities|facilities|features': ['AmenityList', 'InfoStatRow'],
@@ -46,7 +50,8 @@ const SYNONYMS = {
   'onboarding|intro|first run|welcome slides': ['OnboardingFlow'],
   'transition|page change|route animation': ['RouteTransition', 'ScreenStack'],
   'icon|glyph': ['Icon', 'IconButton'],
-  'image|photo|picture|art': ['Scene', 'PlaceHero', 'StayCard'],
+  'image|photo|picture|photograph': ['PlaceHero', 'StayCard', 'Scene'],
+  '3d|art|illustration|3d art': ['HeroHeader', 'PromptCard', 'IllustrationCallout', 'RouteHeader'],
   'section title|section heading|view all|see all': ['SectionHeader'],
   'floating button|add|create|new': ['Fab', 'IconButton', 'Button'],
   'map|route|from to arc': ['RouteHeader', 'HeroHeader'],
@@ -55,7 +60,7 @@ const SYNONYMS = {
 
 export function suggest(query, limit = 6) {
   const q = query.toLowerCase();
-  const STOP = new Set(['and', 'the', 'with', 'for', 'from', 'into', 'that', 'this', 'your', 'our', 'their', 'when', 'where', 'what', 'which', 'shows', 'show', 'user', 'users', 'page', 'button', 'card', 'list']);
+  const STOP = new Set(['and', 'the', 'with', 'for', 'from', 'into', 'that', 'this', 'your', 'our', 'their', 'when', 'where', 'what', 'which', 'shows', 'show', 'user', 'users', 'page', 'button', 'card', 'cards', 'list']);
   const words = q.split(/[^a-z0-9-]+/).filter((w) => w.length > 2 && !STOP.has(w));
   const scores = new Map();
   const add = (name, s, why) => {
@@ -63,16 +68,22 @@ export function suggest(query, limit = 6) {
     cur.s += s; if (why) cur.why.add(why);
     scores.set(name, cur);
   };
+  const isPhrase = (k) => k.includes(' ') || k.includes('-');
+  const wordHit = (k) => words.some((w) => w === k || w === `${k}s` || w === `${k}es` || (w.length > 4 && k.startsWith(w)));
+  // Phrases the query contains ("destination airport") outrank the single words inside them ("destination"):
+  // a word covered by a matched phrase neither triggers its own synonym entry nor the name bonus.
+  const phrases = Object.keys(SYNONYMS).flatMap((k) => k.split('|')).filter((k) => isPhrase(k) && q.includes(k));
+  const covered = (w) => phrases.some((p) => p.split(/[ -]+/).some((x) => x === w || `${x}s` === w));
   for (const [keys, names] of Object.entries(SYNONYMS)) {
-    const hit = keys.split('|').find((k) => (k.includes(' ') ? q.includes(k) : words.includes(k) || words.some((w) => w.length > 4 && k.startsWith(w))));
-    if (hit) names.forEach((n, i) => add(n, 10 - i * 1.5, `"${hit}"`));
+    const hit = keys.split('|').sort((a, b) => b.length - a.length).find((k) => (isPhrase(k) ? q.includes(k) : wordHit(k) && !covered(k)));
+    if (hit) names.forEach((n, i) => add(n, 10 - i * 2 + (isPhrase(hit) ? 6 : 0), `"${hit}"`));
   }
   for (const c of manifest().components) {
     const name = c.name.toLowerCase();
     const text = `${c.summary} ${c.notes.join(' ')} ${c.provides}`.toLowerCase();
     for (const w of words) {
-      if (w.length >= 4 && name.includes(w)) add(c.name, 8, `name has "${w}"`);
-      else if (text.includes(w)) add(c.name, 1.5);
+      if (w.length >= 4 && name.includes(w) && !covered(w)) add(c.name, 8, `name has "${w}"`);
+      else if (text.includes(w)) add(c.name, 1);
     }
   }
   return [...scores.entries()].sort((a, b) => b[1].s - a[1].s).slice(0, limit).map(([name, v]) => {

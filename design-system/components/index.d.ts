@@ -481,6 +481,7 @@ export interface AppBarProps {
   /** Shows the back button; pass null for one without a handler. */ onBack?: (() => void) | null; backLabel?: string;
   actions?: React.ReactNode; eyebrow?: string; subtitle?: React.ReactNode; /** Blue square after the large title. */ accent?: boolean; titleSuffix?: string;
   tone?: 'light' | 'dark'; className?: string;
+  /** Large title heading level: 1 (default) on a tab's root screen, 2 when the page has its own h1. */ headingLevel?: 1 | 2;
 }
 export declare function AppBar(props: AppBarProps): React.ReactElement;
 

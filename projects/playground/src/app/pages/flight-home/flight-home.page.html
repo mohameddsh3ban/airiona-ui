@@ -1,0 +1,166 @@
+<!-- Flight home: generated from docs/pages/flight-home/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--topbar" aria-label="Airiona">
+    <div class="pg-g">
+      <ar-app-bar class="pg-el-appBar" title="Airiona" [large]="true" eyebrow="Ready for take-off" [headingLevel]="2">
+        <button arButton arActions class="pg-el-appBarSignIn" variant="secondary" size="sm" (click)="goToSignIn($event)">Sign in</button>
+      </ar-app-bar>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="flights">
+        <button arButton arActions class="pg-el-navSignIn" variant="primary" size="sm" (click)="goToSignIn($event)">Sign in</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--hero" aria-label="Convenient online flight booking">
+    <div class="pg-g">
+      <ar-hero-header
+        class="pg-el-heroHeader"
+        eyebrow="Ready for take-off"
+        title="Convenient online flight booking"
+        image="assets/art/jet-3d.webp"
+        [headingLevel]="1"
+      >
+        <p arBelowTitle class="body pg-el-heroLede">Flights, stays and transfers in one booking.</p>
+      </ar-hero-header>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--search" aria-label="Search flights">
+    <form class="pg-g" [formGroup]="search" (ngSubmit)="submitSearch()" novalidate>
+        <ar-mobile-segmented
+          class="pg-el-tripType"
+          label="Trip type"
+          tone="brand"
+          [options]="tripTypeOptions"
+          formControlName="tripType"
+        />
+        @if (searchForm.error('tripType'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-segmented-control
+          class="pg-el-tripTypeDesktop"
+          label="Trip type"
+          tone="brand"
+          [options]="tripTypeDesktopOptions"
+          formControlName="tripType"
+        />
+        @if (searchForm.error('tripType'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-select
+          class="pg-el-from"
+          label="From"
+          placeholder="City or airport"
+          [searchable]="true"
+          searchPlaceholder="Type a city or code"
+          iconStart="paper-airplane"
+          emptyText="No airport matches that"
+          [options]="data.airports"
+          formControlName="from"
+          [error]="searchForm.error('from')"
+        />
+        <ar-select
+          class="pg-el-to"
+          label="To"
+          placeholder="City or airport"
+          [searchable]="true"
+          searchPlaceholder="Type a city or code"
+          iconStart="map-pin"
+          emptyText="No airport matches that"
+          [options]="data.airports"
+          formControlName="to"
+          [error]="searchForm.error('to')"
+        />
+        <ar-date-picker
+          class="pg-el-dates"
+          label="Travel dates"
+          mode="range"
+          variant="tiles"
+          startLabel="Departure"
+          endLabel="Return"
+          min="2026-10-03"
+          today="2026-10-03"
+          unit="day"
+          [inclusive]="true"
+          formControlName="dates"
+          [error]="searchForm.error('dates')"
+        />
+        <button
+          arButton
+          class="pg-el-searchSubmit"
+          variant="primary"
+          size="lg"
+          [block]="true"
+          iconStart="magnifying-glass"
+          type="submit"
+          [loading]="searchForm.pending()"
+        >Search flights</button>
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--deals" aria-labelledby="pg-h-deals">
+    <h2 class="pg-h m-title-2" id="pg-h-deals">Top flight deals</h2>
+    <p class="pg-intro body">Discover top flight deals for elite travel at unprecedented prices.</p>
+    <div class="pg-g">
+      <ar-feature-card
+        class="pg-el-dealFeatured"
+        icon="paper-airplane"
+        [openable]="true"
+        [title]="data.deals[0].title"
+        [text]="data.deals[0].text"
+        [tone]="data.deals[0].tone"
+        (open)="openDeal($event)"
+      />
+      <!-- GAP dealHotels: see gaps in the spec. Placeholder until the component exists. -->
+      <div class="pg-gap pg-el-dealHotels">Photo tile · Hotel bookings · arrow</div>
+      <!-- GAP dealDomestic: see gaps in the spec. Placeholder until the component exists. -->
+      <div class="pg-gap pg-el-dealDomestic">Photo tile · Book domestic · arrow</div>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--airlines" aria-labelledby="pg-h-airlines">
+    <h2 class="pg-h m-title-2" id="pg-h-airlines">Most popular airlines</h2>
+    <div class="pg-g">
+      @for (item of data.airlines; track $index) {
+        <ar-mini-destination
+          class="pg-el-airline"
+          [title]="item.title"
+          [image]="item.image"
+          [price]="item.price"
+          [duration]="item.duration"
+          [dates]="item.dates"
+          [badge]="item.badge"
+          (press)="openAirline($event)"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-airline">Section hidden</p>
+      }
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--hotels" aria-labelledby="pg-h-hotels">
+    <h2 class="pg-h m-title-2" id="pg-h-hotels">Book your hotel</h2>
+    <p class="pg-intro body">Stays our travellers rate highest, a short walk from the centre.</p>
+    <div class="pg-g">
+      @for (item of data.hotels; track $index) {
+        <ar-destination-card
+          class="pg-el-hotel"
+          [title]="item.name"
+          [rating]="item.rating"
+          [meta]="item.distance"
+          [image]="item.image"
+          [saved]="item.saved"
+          (book)="bookHotel($event)"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-hotel">IllustrationCallout: 'No featured stays near you yet' with a 'Browse all stays' link</p>
+      }
+    </div>
+  </section>
+</main>
+

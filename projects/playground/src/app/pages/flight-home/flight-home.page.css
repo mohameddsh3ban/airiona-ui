@@ -1,4 +1,4 @@
-/* Log in: generated from docs/pages/login/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */
+/* Flight home: generated from docs/pages/flight-home/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */
 :host { display: block; }
 .pg { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }
 .pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }
@@ -19,28 +19,40 @@
 .pg-toast { position: fixed; z-index: 60; left: 16px; right: 16px; top: calc(16px + env(safe-area-inset-top, 0px)); display: flex; justify-content: center; }
 .pg-s--topbar > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--nav > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
-.pg-s--signIn > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
-.pg-s--promo > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
-.pg-s--footer > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-s--hero > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-s--hero { margin-inline: -16px; }
+.pg-s--search > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-s--deals > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-s--airlines > .pg-g { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(80%, 320px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+.pg-s--airlines > .pg-g > * { scroll-snap-align: start; }
+.pg-s--hotels > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 @media (min-width: 768px) {
   .pg { padding-inline: 24px; gap: 32px; }
-  .pg-s--footer > .pg-g { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-auto-flow: row; }
+  .pg-s--hero { margin-inline: 0; }
+  .pg-s--search > .pg-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-s--hotels > .pg-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-el-tripType { grid-column: span 2; }
+  .pg-el-searchSubmit { grid-column: span 2; }
 }
 @media (min-width: 1280px) {
   .pg { padding-inline: 32px; padding-top: 32px; gap: 36px; }
-  .pg { grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); column-gap: 40px; align-items: start; }
-  .pg > .pg-s--nav { grid-column: 1 / -1; grid-row: 1; }
-  .pg > .pg-s--promo { grid-column: 1; grid-row: 2; }
-  .pg > .pg-s--signIn { grid-column: 2; grid-row: 2 / span 1; position: sticky; top: 24px; }
-  .pg > .pg-s--footer { grid-column: 1 / -1; grid-row: 3; }
+  .pg-s--search > .pg-g { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-s--deals > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-s--airlines > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-s--airlines > .pg-g { overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }
+  .pg-s--hotels > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-el-tripTypeDesktop { grid-column: 1 / -1; }
+  .pg-el-searchSubmit { grid-column: span 1; }
 }
 @media (max-width: 767.98px) {
   .pg-s--nav { display: none !important; }
-  .pg-s--promo { display: none !important; }
+  .pg-el-tripTypeDesktop { display: none !important; }
 }
 @media (min-width: 768px) and (max-width: 1279.98px) {
   .pg-s--nav { display: none !important; }
+  .pg-el-tripTypeDesktop { display: none !important; }
 }
 @media (min-width: 1280px) {
   .pg-s--topbar { display: none !important; }
+  .pg-el-tripType { display: none !important; }
 }

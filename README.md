@@ -12,7 +12,7 @@ The Airiona design system for flight and stay booking, in **Angular 20+** and **
 | 🧪 | Playground: converted pages run here | `projects/playground/` |
 | 🖼 | Showcase: one demo per component (the catalog's Angular previews) | `projects/showcase/` |
 
-Both packages render the same markup with the same stylesheet; `npm run audit:parity` diffs every component pixel for pixel.
+Both packages render the same markup with the same stylesheet; `npm run audit:parity` diffs every component pixel for pixel. Their APIs match closely but not exactly (a few inputs exist on one side only; the catalog's API tab shows each).
 
 ## Start
 

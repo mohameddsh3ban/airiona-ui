@@ -18,7 +18,7 @@ The source is a desktop sign-in page: a pill top nav, a two-panel card (blue fab
 |---|---|---|
 | ![390](shots/390.png) | ![768](shots/768.png) | ![1280](shots/1280.png) |
 
-Checked 2026-10-03 18:10: 0 errors, 0 warnings.
+Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end of this document.
 
 ## Layout, mobile first
 

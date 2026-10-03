@@ -106,6 +106,8 @@
 .ar-iconbtn:active:not(:disabled) { transform: scale(0.94); }
 .ar-iconbtn:disabled { opacity: 0.4; cursor: not-allowed; }
 .ar-iconbtn--sm { --s: 36px; }
+/* 36px look, 44px tap target: a transparent ring of extra hit area. */
+.ar-iconbtn--sm::after { content: ""; position: absolute; inset: -4px; border-radius: inherit; }
 .ar-iconbtn--lg { --s: 56px; }
 .ar-iconbtn--surface { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--line); }
 .ar-iconbtn--surface:hover:not(:disabled) { background: var(--surface-sunken); }
@@ -1605,8 +1607,9 @@
 .m-minidest { display: flex; flex-direction: column; gap: 4px; border-radius: 22px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow-card), inset 0 0 0 1px var(--line); padding-bottom: 12px; cursor: pointer; }
 .m-minidest__media { position: relative; height: 112px; overflow: hidden; isolation: isolate; }
 .m-minidest__media > svg, .m-minidest__media > img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
-.m-minidest__media > b { position: absolute; left: 12px; bottom: 10px; color: #ffffff; font: 700 18px/22px var(--font-display); text-shadow: 0 2px 12px rgba(7, 11, 42, 0.6); }
-.m-minidest__badge { position: absolute; top: 10px; right: 10px; padding: 2px 8px; border-radius: 99px; background: var(--success-tint); color: var(--success); font: 600 11px/16px var(--font-sans); }
+.m-minidest__media::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(180deg, rgba(7, 11, 42, 0) 0%, rgba(7, 11, 42, 0.55) 100%); pointer-events: none; }
+.m-minidest__media > b { z-index: 1; position: absolute; left: 12px; bottom: 10px; color: #ffffff; font: 700 18px/22px var(--font-display); text-shadow: 0 2px 12px rgba(7, 11, 42, 0.6); }
+.m-minidest__badge { z-index: 1; position: absolute; top: 10px; right: 10px; padding: 2px 8px; border-radius: 99px; background: var(--success-tint); color: var(--success); font: 600 11px/16px var(--font-sans); }
 .m-minidest__row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 8px 12px 0; }
 .m-minidest__row b { font: 700 18px/22px var(--font-display); font-variant-numeric: tabular-nums; }
 .m-minidest__row span, .m-minidest__dates { font: 400 12px/16px var(--font-sans); color: var(--ink-subtle); }

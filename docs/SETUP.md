@@ -67,7 +67,7 @@ Works with Vite, Next.js (App Router: components using state are client componen
 
 The page-conversion skill ships inside the repository at `.claude/skills/airiona-page-convert/`, so Claude Code picks it up when you run it here. `CLAUDE.md` at the root gives it the house rules.
 
-- Convert a page: `/airiona-page-convert docs/designs/<page>.png` (or describe the page, or give a URL).
+- Convert a page: `/airiona-page-convert path/to/design.png` (or describe the page, or give a URL). The skill copies the design to `docs/pages/<page>/source.<ext>`.
 - The skill uses `node tools/page/airiona.mjs` for lookups and checks; it never claims a check passed without running it.
 - To use the skill in another repository that consumes the packages, copy `exports/skill/airiona-page-convert` into that repository's `.claude/skills/`, and keep this workspace checked out next to it (the skill needs `tools/page/` and the manifest). The simplest setup is to convert pages here and move the generated folder into the product app.
 
@@ -93,4 +93,4 @@ npm run catalog:build && npm run catalog:test && npm run audit:parity
 for p in $(npm run -s page -- list); do npm run -s page -- check "$p"; done
 ```
 
-`sync --check` fails when someone edited a copied stylesheet instead of `design-system/`. `audit:parity` fails when React and Angular drift apart. The page loop keeps every converted page building and passing its phone checks.
+`sync --check` fails when someone edited a copied stylesheet instead of `design-system/`. `audit:parity` fails when the two builds stop rendering the same pixels. The page loop builds and checks each page on its own, so one broken page fails only its own step; `npx ng build playground` then builds all pages together.

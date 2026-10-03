@@ -1,28 +1,29 @@
 {
- "page": "login",
+ "page": "flight-home",
  "viewports": {
   "390": {
    "overflow": 0,
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 7,
+   "targetCount": 16,
    "tiny": [],
    "fixedCount": 0,
-   "height": 854,
+   "height": 2886,
    "h1s": [
-    "Log in"
+    "Convenient online flight booking"
    ],
    "skips": 0,
    "covered": [],
    "pageErrors": [],
-   "submit:login": {
+   "submit:search": {
     "msgs": [
-     "Enter the email you signed up with.",
-     "Enter your password."
+     "Choose the airport you are flying from.",
+     "Choose where you want to fly to.",
+     "Choose your departure and return dates."
     ],
     "focusInForm": true,
-    "focused": "input"
+    "focused": "button"
    }
   },
   "768": {
@@ -30,12 +31,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 7,
+   "targetCount": 16,
    "tiny": [],
    "fixedCount": 0,
-   "height": 1112,
+   "height": 2378,
    "h1s": [
-    "Log in"
+    "Convenient online flight booking"
    ],
    "skips": 0,
    "covered": [],
@@ -46,12 +47,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 12,
+   "targetCount": 21,
    "tiny": [],
    "fixedCount": 0,
-   "height": 860,
+   "height": 1644,
    "h1s": [
-    "Log in"
+    "Convenient online flight booking"
    ],
    "skips": 0,
    "covered": [],

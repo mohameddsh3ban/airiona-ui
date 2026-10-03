@@ -104,7 +104,7 @@ async function main() {
       for (const e of r.errors) console.log(`  ✗ ${e}`);
       for (const w of r.warnings) console.log(`  ! ${w}`);
       console.log(`wrote ${render(spec, res)}`);
-      console.log(`${arg}: ${r.errors.length ? 'FAILED' : 'passed'} (${r.errors.length} errors, ${r.warnings.length + res.warnings.length} warnings). Screens: docs/pages/${arg}/shots/`);
+      console.log(`${arg}: ${r.errors.length ? 'FAILED' : 'passed'}: page checks ${r.errors.length} errors, ${r.warnings.length} warnings; spec ${res.warnings.length} warnings. Screens: docs/pages/${arg}/shots/`);
       if (r.errors.length) process.exitCode = 1;
       return;
     }

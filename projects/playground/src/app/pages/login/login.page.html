@@ -20,10 +20,10 @@
         <p class="body pg-el-lede">Please log in to your account to continue.</p>
         <ar-text-field
           class="pg-el-email"
-          label="Email"
           type="email"
           autocomplete="email"
           inputMode="email"
+          label="Email"
           iconStart="envelope"
           [placeholder]="emailPlaceholder"
           formControlName="email"
@@ -31,9 +31,9 @@
         />
         <ar-text-field
           class="pg-el-password"
-          label="Password"
           type="password"
           autocomplete="current-password"
+          label="Password"
           iconStart="lock-closed"
           formControlName="password"
           [error]="loginForm.error('password')"

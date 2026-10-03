@@ -11,9 +11,9 @@ Design the 390px phone screen first; 768 and 1280 add room, they do not define t
 - **Navigation.** Root screens: `AppBar large` at the top and `TabBar` (3–5 destinations) at the bottom. Detail screens: `AppBar` with back. Desktop: `TopNav` (and `SideNav` for operator tools); swap with `show`.
 - **Sheets, not popovers.** Choices that need room (filters, travellers, sort) open a `BottomSheet` or `ActionSheet` on phones. `Dialog` already becomes a bottom sheet on phones; keep it for one decision.
 - **Tap targets** at least 44 × 44 px (the check errors under 24px and warns under 44). Space adjacent targets 8px apart.
-- **No sideways scroll** except deliberate carousels (`layout: "scroll-x"`, `SnapCarousel`, `ChipScroller`) that show a peek of the next item. The check fails a page that scrolls sideways.
+- **No sideways scroll** except deliberate carousels (`layout: "scroll-x"`, `SnapCarousel`, `ChipScroller`) that show a peek of the next item. The check measures every width against its real viewport and fails a page that scrolls sideways, naming the element that is too wide.
 - **Text** 15px body on phones (the components already do this); nothing under 11px. Long descriptions go in `ExpandableText`.
-- **Images** fill the width with a fixed aspect ratio; the hero may bleed to the edges (`bleed.base: true`).
+- **Images** never exceed their column (the scaffold caps `img` at 100% width); the hero may bleed to the edges (`bleed.base: true`).
 - **Safe areas.** Bottom bars include the home indicator inset; headers clear the status bar. The components handle this through `--m-status-h` and `--m-home-h`; do not add your own padding for it.
 - **Keyboards.** Every text field sets `type`/`inputMode` and `autocomplete` so the right keyboard and autofill appear. Do not put a sticky bar over a focused field.
 - **Weak networks.** Show `Skeleton` in the final layout while loading; never a blank screen or a spinner alone.
@@ -31,4 +31,4 @@ Two columns where content is a set of equal items (cards `grid-2`), forms stay o
 
 ## What the check measures on the phone
 
-`check` opens the page at 390 × 844 as a touch phone and fails on: script errors, sideways scrolling, tap targets under 24px, and forms whose empty submit shows fewer messages than required fields. It warns on tap targets under 44px, text under 11px, content ending under a fixed bottom bar, and focus not moving to the first invalid field.
+`check` builds only the page under check, then opens it at 390 × 844 (touch), 768 × 1024 (touch) and 1280 × 860. It fails on script errors, sideways scrolling at any width, tap targets under 24px, and any form whose empty submit shows fewer messages than its required fields. It warns on tap targets under 44px (transparent hit areas count), text under 11px, content ending under a fixed bottom bar, more or fewer than one visible h1, skipped heading levels, and focus not moving to the first invalid field.

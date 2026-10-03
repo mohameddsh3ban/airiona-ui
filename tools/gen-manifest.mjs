@@ -193,7 +193,7 @@ for (const file of walk(LIB).filter((f) => f.endsWith('.ts') && !f.endsWith('.sp
       if (im) {
         const rest = body.slice(body.indexOf(l)).slice(l.indexOf(im[2]) + im[2].length + (im[3] ? im[3].length : 0));
         let type = '', after = rest;
-        if (rest.startsWith('<')) { const e = closeIndex(rest, 0); type = rest.slice(1, e - 1); after = rest.slice(e); }
+        if (rest.startsWith('<')) { const e = closeIndex(rest, 0); type = splitTop(rest.slice(1, e - 1), ',')[0].trim(); after = rest.slice(e); }
         const args = after.startsWith('(') ? splitTop(after.slice(1, closeIndex(after, 0) - 1), ',') : [];
         const def = im[3] ? undefined : (args[0] || '').trim();
         const transform = /transform:\s*(\w+)/.exec(args.join(','));

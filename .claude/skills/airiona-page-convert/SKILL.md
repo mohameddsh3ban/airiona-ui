@@ -70,7 +70,7 @@ Read `references/motion.md`. Name the motion that serves the page (usually one `
 `node tools/page/airiona.mjs lint <page>` until it reports **0 errors**. Treat every warning as a question: fix it, or answer it in `notes`.
 
 ### 9. Check
-`node tools/page/airiona.mjs check <page>`. It scaffolds `projects/playground/src/app/pages/<page>/`, builds the playground, opens the page at 390 (touch phone), 768 and 1280, and fails on script errors, sideways scrolling on phones, tap targets under 24px, or a form whose empty submit shows no messages. Then **open the screenshots** in `docs/pages/<page>/shots/` and compare them with the source, section by section. Fix the spec (not the generated code) and run `check` again until the page matches the source's intent and there are 0 errors. The build failing on a type is a spec problem: fix types, samples or inputs.
+`node tools/page/airiona.mjs check <page>`. It scaffolds `projects/playground/src/app/pages/<page>/`, builds the playground with only this page (another page's broken spec cannot block yours), opens the page at 390 (touch phone), 768 and 1280, and fails on script errors, sideways scrolling on phones, tap targets under 24px, or a form whose empty submit shows no messages. Then **open the screenshots** in `docs/pages/<page>/shots/` and compare them with the source, section by section. Fix the spec (not the generated code) and run `check` again until the page matches the source's intent and there are 0 errors. The build failing on a type is a spec problem: fix types, samples or inputs.
 
 ### 10. Report
 Tell the person, briefly: the page, the components used per section, the gaps and proposals, the assumptions in `notes`, the check result (errors and warnings) and where the handoff is: `docs/pages/<page>/HANDOFF.md`. Then move to the next page only if asked.
@@ -83,6 +83,8 @@ Tell the person, briefly: the page, the components used per section, the gaps an
 - A field lives in `forms[].fields` (rules and messages) **and** is placed by an element with `"field": "<name>"` inside a section whose `form` is that form's id.
 - Projected children use `slot` names the parent declares (`describe` lists them, e.g. `arFooter`, `arSummary`, `arTrailing`).
 - Events map an output to a handler name: `"events": { "press": "openStay" }`.
+- Lists use `"each": "<data list>"` with `item.` paths in `bind`, never one element per item.
+- One heading per page at level 1: components that render a title (`AppBar large`, `HeroHeader`) take `headingLevel` when another element is the h1.
 
 ## Output of a finished page
 

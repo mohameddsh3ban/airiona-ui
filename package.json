@@ -17,7 +17,8 @@
     "audit:parity": "node tools/audit-parity.mjs",
     "export": "node tools/export.mjs",
     "export:png": "node tools/shoot.mjs png",
-    "page": "node tools/page/airiona.mjs"
+    "page": "node tools/page/airiona.mjs",
+    "page:regression": "node tools/page/regression.mjs"
   },
   "prettier": {
     "printWidth": 100,

@@ -19,6 +19,8 @@
     if (!loader) loader = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
       s.src = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js';
+      s.integrity = 'sha384-UbfRVKN3/elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz';
+      s.crossOrigin = 'anonymous';
       s.onload = function () { resolve(window.htmlToImage); };
       s.onerror = function () { reject(new Error('Could not load the capture library.')); };
       document.head.appendChild(s);

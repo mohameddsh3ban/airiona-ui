@@ -43,8 +43,8 @@ cpSync(join(ROOT, 'packages/react/styles/tokens.css'), join(OUT, 'react/tokens.c
 const head = [
   '<meta name="viewport" content="width=device-width, initial-scale=1">',
   '<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="bundle.css">',
-  '<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>',
-  '<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>',
   '<script src="bundle.js"></script><script src="../embed.js"></script>',
 ].join('\n');
 let pages = 0;
