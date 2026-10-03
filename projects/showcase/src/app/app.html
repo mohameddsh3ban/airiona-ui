@@ -1,0 +1,38 @@
+@if (solo) {
+  <div id="solo-stage" class="ar ar-stage" [attr.data-demo]="current().name" [style]="current().stage || ''">
+    <ng-container *ngComponentOutlet="current().component" />
+  </div>
+} @else {
+<aside class="sc-side">
+  <div class="sc-brand"><ar-wordmark /><small>Angular · {{ demos.length }} components</small></div>
+  <input class="sc-search" placeholder="Search" aria-label="Search components" [value]="query()" (input)="query.set($any($event.target).value)" />
+  <nav>
+    <a href="#all" [class.is-on]="isAll()">All components</a>
+    @for (g of groups(); track g[0]) {
+      <div class="sc-group">{{ g[0] }}</div>
+      @for (d of g[1]; track d.name) {
+        <a [href]="'#' + slug(d.name)" [class.is-on]="!isAll() && current().name === d.name">{{ d.name }}</a>
+      }
+    }
+  </nav>
+</aside>
+<main class="sc-main">
+  @if (isAll()) {
+    @for (d of demos; track d.name) {
+      <section class="sc-card" [attr.data-demo]="d.name">
+        <h2>{{ d.name }} <small>{{ d.group }}</small></h2>
+        <div class="ar ar-stage" [style.min-height.px]="d.height || 120" [style]="d.stage || ''">
+          <ng-container *ngComponentOutlet="d.component" />
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="sc-card" [attr.data-demo]="current().name">
+      <h2>{{ current().name }} <small>{{ current().group }}</small></h2>
+      <div class="ar ar-stage" [style.min-height.px]="current().height || 120" [style]="current().stage || ''">
+        <ng-container *ngComponentOutlet="current().component" />
+      </div>
+    </section>
+  }
+</main>
+}

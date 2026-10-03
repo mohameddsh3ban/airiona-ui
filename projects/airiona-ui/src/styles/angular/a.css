@@ -1,0 +1,13 @@
+/* Angular layer for batch A. Loaded after components.css. */
+
+/* Hosts that are the React root <div> but whose class sets no display of their own. */
+ar-calendar { display: block; }
+
+/* Toast message slot left empty (React renders no .ar-toast__msg without children). */
+.ar-toast__msg:empty { display: none; }
+
+/* TopNav renders <header class="ar-top"> inside a display:contents host, so `.ar-pilot > .ar-top` needs the host step. */
+.ar-pilot > ar-top-nav > .ar-top { margin: 0 -28px; padding: 0 28px; }
+@media (max-width: 720px) {
+  .ar-pilot > ar-top-nav > .ar-top { margin: 0 -16px; padding: 0 16px; }
+}

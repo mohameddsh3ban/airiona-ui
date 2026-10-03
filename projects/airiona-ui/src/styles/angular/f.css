@@ -1,0 +1,4 @@
+/* Batch F (mobile cards), Angular only.
+   Hosts that are the React root <div>/<article> but whose class sets no display of its own;
+   a custom element would otherwise be inline (the midnight .m-cal would paint only its line boxes). */
+ar-calendar-card, ar-boarding-pass, ar-place-card, ar-place-hero { display: block; }

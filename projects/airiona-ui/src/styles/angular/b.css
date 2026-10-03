@@ -1,0 +1,11 @@
+/* Batch B (Angular only): slots are always rendered as wrappers; hide the ones nothing was projected into,
+   where React would have omitted the element. */
+.ar-dialog__media:empty,
+.ar-dialog__body:empty,
+.ar-dialog__foot:empty,
+.ar-table__filters:empty,
+.ar-tabs__extra:empty { display: none; }
+/* React's `.ar-dialog__body:last-child` padding when the footer slot is empty. */
+.ar-dialog__body:has(+ .ar-dialog__foot:empty) { padding-bottom: 24px; }
+/* Host elements that wrap an inner root. */
+ar-dialog { display: contents; }

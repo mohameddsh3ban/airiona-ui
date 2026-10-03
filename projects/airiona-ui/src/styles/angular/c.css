@@ -1,0 +1,4 @@
+/* Batch C (analytics + widgets): Angular host fixes. */
+
+/* React renders the heatmap root as a <div>; the custom-element host would otherwise be inline. */
+ar-heatmap { display: block; }

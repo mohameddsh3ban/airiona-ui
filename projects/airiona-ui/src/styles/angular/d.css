@@ -1,0 +1,4 @@
+/* Batch D — Angular-only fixes. */
+
+/* PageHeader always renders its actions wrapper (projected [arActions]); React omits it when there are none. */
+.ar-pagehead__actions:empty { display: none; }

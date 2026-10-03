@@ -1,0 +1,12 @@
+/* Batch E (mobile kit), Angular only.
+   React omits these wrappers when their slot is empty; Angular always renders the wrapper around <ng-content>,
+   so hide it when nothing was projected. */
+.m-sheet__foot:empty,
+.m-actionbar__summary:empty,
+.m-hero__art:empty,
+.m-hero__overlap:empty,
+.m-routehead__tools:empty { display: none; }
+
+/* Sheet bar: each slot sits in a span (React's placeholder span when a side is missing); no bar when both are empty. */
+.m-sheet__bar:has(> span:first-child:empty):has(> span:last-child:empty) { display: none; }
+.m-sheet__bar > span { display: flex; }

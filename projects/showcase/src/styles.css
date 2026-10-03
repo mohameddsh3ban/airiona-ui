@@ -1,0 +1,5 @@
+html, body { margin: 0; background: var(--canvas); }
+/* ?still freezes motion so screenshots show final states. */
+html.sc-still *, html.sc-still *::before, html.sc-still *::after { animation: none !important; transition: none !important; }
+/* Demo components render through NgComponentOutlet into an inline <ng-component> host; React mounts straight into the stage. */
+.ar-stage > ng-component { display: contents; }

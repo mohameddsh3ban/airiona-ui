@@ -1,0 +1,6 @@
+/* Batch G (Angular only): the drawn Scene fallback sits inside <ar-scene> (display: contents), so the
+   child-combinator rules for `.m-minidest__media > svg` in components.css do not reach it. Mirror them. */
+.m-minidest__media > ar-scene > svg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ar-ease); }
+@media (hover: hover) {
+  .m-minidest:hover .m-minidest__media > ar-scene > svg { transform: scale(1.05); }
+}

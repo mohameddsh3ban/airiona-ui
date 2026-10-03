@@ -1,0 +1,32 @@
+{
+  "name": "@airiona/ui",
+  "version": "1.6.0",
+  "description": "Airiona design system for Angular 20+: standalone, signal-based components, tokens and motion.",
+  "keywords": [
+    "angular",
+    "design-system",
+    "airiona",
+    "components"
+  ],
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/core": "^20.0.0 || ^21.0.0 || ^22.0.0",
+    "@angular/forms": "^20.0.0 || ^21.0.0 || ^22.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "exports": {
+    "./styles/*": {
+      "default": "./styles/*"
+    }
+  }
+}

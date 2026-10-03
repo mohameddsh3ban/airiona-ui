@@ -1,0 +1,125 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/core/scene.component.ts"
+        ],
+        "createdAt": "2026-10-03T11:55:27.471Z",
+        "reason": "Claude: Angular property binding [src] inside @if(src()) guard; static scanner cannot see bound src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/core/primitives.ts"
+        ],
+        "createdAt": "2026-10-03T11:56:15.095Z",
+        "reason": "Claude: Angular [src] property binding inside @if(url()) guard; scanner cannot see bound src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/plan-list.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:14:40.183Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/mini-destination.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:14:43.963Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/illustration-callout.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:14:44.329Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/onboarding-flow.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:14:44.790Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/hero-header.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:15:31.601Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/boarding-pass.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:15:38.083Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/mobile/route-header.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:18:11.798Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/widgets/ride-tile.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:18:46.138Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/widgets/trip-summary-tile.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:18:46.610Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/workspace/assistant-card.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:18:47.028Z",
+        "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/dashboard/prompt-card.component.ts"
+        ],
+        "createdAt": "2026-10-03T12:18:47.685Z",
+        "reason": "Angular [src] binding behind a guard"
+      }
+    ]
+  }
+}

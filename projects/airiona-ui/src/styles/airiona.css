@@ -1,0 +1,11 @@
+/* Airiona for Angular. Add once to angular.json "styles": "node_modules/@airiona/ui/styles/airiona.css" */
+@import "./tokens.css";
+@import "./components.css";
+@import "./angular.css";
+@import "./angular/a.css";
+@import "./angular/b.css";
+@import "./angular/c.css";
+@import "./angular/d.css";
+@import "./angular/e.css";
+@import "./angular/f.css";
+@import "./angular/g.css";

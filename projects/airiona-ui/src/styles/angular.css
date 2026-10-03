@@ -1,0 +1,24 @@
+/* Angular layer: host elements and config switches. Loaded after components.css. */
+
+/* Component hosts that only wrap an inner element take no box of their own. */
+ar-icon, ar-scene, ar-media, ar-hero-pattern { display: contents; }
+
+/* Hosts that replace a React <div> root whose class sets no display of its own (custom elements default to inline). */
+ar-data-table, ar-hero-header, ar-route-header, ar-expandable-text { display: block; }
+
+/* Child selectors in components.css that point at an <img>/<svg> also reach through <ar-media>/<ar-scene> hosts. */
+.m-minidest__media > :is(ar-media, ar-scene) > :is(img, svg) { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
+.ar-prompt__art > :is(ar-media, ar-scene) > svg { height: 100%; width: auto; }
+
+/* Arrow buttons: only the disc's arrow nudges on hover, not a leading icon. */
+.ar-btn--arrow > ar-icon .ar-icon { transform: none !important; }
+
+/* Projected text slots that were left empty. */
+.ar-avatars__text:empty { display: none; }
+.ar-burst__text:empty { display: none; }
+
+/* provideAiriona({ motion: 'reduce' }) */
+html.ar-motion-reduce :is([class*="ar-"], [class*="m-"]),
+html.ar-motion-reduce :is([class*="ar-"], [class*="m-"])::before,
+html.ar-motion-reduce :is([class*="ar-"], [class*="m-"])::after { animation-duration: 1ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+html.ar-motion-reduce :is(.ar-skel__media, .ar-skel__avatar, .ar-skel__line, .m-carousel__item > *) { animation: none !important; }

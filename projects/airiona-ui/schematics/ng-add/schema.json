@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "AirionaNgAdd",
+  "title": "Airiona ng-add",
+  "type": "object",
+  "properties": {
+    "project": { "type": "string", "description": "Application to set up. Defaults to the first application.", "$default": { "$source": "projectName" } },
+    "icons": { "type": "string", "enum": ["core", "all"], "default": "all", "description": "'all' registers all 648 Heroicons; 'core' keeps only the icons the components need.", "x-prompt": { "message": "Register the full Heroicons set (648 icons, ~240 KB) or only the core set the components use?", "type": "list", "items": [{ "value": "all", "label": "All Heroicons" }, { "value": "core", "label": "Core set only" }] } },
+    "motion": { "type": "string", "enum": ["system", "reduce"], "default": "system", "description": "Follow the OS reduced-motion setting, or turn motion off." }
+  },
+  "required": []
+}
