@@ -19348,7 +19348,7 @@
      },
      {
       "name": "className",
-      "type": "string /** ms",
+      "type": "string",
       "optional": true,
       "doc": ""
      }
