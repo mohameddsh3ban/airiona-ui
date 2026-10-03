@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=238 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>MediaPlayer</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 320 } }, h(A.MediaPlayer, { title: 'Lounge at dusk', artist: 'Airiona Sessions', scene: 'dusk', elapsed: '0:18', remaining: '-2:24', progress: 0.3 })));
+</script>
+</body>
+</html>

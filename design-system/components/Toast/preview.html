@@ -1,0 +1,17 @@
+<!-- @dsCard group="Status" height=364 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Toast</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="max-width:460px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 12 } },
+  h(A.Toast, { tone: 'success', title: 'Booking confirmed', time: 'now', action: 'View itinerary', onClose: () => {} }, 'Scandinavian Forest Cabin · 15–19 Oct. Reference K7QX2M.'),
+  h(A.Toast, { tone: 'info', title: 'Gate change', time: '2m', onClose: () => {} }, 'SQ 923 now boards from gate B14 at 08:15.'),
+  h(A.Toast, { tone: 'danger', title: 'Payment declined', action: 'Try another card' }, 'Your bank declined the charge of $1,284. No money was taken.')));
+</script>
+</body>
+</html>

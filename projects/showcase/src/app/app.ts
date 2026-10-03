@@ -4,7 +4,9 @@ import { ArWordmark } from '@airiona/ui';
 import { DEMOS } from './demos/registry';
 import { DemoDef } from './demos/demo';
 
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const slug = (s: string) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+/** `#date-picker`, `#datepicker` and `#DatePicker` all find DatePicker. */
+const key = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 @Component({
   selector: 'sc-root',
@@ -28,7 +30,7 @@ export class App {
     return [...map.entries()];
   });
   protected readonly isAll = computed(() => this.route().toLowerCase() === 'all');
-  protected readonly current = computed(() => this.demos.find((d) => slug(d.name) === slug(this.route())) ?? this.demos[0]);
+  protected readonly current = computed(() => this.demos.find((d) => key(d.name) === key(this.route())) ?? this.demos[0]);
   /** `?solo#name` renders one bare stage at full width, matching the React harness pages, for screenshot diffs. */
   protected readonly solo = new URLSearchParams(location.search).has('solo');
   protected readonly slug = slug;

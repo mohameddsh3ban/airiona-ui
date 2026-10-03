@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=262 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>LetterRow</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '8px 20px' } }, h(A.LetterRow, { mark: 'C', title: 'Completed stays', subtitle: 'Cabins and villas', meta: '3 days ago' }), h(A.LetterRow, { mark: 'In', title: 'In progress', subtitle: 'Tokyo trip', meta: '12:50 PM' }), h(A.LetterRow, { mark: 'Td', title: 'To do', subtitle: 'Book transfer', meta: '2 days ago' }))));
+</script>
+</body>
+</html>

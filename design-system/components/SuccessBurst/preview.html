@@ -1,0 +1,19 @@
+<!-- @dsCard group="Motion" height=330 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SuccessBurst</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(function BurstDemo() {
+  var k = React.useState(0);
+  return h('div', { className: 'ar-col', style: { gap: 12, alignItems: 'center' } },
+    h(A.SuccessBurst, { replayKey: k[0], title: 'Booking confirmed' }, 'Scandinavian Forest Cabin · 15–19 Oct. Reference K7QX2M is in your inbox.'),
+    h(A.Button, { variant: 'secondary', size: 'sm', iconStart: 'arrow-path', onClick: function () { k[1](k[0] + 1); } }, 'Replay'));
+}));
+</script>
+</body>
+</html>

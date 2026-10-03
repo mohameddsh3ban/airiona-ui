@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=330 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RouteHeader</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo is-flush', style: { height: 'auto' } }, h(A.RouteHeader, { image: '../../assets/art/globe.webp', title: 'Select flight', onBack: function () {}, from: { code: 'DXB', city: 'Dubai' }, to: { code: 'LHR', city: 'London' }, meta: '27 Aug – 27 Sep · 1 traveller' })));
+</script>
+</body>
+</html>

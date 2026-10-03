@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=248 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>VoiceRecorder</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 220 } }, h(A.VoiceRecorder, { title: 'Voice note', date: '12.08.26', time: '01:12:25', position: 0.62 })));
+</script>
+</body>
+</html>

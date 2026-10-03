@@ -1,0 +1,15 @@
+<!-- @dsCard group="Workspace" height=376 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ProfileProjectCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 420 } }, h(A.ProfileProjectCard, { person: { name: 'Lina Park', role: 'Revenue manager' }, project: 'Nordic Pine Lodge', metaLabel: 'Segment', meta: 'Boutique cabins', progress: 0.34, progressLabel: 'Onboarding progress', unread: true,
+  reports: [{ value: 'occ', label: 'Occupancy report' }, { value: 'rev', label: 'Revenue report' }, { value: 'rev2', label: 'Reviews digest' }] })));
+</script>
+</body>
+</html>

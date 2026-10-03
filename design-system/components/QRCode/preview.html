@@ -1,0 +1,17 @@
+<!-- @dsCard group="Mobile content" height=260 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>QRCode</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 24, alignItems: 'center', flexWrap: 'wrap' } },
+  h('div', { style: { width: 160, padding: 10, borderRadius: 22, background: '#fff', boxShadow: 'var(--shadow-card)', color: 'var(--midnight)' } }, h(A.QRCode, { value: 'AIRIONA|EK 312|DXB|HND|4A|Maya Haddad', label: 'Boarding pass code' })),
+  h('div', { style: { width: 120, padding: 10, borderRadius: 20, background: 'var(--midnight)', color: '#fff' } }, h(A.QRCode, { value: 'https://airiona.com/trips/K7QX2M', color: '#ffffff', background: 'transparent', label: 'Trip link' })),
+  h('div', { style: { width: 96, color: 'var(--blue-700)' } }, h(A.QRCode, { value: 'K7QX2M', label: 'Booking reference' }))));
+</script>
+</body>
+</html>

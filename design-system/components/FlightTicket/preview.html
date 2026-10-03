@@ -1,0 +1,14 @@
+<!-- @dsCard group="Booking" height=470 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>FlightTicket</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="display:flex;justify-content:center;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.FlightTicket, { image: '../../assets/photos/jet-clouds.webp', from: { code: 'DXB', city: 'Dubai', time: '08:45' }, to: { code: 'HND', city: 'Tokyo', time: '23:10' }, flight: 'EK 312', duration: '9h 25m · Non-stop', airline: 'Emirates', cabin: 'Business' }));
+</script>
+</body>
+</html>

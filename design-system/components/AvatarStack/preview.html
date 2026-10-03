@@ -1,0 +1,16 @@
+<!-- @dsCard group="Identity" height=90 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AvatarStack</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 32 } },
+  h(A.AvatarStack, { people: ['Maya Haddad', 'Omar Saleh', 'Lina Park'], extra: 12, caption: h('span', null, h('b', null, '10k+'), ' travellers rated this 4.8') }),
+  h(A.AvatarStack, { people: ['Aiko Tan', 'Daniel Ruiz', 'Sara Ali', 'Jon Berg', 'Nour Aziz', 'Eli Cohen'], max: 4 })));
+</script>
+</body>
+</html>

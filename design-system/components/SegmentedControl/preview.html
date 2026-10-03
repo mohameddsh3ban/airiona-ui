@@ -1,0 +1,17 @@
+<!-- @dsCard group="Actions" height=198 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SegmentedControl</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16, alignItems: 'flex-start' } },
+  h(A.SegmentedControl, { label: 'Section', options: ['Overview', 'Bookings', 'Payouts', 'Calendar'] }),
+  h(A.SegmentedControl, { label: 'Trip', tone: 'brand', size: 'sm', defaultValue: 'round', options: [{ value: 'one', label: 'One way' }, { value: 'round', label: 'Round trip' }, { value: 'multi', label: 'Multi-city' }] }),
+  h(A.SegmentedControl, { label: 'Dashboard', tone: 'brand', variant: 'pills', options: [{ value: 'd', label: 'Dashboard' }, { value: 'a', label: 'Analytics' }, { value: 'i', label: 'Invoices', count: 3 }] })));
+</script>
+</body>
+</html>

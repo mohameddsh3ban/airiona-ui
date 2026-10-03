@@ -1,0 +1,189 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-03T05:46:45Z"
+  },
+  "title": "Airiona",
+  "namespace": "Airiona",
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18"
+    },
+    {
+      "name": "react-dom",
+      "version": "18"
+    }
+  ],
+  "sections": {},
+  "groups": [
+    "Onboarding",
+    "Photography",
+    "Art"
+  ],
+  "assetGroups": {
+    "Onboarding": {
+      "name": "Onboarding",
+      "tile": "l",
+      "order": [
+        "onboarding-1.webp",
+        "onboarding-2.webp",
+        "onboarding-3.webp",
+        "onboarding-4.webp",
+        "onboarding-5.webp"
+      ],
+      "files": {
+        "onboarding-1.webp": {
+          "name": "onboarding-1.webp",
+          "blob": "e822ed19166127dee560bf1902688d4a",
+          "size": 21132,
+          "type": "image/webp"
+        },
+        "onboarding-2.webp": {
+          "name": "onboarding-2.webp",
+          "blob": "1a511f9712094c18a8118a4400a13634",
+          "size": 19620,
+          "type": "image/webp"
+        },
+        "onboarding-3.webp": {
+          "name": "onboarding-3.webp",
+          "blob": "e43ef137c795388bae09a003312c08ce",
+          "size": 32034,
+          "type": "image/webp"
+        },
+        "onboarding-4.webp": {
+          "name": "onboarding-4.webp",
+          "blob": "94047840dbddef6203bd3bfedd35ed26",
+          "size": 15986,
+          "type": "image/webp"
+        },
+        "onboarding-5.webp": {
+          "name": "onboarding-5.webp",
+          "blob": "93d937c2686b042bcd1e3656d02aff4d",
+          "size": 22348,
+          "type": "image/webp"
+        }
+      }
+    },
+    "Photography": {
+      "name": "Photography",
+      "tile": "m",
+      "order": [
+        "forest-cabin.webp",
+        "alpine-lodge.webp",
+        "cliff-villa.webp",
+        "tokyo-penthouse.webp",
+        "lisbon-rooftops.webp",
+        "jet-clouds.webp",
+        "white-hotel.webp"
+      ],
+      "files": {
+        "forest-cabin.webp": {
+          "name": "forest-cabin.webp",
+          "blob": "01ee3ef20e666d0eb3e5a01099a50262",
+          "size": 131546,
+          "type": "image/webp"
+        },
+        "alpine-lodge.webp": {
+          "name": "alpine-lodge.webp",
+          "blob": "1c176c3ae32bd7ae8058e90b750cd5aa",
+          "size": 86060,
+          "type": "image/webp"
+        },
+        "cliff-villa.webp": {
+          "name": "cliff-villa.webp",
+          "blob": "53f2e978dcf6a1ae2733c292918acefd",
+          "size": 116718,
+          "type": "image/webp"
+        },
+        "tokyo-penthouse.webp": {
+          "name": "tokyo-penthouse.webp",
+          "blob": "9aea358001db8b3d275a3771f097288f",
+          "size": 88968,
+          "type": "image/webp"
+        },
+        "lisbon-rooftops.webp": {
+          "name": "lisbon-rooftops.webp",
+          "blob": "553498393dce9963945eaffb9ede28b2",
+          "size": 113760,
+          "type": "image/webp"
+        },
+        "jet-clouds.webp": {
+          "name": "jet-clouds.webp",
+          "blob": "60ab115bcfb8fabb579160935393c8d5",
+          "size": 24432,
+          "type": "image/webp"
+        },
+        "white-hotel.webp": {
+          "name": "white-hotel.webp",
+          "blob": "2945e954a94bd514a00ca3e10f6d0efa",
+          "size": 122110,
+          "type": "image/webp"
+        }
+      }
+    },
+    "Art": {
+      "name": "Art",
+      "tile": "m",
+      "order": [
+        "ai-orb.webp",
+        "globe.webp",
+        "jet-3d.webp",
+        "car-3d.webp",
+        "scooter-3d.webp",
+        "route-globe.webp"
+      ],
+      "files": {
+        "ai-orb.webp": {
+          "name": "ai-orb.webp",
+          "blob": "36329184ecbdb69cee0bf46389393dea",
+          "size": 32010,
+          "type": "image/webp"
+        },
+        "globe.webp": {
+          "name": "globe.webp",
+          "blob": "ed445217b94fbdcf26d3e82be94a5053",
+          "size": 14906,
+          "type": "image/webp"
+        },
+        "jet-3d.webp": {
+          "name": "jet-3d.webp",
+          "blob": "8fc2235db98a1bda58e38c4210a68ba9",
+          "size": 25746,
+          "type": "image/webp"
+        },
+        "car-3d.webp": {
+          "name": "car-3d.webp",
+          "blob": "f389d5fab664473bcc9fbd2612dfd030",
+          "size": 27386,
+          "type": "image/webp"
+        },
+        "scooter-3d.webp": {
+          "name": "scooter-3d.webp",
+          "blob": "1e0bff333adb6b32d551053f16d61c02",
+          "size": 14560,
+          "type": "image/webp"
+        },
+        "route-globe.webp": {
+          "name": "route-globe.webp",
+          "blob": "c102fecf2e940cdd242695a7abb944c2",
+          "size": 12614,
+          "type": "image/webp"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Claude",
+    "at": "2026-10-03T14:30:00Z",
+    "via": "Claude Code",
+    "note": "v1.6: repairs and premium pass. Real notch cut-outs, real QR boarding pass, chart lines that meet their markers, 3D art across PromptCard, AssistantCard, RouteHeader, HeroHeader, RideTile and TripSummaryTile, popovers clamped to the viewport, 78 preview heights fixed."
+  }
+}

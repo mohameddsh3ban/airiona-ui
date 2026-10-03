@@ -1,0 +1,15 @@
+<!-- @dsCard group="Booking" height=172 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AmenityList</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { padding: 16, borderRadius: 24, background: 'var(--surface)' } },
+  h(A.AmenityList, { items: [{ icon: 'users', label: '4 guests' }, { icon: 'bed', label: '2 bedrooms' }, { icon: 'bath', label: '1 bathroom' }, { icon: 'utensils', label: 'Kitchen' }, { icon: 'wifi', label: 'Wi-Fi' }, { icon: 'car', label: 'Parking' }] })));
+</script>
+</body>
+</html>

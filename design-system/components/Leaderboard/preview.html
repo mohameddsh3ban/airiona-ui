@@ -1,0 +1,19 @@
+<!-- @dsCard group="Analytics" height=439 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Leaderboard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 380 } }, h(A.Leaderboard, { eyebrow: 'Top host score', title: 'Top 5 rating', onOpen: null, items: [
+  { name: 'Alice Johnson', role: 'Forest Cabin host', score: '8.5', label: 'Excellent', ring: 'blue-300' },
+  { name: 'Elisabeth Kim Tjow', role: 'Guest relations', roleTone: 'success', score: '7.8', label: 'Good', ring: 'sky-200' },
+  { name: 'Mark Lee', role: 'Concierge', roleTone: 'blue-700', score: '7.8', label: 'Good', ring: 'blue-500' },
+  { name: 'Theodorus Ronald', role: 'Penthouse host', score: '7.2', label: 'Good', ring: 'blue-500' },
+  { name: 'Bessie Cooper', role: 'Villa host', roleTone: 'warning', score: '7.2', label: 'Good', ring: 'blue-300' }] })));
+</script>
+</body>
+</html>

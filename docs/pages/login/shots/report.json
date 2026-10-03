@@ -1,0 +1,64 @@
+{
+ "page": "login",
+ "at": "2026-10-03T18:10:21.938Z",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 7,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 946,
+   "h1s": [
+    "Log in"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": [],
+   "submit:login": {
+    "msgs": [
+     "Enter the email you signed up with.",
+     "Enter your password."
+    ],
+    "focusInForm": true,
+    "focused": "input"
+   }
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 7,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1204,
+   "h1s": [
+    "Log in"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 12,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 860,
+   "h1s": [
+    "Log in"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

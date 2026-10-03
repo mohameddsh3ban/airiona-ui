@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=256 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>MobileSegmented</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } }, h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.MobileSegmented, { label: 'Trip type', options: [{ value: 'round', label: 'Round trip', icon: 'arrows-right-left' }, { value: 'one', label: 'One way', icon: 'arrow-right' }] }))), h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.MobileSegmented, { tone: 'ink', label: 'Sections', options: ['Overview', 'Activity', 'Details'] })))));
+</script>
+</body>
+</html>

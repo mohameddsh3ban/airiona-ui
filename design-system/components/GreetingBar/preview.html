@@ -1,0 +1,16 @@
+<!-- @dsCard group="Mobile navigation" height=240 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>GreetingBar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } },
+  h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.GreetingBar, { title: 'Hello, Maya!', subtitle: "It's time to explore", actions: [h(A.IconButton, { key: 's', icon: 'magnifying-glass', label: 'Search', variant: 'surface' }), h(A.IconButton, { key: 'b', icon: 'bell', label: 'Notifications', variant: 'surface', badge: true })] })),
+  h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.GreetingBar, { title: 'Hi, Maya', subtitle: 'A journey worth taking', name: 'Maya Haddad' }))));
+</script>
+</body>
+</html>

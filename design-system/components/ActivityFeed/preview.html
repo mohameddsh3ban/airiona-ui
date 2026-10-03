@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=394 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ActivityFeed</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo is-canvas', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.ActivityFeed, { items: [{ title: 'Host sent the check-in code', time: 'Just now' }, { title: 'You added photos of the deck', time: 'Yesterday', attachments: ['forest', 'alpine'] }, { title: 'Payment confirmed · $1,056', time: '2 Oct' }] }))));
+</script>
+</body>
+</html>

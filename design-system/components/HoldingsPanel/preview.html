@@ -1,0 +1,16 @@
+<!-- @dsCard group="Dashboard" height=432 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>HoldingsPanel</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 340 } }, h(A.HoldingsPanel, { title: 'Top properties', linkLabel: 'See all properties', groups: [
+  { title: 'Total value', items: [{ name: 'Forest Cabin', sub: 'Nuremberg', symbol: 'F', tone: 'sky', value: '$19.8k' }, { name: 'Tokyo Penthouse', sub: 'Minato', icon: 'building-office-2', tone: 'brand', value: '$14.4k' }] },
+  { title: 'Occupancy trend', items: [{ name: 'Forest Cabin', sub: 'Nuremberg', symbol: 'F', tone: 'sky', spark: [2, 3, 2, 5, 9, 6, 4, 2, 3, 2], change: '+6.5%' }, { name: 'Tokyo Penthouse', sub: 'Minato', icon: 'building-office-2', tone: 'brand', spark: [2, 2, 4, 3, 9, 5, 3, 2, 2, 3], change: '+6.5%' }] }] })));
+</script>
+</body>
+</html>

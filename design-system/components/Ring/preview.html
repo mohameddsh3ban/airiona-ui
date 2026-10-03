@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=100 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Ring</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 20 } }, h(A.Ring, { value: 0.64, size: 64 }, h('b', null, '64'), h('span', null, 'km')), h(A.Ring, { value: 0.3, size: 48 }, h('b', null, '30%')), h('div', { className: 'ar-w ar-w--dark', style: { padding: 12 } }, h(A.Ring, { value: 0.8, size: 56 }, h(A.Icon, { name: 'bolt', size: 20 })))));
+</script>
+</body>
+</html>

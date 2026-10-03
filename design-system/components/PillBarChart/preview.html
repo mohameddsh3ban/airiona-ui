@@ -1,0 +1,15 @@
+<!-- @dsCard group="Analytics" height=392 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PillBarChart</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.PillBarChart, { eyebrow: 'Bookings by stay type', title: 'Track your stays', unit: 'bookings', onOpen: null, highlight: 4,
+  data: [{ label: 'Cabins', value: 5 }, { label: 'Villas', value: 8 }, { label: 'Hotels', value: 11 }, { label: 'Lofts', value: 9 }, { label: 'Suites', value: 12 }, { label: 'Hostels', value: 7 }, { label: 'Camps', value: 10 }] }));
+</script>
+</body>
+</html>

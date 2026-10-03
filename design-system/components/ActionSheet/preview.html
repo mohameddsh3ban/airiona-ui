@@ -1,0 +1,15 @@
+<!-- @dsCard group="Mobile navigation" height=448 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ActionSheet</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function () { function Demo() { var o = React.useState(true); return h('div', { className: 'm-demo', style: { height: 400 } }, h(React.Fragment, null, h('div', { style: { padding: 20 } }, h(A.Button, { variant: 'secondary', onClick: function () { o[1](true); } }, 'Show actions')),
+  h(A.ActionSheet, { contained: true, open: o[0], onClose: function () { o[1](false); }, title: 'Booking K7QX2M', actions: [{ label: 'Share itinerary', icon: 'arrow-up-on-square' }, { label: 'Change dates', icon: 'calendar-days' }, { label: 'Message host', icon: 'chat-bubble-oval-left' }, { label: 'Cancel booking', icon: 'x-mark', tone: 'danger' }] }))); } return h(Demo); })());
+</script>
+</body>
+</html>

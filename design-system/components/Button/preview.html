@@ -1,0 +1,28 @@
+<!-- @dsCard group="Actions" height=256 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Button</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 18 } },
+  h('div', { className: 'ar-row' },
+    h(A.Button, { variant: 'primary' }, 'Check availability'),
+    h(A.Button, { variant: 'brand', arrow: true }, 'Join Airiona Plus'),
+    h(A.Button, { variant: 'secondary', iconStart: 'adjustments-horizontal' }, 'Filters'),
+    h(A.Button, { variant: 'soft' }, 'Export'),
+    h(A.Button, { variant: 'ghost', iconEnd: 'chevron-down' }, 'Default view')),
+  h('div', { className: 'ar-row' },
+    h(A.Button, { variant: 'primary', size: 'lg', arrow: true }, 'Book now'),
+    h(A.Button, { variant: 'primary', size: 'sm' }, 'Sign in'),
+    h(A.Button, { variant: 'brand', loading: true }, 'Paying…'),
+    h(A.Button, { variant: 'primary', disabled: true }, 'Sold out')),
+  h('div', { className: 'ar-row', style: { padding: 14, borderRadius: 20, background: 'var(--blue-500)' } },
+    h(A.Button, { variant: 'white' }, 'Reserve'),
+    h(A.Button, { variant: 'glass', arrow: true }, 'View deal'))));
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Overlays" height=339 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Menu</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 24, alignItems: 'flex-start' } },
+  h(A.Menu, { defaultOpen: true, label: 'Booking actions', heading: 'Booking K7QX2M', items: [
+    { label: 'View itinerary', icon: 'ticket' }, { label: 'Change dates', icon: 'calendar' }, { label: 'Message guest', icon: 'bell', shortcut: 'M' },
+    { divider: true }, { label: 'Download invoice', icon: 'credit-card' }, { label: 'Cancel booking', icon: 'x-mark', tone: 'danger' }] }),
+  h('div', { style: { marginLeft: 220 } },
+    h(A.Menu, { align: 'start', trigger: h(A.Button, { variant: 'secondary', iconEnd: 'chevron-down', size: 'sm' }, 'Export'), items: [{ label: 'CSV', icon: 'chart-bar' }, { label: 'PDF report', icon: 'credit-card' }] }))));
+</script>
+</body>
+</html>

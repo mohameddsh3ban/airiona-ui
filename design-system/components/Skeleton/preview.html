@@ -1,0 +1,16 @@
+<!-- @dsCard group="Motion" height=318 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Skeleton</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 16, alignItems: 'flex-start', flexWrap: 'wrap' } },
+  h('div', { style: { flex: '1 1 240px', maxWidth: 300 } }, h(A.Skeleton, { variant: 'card', lines: 3, label: 'Loading stay' })),
+  h('div', { style: { flex: '1 1 280px' } }, h(A.Skeleton, { variant: 'row', lines: 2 }), h(A.Skeleton, { variant: 'row', lines: 2 }), h(A.Skeleton, { variant: 'text', lines: 3 }))));
+</script>
+</body>
+</html>

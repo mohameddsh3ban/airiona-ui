@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=420 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Timeline</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.Timeline, { items: [{ featured: true, title: 'Flight to Tokyo', time: '08:45', text: 'EK 312 · Gate B18 · Seat 4A', people: ['Maya Haddad', 'Omar Saleh', 'Lina Park'], done: true }, { title: 'Hotel check-in', time: '14:00', text: 'Code arrives at noon' }, { title: 'Dinner reservation', time: '19:30', text: 'Table for 3, Roppongi' }] }))));
+</script>
+</body>
+</html>

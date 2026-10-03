@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=720 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BoardingPass</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'flex', justifyContent: 'center', padding: '8px 0' } }, h('div', { style: { width: 360, maxWidth: '100%' } }, h(A.BoardingPass, { art: h('img', { src: '../../assets/art/jet-3d.webp', alt: '' }), carrier: 'Airiona', cabin: 'Business', date: 'Thu, 15 Oct', time: 'Boards 08:10', from: { code: 'DXB', city: 'Dubai', time: '08:45' }, to: { code: 'HND', city: 'Tokyo', time: '23:10' }, duration: '9h 25m', flight: 'EK 312', seat: '4A', passenger: 'Maya Haddad', zone: '2', seq: '042', details: [{ label: 'Flight', value: 'EK 312' }, { label: 'Gate', value: 'B18' }, { label: 'Seat', value: '4A' }, { label: 'Boarding', value: '08:10' }, { label: 'Terminal', value: '3' }, { label: 'Class', value: 'Business' }] }))));
+</script>
+</body>
+</html>

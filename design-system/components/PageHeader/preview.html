@@ -1,0 +1,15 @@
+<!-- @dsCard group="Navigation" height=110 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PageHeader</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.PageHeader, { title: 'Revenue', tabs: [{ value: 'overview', label: 'Overview' }, { value: 'property', label: 'By property' }], defaultTab: 'overview',
+  actions: [h(A.Button, { key: 'e', variant: 'secondary', iconStart: 'document-arrow-down' }, 'Export report'), h(A.Button, { key: 'a', variant: 'secondary', iconStart: 'plus' }, 'Add')] }));
+</script>
+</body>
+</html>

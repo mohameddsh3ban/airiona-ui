@@ -1,0 +1,16 @@
+<!-- @dsCard group="Booking" height=422 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>DestinationCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="overflow-x:auto;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 20, flexWrap: 'nowrap', alignItems: 'flex-start' } },
+  h(A.DestinationCard, { image: '../../assets/photos/white-hotel.webp', title: 'Hotel Tropical Daisy', rating: 4.7, meta: '1.2 km from centre' }),
+  h(A.DestinationCard, { image: '../../assets/photos/forest-cabin.webp', title: 'Nordic Pine Lodge', rating: 4.9, meta: 'Nuremberg, Germany', saved: true })));
+</script>
+</body>
+</html>

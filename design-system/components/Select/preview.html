@@ -1,0 +1,25 @@
+<!-- @dsCard group="Forms" height=430 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Select</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18, padding: 20, borderRadius: 24, background: 'var(--surface)', alignItems: 'start' } },
+  h(A.Select, { label: 'Cabin class', defaultOpen: true, defaultValue: 'business', options: [
+    { value: 'economy', label: 'Economy', description: '23 kg checked bag', icon: 'briefcase', meta: '$642' },
+    { value: 'premium', label: 'Premium economy', description: 'Extra legroom, priority boarding', icon: 'users', meta: '$918' },
+    { value: 'business', label: 'Business', description: 'Lie-flat seat, lounge access', icon: 'star', meta: '$2,140' },
+    { value: 'first', label: 'First', description: 'Sold out on this flight', icon: 'ticket', disabled: true }] }),
+  h(A.Select, { label: 'Departure airport', searchable: true, searchPlaceholder: 'City or airport code', placeholder: 'Choose an airport', options: [
+    { value: 'DXB', label: 'Dubai International', meta: 'DXB' }, { value: 'AUH', label: 'Abu Dhabi', meta: 'AUH' }, { value: 'DOH', label: 'Doha Hamad', meta: 'DOH' },
+    { value: 'RUH', label: 'Riyadh King Khalid', meta: 'RUH' }, { value: 'CAI', label: 'Cairo International', meta: 'CAI' }, { value: 'IST', label: 'Istanbul', meta: 'IST' }] }),
+  h('div', { className: 'ar-col', style: { gap: 18 } },
+    h(A.Select, { label: 'Currency', variant: 'sunken', defaultValue: 'usd', options: [{ value: 'usd', label: 'US dollar', meta: 'USD' }, { value: 'eur', label: 'Euro', meta: 'EUR' }, { value: 'aed', label: 'UAE dirham', meta: 'AED' }] }),
+    h(A.Select, { label: 'Bed type', placeholder: 'Choose a bed', error: 'Choose a bed type to continue.', options: ['King', 'Twin', 'Sofa bed'] }))));
+</script>
+</body>
+</html>

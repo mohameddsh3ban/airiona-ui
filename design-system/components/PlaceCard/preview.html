@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=403 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PlaceCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '16px 20px 0' } }, h(A.SnapCarousel, { itemWidth: '72%', label: 'Places' }, h(A.PlaceCard, { image: '../../assets/photos/forest-cabin.webp', title: 'Nordic Pine Lodge', region: 'Bavaria', location: 'Nuremberg, Germany', rating: '4.8' }), h(A.PlaceCard, { image: '../../assets/photos/alpine-lodge.webp', title: 'Swiss Alps Retreat', region: 'Valais', location: 'Zermatt', rating: '4.9', saved: true })))));
+</script>
+</body>
+</html>

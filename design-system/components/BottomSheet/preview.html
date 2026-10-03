@@ -1,0 +1,17 @@
+<!-- @dsCard group="Mobile navigation" height=549 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BottomSheet</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function () { function Demo() { var o = React.useState(true); return h('div', { className: 'm-demo', style: { height: 500 } }, h(React.Fragment, null, h('div', { style: { padding: 20 } }, h(A.Button, { variant: 'primary', onClick: function () { o[1](true); } }, 'Open sheet')),
+  h(A.BottomSheet, { contained: true, open: o[0], onClose: function () { o[1](false); }, title: 'Choose your dates', leading: h(A.IconButton, { icon: 'x-mark', label: 'Close', variant: 'soft', onClick: function () { o[1](false); } }), trailing: h(A.IconButton, { icon: 'pencil-square', label: 'Edit', variant: 'soft' }),
+    footer: h(A.Button, { variant: 'primary', size: 'lg', block: true }, 'Continue · 4 nights') },
+    h(A.WeekStrip, { defaultValue: '15', days: [{ date: '12', weekday: 'Mon' }, { date: '13', weekday: 'Tue' }, { date: '14', weekday: 'Wed' }, { date: '15', weekday: 'Thu', dot: true }, { date: '16', weekday: 'Fri' }, { date: '17', weekday: 'Sat' }] })))); } return h(Demo); })());
+</script>
+</body>
+</html>

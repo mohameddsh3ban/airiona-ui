@@ -1,0 +1,27 @@
+<!-- @dsCard group="Motion" height=880 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ScreenStack</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(function StackDemo() {
+  var s = React.useState({ key: 'list', dir: 'push' });
+  var go = function (key, dir) { s[1]({ key: key, dir: dir }); };
+  var list = h('div', { className: 'm-screen' },
+    h(A.AppBar, { large: true, eyebrow: 'Thu, 15 Oct', title: 'Explore' }),
+    h('div', { className: 'm-pad', style: { display: 'flex', flexDirection: 'column', gap: 14, paddingBottom: 40 } },
+      h(A.PlaceCard, { image: '../../assets/photos/forest-cabin.webp', title: 'Nordic Pine Lodge', region: 'Bavaria', location: 'Nuremberg, Germany', rating: '4.8', onPress: function () { go('detail', 'push'); } }),
+      h(A.PlaceCard, { image: '../../assets/photos/alpine-lodge.webp', title: 'Swiss Alps Retreat', region: 'Valais', location: 'Zermatt, Switzerland', rating: '4.9', onPress: function () { go('detail', 'push'); } })));
+  var detail = h('div', { className: 'm-screen' },
+    h(A.PlaceHero, { image: '../../assets/photos/forest-cabin.webp', title: 'Nordic Pine Lodge', location: 'Nuremberg, Germany', price: '$412', priceLabel: 'per night', onBack: function () { go('list', 'pop'); } }),
+    h('div', { className: 'm-pad', style: { paddingTop: 16 } }, h(A.InfoStatRow, { items: [{ icon: 'star', label: '4.8' }, { icon: 'users', label: '4 guests' }, { icon: 'clock', label: '2h drive' }] })));
+  return h('div', { style: { display: 'flex', justifyContent: 'center' } },
+    h(A.PhoneFrame, { statusTone: s[0].key === 'detail' ? 'light' : 'dark' }, h(A.ScreenStack, { screenKey: s[0].key, direction: s[0].dir }, s[0].key === 'list' ? list : detail)));
+}));
+</script>
+</body>
+</html>

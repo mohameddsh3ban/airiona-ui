@@ -1,0 +1,16 @@
+<!-- @dsCard group="Widgets" height=228 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ToggleTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 16, alignItems: 'stretch' } },
+  h('div', { style: { width: 200 } }, h(A.ToggleTile, { title: 'Wi-Fi', status: 'On · Airiona_Guest', icon: 'wifi' })),
+  h('div', { style: { width: 200 } }, h(A.ToggleTile, { title: 'Do not disturb', status: 'Until 08:00', offStatus: 'Off', icon: 'moon', defaultChecked: false }))));
+</script>
+</body>
+</html>

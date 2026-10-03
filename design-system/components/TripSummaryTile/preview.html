@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=219 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TripSummaryTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 320 } }, h(A.TripSummaryTile, { image: '../../assets/art/scooter-3d.webp', title: 'Electric scooter', date: '12 Aug 2026', stats: [{ label: 'Distance', value: '3.2', unit: 'km' }, { label: 'Avg. speed', value: '18.4', unit: 'km/h' }, { label: 'Energy', value: '134', unit: 'Wh' }] })));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Navigation" height=120 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TopNav</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.TopNav, { links: [{ value: 'f', label: 'Flights' }, { value: 'h', label: 'Hotels' }, { value: 's', label: 'Stays' }, { value: 'c', label: 'Car rental' }], user: { name: 'Maya Haddad', email: 'maya.haddad@mail.com' } }));
+</script>
+</body>
+</html>

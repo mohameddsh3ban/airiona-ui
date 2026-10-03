@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=309 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TripRow</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '8px 20px' } }, h(A.TripRow, { date: 'August 12, 2026', logo: 'EK', from: { time: '07:00', city: 'Dubai' }, to: { time: '11:35', city: 'London' }, duration: '7h 35min' }), h(A.TripRow, { date: 'September 5, 2026', logo: 'AF', from: { time: '18:00', city: 'Paris' }, to: { time: '19:40', city: 'Oslo' }, duration: '1h 40min' }))));
+</script>
+</body>
+</html>

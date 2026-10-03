@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=248 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AnalogClock</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 16 } }, h('div', { style: { width: 200 } }, h(A.AnalogClock, { time: '07:02:46' })), h('div', { style: { width: 200 } }, h(A.AnalogClock, { live: true }))));
+</script>
+</body>
+</html>

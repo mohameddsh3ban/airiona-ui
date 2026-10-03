@@ -1,0 +1,14 @@
+<!-- @dsCard group="Dashboard" height=481 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PromptCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 280 } }, h(A.PromptCard, { image: '../../assets/art/ai-orb.webp', question: 'How did my bookings perform over the last 3 months?', sources: [{ icon: 'globe-alt', label: 'Direct' }, { icon: 'device-phone-mobile', label: 'Mobile app' }, { icon: 'building-storefront', label: 'Partners' }] })));
+</script>
+</body>
+</html>

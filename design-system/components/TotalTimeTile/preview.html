@@ -1,0 +1,14 @@
+<!-- @dsCard group="Workspace" height=216 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TotalTimeTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 240 } }, h(A.TotalTimeTile, { icon: 'moon', label: 'Total nights booked', value: '645', unit: 'nights' })));
+</script>
+</body>
+</html>

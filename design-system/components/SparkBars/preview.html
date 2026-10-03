@@ -1,0 +1,14 @@
+<!-- @dsCard group="Dashboard" height=90 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SparkBars</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-w ar-w--dark', style: { flexDirection: 'row', gap: 24, width: 'fit-content' } }, h(A.SparkBars, { values: [2, 3, 2, 5, 9, 6, 4, 2, 3, 2] }), h(A.SparkBars, { values: [5, 4, 6, 3, 2, 4, 8, 3, 2, 4] })));
+</script>
+</body>
+</html>

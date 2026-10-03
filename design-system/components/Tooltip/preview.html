@@ -1,0 +1,18 @@
+<!-- @dsCard group="Overlays" height=220 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Tooltip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 28, padding: '64px 0 24px', justifyContent: 'center' } },
+  h(A.Tooltip, { content: 'Save to your trips', defaultOpen: true }, h(A.IconButton, { icon: 'heart', label: 'Save' })),
+  h(A.Tooltip, { content: 'Swap origin and destination', shortcut: 'S', placement: 'bottom' }, h(A.IconButton, { icon: 'arrows-right-left', label: 'Swap', variant: 'soft' })),
+  h(A.Tooltip, { title: 'Free cancellation', content: 'Full refund until 13 Oct, 12:00 local time.', tone: 'light', placement: 'right' }, h(A.Badge, { tone: 'outline', icon: 'information-circle' }, 'Refundable')),
+  h(A.Tooltip, { content: 'Prices include taxes and fees' }, h(A.Button, { variant: 'secondary', size: 'sm', iconStart: 'receipt-percent' }, 'Price breakdown'))));
+</script>
+</body>
+</html>

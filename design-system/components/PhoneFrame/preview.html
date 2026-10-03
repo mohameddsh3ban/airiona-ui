@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile navigation" height=880 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PhoneFrame</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:20px 0;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'flex', justifyContent: 'center' } }, h(A.PhoneFrame, {}, h('div', { className: 'm-screen' }, h(A.AppBar, { large: true, eyebrow: 'Thu, 15 Oct', title: 'Today' }), h(A.Timeline, { items: [{ featured: true, title: 'Flight to Tokyo', time: '08:45', text: 'EK 312 · Gate B18', done: true }, { title: 'Hotel check-in', time: '14:00', text: 'Code arrives at noon' }] })), h(A.TabBar, { items: [{ value: 'home', label: 'Home', icon: 'home' }, { value: 'trips', label: 'Trips', icon: 'ticket' }, { value: 'saved', label: 'Saved', icon: 'heart' }, { value: 'me', label: 'Profile', icon: 'user' }] }))));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Status" height=152 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BookingSteps</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { padding: '24px 16px', borderRadius: 24, background: 'var(--surface)' } }, h(A.BookingSteps, { current: 2 })));
+</script>
+</body>
+</html>

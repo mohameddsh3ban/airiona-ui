@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=270 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RideTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 220 } }, h(A.RideTile, { image: '../../assets/art/car-3d.webp', provider: 'Transfer', eta: '2', title: 'Meet at the pickup point', vehicle: 'Mercedes-Benz E', plate: 'S00121' })));
+</script>
+</body>
+</html>

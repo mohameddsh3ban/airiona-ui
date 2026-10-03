@@ -1,0 +1,17 @@
+<!-- @dsCard group="Mobile navigation" height=444 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AppBar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } },
+  h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.AppBar, { title: 'Boarding pass', onBack: function () {}, actions: h(A.IconButton, { icon: 'arrow-up-on-square', label: 'Share', variant: 'soft' }) })),
+  h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.AppBar, { large: true, eyebrow: 'October 15, 2026', title: 'Today', actions: h(A.Avatar, { name: 'Maya Haddad', size: 'lg' }) })),
+  h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.AppBar, { large: true, title: 'Trips', accent: true, titleSuffix: 'Planner' }))));
+</script>
+</body>
+</html>

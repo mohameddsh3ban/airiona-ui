@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=235 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>CategoryTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '16px 20px 0' } }, h(A.SnapCarousel, { itemWidth: '42%', label: 'Categories' }, h(A.CategoryTile, { icon: 'home-modern', title: 'Stays', subtitle: '3 upcoming', progress: 0.6, active: true }), h(A.CategoryTile, { icon: 'paper-airplane', title: 'Flights', subtitle: '2 upcoming', progress: 0.35 }), h(A.CategoryTile, { icon: 'truck', title: 'Transfers', subtitle: '1 upcoming', progress: 0.2 })))));
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- @dsCard group="Analytics" height=268 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>MetricTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 16 } },
+  h(A.MetricTile, { label: 'Guests today', value: '327', caption: 'New arrivals', delta: '+4.7%', icon: 'user' }),
+  h(A.MetricTile, { label: 'Staff on shift', value: '75', caption: 'Housekeeping', delta: '-1.2%', icon: 'lifebuoy' }),
+  h(A.MetricTile, { label: 'Status breakdown', value: '1,350', caption: 'Bookings', icon: 'user-group', split: [{ value: '87', label: 'Confirmed', tone: 'success' }, { value: '46', label: 'Pending', tone: 'warning' }] })));
+</script>
+</body>
+</html>

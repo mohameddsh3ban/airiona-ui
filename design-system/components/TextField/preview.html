@@ -1,0 +1,20 @@
+<!-- @dsCard group="Forms" height=330 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TextField</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18, padding: 20, borderRadius: 24, background: 'var(--surface)' } },
+  h(A.TextField, { label: 'Email', placeholder: 'you@example.com', iconStart: 'information-circle', type: 'email', defaultValue: 'maya.haddad@mail.com' }),
+  h(A.TextField, { label: 'Password', type: 'password', defaultValue: 'airiona-2026' }),
+  h(A.TextField, { label: 'Passport number', placeholder: 'As printed on your passport', hint: 'Needed for international flights.' }),
+  h(A.TextField, { label: 'Card number', iconStart: 'credit-card', defaultValue: '4242 4242 4242', error: 'Card number is incomplete. Check the last 4 digits.' }),
+  h(A.TextField, { label: 'Promo code', variant: 'sunken', placeholder: 'SKY2026' }),
+  h(A.TextField, { label: 'Where to?', variant: 'sunken', iconStart: 'magnifying-glass', placeholder: 'City, airport or hotel' })));
+</script>
+</body>
+</html>

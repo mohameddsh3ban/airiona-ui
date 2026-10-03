@@ -35,7 +35,11 @@ import { cx } from '../core/utils';
             <span class="m-hero__eyebrow">{{ eyebrow() }}</span>
           }
           @if (title()) {
-            <h1 class="m-hero__title">{{ title() }}</h1>
+            @switch (headingLevel()) {
+              @case (2) { <h2 class="m-hero__title">{{ title() }}</h2> }
+              @case (3) { <h3 class="m-hero__title">{{ title() }}</h3> }
+              @default { <h1 class="m-hero__title">{{ title() }}</h1> }
+            }
           }
         </div>
         <ng-content select="[arTrailing]" />
@@ -55,6 +59,8 @@ export class ArHeroHeader {
   readonly pattern = input<'map' | 'waves'>('waves');
   /** Default content straddles the bottom edge. */
   readonly overlap = input(false, { transform: booleanAttribute });
+  /** Heading level of the title: 1 (default) for the page header, 2 or 3 when the hero sits inside a page that has its own h1. */
+  readonly headingLevel = input<1 | 2 | 3>(1);
 
   protected readonly src = computed(() => this.asset(this.image()));
   protected readonly hostClass = computed(() => cx('m-hero', this.overlap() && 'has-overlap'));

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=304 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ChecklistRow</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { className: 'm-stack', style: { padding: 20 } }, h(A.ChecklistRow, { text: 'Restock welcome baskets', defaultChecked: true }), h(A.ChecklistRow, { text: 'Send check-in code to guest', meta: 'Due 12:00', dotTone: 'warning' }), h(A.ChecklistRow, { text: 'Approve cleaning report', dotTone: 'brand' }))));
+</script>
+</body>
+</html>

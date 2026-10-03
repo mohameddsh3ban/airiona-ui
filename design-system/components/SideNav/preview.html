@@ -1,0 +1,17 @@
+<!-- @dsCard group="Navigation" height=500 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SideNav</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { padding: 16, borderRadius: 28, background: 'var(--surface)', maxWidth: 280 } },
+  h(A.SideNav, { defaultValue: 'overview', sections: [
+    { title: 'Home', items: [{ value: 'overview', icon: 'squares-2x2', label: 'Overview' }, { value: 'bookings', icon: 'ticket', label: 'Bookings', count: 12 }, { value: 'calendar', icon: 'calendar', label: 'Calendar' }, { value: 'guests', icon: 'users', label: 'Guests' }] },
+    { title: 'Business', items: [{ value: 'listings', icon: 'building-office-2', label: 'Listings' }, { value: 'payouts', icon: 'wallet', label: 'Payouts' }, { value: 'reports', icon: 'chart-bar', label: 'Reports' }] }] })));
+</script>
+</body>
+</html>

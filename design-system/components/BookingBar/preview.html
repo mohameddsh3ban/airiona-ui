@@ -1,0 +1,16 @@
+<!-- @dsCard group="Booking" height=237 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BookingBar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 20 } },
+  h('div', { style: { borderRadius: 24, overflow: 'hidden', boxShadow: 'var(--shadow-card)' } }, h(A.BookingBar, { price: '€128', unit: '/ night', dates: '20–25 May · 2 guests' })),
+  h(A.BookingBar, { floating: true, was: '$1,420', price: '$1,284', unit: 'total', dates: 'Incl. taxes and fees', cta: 'Continue to payment', ctaVariant: 'brand', arrow: 'arrow-right' })));
+</script>
+</body>
+</html>

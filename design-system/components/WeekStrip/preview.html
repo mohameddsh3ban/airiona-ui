@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=182 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>WeekStrip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.WeekStrip, { defaultValue: '15', days: [{ date: '12', weekday: 'Mon' }, { date: '13', weekday: 'Tue' }, { date: '14', weekday: 'Wed' }, { date: '15', weekday: 'Thu', dot: true }, { date: '16', weekday: 'Fri' }, { date: '17', weekday: 'Sat' }, { date: '18', weekday: 'Sun' }] }))));
+</script>
+</body>
+</html>

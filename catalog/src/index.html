@@ -1,0 +1,68 @@
+<title>Airiona Catalog</title>
+<meta name="description" content="Every Airiona component, live in React and Angular, with code, API, motion and exports.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="catalog.css">
+
+<div class="cx" id="app">
+  <header class="cx-top">
+    <a class="cx-brand" href="#" aria-label="Airiona Catalog home">
+      <span class="cx-brand__mark">airiona<i>.</i></span>
+      <span class="cx-brand__sub">catalog</span>
+    </a>
+    <label class="cx-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15Z"/></svg>
+      <input id="search" type="search" placeholder="Search components, motion, use cases" autocomplete="off" aria-label="Search components">
+      <kbd>/</kbd>
+    </label>
+    <div class="cx-fw" role="radiogroup" aria-label="Framework">
+      <button type="button" role="radio" data-fw="react" id="fw-react">React</button>
+      <button type="button" role="radio" data-fw="angular" id="fw-angular">Angular</button>
+      <button type="button" role="radio" data-fw="both" id="fw-both">Both</button>
+    </div>
+    <nav class="cx-toplinks" aria-label="Sections">
+      <a href="#foundations">Foundations</a>
+      <a href="#exports">Exports</a>
+      <a href="#pipeline">Page pipeline</a>
+    </nav>
+    <button type="button" class="cx-menu" id="menu" aria-label="Show components" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <aside class="cx-side" id="side" aria-label="Components">
+    <div class="cx-kinds" id="kinds" role="toolbar" aria-label="Filter by kind"></div>
+    <nav id="nav" class="cx-nav"></nav>
+  </aside>
+
+  <main class="cx-main" id="main" tabindex="-1">
+    <p class="cx-loading">Loading the catalog…</p>
+  </main>
+
+  <div class="cx-tray" id="tray" hidden>
+    <span class="cx-tray__count" id="tray-count"></span>
+    <span class="cx-tray__names" id="tray-names"></span>
+    <button type="button" class="cx-btn" id="tray-imports">Copy imports</button>
+    <button type="button" class="cx-btn" id="tray-handoff">Copy handoff list</button>
+    <button type="button" class="cx-btn cx-btn--ghost" id="tray-clear">Clear</button>
+  </div>
+
+  <div class="cx-modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="cx-modal__card">
+      <div class="cx-modal__head">
+        <h2 id="modal-title">Snapshot</h2>
+        <button type="button" class="cx-icon" id="modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div class="cx-modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <div class="cx-toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="catalog.js"></script>

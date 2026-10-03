@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=418 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PlaceHero</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.PlaceHero, { image: '../../assets/photos/forest-cabin.webp', title: 'Nordic Pine Lodge', location: 'Nuremberg, Germany', price: '$264', onBack: function () {} }))));
+</script>
+</body>
+</html>

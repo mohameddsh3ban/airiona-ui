@@ -1,0 +1,14 @@
+<!-- @dsCard group="Screens" height=900 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PilotDashboard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:12px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.PilotDashboard, { promptImage: '../../assets/art/ai-orb.webp' }));
+</script>
+</body>
+</html>

@@ -1,13 +1,23 @@
 {
-  "name": "airiona-angular",
-  "version": "0.0.0",
+  "name": "airiona-ui-workspace",
+  "version": "1.6.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:lib": "ng build airiona-ui && tsc -p projects/airiona-ui/tsconfig.schematics.json && node -e \"const fs=require('fs');fs.cpSync('projects/airiona-ui/schematics','dist/airiona-ui/schematics',{recursive:true,filter:s=>!s.endsWith('.ts')||s.endsWith('.d.ts')})\""
+    "build:lib": "ng build airiona-ui && tsc -p projects/airiona-ui/tsconfig.schematics.json && node -e \"const fs=require('fs');fs.cpSync('projects/airiona-ui/schematics','dist/airiona-ui/schematics',{recursive:true,filter:s=>!s.endsWith('.ts')||s.endsWith('.d.ts')})\"",
+    "sync": "node tools/sync-design-system.mjs",
+    "manifest": "node tools/gen-manifest.mjs",
+    "build:react": "node tools/build-react.mjs",
+    "catalog:build": "node tools/build-catalog.mjs --thumbs",
+    "catalog": "node tools/serve.mjs dist/catalog 4400",
+    "catalog:test": "node tools/test-catalog.mjs",
+    "audit:parity": "node tools/audit-parity.mjs",
+    "export": "node tools/export.mjs",
+    "export:png": "node tools/shoot.mjs png",
+    "page": "node tools/page/airiona.mjs"
   },
   "prettier": {
     "printWidth": 100,
@@ -38,6 +48,7 @@
     "@angular/cli": "^20.3.37",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
+    "@types/react": "^19.3.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -45,6 +56,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.0",
+    "pixelmatch": "^5.3.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0",
     "typescript": "~5.9.2"
   }
 }

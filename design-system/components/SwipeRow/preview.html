@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=230 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SwipeRow</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { className: 'm-stack', style: { padding: 20 } }, h(A.SwipeRow, { actions: [{ label: 'Snooze', icon: 'clock', tone: 'neutral' }, { label: 'Delete', icon: 'trash', tone: 'danger' }] }, h(A.ChecklistRow, { text: 'Swipe this row left', meta: 'Reveals Snooze and Delete' })), h(A.SwipeRow, { actions: [{ label: 'Archive', icon: 'archive-box', tone: 'brand' }] }, h(A.ChecklistRow, { text: 'One action works too', defaultChecked: true })))));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=266 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>MiniDestination</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo is-canvas', style: { height: 'auto' } }, h('div', { style: { padding: '16px 20px 0' } }, h(A.SnapCarousel, { itemWidth: '58%', label: 'Destinations' }, h(A.MiniDestination, { image: '../../assets/photos/lisbon-rooftops.webp', title: 'Lisbon', price: '$480', duration: '7h 30m', dates: '12 Mar – 22 Mar', badge: '-10%' }), h(A.MiniDestination, { image: '../../assets/photos/tokyo-penthouse.webp', title: 'Tokyo', price: '$950', duration: '9h 40m', dates: '27 Apr – 22 May' })))));
+</script>
+</body>
+</html>

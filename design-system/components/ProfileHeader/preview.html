@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=350 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ProfileHeader</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.ProfileHeader, { name: 'Lina Park', subtitle: 'Your host · replies in 10 min', stats: [{ value: '4.9', label: 'Rating' }, { value: '214', label: 'Reviews' }, { value: '6 yrs', label: 'Hosting' }] }))));
+</script>
+</body>
+</html>

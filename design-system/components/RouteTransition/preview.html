@@ -1,0 +1,28 @@
+<!-- @dsCard group="Motion" height=360 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RouteTransition</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(function RouteDemo() {
+  var r = React.useState('stays'), v = React.useState('fade-through'), prev = React.useRef(0);
+  var order = ['stays', 'flights', 'trips'], idx = order.indexOf(r[0]), dir = idx >= prev.current ? 'forward' : 'back';
+  React.useEffect(function () { prev.current = idx; });
+  var body = { stays: ['Stays', '128 places in Lisbon', 'home-modern'], flights: ['Flights', 'DXB → HND · 14 options', 'paper-airplane'], trips: ['Trips', '2 upcoming, 1 needs check-in', 'briefcase'] }[r[0]];
+  return h('div', { className: 'ar-col', style: { gap: 16 } },
+    h('div', { className: 'ar-row', style: { gap: 12, flexWrap: 'wrap' } },
+      h(A.SegmentedControl, { label: 'Route', value: r[0], onChange: r[1], options: [{ value: 'stays', label: 'Stays' }, { value: 'flights', label: 'Flights' }, { value: 'trips', label: 'Trips' }] }),
+      h(A.SegmentedControl, { label: 'Variant', tone: 'surface', size: 'sm', value: v[0], onChange: v[1], options: ['fade-through', 'shared-x', 'shared-y', 'scale'] })),
+    h('div', { style: { overflow: 'hidden', borderRadius: 28 } },
+      h(A.RouteTransition, { routeKey: r[0] + v[0], variant: v[0], direction: dir },
+        h('div', { className: 'ar-w ar-w--sky', style: { minHeight: 180 } },
+          h('div', { className: 'ar-w__row' }, h('div', { className: 'ar-w__titles' }, h('span', { className: 'ar-w__eyebrow' }, 'Route'), h('h3', { className: 'ar-w__title' }, body[0])), h('span', { className: 'ar-w__badge' }, h(A.Icon, { name: body[2], size: 20 }))),
+          h('p', { style: { margin: 0, color: 'var(--ink-muted)' } }, body[1])))));
+}));
+</script>
+</body>
+</html>

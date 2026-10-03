@@ -1,0 +1,36 @@
+<!-- @dsCard group="Data" height=757 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>DataTable</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function () {
+  var rows = [
+    { id: 'K7QX2M', guest: 'Maya Haddad', email: 'maya.haddad@mail.com', stay: 'Scandinavian Forest Cabin', dates: '15–19 Oct', nights: 4, status: 'confirmed', amount: 640 },
+    { id: 'P2LM8D', guest: 'Omar Saleh', email: 'omar.s@mail.com', stay: 'Swiss Alps Retreat', dates: '18–20 Oct', nights: 2, status: 'pending', amount: 1420 },
+    { id: 'Z9QT4R', guest: 'Lina Park', email: 'lina.park@mail.com', stay: 'Tokyo Penthouse', dates: '21–25 Oct', nights: 4, status: 'confirmed', amount: 3800 },
+    { id: 'B4NV1K', guest: 'Daniel Ruiz', email: 'druiz@mail.com', stay: 'Cliff House Lisbon', dates: '9–12 Oct', nights: 3, status: 'cancelled', amount: 1440 },
+    { id: 'H3WS7P', guest: 'Aiko Tan', email: 'aiko.tan@mail.com', stay: 'Hotel Tropical Daisy', dates: '1–6 Nov', nights: 5, status: 'checked-in', amount: 990 },
+    { id: 'M8KD2Q', guest: 'Sara Ali', email: 'sara.ali@mail.com', stay: 'Nordic Pine Lodge', dates: '3–5 Nov', nights: 2, status: 'confirmed', amount: 412 },
+    { id: 'T6RC9L', guest: 'Jon Berg', email: 'jon.berg@mail.com', stay: 'Swiss Alps Retreat', dates: '7–14 Nov', nights: 7, status: 'pending', amount: 4970 }];
+  var STATUS = { confirmed: ['success', 'Confirmed'], pending: ['warning', 'Payment pending'], cancelled: ['danger', 'Cancelled'], 'checked-in': ['brand', 'Checked in'] };
+  return h(A.DataTable, {
+    title: 'Bookings', rows: rows, selectable: true, searchable: true, searchPlaceholder: 'Search reference or guest', pageSize: 5, defaultSort: { key: 'amount', dir: 'desc' },
+    actions: [h(A.Select, { key: 's', size: 'sm', defaultValue: 'all', align: 'end', options: [{ value: 'all', label: 'All properties' }, { value: 'cabin', label: 'Cabins' }, { value: 'hotel', label: 'Hotels' }] }), h(A.Button, { key: 'b', variant: 'primary', size: 'sm', iconStart: 'plus' }, 'New booking')],
+    bulkActions: function (sel) { return [h(A.Button, { key: 'e', variant: 'white', size: 'sm', iconStart: 'credit-card' }, 'Export ' + sel.length), h(A.Button, { key: 'm', variant: 'brand', size: 'sm', iconStart: 'bell' }, 'Message guests')]; },
+    columns: [
+      { key: 'id', header: 'Reference', mono: true, sortable: true },
+      { key: 'guest', header: 'Guest', sortable: true, searchValue: function (r) { return r.guest + ' ' + r.email; }, render: function (r) { return h('div', { className: 'ar-cell-person' }, h(A.Avatar, { name: r.guest, size: 'sm' }), h('div', null, h('b', null, r.guest), h('small', null, r.email))); } },
+      { key: 'stay', header: 'Stay', sortable: true, render: function (r) { return h('div', null, h('div', { style: { fontWeight: 500 } }, r.stay), h('small', { style: { color: 'var(--ink-subtle)', fontSize: 13 } }, r.dates + ' · ' + r.nights + ' nights')); } },
+      { key: 'status', header: 'Status', sortable: true, render: function (r) { return h(A.Badge, { tone: STATUS[r.status][0], dot: true }, STATUS[r.status][1]); } },
+      { key: 'amount', header: 'Amount', align: 'right', numeric: true, sortable: true, defaultDir: 'desc', render: function (r) { return h('b', { style: { fontWeight: 600 } }, '$' + r.amount.toLocaleString('en-US')); } },
+      { key: 'menu', header: h('span', { className: 'ar-sr' }, 'Actions'), width: 56, render: function (r) { return h(A.Menu, { label: 'Actions for ' + r.id, items: [{ label: 'View booking', icon: 'ticket' }, { label: 'Message guest', icon: 'bell' }, { divider: true }, { label: 'Cancel booking', icon: 'x-mark', tone: 'danger' }] }); } }]
+  });
+})());
+</script>
+</body>
+</html>

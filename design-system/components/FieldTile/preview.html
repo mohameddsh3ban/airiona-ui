@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=302 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>FieldTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 } }, h('div', { style: { gridColumn: '1 / -1' } }, h(A.FieldTile, { label: 'From', value: 'Dubai · DXB', trailingIcon: 'plane' })), h(A.FieldTile, { label: 'Departure', icon: 'calendar-days', value: '27 Aug, 2026' }), h(A.FieldTile, { label: 'Class', icon: 'star', value: 'Economy', chevron: true }), h(A.FieldTile, { label: 'Passengers', icon: 'user', placeholder: 'Add travellers' }))));
+</script>
+</body>
+</html>

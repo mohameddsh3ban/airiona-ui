@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=216 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ArrivalTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 220 } }, h(A.ArrivalTile, { eta: '53min', from: { code: 'DXB', city: 'Dubai', time: '14:30' }, to: { code: 'IST', city: 'Istanbul', time: '16:30' }, progress: 0.6 })));
+</script>
+</body>
+</html>

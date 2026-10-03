@@ -1,0 +1,17 @@
+<!-- @dsCard group="Mobile navigation" height=396 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TabBar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } },
+  h('div', { className: 'm-demo', style: { height: 96 } }, h(A.TabBar, { variant: 'dot', items: [{ value: 'home', label: 'Home', icon: 'home' }, { value: 'trips', label: 'Trips', icon: 'ticket' }, { value: 'saved', label: 'Saved', icon: 'heart' }, { value: 'me', label: 'Profile', icon: 'user' }] })),
+  h('div', { className: 'm-demo', style: { height: 110 } }, h(A.TabBar, { variant: 'fab', items: [{ value: 'home', label: 'Home', icon: 'home' }, { value: 'trips', label: 'Trips', icon: 'ticket' }, { value: 'saved', label: 'Saved', icon: 'heart' }, { value: 'me', label: 'Profile', icon: 'user' }] })),
+  h('div', { className: 'm-demo is-canvas', style: { height: 110 } }, h(A.TabBar, { variant: 'pill', items: [{ value: 'home', label: 'Home', icon: 'home' }, { value: 'trips', label: 'Trips', icon: 'ticket' }, { value: 'saved', label: 'Saved', icon: 'heart' }, { value: 'me', label: 'Profile', icon: 'user' }] }))));
+</script>
+</body>
+</html>

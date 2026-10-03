@@ -1,0 +1,22 @@
+<!-- @dsCard group="Actions" height=120 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>IconButton</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row' },
+  h(A.IconButton, { icon: 'bell', label: 'Notifications', badge: true }),
+  h(A.IconButton, { icon: 'cog-6-tooth', label: 'Settings', variant: 'soft' }),
+  h(A.IconButton, { icon: 'chevron-left', label: 'Back', variant: 'outline' }),
+  h(A.IconButton, { icon: 'arrow-up-right', label: 'Open', variant: 'ink' }),
+  h(A.IconButton, { icon: 'magnifying-glass', label: 'Search', variant: 'brand', size: 'lg' }),
+  h('div', { className: 'ar-row', style: { padding: 12, borderRadius: 999, background: 'linear-gradient(135deg, var(--blue-300), var(--sky-200))' } },
+    h(A.IconButton, { icon: 'arrow-up-on-square', label: 'Share', variant: 'white' }),
+    h(A.IconButton, { icon: 'heart', label: 'Save', variant: 'glass', 'aria-pressed': 'true' }))));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Workspace" height=90 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>DateChip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row' }, h(A.DateChip, { day: '19', weekday: 'Tue', month: 'January' }), h(A.DateChip, { day: '3', weekday: 'Sat', month: 'October' })));
+</script>
+</body>
+</html>

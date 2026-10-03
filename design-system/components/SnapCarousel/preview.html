@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=300 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SnapCarousel</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '16px 20px 0' } }, h(A.SnapCarousel, { itemWidth: '70%', label: 'Stats' }, h(A.MiniStatCard, { title: 'Trips done', subtitle: 'Over the last year', value: '9', delta: '-3.48%' }), h(A.MiniStatCard, { title: 'Nights booked', subtitle: 'Over the last year', value: '42', delta: '+12%' }), h(A.MiniStatCard, { title: 'Cancelled', subtitle: 'Over the last year', value: '1', delta: '-50%' })))));
+</script>
+</body>
+</html>

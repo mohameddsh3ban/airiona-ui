@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile navigation" height=178 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StickyActionBar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 130 } }, h(A.StickyActionBar, { summary: h(React.Fragment, null, h('b', { className: 'm-title-2' }, '$264'), h('span', { className: 'm-footnote', style: { color: 'var(--ink-muted)' } }, 'per night')) }, h(A.Button, { variant: 'primary', size: 'lg', iconEnd: 'paper-airplane' }, 'Book now'))));
+</script>
+</body>
+</html>

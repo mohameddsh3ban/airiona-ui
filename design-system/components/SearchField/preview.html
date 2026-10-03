@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=248 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SearchField</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } }, h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.SearchField, { placeholder: 'Search stays', onFilter: null })), h('div', { className: 'm-demo is-padded', style: { height: 'auto' } }, h(A.SearchField, { variant: 'outline', placeholder: 'Search places', onFilter: null }))));
+</script>
+</body>
+</html>

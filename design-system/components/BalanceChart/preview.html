@@ -1,0 +1,14 @@
+<!-- @dsCard group="Dashboard" height=436 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BalanceChart</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.BalanceChart, { label: 'Total revenue', value: '$325,000.69', yLabels: ['$60k', '$45k', '$30k', '$15k', '$0'], bars: [40, 52, 46, 70, 58, 74, 62, 80, 55, 72, 68, 44], selection: [3, 8], tooltip: { value: '$42,250.69', date: 'Jan 25, 2026' } }));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=200 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ExpandableText</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.ExpandableText, { lines: 3 }, 'A black timber cabin with floor-to-ceiling glass, set deep in the Bavarian forest. Wake to birdsong, light the wood stove, and walk straight from the deck onto the trails. Fast Wi-Fi, a full kitchen and a sauna for two.'))));
+</script>
+</body>
+</html>

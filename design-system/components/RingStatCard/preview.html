@@ -1,0 +1,16 @@
+<!-- @dsCard group="Widgets" height=221 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RingStatCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 } },
+  h(A.RingStatCard, { value: '2.8', unit: 'km', ring: { value: 0.64, label: '64', unit: 'km' }, stats: [{ label: 'Duration', value: '08:21' }, { label: 'Avg. speed', value: '18.4 km/h' }, { label: 'Calories', value: '134 kcal' }] }),
+  h(A.RingStatCard, { tone: 'dark', icon: 'arrow-turn-left-up', value: '300', unit: 'm', ring: { value: 0.64, label: '64', unit: 'km' }, stats: [{ label: 'ETA', value: '10:21' }, { label: 'Time left', value: '18 min' }, { label: 'Distance left', value: '6.4 km' }] })));
+</script>
+</body>
+</html>

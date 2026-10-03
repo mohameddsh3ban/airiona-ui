@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=240 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>BatteryTile</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 200 } }, h(A.BatteryTile, { percent: 57, caption: '~ 5 hours left', label: 'Key card battery' })));
+</script>
+</body>
+</html>

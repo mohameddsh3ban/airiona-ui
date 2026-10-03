@@ -1,0 +1,24 @@
+<!-- @dsCard group="Navigation" height=400 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Tabs</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 28 } },
+  h('div', { style: { padding: '8px 24px 24px', borderRadius: 24, background: 'var(--surface)' } },
+    h(A.Tabs, { label: 'Listing sections', defaultValue: 'overview', extra: h(A.Button, { variant: 'ghost', size: 'sm', iconStart: 'arrow-up-on-square' }, 'Share'), tabs: [
+      { value: 'overview', label: 'Overview', content: h('p', { className: 'body', style: { margin: 0, color: 'var(--ink-muted)', maxWidth: 560 } }, 'A black timber cabin with floor-to-ceiling glass, a wood stove and a deck over the forest floor. 25 minutes from Nuremberg.') },
+      { value: 'rooms', label: 'Rooms', count: 2, content: h(A.AmenityList, { items: [{ icon: 'bed', label: '2 bedrooms' }, { icon: 'bath', label: '1 bathroom' }, { icon: 'users', label: '4 guests' }] }) },
+      { value: 'reviews', label: 'Reviews', count: 214, content: h(A.Rating, { value: 4.8, count: '214' }) },
+      { value: 'policies', label: 'Policies', disabled: true, content: null }] })),
+  h(A.Tabs, { variant: 'card', label: 'Trip type', defaultValue: 'flights', tabs: [
+    { value: 'flights', label: 'Flights', icon: 'paper-airplane', content: h('div', { className: 'ar-row' }, h(A.Badge, { tone: 'brand', dot: true }, '3 trips upcoming'), h('span', { className: 'body-sm', style: { color: 'var(--ink-muted)' } }, 'Next: EK 312 to Tokyo on Thu, 15 Oct')) },
+    { value: 'stays', label: 'Stays', icon: 'home-modern', content: h('span', { className: 'body-sm' }, 'Scandinavian Forest Cabin · 15–19 Oct') },
+    { value: 'cars', label: 'Cars', icon: 'truck', content: h('span', { className: 'body-sm' }, 'No car rentals yet.') }] })));
+</script>
+</body>
+</html>

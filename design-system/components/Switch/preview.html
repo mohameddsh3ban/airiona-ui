@@ -1,0 +1,16 @@
+<!-- @dsCard group="Forms" height=178 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Switch</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 18, padding: 20, borderRadius: 24, background: 'var(--surface)', maxWidth: 420 } },
+  h(A.Switch, { label: 'Price alerts', description: 'Email me when this route drops below $480.', defaultChecked: true }),
+  h(A.Switch, { label: 'Instant book', description: 'Guests can book without waiting for approval.' })));
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!-- @dsCard group="Mobile onboarding" height=880 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>OnboardingFlow</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:20px 0;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function () { var imgs = ["../../assets/onboarding/onboarding-1.webp","../../assets/onboarding/onboarding-2.webp","../../assets/onboarding/onboarding-3.webp","../../assets/onboarding/onboarding-4.webp","../../assets/onboarding/onboarding-5.webp"]; var steps = A.OnboardingFlow.copy.map(function (c, i) { return Object.assign({ image: imgs[i] }, c); });
+  return h('div', { style: { display: 'flex', justifyContent: 'center' } }, h(A.PhoneFrame, {}, h(A.OnboardingFlow, { steps: steps }))); })());
+</script>
+</body>
+</html>

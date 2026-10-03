@@ -1,0 +1,20 @@
+<!-- @dsCard group="Dashboard" height=378 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StatCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 } },
+  h(A.StatCard, { icon: 'wallet', label: 'Revenue this week', value: '$84,210', delta: '+12.4%', caption: 'vs last week', onOpen: () => {},
+    bars: { values: [42, 58, 36, 74, 61, 88, 52], highlight: 5, flag: '$18.2k', axis: ['M','T','W','T','F','S','S'] } }),
+  h(A.StatCard, { tone: 'ink', icon: 'ticket', label: 'Bookings today', value: '1,284', delta: '+8%', caption: 'on 1,189 yesterday', onOpen: () => {},
+    bars: { values: [30, 44, 52, 40, 64, 70, 58], highlight: 5, flag: '312', axis: ['8','10','12','14','16','18','20'] } }),
+  h(A.StatCard, { tone: 'brand', icon: 'building-office-2', label: 'Occupancy', value: '87%', delta: '-3%', caption: 'across 42 properties',
+    bars: { values: [72, 81, 90, 84, 78, 92, 87], highlight: 6, flag: '87%', axis: ['W36','W37','W38','W39','W40','W41','W42'] } })));
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!-- @dsCard group="Motion" height=230 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>CountUp</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(function CountUpDemo() {
+  var k = React.useState(0);
+  var cell = function (v, l) { return h('div', { key: l, className: 'ar-stat', style: { flex: '1 1 160px' } }, h('div', { className: 'ar-stat__label' }, l), h('div', { className: 'ar-stat__value' }, h(A.CountUp, { value: v }))); };
+  return h('div', { className: 'ar-col', style: { gap: 14 } },
+    h('div', { key: k[0], className: 'ar-row', style: { gap: 12, flexWrap: 'wrap', alignItems: 'stretch' } }, cell('$84,210', 'Revenue, October'), cell('1,350', 'Nights booked'), cell('87%', 'Occupancy'), cell('4.92', 'Guest rating')),
+    h('div', null, h(A.Button, { variant: 'secondary', size: 'sm', iconStart: 'arrow-path', onClick: function () { k[1](k[0] + 1); } }, 'Replay')));
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!-- Log in: generated from docs/pages/login/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--topbar" aria-label="Airiona">
+    <div class="pg-g">
+      <ar-app-bar class="pg-el-appBar" title="Airiona" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks">
+        <button arButton arActions class="pg-el-navSignup" variant="secondary" size="sm" (click)="goToSignup($event)">Sign up</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--signIn" aria-label="Log in">
+    <form class="pg-g" [formGroup]="login" (ngSubmit)="submitLogin()" novalidate>
+        <h1 class="m-large-title pg-el-heading">Log in</h1>
+        <p class="body pg-el-lede">Please log in to your account to continue.</p>
+        <ar-text-field
+          class="pg-el-email"
+          label="Email"
+          type="email"
+          autocomplete="email"
+          inputMode="email"
+          iconStart="envelope"
+          [placeholder]="emailPlaceholder"
+          formControlName="email"
+          [error]="loginForm.error('email')"
+        />
+        <ar-text-field
+          class="pg-el-password"
+          label="Password"
+          type="password"
+          autocomplete="current-password"
+          iconStart="lock-closed"
+          formControlName="password"
+          [error]="loginForm.error('password')"
+        />
+        <ar-checkbox class="pg-el-remember" label="Remember me" formControlName="remember" />
+        @if (loginForm.error('remember'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <a class="pg-link pg-el-forgot" href="#/forgot-password">Forgot password?</a>
+        <button
+          arButton
+          class="pg-el-submit"
+          variant="primary"
+          size="lg"
+          [block]="true"
+          type="submit"
+          [loading]="loginForm.pending()"
+        >Log in</button>
+        <p class="pg-divider pg-el-or">Or continue with</p>
+        <!-- GAP social: see gaps in the spec. Placeholder until the component exists. -->
+        <div class="pg-gap pg-el-social">Facebook · Apple · Google sign-in</div>
+        <p class="body-sm pg-el-signup">Don't have an account? 
+          <a class="pg-link pg-el-signupLink" href="#/signup">Sign up</a>
+        </p>
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--promo" aria-label="Manage your trips in one place">
+    <div class="pg-g">
+      <ar-hero-header
+        class="pg-el-hero"
+        eyebrow="Airiona"
+        title="Manage your trips in one place"
+        image="assets/art/globe.webp"
+        [headingLevel]="2"
+      >
+        <p arBelowTitle class="body pg-el-heroText">Track every booking in real time.</p>
+      </ar-hero-header>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--footer" aria-label="Contact and legal">
+    <div class="pg-g">
+      <p class="m-title-2 pg-muted pg-el-pitch">Planning a group trip or a corporate account? Talk to us.</p>
+      <p class="body-sm pg-el-contact">Contact us · hello&#64;airiona.com</p>
+      <p class="caption pg-muted pg-el-legal">Terms · Cookie policy · Privacy settings · © 2026 Airiona</p>
+    </div>
+  </section>
+</main>
+

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Actions" height=100 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Chip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row' },
+  h(A.Chip, { defaultSelected: true, icon: 'building-office-2' }, 'Hotels'),
+  h(A.Chip, { icon: 'home' }, 'Cabins'),
+  h(A.Chip, { icon: 'wifi', count: 128 }, 'Fast Wi-Fi'),
+  h(A.Chip, null, 'Free cancellation'),
+  h(A.Chip, null, 'Pool')));
+</script>
+</body>
+</html>

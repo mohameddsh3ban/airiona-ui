@@ -1,0 +1,17 @@
+<!-- @dsCard group="Forms" height=90 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Checkbox</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 28 } },
+  h(A.Checkbox, { label: 'Remember me', defaultChecked: true }),
+  h(A.Checkbox, { label: 'Add travel insurance' }),
+  h(A.Checkbox, { label: 'Window seat (sold out)', disabled: true })));
+</script>
+</body>
+</html>

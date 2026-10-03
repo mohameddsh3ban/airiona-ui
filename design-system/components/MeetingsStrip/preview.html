@@ -1,0 +1,15 @@
+<!-- @dsCard group="Workspace" height=330 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>MeetingsStrip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 420 } }, h(A.MeetingsStrip, { title: 'Upcoming meetings', summary: '3 calls · Thu, 11', month: 'sep', months: [{ value: 'sep', label: 'September' }, { value: 'oct', label: 'October' }], defaultValue: '11',
+  days: [{ date: '8', weekday: 'Mon' }, { date: '9', weekday: 'Tue', count: 1 }, { date: '10', weekday: 'Wed' }, { date: '11', weekday: 'Thu', count: 3 }, { date: '12', weekday: 'Fri' }, { date: '13', weekday: 'Sat' }] })));
+</script>
+</body>
+</html>

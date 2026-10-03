@@ -1,0 +1,24 @@
+<!-- @dsCard group="Forms" height=630 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>DatePicker</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render((function () {
+  var prices = {};
+  ['2026-10-12','2026-10-13','2026-10-14','2026-10-15','2026-10-16','2026-10-17','2026-10-18','2026-10-19','2026-10-20','2026-10-21','2026-10-24','2026-10-25','2026-10-26','2026-10-27','2026-10-28','2026-10-29','2026-10-30','2026-10-31','2026-11-01','2026-11-02','2026-11-03','2026-11-04','2026-11-05','2026-11-06','2026-11-07','2026-11-08'].forEach(function (d, i) { prices[d] = '$' + [128, 98, 140, 156, 160, 188, 194, 150, 138, 136, 180, 176, 128, 102, 99, 128, 134, 190, 172, 128, 118, 112, 120, 158, 196, 176][i]; });
+  return h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18, padding: 20, borderRadius: 24, background: 'var(--surface)', alignItems: 'start' } },
+    h(A.DatePicker, { mode: 'range', variant: 'tiles', defaultOpen: true, today: '2026-10-03', min: '2026-10-03', defaultValue: ['2026-10-15', '2026-10-19'],
+      unavailable: ['2026-10-06', '2026-10-07', '2026-10-08', '2026-10-22', '2026-10-23'], prices: prices, lowPrices: ['2026-10-13', '2026-10-27', '2026-10-28'],
+      presets: [{ label: 'This weekend', value: ['2026-10-09', '2026-10-11'] }, { label: 'Next week', value: ['2026-10-12', '2026-10-19'] }, { label: 'Late Oct', value: ['2026-10-26', '2026-10-31'] }] }),
+    h('div', { className: 'ar-col', style: { gap: 18 } },
+      h(A.DatePicker, { label: 'Departure', today: '2026-10-03', min: '2026-10-03', defaultValue: '2026-10-15' }),
+      h(A.DatePicker, { label: 'Date of birth', placeholder: 'Choose a date', max: '2026-10-03', today: '2026-10-03', hint: 'As printed on your passport.' })));
+})());
+</script>
+</body>
+</html>

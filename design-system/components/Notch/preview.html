@@ -1,0 +1,16 @@
+<!-- @dsCard group="Workspace" height=208 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Notch</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 16 } },
+  h('div', { className: 'ar-w ar-w--brand', style: { width: 240, height: 160 } }, h(A.Notch, { corner: 'tr' }, h(A.IconButton, { icon: 'bell', variant: 'white', label: 'Notifications' })), h('b', { style: { marginTop: 'auto', font: '600 20px/24px var(--font-display)' } }, 'Top-right notch')),
+  h('div', { className: 'ar-w ar-w--dark', style: { width: 240, height: 160 } }, h(A.Notch, { corner: 'tl' }, h(A.IconButton, { icon: 'arrow-up-right', variant: 'brand', label: 'Open' })), h('b', { style: { marginTop: 'auto', font: '600 20px/24px var(--font-display)' } }, 'Top-left notch'))));
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=384 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PlanList</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: 20 } }, h(A.PlanList, { items: [{ title: 'Land at Haneda, terminal 3', time: '2:00 – 2:30 PM', featured: true, image: '../../assets/photos/tokyo-penthouse.webp' }, { title: 'Transfer to Minato Penthouse', time: '2:30 – 3:45 PM' }, { title: 'Check-in and rest', time: '3:45 – 5:00 PM' }] }))));
+</script>
+</body>
+</html>

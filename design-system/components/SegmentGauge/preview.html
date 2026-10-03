@@ -1,0 +1,15 @@
+<!-- @dsCard group="Analytics" height=384 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SegmentGauge</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.SegmentGauge, { eyebrow: 'Booking mix', title: 'Rate status', onOpen: null, total: '800', totalLabel: 'Total bookings',
+  segments: [{ label: 'Flexible', value: 80, display: '80%' }, { label: 'Non-refundable', value: 11.5, display: '11.5%' }, { label: 'Corporate', value: 8.5, display: '8.5%' }] }));
+</script>
+</body>
+</html>

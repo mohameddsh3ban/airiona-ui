@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=300 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>TicketCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 360, maxWidth: '100%' } }, h(A.TicketCard, { badge: 'Best', from: { time: '07:00', code: 'DXB', city: 'Dubai' }, to: { time: '11:35', code: 'LHR', city: 'London' }, duration: '7h 35m', cabin: 'Economy', price: '$649', airline: 'Emirates' })));
+</script>
+</body>
+</html>

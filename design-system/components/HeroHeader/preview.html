@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile navigation" height=380 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>HeroHeader</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo is-flush', style: { height: 'auto' } }, h('div', null, h(A.HeroHeader, { image: '../../assets/art/globe.webp', overlap: true, eyebrow: 'Good morning', title: 'Maya Haddad', trailing: h(A.IconButton, { icon: 'bell', label: 'Notifications', variant: 'white', badge: true }) }, h(A.SearchField, { placeholder: 'Where to next?', onFilter: null })), h('div', { style: { padding: '18px 20px 22px' } }, h(A.SectionHeader, { title: 'Popular places', action: 'View all' })))));
+</script>
+</body>
+</html>

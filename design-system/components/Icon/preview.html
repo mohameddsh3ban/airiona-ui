@@ -1,0 +1,21 @@
+<!-- @dsCard group="Foundations" height=300 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Icon</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } },
+  h('div', { className: 'ar-row', style: { gap: 10, color: 'var(--ink)' } },
+    ['magnifying-glass','paper-airplane','calendar-days','map-pin','globe-alt','home-modern','building-office-2','ticket','briefcase','credit-card','wallet','users','user-circle','heart','star','bell','chat-bubble-left-right','arrows-right-left','adjustments-horizontal','funnel','arrow-up-on-square','arrow-up-right','check-circle','exclamation-triangle','information-circle','x-mark','plus','minus','clock','wifi','shield-check','sparkles'].map(n => h('span', { key: n, title: n, style: { display: 'inline-grid', placeItems: 'center', width: 44, height: 44, borderRadius: 12, background: 'var(--surface)' } }, h(A.Icon, { name: n, size: 22 })))),
+  h('div', { className: 'ar-row', style: { gap: 10, color: 'var(--ink)' } },
+    ['star','heart','check-circle','exclamation-triangle','information-circle','bell'].map(n => h('span', { key: n, title: n + ' (solid)', style: { display: 'inline-grid', placeItems: 'center', width: 44, height: 44, borderRadius: 12, background: 'var(--blue-50)', color: 'var(--blue-600)' } }, h(A.Icon, { name: n, variant: 'solid', size: 22 }))),
+    h('span', { style: { width: 1, height: 28, background: 'var(--line)', margin: '0 6px' } }),
+    A.Icon.additions.map(n => h('span', { key: n, title: n + ' (Airiona addition)', style: { display: 'inline-grid', placeItems: 'center', width: 44, height: 44, borderRadius: 12, background: 'var(--surface)', boxShadow: 'inset 0 0 0 1.5px var(--blue-200)' } }, h(A.Icon, { name: n, size: 22 })))),
+  h('span', { className: 'body-sm', style: { color: 'var(--ink-muted)' } }, A.Icon.heroicons.length + ' Heroicons outline · ' + A.Icon.solidNames.length + ' solid · ' + A.Icon.additions.length + ' Airiona travel additions (blue outline)')));
+</script>
+</body>
+</html>

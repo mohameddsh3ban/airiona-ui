@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=261 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>DetailList</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '8px 20px' } }, h(A.DetailList, { items: [{ label: 'Dates', value: '15–19 Oct' }, { label: 'Guests', value: '2 adults' }, { label: 'Reference', value: h('span', { className: 'ar-mono' }, 'K7QX2M') }, { label: 'Status', value: h(A.Badge, { tone: 'success', dot: true, size: 'sm' }, 'Confirmed') }] }))));
+</script>
+</body>
+</html>

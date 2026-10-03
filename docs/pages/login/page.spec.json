@@ -1,0 +1,423 @@
+{
+  "page": "login",
+  "title": "Log in",
+  "route": "login",
+  "target": "angular",
+  "source": {
+    "kind": "screenshot",
+    "ref": "docs/pages/login/source.jpg",
+    "notes": "The source is a desktop sign-in page: a pill top nav, a two-panel card (blue fabric art with a headline on the left, the form on the right) and a dark footer. It shows no phone layout, no error states and no pending state; those are designed here. The brand in the source is a placeholder (Glintz); this conversion uses Airiona."
+  },
+  "audience": "A returning traveller signing in on their phone to manage a trip, sometimes on hotel or airport Wi-Fi, often with saved passwords",
+  "primaryAction": "Sign in with email and password",
+  "types": {},
+  "data": [],
+  "sections": [
+    {
+      "id": "topbar",
+      "title": "Airiona",
+      "heading": false,
+      "purpose": "Brand and a way back to the public site on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": true,
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "appBar",
+          "component": "AppBar",
+          "inputs": {
+            "title": "Airiona"
+          },
+          "why": "Phone screens get a compact top bar; the source's four-link pill nav does not fit 390px",
+          "alternatives": [
+            {
+              "component": "TopNav",
+              "rejected": "four links plus brand overflow a phone; it returns at 1280"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "The source's pill navigation: brand plus Home, Services, Features, Team",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "home",
+                "label": "Home"
+              },
+              {
+                "value": "services",
+                "label": "Services"
+              },
+              {
+                "value": "features",
+                "label": "Features"
+              },
+              {
+                "value": "team",
+                "label": "Team"
+              }
+            ]
+          },
+          "why": "Matches the source's centred pill of links with the brand on the left",
+          "alternatives": [
+            {
+              "component": "SideNav",
+              "rejected": "an app sidebar for a public sign-in page"
+            }
+          ],
+          "children": [
+            {
+              "id": "navSignup",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Sign up",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm"
+              },
+              "events": {
+                "click": "goToSignup"
+              },
+              "why": "Fills TopNav's actions slot; without it TopNav shows its default search and notification buttons, which a signed-out page cannot use",
+              "notes": "Routes to /signup"
+            }
+          ]
+        }
+      ],
+      "area": {
+        "lg": "full"
+      }
+    },
+    {
+      "id": "signIn",
+      "title": "Log in",
+      "heading": false,
+      "purpose": "The form: the reason the page exists, so it comes first on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "area": {
+        "lg": "aside"
+      },
+      "form": "login",
+      "elements": [
+        {
+          "id": "heading",
+          "component": "html",
+          "tag": "h1",
+          "class": "m-large-title",
+          "text": "Log in"
+        },
+        {
+          "id": "lede",
+          "component": "html",
+          "tag": "p",
+          "class": "body",
+          "text": "Please log in to your account to continue."
+        },
+        {
+          "id": "email",
+          "component": "TextField",
+          "field": "email",
+          "inputs": {
+            "label": "Email",
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email",
+            "iconStart": "envelope",
+            "placeholder": "name@example.com"
+          },
+          "why": "Labelled field with an icon, hint and error built in; type email brings up the @ keyboard",
+          "alternatives": [
+            {
+              "component": "FieldTile",
+              "rejected": "opens a picker, not the keyboard"
+            }
+          ]
+        },
+        {
+          "id": "password",
+          "component": "TextField",
+          "field": "password",
+          "inputs": {
+            "label": "Password",
+            "type": "password",
+            "autocomplete": "current-password",
+            "iconStart": "lock-closed"
+          },
+          "why": "Same field family as email; with type password it brings its own Show password button, and current-password lets password managers fill it"
+        },
+        {
+          "id": "remember",
+          "component": "Checkbox",
+          "field": "remember",
+          "inputs": {
+            "label": "Remember me"
+          },
+          "why": "Independent yes/no choice inside a form",
+          "alternatives": [
+            {
+              "component": "Switch",
+              "rejected": "switches apply immediately; this is part of the submission"
+            }
+          ]
+        },
+        {
+          "id": "forgot",
+          "component": "html",
+          "tag": "a",
+          "class": "pg-link",
+          "text": "Forgot password?",
+          "href": "#/forgot-password"
+        },
+        {
+          "id": "submit",
+          "component": "Button",
+          "submit": true,
+          "text": "Log in",
+          "inputs": {
+            "variant": "primary",
+            "size": "lg",
+            "block": true
+          },
+          "why": "The one primary action: midnight ink pill, full width on every size like the source"
+        },
+        {
+          "id": "or",
+          "component": "html",
+          "tag": "p",
+          "class": "pg-divider",
+          "text": "Or continue with"
+        },
+        {
+          "id": "social",
+          "component": "GAP",
+          "text": "Facebook · Apple · Google sign-in",
+          "why": "Brand sign-in buttons"
+        },
+        {
+          "id": "signup",
+          "component": "html",
+          "tag": "p",
+          "class": "body-sm",
+          "text": "Don't have an account?",
+          "notes": "‘Sign up’ links to /signup. The source says ‘Sign in’ here; that is a copy error in the source.",
+          "children": [
+            {
+              "id": "signupLink",
+              "component": "html",
+              "tag": "a",
+              "class": "pg-link",
+              "href": "#/signup",
+              "text": "Sign up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "promo",
+      "title": "Manage your trips in one place",
+      "heading": false,
+      "purpose": "The source's left art panel: brand art and a one-line promise",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "md": true
+      },
+      "elements": [
+        {
+          "id": "hero",
+          "component": "HeroHeader",
+          "inputs": {
+            "eyebrow": "Airiona",
+            "title": "Manage your trips in one place",
+            "image": "assets/art/globe.webp",
+            "headingLevel": 2
+          },
+          "why": "Midnight panel with art and a headline, the system's version of the source's blue fabric panel",
+          "alternatives": [
+            {
+              "component": "StayCard",
+              "rejected": "a priced stay card, wrong meaning"
+            },
+            {
+              "component": "FeatureCard",
+              "rejected": "smaller card with an open button"
+            }
+          ],
+          "children": [
+            {
+              "id": "heroText",
+              "component": "html",
+              "tag": "p",
+              "class": "body",
+              "text": "Track every booking in real time.",
+              "slot": "arBelowTitle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "title": "Contact and legal",
+      "heading": false,
+      "purpose": "Contact line, legal links and copyright from the source footer",
+      "layout": {
+        "base": "stack",
+        "md": "split"
+      },
+      "elements": [
+        {
+          "id": "pitch",
+          "component": "html",
+          "tag": "p",
+          "class": "m-title-2 pg-muted",
+          "text": "Planning a group trip or a corporate account? Talk to us."
+        },
+        {
+          "id": "contact",
+          "component": "html",
+          "tag": "p",
+          "class": "body-sm",
+          "text": "Contact us · hello@airiona.com"
+        },
+        {
+          "id": "legal",
+          "component": "html",
+          "tag": "p",
+          "class": "caption pg-muted",
+          "text": "Terms · Cookie policy · Privacy settings · © 2026 Airiona"
+        }
+      ],
+      "area": {
+        "lg": "full"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "id": "login",
+      "submit": {
+        "label": "Log in",
+        "action": "POST /api/auth/session { email, password, remember }",
+        "success": {
+          "kind": "navigate",
+          "to": "/"
+        },
+        "failure": "401: danger Toast ‘That email and password don't match.’ and clear only the password; 429: Toast ‘Too many tries. Wait a minute and try again.’ with the button disabled for the wait"
+      },
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "email"
+            },
+            {
+              "type": "maxLength",
+              "value": 254
+            }
+          ],
+          "messages": {
+            "required": "Enter the email you signed up with.",
+            "email": "Enter an email like name@example.com.",
+            "maxlength": "Emails are at most 254 characters."
+          }
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "password",
+            "autocomplete": "current-password"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "minLength",
+              "value": 8
+            }
+          ],
+          "messages": {
+            "required": "Enter your password.",
+            "minlength": "Passwords are at least 8 characters."
+          }
+        },
+        {
+          "name": "remember",
+          "label": "Remember me",
+          "component": "Checkbox",
+          "default": false,
+          "validators": [],
+          "messages": {}
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "where": "Arriving from the public site and leaving after sign-in",
+      "component": "RouteTransition",
+      "variant": "fade-through",
+      "why": "Top-level change of context"
+    }
+  ],
+  "a11y": [
+    "One h1 (‘Log in’); the promo hero renders its title as h2 (headingLevel 2).",
+    "After a failed sign-in, focus returns to the password field and the toast is announced (role=status).",
+    "Do not block paste in the password field."
+  ],
+  "gaps": [
+    {
+      "element": "social",
+      "need": "Facebook, Apple and Google sign-in buttons with brand marks",
+      "nearest": "IconButton (no brand glyphs in Heroicons)",
+      "proposal": "Add a SocialSignIn component with official brand marks and provider-required wording (‘Continue with Google’), full-width on phones"
+    }
+  ],
+  "notes": [
+    "Phone order: form first, art hidden (it adds height without helping sign-in); the art returns from 768.",
+    "The source's 'Forget password?' is corrected to 'Forgot password?'.",
+    "No sticky bottom bar: the whole form fits above the fold at 390 × 844, so the button is already in reach.",
+    "The source's nav has nothing on the right; TopNav needs something in its actions slot (otherwise it shows search and notifications), so it carries a Sign up button."
+  ]
+}

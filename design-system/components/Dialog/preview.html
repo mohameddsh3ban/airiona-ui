@@ -1,0 +1,19 @@
+<!-- @dsCard group="Overlays" height=470 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Dialog</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:0;min-height:100%;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.Dialog, { inline: true, tone: 'danger', title: 'Cancel this booking?', description: 'Scandinavian Forest Cabin · 15–19 Oct · 2 guests. You are inside the free cancellation window.',
+  footer: [h(A.Button, { key: 'k', variant: 'secondary' }, 'Keep booking'), h(A.Button, { key: 'c', variant: 'danger' }, 'Cancel and refund $512')] },
+  h('div', { className: 'ar-plate' },
+    h('div', { className: 'ar-plate__row' }, 'Paid on 2 Oct', h('b', null, '$640')),
+    h('div', { className: 'ar-plate__row' }, 'Cleaning fee (non-refundable)', h('b', null, '−$128')),
+    h('div', { className: 'ar-plate__row ar-plate__row--total' }, 'Refund to Visa ··4242', h('b', null, '$512')))));
+</script>
+</body>
+</html>

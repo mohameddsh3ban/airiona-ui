@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile content" height=370 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AgendaCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { className: 'm-stack', style: { padding: 20 } }, h(A.AgendaCard, { variant: 'done', title: 'Host welcome call', subtitle: 'Arrival details with your host' }), h(A.AgendaCard, { time: '12:00 – 13:00', title: 'Airport transfer', subtitle: 'Driver meets you at gate B', people: ['Omar Saleh', 'Lina Park'], chips: ['Today', '1h'], onOpen: function () {} }))));
+</script>
+</body>
+</html>

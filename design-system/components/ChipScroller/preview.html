@@ -1,0 +1,14 @@
+<!-- @dsCard group="Mobile inputs" height=208 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ChipScroller</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 16 } }, h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '12px 20px 0' } }, h(A.ChipScroller, { label: 'Sort places', options: ['Most viewed', 'Nearby', 'Latest', 'Top rated'] }))), h('div', { className: 'm-demo', style: { height: 'auto' } }, h('div', { style: { padding: '12px 20px 0' } }, h(A.ChipScroller, { tone: 'brand', onFilter: null, label: 'Filter flights', options: ['Airlines', 'Airports', 'Stops', 'Amenities'] })))));
+</script>
+</body>
+</html>

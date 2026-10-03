@@ -1,0 +1,16 @@
+<!-- @dsCard group="Analytics" height=352 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RatingBreakdown</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 380 } }, h(A.RatingBreakdown, { eyebrow: 'Guest review results', title: 'Metrics rating', onOpen: null, score: '7.8', scoreLabel: 'Average rating',
+  segments: [{ label: 'Excellent', value: 38 }, { label: 'Good', value: 25 }, { label: 'Fair', value: 18 }, { label: 'Improved', value: 8 }],
+  note: 'Highlight stays needing improvement with tips from top hosts.' })));
+</script>
+</body>
+</html>

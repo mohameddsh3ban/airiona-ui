@@ -1,0 +1,17 @@
+<!-- @dsCard group="Booking" height=520 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StayCard</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="overflow-x:auto;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-row', style: { gap: 20, alignItems: 'stretch', flexWrap: 'nowrap' } },
+  h(A.StayCard, { image: '../../assets/photos/alpine-lodge.webp', tint: '#16313b', photos: 3, title: 'Swiss Alps Retreat', price: '$710', unit: '/night', description: 'A quiet alpine lodge with a heated pool and views over snow-capped peaks.', tags: ['Luxury stay', '2-night min'] }),
+  h(A.StayCard, { image: '../../assets/photos/cliff-villa.webp', tint: '#14304a', photos: 4, title: 'Cliff House Lisbon', price: '$480', unit: '/night', description: 'Glass-walled villa above the Atlantic, ten minutes from Cascais.', tags: ['Top rated', 'Sea view'], saved: true }),
+  h(A.StayCard, { image: '../../assets/photos/tokyo-penthouse.webp', tint: '#1b1642', photos: 3, title: 'Tokyo Penthouse', price: '$950', unit: '/night', description: 'Rooftop pool and skyline views in the heart of Minato.', tags: ['Cityscape', 'Weekend stay'] })));
+</script>
+</body>
+</html>

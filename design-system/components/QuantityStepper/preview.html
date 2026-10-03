@@ -1,0 +1,17 @@
+<!-- @dsCard group="Forms" height=260 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>QuantityStepper</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { padding: '6px 20px', borderRadius: 24, background: 'var(--surface)', maxWidth: 400 } },
+  h(A.QuantityStepper, { label: 'Adults', description: 'Ages 13 or above', defaultValue: 2, min: 1 }),
+  h(A.QuantityStepper, { label: 'Children', description: 'Ages 2–12', defaultValue: 1 }),
+  h(A.QuantityStepper, { label: 'Infants', description: 'Under 2, on lap', max: 2 })));
+</script>
+</body>
+</html>

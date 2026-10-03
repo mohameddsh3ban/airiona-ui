@@ -1,0 +1,26 @@
+<!-- @dsCard group="Status" height=110 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Badge</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-col', style: { gap: 12 } },
+  h('div', { className: 'ar-row' },
+    h(A.Badge, { tone: 'success', dot: true }, 'Confirmed'),
+    h(A.Badge, { tone: 'warning', dot: true }, 'Payment pending'),
+    h(A.Badge, { tone: 'danger', dot: true }, 'Cancelled'),
+    h(A.Badge, { tone: 'brand', dot: true }, 'Checked in'),
+    h(A.Badge, { tone: 'neutral', dot: true }, 'Draft')),
+  h('div', { className: 'ar-row' },
+    h(A.Badge, { tone: 'ink', icon: 'star' }, 'Top rated'),
+    h(A.Badge, { tone: 'brand' }, '+15% for members'),
+    h(A.Badge, { tone: 'outline' }, 'Refundable'),
+    h(A.Badge, { tone: 'warning', size: 'sm' }, '2 seats left'),
+    h('span', { style: { padding: 8, borderRadius: 14, background: 'var(--blue-900)' } }, h(A.Badge, { tone: 'glass' }, 'Luxury stay')))));
+</script>
+</body>
+</html>

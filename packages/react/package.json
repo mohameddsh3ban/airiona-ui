@@ -1,0 +1,28 @@
+{
+  "name": "@airiona/react",
+  "version": "1.6.0",
+  "description": "Airiona design system for React 18 and 19: components, tokens and motion. Same markup and styles as @airiona/ui for Angular.",
+  "keywords": ["react", "design-system", "airiona", "components"],
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./umd": "./dist/airiona.umd.js",
+    "./styles/*": "./styles/*",
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "styles", "assets", "README.md"],
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  }
+}

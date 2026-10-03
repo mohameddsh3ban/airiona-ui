@@ -1,0 +1,14 @@
+<!-- @dsCard group="Widgets" height=499 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>ActivityCalendar</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 380 } }, h(A.ActivityCalendar, { title: 'Daily activity', year: 2026, month: 10, days: { 2: 'goal', 3: 'partial', 4: 'partial', 5: 'goal', 6: 'goal', 7: 'goal', 8: 'today' } })));
+</script>
+</body>
+</html>

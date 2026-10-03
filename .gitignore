@@ -44,3 +44,7 @@ Thumbs.db
 
 # Local tool cache
 /.impeccable/hook.cache.json
+/exports
+/packages/react/dist
+/packages/react/assets
+/dist

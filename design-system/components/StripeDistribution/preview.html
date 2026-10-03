@@ -1,0 +1,14 @@
+<!-- @dsCard group="Analytics" height=230 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StripeDistribution</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { className: 'ar-w', style: { maxWidth: 560 } }, h(A.StripeDistribution, { unit: 'cancellations', groups: [{ label: 'Guest request', count: 45, bars: 6 }, { label: 'Weather', count: 165, bars: 13 }, { label: 'Other', count: 65, bars: 7 }] })));
+</script>
+</body>
+</html>

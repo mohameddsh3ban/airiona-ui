@@ -1,0 +1,15 @@
+<!-- @dsCard group="Workspace" height=414 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>RoadmapGantt</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style=""></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 520 } }, h(A.RoadmapGantt, { title: 'Property launch', days: ['Mon 12', 'Tue 13', 'Wed 14', 'Thu 15', 'Fri 16'], today: 3,
+  tasks: [{ label: 'Photos', start: 0, end: 2, progress: 1, tone: 'done', people: ['Lina Park', 'Omar Saleh'] }, { label: 'Pricing', start: 1.5, end: 5, progress: 0.59, tone: 'muted', people: ['Aiko Tan'] }, { label: 'Listing copy', start: 0, end: 5, progress: 0.75, tone: 'brand', people: ['Maya Haddad', 'Jon Berg', 'Sara Ali'] }] })));
+</script>
+</body>
+</html>

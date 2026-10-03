@@ -1,0 +1,48 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Airiona cover</title>
+<style>
+  html, body { margin: 0; background: var(--canvas); overflow: hidden; }
+  .cv { position: relative; width: 960px; height: 288px; background: var(--canvas); overflow: hidden; }
+  .cv svg { position: absolute; inset: 0; }
+  .brand { fill: var(--blue-500); }
+  .night { fill: var(--midnight); }
+  .sky { fill: var(--sky-200); }
+  .soft { fill: var(--blue-300); }
+  .ink { fill: var(--action); }
+  .stripe { stroke: var(--blue-500); stroke-width: 3; }
+  .cv-text { position: absolute; left: 32px; bottom: 32px; max-width: 440px; }
+  .cv-name { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 100px; line-height: 0.95; letter-spacing: -0.045em; color: var(--ink); }
+  .cv-tag { margin: 12px 0 0 4px; font-family: var(--font-sans); font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cv">
+  <svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+    <!--
+      blocks: blue-500 slab 248x152 (radius-xl), midnight tower 176x240 (radius-xl), sky-200 tile 120x72 (radius-lg), blue-300 pill 112x72, action disc r24
+      arrangement: a dashboard bento flush to a 16px gap (space-4), right of x=480, like Airiona cards floating on canvas
+      pattern: diagonal hatch in blue-500 inside the midnight tower; the hatch is the system's own mark for charts and booked-out dates
+      scales: gap space-4 (16), outer inset space-6 (24), hatch pitch space-3 (12), radii radius-xl 32 / radius-lg 24 / pill = half of 72
+    -->
+    <defs>
+      <pattern id="cv-hatch" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+        <line class="stripe" x1="0" y1="0" x2="0" y2="12"></line>
+      </pattern>
+      <clipPath id="cv-tower"><rect x="760" y="24" width="176" height="240" rx="32"></rect></clipPath>
+    </defs>
+    <rect class="brand" x="496" y="24" width="248" height="152" rx="32"></rect>
+    <circle class="ink" cx="704" cy="64" r="24"></circle>
+    <rect class="night" x="760" y="24" width="176" height="240" rx="32"></rect>
+    <rect x="760" y="136" width="176" height="128" fill="url(#cv-hatch)" clip-path="url(#cv-tower)"></rect>
+    <rect class="sky" x="496" y="192" width="120" height="72" rx="24"></rect>
+    <rect class="soft" x="632" y="192" width="112" height="72" rx="36"></rect>
+  </svg>
+  <div class="cv-text">
+    <h1 class="cv-name">Airiona</h1>
+    <p class="cv-tag">Calm, bright booking for flights and stays.</p>
+  </div>
+</div>
+</body>
+</html>
