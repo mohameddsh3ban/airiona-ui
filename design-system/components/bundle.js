@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"},{"name":"AuthShell"},{"name":"LandingHero"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"},{"name":"AuthShell"},{"name":"LandingHero"},{"name":"SplitHero"},{"name":"PromoBanner"},{"name":"StatStrip"}]} */
 (function () {
   "use strict";
   var React = window.React;
@@ -2713,6 +2713,93 @@
       docked ? h("div", { className: "ar-landing__dock" }, props.children) : null);
   }
 
+  /* SplitHero: the landing page's opening. Copy on one side (eyebrow with a dashed flight trail, a two-part display
+     headline, lede, actions); on the other a photo in an organic shape that turns into a looping video once the
+     page has settled, a glass badge with faces and a figure, and a "watch the story" ring button. With `docked`,
+     the children straddle the bottom edge (the search bar). */
+  var splitSeq = 0;
+  function SplitHero(props) {
+    var Tag = "h" + (props.headingLevel || 1);
+    var ready = useState(false);
+    var videoRef = React.useRef(null);
+    var ringId = React.useRef(null);
+    if (!ringId.current) ringId.current = "ar-split-ring-" + (++splitSeq);
+    React.useEffect(function () {
+      var v = videoRef.current;
+      if (!v || !props.video || reduceMotion()) return undefined;
+      var conn = typeof navigator !== "undefined" && navigator.connection;
+      if (conn && conn.saveData) return undefined;
+      var cancelled = false, timer = 0, io = null;
+      var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      var start = function () {
+        if (cancelled) return;
+        v.src = props.video;
+        play();
+        if (typeof IntersectionObserver !== "undefined") {
+          io = new IntersectionObserver(function (es) { if (es[0] && es[0].isIntersecting) play(); else v.pause(); });
+          io.observe(v);
+        }
+      };
+      var later = function () { timer = setTimeout(start, 1200); };
+      if (document.readyState === "complete") later(); else window.addEventListener("load", later, { once: true });
+      return function () { cancelled = true; clearTimeout(timer); window.removeEventListener("load", later); if (io) io.disconnect(); };
+    }, [props.video]);
+    var b = props.badge;
+    var label = (props.storyLabel || "").toUpperCase();
+    return h("section", { className: cx("ar ar-split", props.docked && "ar-split--docked", props.className), style: props.focus ? { "--ar-split-focus": props.focus } : undefined },
+      h("div", { className: "ar-split__grid" },
+        h("div", { className: "ar-split__copy" },
+          props.eyebrow ? h("p", { className: "ar-split__eyebrow" },
+            h("span", null, props.eyebrow),
+            h("span", { className: "ar-split__trail", "aria-hidden": "true" },
+              h("svg", { viewBox: "0 0 72 22" }, h("path", { d: "M2 18 C 22 22, 46 20, 66 6" })),
+              h(Icon, { name: "paper-airplane", variant: "solid", size: 16 }))) : null,
+          h(Tag, { className: "ar-split__title" },
+            h("span", null, props.title),
+            props.accent ? " " : null,
+            props.accent ? h("span", { className: "ar-split__accent" }, props.accent) : null),
+          props.lede ? h("p", { className: "ar-split__lede" }, props.lede) : null,
+          props.actions ? h("div", { className: "ar-split__actions" }, props.actions) : null),
+        h("div", { className: "ar-split__media" },
+          h("div", { className: "ar-split__shape", "aria-hidden": "true" },
+            props.image ? h("img", { className: "ar-split__poster", src: props.image, alt: "" }) : null,
+            props.video ? h("video", { ref: videoRef, className: cx("ar-split__video", ready[0] && "is-ready"), muted: true, loop: true, playsInline: true, preload: "none", tabIndex: -1, disablePictureInPicture: true, onPlaying: function () { ready[1](true); } }) : null),
+          b ? h("div", { className: "ar-split__badge" },
+            h("div", { className: "ar-split__badge-top" },
+              h(AvatarStack, { people: b.people || [], max: 3 }),
+              b.value ? h("span", { className: "ar-split__badge-value" }, b.value) : null),
+            h("b", null, b.title),
+            b.text ? h("span", null, b.text) : null) : null,
+          props.storyLabel ? h("button", { type: "button", className: "ar-split__story", "aria-label": props.storyLabel, onClick: props.onStory },
+            h("svg", { className: "ar-split__ring", viewBox: "0 0 120 120", "aria-hidden": "true" },
+              h("defs", null, h("path", { id: ringId.current, d: "M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" })),
+              h("text", null, h("textPath", { href: "#" + ringId.current, textLength: "272", lengthAdjust: "spacing" }, label + " • " + label + " • "))),
+            h("span", { className: "ar-split__play" }, h(Icon, { name: "play", variant: "solid", size: 22 }))) : null)),
+      props.docked ? h("div", { className: "ar-split__dock" }, props.children) : null);
+  }
+
+  /* PromoBanner: a photo offer card. A pill eyebrow, a title with a highlighted part, a line of text and one
+     white action, over a photo that fades into Ion Blue on the copy side. */
+  function PromoBanner(props) {
+    return h("article", { className: cx("ar ar-promo", props.className) },
+      props.image ? h("img", { className: "ar-promo__img", src: props.image, alt: "" }) : null,
+      props.eyebrow ? h("span", { className: "ar-promo__eyebrow" }, props.eyebrow) : null,
+      h("p", { className: "ar-promo__title" }, props.title, props.highlight ? h("span", null, " " + props.highlight) : null),
+      props.text ? h("p", { className: "ar-promo__text" }, props.text) : null,
+      props.action ? h(Button, { variant: "white", size: "sm", iconEnd: "arrow-right", onClick: props.onAction }, props.action) : null);
+  }
+
+  /* StatStrip: three or four proof figures in one white card, each with a tinted icon disc. */
+  function StatStrip(props) {
+    var items = props.items || [];
+    return h("ul", { className: cx("ar ar-statstrip", props.className), "aria-label": props.label },
+      items.map(function (it, i) {
+        return h("li", { key: i, className: cx("ar-statstrip__item", "ar-statstrip__item--" + (it.tone || "blue")) },
+          h("span", { className: "ar-statstrip__icon", "aria-hidden": "true" }, h(Icon, { name: it.icon, size: 20 })),
+          h("span", { className: "ar-statstrip__text" }, h("b", null, it.value), h("span", null, it.label)));
+      }));
+  }
+
   var api = {
     Icon: Icon, Scene: Scene, Button: Button, IconButton: IconButton, SegmentedControl: SegmentedControl, Chip: Chip,
     TextField: TextField, Checkbox: Checkbox, Switch: Switch, QuantityStepper: QuantityStepper, Calendar: Calendar,
@@ -2723,7 +2810,7 @@
     Tabs: Tabs, Tooltip: Tooltip, DatePicker: DatePicker,
     Ring: Ring, MetricTile: MetricTile, PillBarChart: PillBarChart, SegmentGauge: SegmentGauge, RatingBreakdown: RatingBreakdown, Leaderboard: Leaderboard, StripeDistribution: StripeDistribution, Heatmap: Heatmap, AbsenceCard: AbsenceCard, ToggleTile: ToggleTile, ArrivalTile: ArrivalTile, RingStatCard: RingStatCard, HabitTile: HabitTile, GateTile: GateTile, VoiceRecorder: VoiceRecorder, BatteryTile: BatteryTile, MediaPlayer: MediaPlayer, AnalogClock: AnalogClock, RecordingTile: RecordingTile, ActivityCalendar: ActivityCalendar, WorldClock: WorldClock, RideTile: RideTile, ChargingTile: ChargingTile, TripSummaryTile: TripSummaryTile, Notch: Notch, ProfileProjectCard: ProfileProjectCard, MeetingsStrip: MeetingsStrip, RoadmapGantt: RoadmapGantt, DateChip: DateChip, EfficiencyChart: EfficiencyChart, TotalTimeTile: TotalTimeTile, AssistantCard: AssistantCard, PageHeader: PageHeader, ChannelCard: ChannelCard, PromptCard: PromptCard, BalanceChart: BalanceChart, HoldingsPanel: HoldingsPanel, SparkBars: SparkBars, PilotDashboard: PilotDashboard,
     PhoneFrame: PhoneFrame, StatusBar: StatusBar, AppBar: AppBar, TabBar: TabBar, BottomSheet: BottomSheet, ActionSheet: ActionSheet, Fab: Fab, StickyActionBar: StickyActionBar, HeroHeader: HeroHeader, GreetingBar: GreetingBar, SearchField: SearchField, SectionHeader: SectionHeader, ChipScroller: ChipScroller, SnapCarousel: SnapCarousel, SwipeRow: SwipeRow, MobileSegmented: MobileSegmented, FieldTile: FieldTile, FeatureCard: FeatureCard, CategoryTile: CategoryTile, ChecklistRow: ChecklistRow, WeekStrip: WeekStrip, Timeline: Timeline, CalendarCard: CalendarCard, AgendaCard: AgendaCard, PeoplePicker: PeoplePicker, PlanList: PlanList, MiniStatCard: MiniStatCard, TripRow: TripRow, FlightSearchSheet: FlightSearchSheet, RouteHeader: RouteHeader, TicketCard: TicketCard, BoardingPass: BoardingPass, PlaceCard: PlaceCard, PlaceHero: PlaceHero, InfoStatRow: InfoStatRow, ExpandableText: ExpandableText, MiniDestination: MiniDestination, IllustrationCallout: IllustrationCallout, MemberPicker: MemberPicker, ActivityFeed: ActivityFeed, DetailList: DetailList, LetterRow: LetterRow, ProfileHeader: ProfileHeader, OnboardingFlow: OnboardingFlow,
-    AuthShell: AuthShell, LandingHero: LandingHero, CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
+    AuthShell: AuthShell, LandingHero: LandingHero, SplitHero: SplitHero, PromoBanner: PromoBanner, StatStrip: StatStrip, CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
     motion: { reduce: reduceMotion, useIndicator: useIndicator, usePresence: usePresence }
   };
   window.Airiona = Object.assign(window.Airiona || {}, api);

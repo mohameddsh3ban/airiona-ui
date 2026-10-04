@@ -1,0 +1,17 @@
+<!-- @dsCard group="Booking" height=300 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>PromoBanner</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="max-width:460px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.PromoBanner, {
+    image: '../../assets/photos/aviation/promo-jet.webp', eyebrow: 'Limited time', title: 'Empty legs up to', highlight: '40% off',
+    text: 'One-way repositioning flights across the Gulf this month.', action: 'View deals'
+  }));
+</script>
+</body>
+</html>

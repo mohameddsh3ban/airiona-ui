@@ -5,7 +5,7 @@ export const PAGE_ROUTES: Routes = [
   { path: 'aircraft-detail', title: "Aircraft", loadComponent: () => import('./aircraft-detail/aircraft-detail.page').then((m) => m.AircraftDetailPage) },
   { path: 'aircraft-market', title: "Aircraft", loadComponent: () => import('./aircraft-market/aircraft-market.page').then((m) => m.AircraftMarketPage) },
   { path: 'flight-booking', title: "Book a flight", loadComponent: () => import('./flight-booking/flight-booking.page').then((m) => m.FlightBookingPage) },
-  { path: 'flight-home', title: "Flight home", loadComponent: () => import('./flight-home/flight-home.page').then((m) => m.FlightHomePage) },
+  { path: 'flight-home', title: "Home", loadComponent: () => import('./flight-home/flight-home.page').then((m) => m.FlightHomePage) },
   { path: 'hangar-detail', title: "Hangar", loadComponent: () => import('./hangar-detail/hangar-detail.page').then((m) => m.HangarDetailPage) },
   { path: 'hangar-market', title: "Hangars", loadComponent: () => import('./hangar-market/hangar-market.page').then((m) => m.HangarMarketPage) },
   { path: 'login', title: "Sign in", loadComponent: () => import('./login/login.page').then((m) => m.LoginPage) },

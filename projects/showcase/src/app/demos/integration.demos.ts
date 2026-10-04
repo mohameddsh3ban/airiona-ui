@@ -7,6 +7,9 @@ import {
   ArTextField,
   ArInfoStatRow,
   ArLandingHero,
+  ArSplitHero,
+  ArPromoBanner,
+  ArStatStrip,
   ArBookingSearch,
   ArMeetingsStrip,
   ArPhoneFrame,
@@ -160,6 +163,48 @@ class LandingHeroDemo {
   ];
 }
 
+@Component({
+  imports: [ArSplitHero, ArBookingSearch, ArButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ar-split-hero eyebrow="Fly. Land. Explore." title="The sky" accent="is yours."
+      lede="Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices."
+      image="photos/aviation/landing-hero.webp" video="video/landing-hero.mp4" [badge]="badge" storyLabel="Watch the story" docked>
+      <button arActions arButton variant="primary" size="lg" iconEnd="arrow-right">Book a flight</button>
+      <ar-booking-search />
+    </ar-split-hero>
+  `,
+})
+class SplitHeroDemo {
+  protected readonly badge = {
+    value: '28K+', title: 'Happy flyers', text: 'joined this year',
+    people: [{ name: 'Lina Haddad', src: 'photos/people/traveller-1.webp' }, { name: 'Omar Saleh', src: 'photos/people/traveller-2.webp' }, { name: 'Mei Tanaka', src: 'photos/people/traveller-3.webp' }],
+  };
+}
+
+@Component({
+  imports: [ArPromoBanner],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ar-promo-banner image="photos/aviation/promo-jet.webp" eyebrow="Limited time" title="Empty legs up to" highlight="40% off"
+      text="One-way repositioning flights across the Gulf this month." action="View deals" />
+  `,
+})
+class PromoBannerDemo {}
+
+@Component({
+  imports: [ArStatStrip],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<ar-stat-strip label="Airiona in numbers" [items]="items" />`,
+})
+class StatStripDemo {
+  protected readonly items = [
+    { icon: 'globe-alt', value: '140', label: 'Airports' },
+    { icon: 'paper-airplane', value: '1,240', label: 'Aircraft', tone: 'green' as const },
+    { icon: 'users', value: '28K+', label: 'Happy flyers', tone: 'amber' as const },
+  ];
+}
+
 export const INTEGRATION_DEMOS: DemoDef[] = [
   { name: 'ProfileProjectCard', group: 'Workspace', component: ProfileProjectCardDemo, height: 376 },
   { name: 'MeetingsStrip', group: 'Workspace', component: MeetingsStripDemo, height: 330 },
@@ -168,4 +213,7 @@ export const INTEGRATION_DEMOS: DemoDef[] = [
   { name: 'ScreenStack', group: 'Motion', component: ScreenStackDemo, height: 880 },
   { name: 'AuthShell', group: 'Screens', component: AuthShellDemo, height: 860, stage: 'padding:0;' },
   { name: 'LandingHero', group: 'Screens', component: LandingHeroDemo, height: 700, stage: 'padding:24px 24px 32px;' },
+  { name: 'SplitHero', group: 'Screens', component: SplitHeroDemo, height: 1180, stage: 'padding:24px 24px 32px;' },
+  { name: 'PromoBanner', group: 'Booking', component: PromoBannerDemo, height: 300, stage: 'max-width:460px;' },
+  { name: 'StatStrip', group: 'Status', component: StatStripDemo, height: 150, stage: 'max-width:520px;' },
 ];

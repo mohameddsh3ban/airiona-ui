@@ -136,6 +136,24 @@
         ],
         "createdAt": "2026-10-03T20:12:48.035Z",
         "reason": "Claude: Angular [src] binding inside @if(image()) guard; scanner cannot see bound src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/screens/split-hero.component.ts"
+        ],
+        "createdAt": "2026-10-04T04:23:38.815Z",
+        "reason": "Claude: Angular [src] binding inside @if(image()) guard; scanner cannot see bound src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/booking/promo-banner.component.ts"
+        ],
+        "createdAt": "2026-10-04T04:23:39.027Z",
+        "reason": "Claude: Angular [src] binding inside @if(image()) guard; scanner cannot see bound src"
       }
     ]
   }

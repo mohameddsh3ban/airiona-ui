@@ -20,7 +20,8 @@ const THRESHOLD = +opt('threshold', 0.002);
 const LIVE = new Set(['AnalogClock']);
 const OUT = join(ROOT, 'dist/parity');
 const PORT = 4473;
-const FREEZE = '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}';
+// Videos are hidden: playback position differs between the two runs, the poster frame underneath does not.
+const FREEZE = '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}video{visibility:hidden!important}';
 
 const manifest = JSON.parse(readFileSync(join(DIST, 'data/manifest.json'), 'utf8'));
 const only = opt('only') ? opt('only').split(',') : null;

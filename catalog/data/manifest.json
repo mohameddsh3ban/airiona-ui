@@ -13910,6 +13910,159 @@
    ]
   },
   {
+   "name": "PromoBanner",
+   "slug": "promo-banner",
+   "group": "Booking",
+   "kind": "component",
+   "height": 300,
+   "stage": "max-width:460px;",
+   "summary": "A photo offer card. It holds a pill eyebrow, a title with a highlighted part in gold, a line of text and one white action. The photo fades into Ion Blue on the copy side, so the white text stays legible.",
+   "provides": "",
+   "notes": [],
+   "motion": [],
+   "readme": "# PromoBanner\n\nA photo offer card. It holds a pill eyebrow, a title with a highlighted part in gold, a line of text and one white action. The photo fades into Ion Blue on the copy side, so the white text stays legible.\n\n```jsx\n<PromoBanner image=\"assets/photos/aviation/promo-jet.webp\" eyebrow=\"Limited time\" title=\"Empty legs up to\" highlight=\"40% off\"\n  text=\"One-way repositioning flights across the Gulf this month.\" action=\"View deals\" onAction={openDeals} />\n```\n\n```html\n<ar-promo-banner image=\"…\" eyebrow=\"Limited time\" title=\"Empty legs up to\" highlight=\"40% off\" text=\"…\" action=\"View deals\" (press)=\"openDeals()\" />\n```\n\nPick a photo whose subject sits on the right, because the left half is covered by the gradient. Keep the title to about six words and the text to one line on desktop.\n",
+   "react": {
+    "import": "import { PromoBanner } from '@airiona/react';",
+    "props": [
+     {
+      "name": "title",
+      "type": "string",
+      "optional": false,
+      "doc": ""
+     },
+     {
+      "name": "highlight",
+      "type": "string",
+      "optional": true,
+      "doc": "Part of the title in gold, e.g. \"30% off\"."
+     },
+     {
+      "name": "eyebrow",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "text",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "image",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "onAction",
+      "type": "() => void",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { PromoBanner } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <PromoBanner\n      image=\"/assets/photos/aviation/promo-jet.webp\"\n      eyebrow=\"Limited time\"\n      title=\"Empty legs up to\"\n      highlight=\"40% off\"\n      text=\"One-way repositioning flights across the Gulf this month.\"\n      action=\"View deals\"\n    />\n  );\n}\n",
+    "uses": [
+     "PromoBanner"
+    ]
+   },
+   "angular": {
+    "import": "import { ArPromoBanner } from '@airiona/ui';",
+    "className": "ArPromoBanner",
+    "selector": "ar-promo-banner",
+    "tag": "ar-promo-banner",
+    "attr": null,
+    "formControl": false,
+    "inputs": [
+     {
+      "name": "title",
+      "kind": "required",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "highlight",
+      "kind": "input",
+      "type": "string",
+      "doc": "Part of the title in gold, e.g. \"30% off\"."
+     },
+     {
+      "name": "eyebrow",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "text",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "image",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Photo; the copy side fades into Ion Blue so white text stays legible."
+     },
+     {
+      "name": "action",
+      "kind": "input",
+      "type": "string",
+      "doc": "Label of the white button; the button shows only when set."
+     }
+    ],
+    "outputs": [
+     {
+      "name": "press",
+      "type": "void",
+      "doc": "The action button was pressed. React: `onAction`."
+     }
+    ],
+    "slots": [],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/booking/promo-banner.component.ts",
+    "doc": "A photo offer card: a pill eyebrow, a title with a highlighted part, a line of text and one white action, over a photo that fades into Ion Blue on the copy side.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArPromoBanner } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArPromoBanner],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-promo-banner image=\"photos/aviation/promo-jet.webp\" eyebrow=\"Limited time\" title=\"Empty legs up to\" highlight=\"40% off\"\n      text=\"One-way repositioning flights across the Gulf this month.\" action=\"View deals\" />\n  `,\n})\nexport class Example {}\n",
+    "uses": [
+     "ArPromoBanner"
+    ]
+   },
+   "keywords": [
+    "promo",
+    "banner",
+    "booking",
+    "photo",
+    "offer",
+    "card",
+    "holds",
+    "pill",
+    "eyebrow",
+    "title",
+    "with",
+    "highlighted",
+    "part",
+    "gold",
+    "line",
+    "text",
+    "white",
+    "action",
+    "fades",
+    "into",
+    "blue",
+    "copy",
+    "side",
+    "stays",
+    "legible"
+   ]
+  },
+  {
    "name": "PromptCard",
    "slug": "prompt-card",
    "group": "Dashboard",
@@ -17751,6 +17904,271 @@
    ]
   },
   {
+   "name": "SplitHero",
+   "slug": "split-hero",
+   "group": "Screens",
+   "kind": "screen",
+   "height": 1180,
+   "stage": "padding:24px 24px 32px;",
+   "summary": "The opening of the landing page:\n- **Copy on one side:** an eyebrow with a dashed flight trail, a two-part display headline (the second part in Ion Blue with a hand-drawn underline), a lede and actions.\n- **Photo on the other side**, in an organic shape. It turns into a looping video once the page has settled.\n- **Glass badge** with faces and a figure.\n- **\"Watch the story\"** ring button.\n- **Docked children** (the search bar) straddle the bottom edge when `docked` is set.",
+   "provides": "",
+   "notes": [
+    "**Copy on one side:** an eyebrow with a dashed flight trail, a two-part display headline (the second part in Ion Blue with a hand-drawn underline), a lede and actions.",
+    "**Photo on the other side**, in an organic shape. It turns into a looping video once the page has settled.",
+    "**Glass badge** with faces and a figure.",
+    "**\"Watch the story\"** ring button.",
+    "**Docked children** (the search bar) straddle the bottom edge when `docked` is set.",
+    "Use one per page, at the top. The title is the page's h1 unless you set `headingLevel`.",
+    "Keep `title` to two or three words and `accent` to two. They stack on two lines at every width.",
+    "**Frame, then video:**",
+    "The shape bites in on the left, where the ring button sits, at 1024px and wider. Below that the media stacks under the copy and the button sits at the photo's lower left.",
+    "The badge sits on the photo's top right: three faces, one short figure and two short lines."
+   ],
+   "motion": [],
+   "readme": "# SplitHero\n\nThe opening of the landing page:\n- **Copy on one side:** an eyebrow with a dashed flight trail, a two-part display headline (the second part in Ion Blue with a hand-drawn underline), a lede and actions.\n- **Photo on the other side**, in an organic shape. It turns into a looping video once the page has settled.\n- **Glass badge** with faces and a figure.\n- **\"Watch the story\"** ring button.\n- **Docked children** (the search bar) straddle the bottom edge when `docked` is set.\n\n```jsx\n<SplitHero eyebrow=\"Fly. Land. Explore.\" title=\"The sky\" accent=\"is yours.\"\n  lede=\"Private jets, hand-picked destinations and hangar space, booked in minutes.\"\n  image=\"assets/photos/aviation/landing-hero.webp\" video=\"assets/video/landing-hero.mp4\"\n  badge={{ value: '28K+', title: 'Happy flyers', text: 'joined this year', people }}\n  storyLabel=\"Watch the story\" onStory={openStory}\n  actions={<Button variant=\"primary\" size=\"lg\" iconEnd=\"arrow-right\">Book a flight</Button>} docked>\n  <BookingSearch />\n</SplitHero>\n```\n\n```html\n<ar-split-hero eyebrow=\"Fly. Land. Explore.\" title=\"The sky\" accent=\"is yours.\" image=\"…\" video=\"…\"\n  [badge]=\"badge\" storyLabel=\"Watch the story\" (story)=\"openStory()\" docked>\n  <button arActions arButton variant=\"primary\" size=\"lg\" iconEnd=\"arrow-right\">Book a flight</button>\n  <ar-booking-search />\n</ar-split-hero>\n```\n\n## Guidance\n\n- Use one per page, at the top. The title is the page's h1 unless you set `headingLevel`.\n- Keep `title` to two or three words and `accent` to two. They stack on two lines at every width.\n- **Frame, then video:**\n  - `image` is the first frame people see, so export it from the video's first frame.\n  - The video starts 1200ms after `load`, fades in over the frame, and pauses while scrolled off screen.\n  - It never plays under reduced motion or when data saver is on.\n  - It is muted and hidden from assistive technology. Put the story itself behind `storyLabel`; the ring button emits `story`, so open a dialog with the full film there.\n- The shape bites in on the left, where the ring button sits, at 1024px and wider. Below that the media stacks under the copy and the button sits at the photo's lower left.\n- The badge sits on the photo's top right: three faces, one short figure and two short lines.\n\n## Motion\n\n| Element | Motion | Duration |\n| --- | --- | --- |\n| Copy | rises in order | 800ms, 80–340ms delays |\n| Photo | settles from 104% scale and fades in | 1400ms |\n| Badge, ring button | rise in after the photo | 700ms, 600 and 720ms delays |\n| Ring text | turns once every 22s (1024px and wider) | loop |\n| Video | fades in over the frame once playing | 1200ms |\n\nUnder reduced motion every animation and the video are off.\n",
+   "react": {
+    "import": "import { SplitHero } from '@airiona/react';",
+    "props": [
+     {
+      "name": "title",
+      "type": "string",
+      "optional": false,
+      "doc": "First line of the headline."
+     },
+     {
+      "name": "accent",
+      "type": "string",
+      "optional": true,
+      "doc": "Second line, in Ion Blue with a hand-drawn underline."
+     },
+     {
+      "name": "eyebrow",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "lede",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "video",
+      "type": "string",
+      "optional": true,
+      "doc": "Looping muted video that replaces the photo once the page has settled."
+     },
+     {
+      "name": "focus",
+      "type": "string",
+      "optional": true,
+      "doc": "object-position for the photo and video."
+     },
+     {
+      "name": "badge",
+      "type": "SplitBadge",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "onStory",
+      "type": "() => void",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "headingLevel",
+      "type": "1 | 2 | 3",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "actions",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "docked",
+      "type": "boolean",
+      "optional": true,
+      "doc": "Children straddle the bottom edge (the search bar)."
+     },
+     {
+      "name": "children",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { BookingSearch, Button, SplitHero } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <SplitHero\n      eyebrow=\"Fly. Land. Explore.\"\n      title=\"The sky\"\n      accent=\"is yours.\"\n      lede=\"Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices.\"\n      image=\"/assets/photos/aviation/landing-hero.webp\"\n      video=\"/assets/video/landing-hero.mp4\"\n      badge={{ value: \"28K+\", title: \"Happy flyers\", text: \"joined this year\", people: [{ name: \"Lina Haddad\", src: \"/assets/photos/people/traveller-1.webp\" }, { name: \"Omar Saleh\", src: \"/assets/photos/people/traveller-2.webp\" }, { name: \"Mei Tanaka\", src: \"/assets/photos/people/traveller-3.webp\" }] }}\n      storyLabel=\"Watch the story\"\n      actions={<Button variant=\"primary\" size=\"lg\" iconEnd=\"arrow-right\">Book a flight</Button>}\n      docked\n    >\n      <BookingSearch />\n    </SplitHero>\n  );\n}\n",
+    "uses": [
+     "BookingSearch",
+     "Button",
+     "SplitHero"
+    ]
+   },
+   "angular": {
+    "import": "import { ArSplitHero } from '@airiona/ui';",
+    "className": "ArSplitHero",
+    "selector": "ar-split-hero",
+    "tag": "ar-split-hero",
+    "attr": null,
+    "formControl": false,
+    "inputs": [
+     {
+      "name": "title",
+      "kind": "required",
+      "type": "string",
+      "doc": "First line of the headline."
+     },
+     {
+      "name": "accent",
+      "kind": "input",
+      "type": "string",
+      "doc": "Second line, in Ion Blue with a hand-drawn underline."
+     },
+     {
+      "name": "eyebrow",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "lede",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "image",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Photo; also the poster frame the video fades in over. Export it from the video's first frame."
+     },
+     {
+      "name": "video",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Looping muted video that replaces the photo once the page has settled."
+     },
+     {
+      "name": "focus",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "object-position for the photo and video, e.g. \"60% 50%\"."
+     },
+     {
+      "name": "badge",
+      "kind": "input",
+      "type": "ArSplitBadge | null",
+      "default": "null",
+      "doc": ""
+     },
+     {
+      "name": "storyLabel",
+      "kind": "input",
+      "type": "string",
+      "doc": "Label of the ring button (\"Watch the story\"); the button shows only when set."
+     },
+     {
+      "name": "headingLevel",
+      "kind": "input",
+      "type": "1 | 2 | 3",
+      "default": "1",
+      "doc": "Heading level of the title: 1 (default) for the page's own hero."
+     },
+     {
+      "name": "docked",
+      "kind": "input",
+      "type": "boolean",
+      "default": "false",
+      "doc": "The default slot straddles the bottom edge."
+     }
+    ],
+    "outputs": [
+     {
+      "name": "story",
+      "type": "void",
+      "doc": "The ring button was pressed (open the story video)."
+     }
+    ],
+    "slots": [
+     "[arActions]",
+     "(default)"
+    ],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/screens/split-hero.component.ts",
+    "doc": "Short figure in the blue disc, e.g. \"28K+\". */ value?: string; people?: ArPerson[]; } let ringSeq = 0; /** The landing page's opening. Copy on one side (eyebrow with a dashed flight trail, a two-part display headline, lede, actions); on the other a photo in an organic shape that turns into a looping video once the page has settled (after load, paused off screen, never under reduced motion or data saver), a glass badge with faces and a figure, and a \"watch the story\" ring button. With `docked`, the default slot straddles the bottom edge.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArSplitHero, ArBookingSearch, ArButton } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArSplitHero, ArBookingSearch, ArButton],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-split-hero eyebrow=\"Fly. Land. Explore.\" title=\"The sky\" accent=\"is yours.\"\n      lede=\"Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices.\"\n      image=\"photos/aviation/landing-hero.webp\" video=\"video/landing-hero.mp4\" [badge]=\"badge\" storyLabel=\"Watch the story\" docked>\n      <button arActions arButton variant=\"primary\" size=\"lg\" iconEnd=\"arrow-right\">Book a flight</button>\n      <ar-booking-search />\n    </ar-split-hero>\n  `,\n})\nexport class Example {\n  protected readonly badge = {\n  value: '28K+', title: 'Happy flyers', text: 'joined this year',\n  people: [{ name: 'Lina Haddad', src: 'photos/people/traveller-1.webp' }, { name: 'Omar Saleh', src: 'photos/people/traveller-2.webp' }, { name: 'Mei Tanaka', src: 'photos/people/traveller-3.webp' }],\n  };\n}\n",
+    "uses": [
+     "ArSplitHero",
+     "ArBookingSearch",
+     "ArButton"
+    ]
+   },
+   "keywords": [
+    "split",
+    "hero",
+    "screens",
+    "opening",
+    "landing",
+    "page",
+    "copy",
+    "side",
+    "eyebrow",
+    "with",
+    "dashed",
+    "flight",
+    "trail",
+    "part",
+    "display",
+    "headline",
+    "second",
+    "blue",
+    "hand",
+    "drawn",
+    "underline",
+    "lede",
+    "actions",
+    "photo",
+    "other",
+    "organic",
+    "shape",
+    "turns",
+    "into",
+    "looping",
+    "video",
+    "once",
+    "settled",
+    "glass",
+    "badge",
+    "faces",
+    "figure",
+    "watch",
+    "story",
+    "ring",
+    "button",
+    "docked",
+    "children",
+    "search",
+    "straddle",
+    "bottom",
+    "edge",
+    "when"
+   ]
+  },
+  {
    "name": "StatCard",
    "slug": "stat-card",
    "group": "Dashboard",
@@ -17938,6 +18356,97 @@
     "optional",
     "hatched",
     "chart"
+   ]
+  },
+  {
+   "name": "StatStrip",
+   "slug": "stat-strip",
+   "group": "Status",
+   "kind": "component",
+   "height": 150,
+   "stage": "max-width:520px;",
+   "summary": "Three or four proof figures in one white card, each with a tinted icon disc (`blue`, `green` or `amber`).",
+   "provides": "",
+   "notes": [],
+   "motion": [],
+   "readme": "# StatStrip\n\nThree or four proof figures in one white card, each with a tinted icon disc (`blue`, `green` or `amber`).\n\n```jsx\n<StatStrip label=\"Airiona in numbers\" items={[{ icon: 'globe-alt', value: '140', label: 'Airports' }, { icon: 'users', value: '28K+', label: 'Happy flyers', tone: 'amber' }]} />\n```\n\n```html\n<ar-stat-strip label=\"Airiona in numbers\" [items]=\"stats\" />\n```\n\nIt is a list. Each item reads as figure, then label (\"140 Airports\"). Use it for social proof under a hero or a promo, not for dashboards; use StatCard or MetricTile there.\n",
+   "react": {
+    "import": "import { StatStrip } from '@airiona/react';",
+    "props": [
+     {
+      "name": "items",
+      "type": "StripStat[]",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "label",
+      "type": "string",
+      "optional": true,
+      "doc": "Accessible name of the list."
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { StatStrip } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <StatStrip\n      label=\"Airiona in numbers\"\n      items={[{ icon: \"globe-alt\", value: \"140\", label: \"Airports\" }, { icon: \"paper-airplane\", value: \"1,240\", label: \"Aircraft\", tone: \"green\" }, { icon: \"users\", value: \"28K+\", label: \"Happy flyers\", tone: \"amber\" }]}\n    />\n  );\n}\n",
+    "uses": [
+     "StatStrip"
+    ]
+   },
+   "angular": {
+    "import": "import { ArStatStrip } from '@airiona/ui';",
+    "className": "ArStatStrip",
+    "selector": "ar-stat-strip",
+    "tag": "ar-stat-strip",
+    "attr": null,
+    "formControl": false,
+    "inputs": [
+     {
+      "name": "items",
+      "kind": "input",
+      "type": "ArStripStat[]",
+      "default": "[]",
+      "doc": ""
+     },
+     {
+      "name": "label",
+      "kind": "input",
+      "type": "string",
+      "doc": "Accessible name of the list."
+     }
+    ],
+    "outputs": [],
+    "slots": [],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/status/stat-strip.component.ts",
+    "doc": "Heroicons name. */ icon: string; /** The figure, e.g. \"140\". */ value: string; label: string; /** Tint of the icon disc. Default blue. */ tone?: 'blue' | 'green' | 'amber'; } /** Three or four proof figures in one white card, each with a tinted icon disc.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArStatStrip } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArStatStrip],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-stat-strip label=\"Airiona in numbers\" [items]=\"items\" />\n  `,\n})\nexport class Example {\n  protected readonly items = [\n  { icon: 'globe-alt', value: '140', label: 'Airports' },\n  { icon: 'paper-airplane', value: '1,240', label: 'Aircraft', tone: 'green' as const },\n  { icon: 'users', value: '28K+', label: 'Happy flyers', tone: 'amber' as const },\n  ];\n}\n",
+    "uses": [
+     "ArStatStrip"
+    ]
+   },
+   "keywords": [
+    "stat",
+    "strip",
+    "status",
+    "three",
+    "four",
+    "proof",
+    "figures",
+    "white",
+    "card",
+    "each",
+    "with",
+    "tinted",
+    "icon",
+    "disc",
+    "blue",
+    "green",
+    "amber"
    ]
   },
   {

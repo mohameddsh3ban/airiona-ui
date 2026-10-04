@@ -12,6 +12,9 @@ const LAYOUT_CSS = {
   'grid-3': 'display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row;',
   'grid-4': 'display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row;',
   split: 'display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-auto-flow: row;',
+  sidebar: 'display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); grid-auto-flow: row;',
+  // Three cards per view from tablets up, swiping sideways; scroll-x is the phone version (one card and a peek).
+  carousel: 'display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: 0; padding-inline: 0; padding-bottom: 6px;',
   'scroll-x': 'display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(80%, 320px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px;',
 };
 const VALIDATOR_CODE = {
@@ -217,7 +220,8 @@ export function scaffold(spec) {
     }
     for (const { el, section, parent } of walkElements(spec)) {
       const own = el.component === 'html' && el.layout?.[bp];
-      if (own) rules.push(`.pg-el-${el.id} { ${LAYOUT_CSS[own]} gap: 16px; }`, `.pg-el-${el.id} > * { min-width: 0; }`);
+      if (own) rules.push(`.pg-el-${el.id} { ${LAYOUT_CSS[own]} gap: 16px; align-content: start; }`, `.pg-el-${el.id} > * { min-width: 0; }`);
+      if (own === 'scroll-x' || own === 'carousel') rules.push(`.pg-el-${el.id} > * { scroll-snap-align: start; }`);
       // A span cascades upward like everything else, but in a one-column stack "span 2" would invent a second
       // column; there it means the full row.
       const span = cascade(el.span, null).find(([b]) => b === bp)[1];

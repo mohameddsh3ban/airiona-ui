@@ -1,8 +1,8 @@
-<!-- Flight home: generated from docs/pages/flight-home/page.spec.json -->
+<!-- Home: generated from docs/pages/flight-home/page.spec.json -->
 <main class="ar pg">
   <section class="pg-s pg-s--topbar" aria-label="Airiona">
     <div class="pg-g">
-      <ar-app-bar class="pg-el-appBar" title="Airiona" [large]="true" eyebrow="Ready for take-off" [headingLevel]="2">
+      <ar-app-bar class="pg-el-appBar" title="Airiona">
         <button arButton arActions class="pg-el-appBarSignIn" variant="secondary" size="sm" (click)="goToSignIn($event)">Sign in</button>
       </ar-app-bar>
     </div>
@@ -10,190 +10,151 @@
 
   <section class="pg-s pg-s--nav" aria-label="Site navigation">
     <div class="pg-g">
-      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="flights">
-        <button arButton arActions class="pg-el-navSignIn" variant="primary" size="sm" (click)="goToSignIn($event)">Sign in</button>
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="explore">
+        <button
+          arButton
+          arActions
+          class="pg-el-navLanguage"
+          variant="ghost"
+          size="sm"
+          iconStart="globe-alt"
+          (click)="openLanguage($event)"
+        >EN</button>
+        <button arButton arActions class="pg-el-navSignIn" variant="secondary" size="sm" (click)="goToSignIn($event)">Sign in</button>
       </ar-top-nav>
     </div>
   </section>
 
-  <section class="pg-s pg-s--hero" aria-label="Fly on your own schedule">
-    <form class="pg-g" [formGroup]="search" (ngSubmit)="submitSearch()" novalidate>
-        <ar-landing-hero
-          class="pg-el-heroLanding"
-          eyebrow="Private aviation"
-          title="Fly on your own schedule."
-          lede="Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes."
-          image="assets/photos/aviation/hero-sky.webp"
-          video="assets/video/hero-sky.mp4"
-          focus="78% 50%"
-          [stats]="heroLandingStats"
-          [headingLevel]="1"
-          [docked]="true"
-        >
-          <button
-            arButton
-            arActions
-            class="pg-el-heroBrowseAircraft"
-            variant="secondary"
-            size="lg"
-            iconStart="paper-airplane"
-            (click)="goToAircraft($event)"
-          >Browse aircraft</button>
-          <button
-            arButton
-            arActions
-            class="pg-el-heroHangars"
-            variant="ghost"
-            size="lg"
-            iconStart="building-office-2"
-            (click)="goToHangars($event)"
-          >Find hangar space</button>
-          <div class="pg-card pg-el-searchCard">
-            <ar-mobile-segmented
-              class="pg-el-tripType"
-              label="Trip type"
-              tone="brand"
-              [options]="tripTypeOptions"
-              formControlName="tripType"
-            />
-            @if (searchForm.error('tripType'); as message) {
-              <p class="pg-error" role="alert">{{ message }}</p>
-            }
-            <ar-segmented-control
-              class="pg-el-tripTypeDesktop"
-              label="Trip type"
-              tone="brand"
-              [options]="tripTypeDesktopOptions"
-              formControlName="tripType"
-            />
-            @if (searchForm.error('tripType'); as message) {
-              <p class="pg-error" role="alert">{{ message }}</p>
-            }
-            <ar-select
-              class="pg-el-from"
-              label="From"
-              placeholder="City or airport"
-              [searchable]="true"
-              searchPlaceholder="Type a city or code"
-              iconStart="paper-airplane"
-              emptyText="No airport matches that"
-              [options]="data.airports"
-              formControlName="from"
-              [error]="searchForm.error('from')"
-            />
-            <ar-select
-              class="pg-el-to"
-              label="To"
-              placeholder="City or airport"
-              [searchable]="true"
-              searchPlaceholder="Type a city or code"
-              iconStart="map-pin"
-              emptyText="No airport matches that"
-              [options]="data.airports"
-              formControlName="to"
-              [error]="searchForm.error('to')"
-            />
-            <ar-date-picker
-              class="pg-el-dates"
-              label="Travel dates"
-              mode="range"
-              variant="tiles"
-              startLabel="Departure"
-              endLabel="Return"
-              min="2026-10-03"
-              today="2026-10-03"
-              unit="day"
-              [inclusive]="true"
-              formControlName="dates"
-              [error]="searchForm.error('dates')"
-            />
-            <button
-              arButton
-              class="pg-el-searchSubmit"
-              variant="primary"
-              size="lg"
-              [block]="true"
-              iconStart="magnifying-glass"
-              type="submit"
-              [loading]="searchForm.pending()"
-            >Search flights</button>
-          </div>
-        </ar-landing-hero>
-    </form>
+  <section class="pg-s pg-s--hero" aria-label="The sky is yours">
+    <div class="pg-g">
+      <ar-split-hero
+        class="pg-el-splitHero"
+        eyebrow="Fly. Land. Explore."
+        title="The sky"
+        accent="is yours."
+        lede="Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices."
+        image="assets/photos/aviation/landing-hero.webp"
+        video="assets/video/landing-hero.mp4"
+        focus="42% 50%"
+        [badge]="splitHeroBadge"
+        storyLabel="Watch the story"
+        [headingLevel]="1"
+        [docked]="true"
+        (story)="openStory($event)"
+      >
+        <button
+          arButton
+          arActions
+          class="pg-el-heroBook"
+          variant="primary"
+          size="lg"
+          iconEnd="arrow-right"
+          (click)="goToBooking($event)"
+        >Book a flight</button>
+        <ar-booking-search
+          class="pg-el-heroSearch"
+          (search)="searchFlights($event)"
+          (fieldOpen)="openSearchField($event)"
+        />
+      </ar-split-hero>
+    </div>
   </section>
 
-  <section class="pg-s pg-s--deals" aria-labelledby="pg-h-deals">
-    <h2 class="pg-h m-title-2" id="pg-h-deals">Top deals</h2>
-    <p class="pg-intro body">Charter fares, aircraft for sale and hangar space across the network.</p>
+  <section class="pg-s pg-s--offers" aria-label="Offers and featured destinations">
+    <div class="pg-g">
+      <div class="pg-el-offerColumn">
+        <ar-promo-banner
+          class="pg-el-promo"
+          image="assets/photos/aviation/promo-jet.webp"
+          eyebrow="Limited time"
+          title="Empty legs up to"
+          highlight="40% off"
+          text="One-way repositioning flights across the Gulf this month."
+          action="View deals"
+          (press)="openDeals($event)"
+        />
+        <ar-stat-strip class="pg-el-stats" label="Airiona in numbers" [items]="statsItems" />
+      </div>
+      <div class="pg-el-featuredColumn">
+        <ar-section-header
+          class="pg-el-featuredHead"
+          title="Featured destinations"
+          action="View all"
+          [chevron]="true"
+          (press)="openDestinations($event)"
+        />
+        <div class="pg-el-featuredGrid">
+          @for (item of data.destinations; track $index) {
+            <ar-place-card
+              class="pg-el-destination"
+              [title]="item.title"
+              [region]="item.region"
+              [location]="item.location"
+              [rating]="item.rating"
+              [image]="item.image"
+              [saved]="item.saved"
+              (press)="openDestination($event)"
+            />
+          } @empty {
+            <p class="pg-empty pg-el-destination">Section hidden</p>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--why" aria-labelledby="pg-h-why">
+    <h2 class="pg-h m-title-2" id="pg-h-why">Why fly with Airiona</h2>
+    <p class="pg-intro body">Everything a charter client asks before they book, answered before they ask.</p>
     <div class="pg-g">
       <ar-feature-card
-        class="pg-el-dealFeatured"
-        icon="paper-airplane"
-        [openable]="true"
-        [title]="data.deals[0].title"
-        [text]="data.deals[0].text"
-        [tone]="data.deals[0].tone"
-        (open)="openDeal($event)"
+        class="pg-el-whyVerified"
+        icon="shield-check"
+        title="Verified operators"
+        text="Every operator is checked for its air operator certificate, insurance and safety audits."
+        tone="light"
       />
-      <ar-mini-destination
-        class="pg-el-dealAircraft"
-        title="Aircraft for sale"
-        image="assets/photos/aviation/jet-midsize.webp"
-        price="from $2.4M"
-        duration="1,240 listed"
-        dates="Jets, turboprops, helicopters"
-        badge="New"
-        (press)="goToAircraft($event)"
+      <ar-feature-card
+        class="pg-el-whyPrice"
+        icon="banknotes"
+        title="All-in prices"
+        text="Crew, fuel, airport fees and VAT in one number before you request."
+        tone="dark"
       />
-      <ar-mini-destination
-        class="pg-el-dealHangars"
-        title="Hangar space"
-        image="assets/photos/aviation/hangar-large.webp"
-        price="from $1,850 / mo"
-        duration="140 airports"
-        dates="Nightly, monthly or yearly"
-        (press)="goToHangars($event)"
+      <ar-feature-card
+        class="pg-el-whyFast"
+        icon="clock"
+        title="Confirmed in minutes"
+        text="Operators answer within the 15-minute price hold, day or night."
+        tone="light"
       />
     </div>
   </section>
 
-  <section class="pg-s pg-s--airlines" aria-labelledby="pg-h-airlines">
-    <h2 class="pg-h m-title-2" id="pg-h-airlines">Most popular airlines</h2>
+  <section class="pg-s pg-s--markets" aria-labelledby="pg-h-markets">
+    <h2 class="pg-h m-title-2" id="pg-h-markets">More than a flight</h2>
+    <p class="pg-intro body">Buy an aircraft, lease hangar space or catch an empty leg on the same account.</p>
     <div class="pg-g">
-      @for (item of data.airlines; track $index) {
+      @for (item of data.marketplaces; track $index) {
         <ar-mini-destination
-          class="pg-el-airline"
+          class="pg-el-market"
           [title]="item.title"
           [image]="item.image"
           [price]="item.price"
           [duration]="item.duration"
           [dates]="item.dates"
           [badge]="item.badge"
-          (press)="openAirline($event)"
+          (press)="openMarketplace($event)"
         />
       } @empty {
-        <p class="pg-empty pg-el-airline">Section hidden</p>
+        <p class="pg-empty pg-el-market">Section hidden</p>
       }
     </div>
   </section>
 
-  <section class="pg-s pg-s--hotels" aria-labelledby="pg-h-hotels">
-    <h2 class="pg-h m-title-2" id="pg-h-hotels">Book your hotel</h2>
-    <p class="pg-intro body">Stays our travellers rate highest, a short walk from the centre.</p>
+  <section class="pg-s pg-s--footer" aria-label="Footer">
     <div class="pg-g">
-      @for (item of data.hotels; track $index) {
-        <ar-destination-card
-          class="pg-el-hotel"
-          [title]="item.name"
-          [rating]="item.rating"
-          [meta]="item.distance"
-          [image]="item.image"
-          [saved]="item.saved"
-          (book)="bookHotel($event)"
-        />
-      } @empty {
-        <p class="pg-empty pg-el-hotel">IllustrationCallout: 'No featured stays near you yet' with a 'Browse all stays' link</p>
-      }
+      <p class="pg-muted m-footnote pg-el-footerLine">© 2026 Airiona · Private charter, aircraft and hangar marketplace · Dubai</p>
     </div>
   </section>
 

@@ -1,0 +1,23 @@
+<!-- @dsCard group="Screens" height=1180 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SplitHero</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:24px 24px 32px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  var P = '../../assets/photos/';
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.SplitHero, {
+    eyebrow: 'Fly. Land. Explore.', title: 'The sky', accent: 'is yours.',
+    lede: 'Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices.',
+    image: P + 'aviation/landing-hero.webp', video: '../../assets/video/landing-hero.mp4',
+    badge: { value: '28K+', title: 'Happy flyers', text: 'joined this year', people: [{ name: 'Lina Haddad', src: P + 'people/traveller-1.webp' }, { name: 'Omar Saleh', src: P + 'people/traveller-2.webp' }, { name: 'Mei Tanaka', src: P + 'people/traveller-3.webp' }] },
+    storyLabel: 'Watch the story',
+    actions: h(A.Button, { variant: 'primary', size: 'lg', iconEnd: 'arrow-right' }, 'Book a flight'),
+    docked: true
+  }, h(A.BookingSearch, null)));
+</script>
+</body>
+</html>

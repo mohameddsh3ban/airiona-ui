@@ -14,8 +14,10 @@ const results = [];
 const probe = (name, ok, detail = '') => { results.push({ name, ok }); console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  (${detail})` : ''}`); };
 const clean = (slug) => { rmSync(join(PAGES, slug), { recursive: true, force: true }); rmSync(join(PLAYGROUND, slug), { recursive: true, force: true }); };
 
-/* ---------- lint probes (mutations of the flight-home spec) ---------- */
-const base = JSON.parse(readFileSync(join(PAGES, 'flight-home/page.spec.json'), 'utf8'));
+/* ---------- lint probes (mutations of the fixture spec) ---------- */
+// A frozen copy of an earlier flight-home spec: it exercises field twins, each, html containers and a form, and it
+// does not change when the live page is redesigned.
+const base = JSON.parse(readFileSync(new URL('./fixtures/probe-base.spec.json', import.meta.url), 'utf8'));
 const clone = () => JSON.parse(JSON.stringify(base));
 const all = (els) => (els || []).flatMap((e) => [e, ...all(e.children)]);
 const find = (s, id) => all(s.sections.flatMap((x) => x.elements)).find((e) => e.id === id);
@@ -45,7 +47,7 @@ lintProbe('html container layout typo', (s) => { find(s, 'searchCard').layout.lg
 lintProbe('field twin with a component not listed', (s) => { find(s, 'tripTypeDesktop').component = 'Select'; }, /element is a Select/);
 {
   const r = lint(clone());
-  probe('lint: flight-home (field twin, each, intro) has no errors', r.errors.length === 0, r.errors.slice(0, 2).join(' | '));
+  probe('lint: fixture spec (field twin, each, intro) has no errors', r.errors.length === 0, r.errors.slice(0, 2).join(' | '));
 }
 
 /* ---------- build and browser probes ---------- */

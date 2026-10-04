@@ -1,16 +1,16 @@
-# Flight home
+# Home
 
 > Generated from `docs/pages/flight-home/page.spec.json` by `node tools/page/airiona.mjs render flight-home`. Edit the spec, not this file.
 
 | | |
 |---|---|
-| Audience | A traveller planning a trip on their phone, often on mobile data, who lands here from a search engine or the app's Home tab and wants to search flights in under a minute; the deals and hotel rows are for people still browsing. |
-| Primary action | Search flights for a route and dates |
-| Source | screenshot · `docs/pages/flight-home/source.jpg` |
+| Audience | Someone planning a private flight, buying an aircraft or looking for hangar space, landing here from search or an ad. Often on a phone; they decide in seconds whether Airiona is premium and trustworthy, then search a route. |
+| Primary action | Search a route and open the booking page |
+| Source | screenshot · `docs/pages/flight-home/source.png` |
 | Route | `/flight-home` (playground: `#/flight-home`) |
 | Framework | angular |
 
-The source is a desktop travel-agency landing page: a top nav (wordmark, Flights/Hotel/Trains/Buses/Cabs, Sign In), a hero with an eyebrow, a two-line display headline and a 3D plane, a flight search bar (One Way / Round Trip / Multi City, From, To with a swap disc, Departure, Return, a round search button), then three content sections each with a centred heading and a one-line lede: Top flight deals (one wide promo card with a cabin photo, code DTOUR2023, title, text and a Learn More button, plus two photo tiles 'Hotel bookings' and 'Book domestic' with an arrow disc), Most popular airlines (a horizontal carousel of photo cards named Turkish Airlines, Emirates, Qatar Airways with peeking neighbours), and Book your hotel (three photo cards: Moxy NYC Downtown, Hotel Tropical Daisy with four stars, '1.22 km from City Centre' and a Book Now button, Hotel Tropical Daisy). It shows no phone layout, no empty/loading/error states and no validation; those are designed here. The brand is a placeholder ('Travel agency.'); this conversion uses Airiona.
+The product owner's chosen landing reference (a travel brand, 'Travorra'). Desktop only. It has a top bar with the logo, five centred links with a dot under the active one, a language switch and a round menu button. The hero has an uppercase eyebrow with a dashed plane trail, a two-line serif headline whose second line is italic blue, a lede, and a 'Start Exploring' pill with an arrow disc. On the right is a coastal photo in an organic shape with a curved bite on the left edge, a 'watch travel story' ring play button sitting in that bite, and a glass 'Happy Travelers 28K+' card with faces on the top right. A white search pill spans the hero's bottom edge (Where to, Check in, Check out, Travelers, round search button). Below it are a blue 'Limited time offer, Get up to 30% off' photo card and a three-figure stats card on the left, and 'Featured destinations' with View all, four tall photo cards (heart, name, from price, rating chip) and prev/next arrows on the right. The owner's instruction: keep the hero style, apply Airiona's style, use our components, and make the hero photo a still frame that becomes a running video after load. Phone layout, states, the sections below the fold and all copy are designed here for Airiona (private charter, aircraft and hangar marketplaces).
 
 ## Screens
 
@@ -28,12 +28,13 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Section | Purpose | 390 | 768 | 1280 | Sticky | Notes |
 |---|---|---|---|---|---|---|
-| **Airiona** `topbar` | Brand and Sign in on phones; the five-link pill nav does not fit 390px | stack | ↑ | ↑ |  | hidden at lg |
-| **Site navigation** `nav` | The source's top nav: wordmark, Flights/Hotels/Trains/Buses/Cabs, Sign in (desktop only) | stack | ↑ | ↑ |  | hidden at base |
-| **Fly on your own schedule** `hero` | The page's opening: a cinematic sky with the headline, proof figures and the flight search docked over its lower edge, so the primary action is on the first screen | stack | ↑ | ↑ |  |  |
-| **Top deals** `deals` | Promotions: one featured charter deal and two doors into the aircraft and hangar marketplaces | stack | ↑ | grid-3 |  |  |
-| **Most popular airlines** `airlines` | Browse by airline: the carriers people book most, with the cheapest fare from the home airport | scroll-x | ↑ | grid-3 |  |  |
-| **Book your hotel** `hotels` | Featured stays near the traveller's home city | stack | grid-2 | grid-3 |  |  |
+| **Airiona** `topbar` | Phone brand bar with sign in; the link row does not fit 390px | stack | ↑ | ↑ |  | hidden at lg |
+| **Site navigation** `nav` | The reference's top bar: brand, links, language and sign in | stack | ↑ | ↑ |  | hidden at base |
+| **The sky is yours** `hero` | The reference hero in Airiona style: the promise, proof, the story film and the route search on the first screen | stack | ↑ | ↑ |  |  |
+| **Offers and featured destinations** `offers` | The reference's second band: the offer and proof on the left, featured destinations on the right | stack | ↑ | sidebar |  |  |
+| **Why fly with Airiona** `why` | Trust: the three promises behind the price | scroll-x | grid-3 | ↑ |  |  |
+| **More than a flight** `markets` | Doors into the aircraft and hangar marketplaces | scroll-x | grid-3 | ↑ |  |  |
+| **Footer** `footer` | Brand line and legal | stack | row | ↑ |  |  |
 | **Tabs** `tabs` | Phone and tablet app navigation, always in thumb reach | stack | ↑ | ↑ | base: bottom, lg: none | hidden at lg |
 
 ## Components
@@ -42,105 +43,84 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `appBar` | AppBar `ar-app-bar` | `title`=Airiona<br>`large`=true<br>`eyebrow`=Ready for take-off<br>`headingLevel`=2 |  | Root screen of the Flights tab: large title with the source's eyebrow line above it<br>Not TopNav: wordmark + five links + Sign in overflow a phone; it returns at 1280<br>Not GreetingBar: a greeting for a signed-in home; this page serves signed-out visitors too |  |
-| `appBarSignIn` [arActions] | Button `button[arButton], a[arButton]` | `variant`=secondary<br>`size`=sm |  | The source's Sign In pill, kept in the bar's actions slot so it stays in reach at the top right |  |
+| `appBar` | AppBar `ar-app-bar` | `title`=Airiona |  | A compact bar on phones: the hero below carries the h1, so the bar stays small |  |
+| `appBarSignIn` [arActions] | Button `button[arButton], a[arButton]` | `variant`=secondary<br>`size`=sm |  | Returning clients sign in from the top right |  |
 
 ### Site navigation
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `topNav` | TopNav `ar-top-nav` | `links`=[{"value":"flights","label":"Flights"},{"value":"hotels","la<br>`value`=flights |  | Matches the source: wordmark left, a pill group of sections in the middle, action on the right; Flights is the active pill<br>Not SideNav: an operator sidebar, not a public site header<br>Not Tabs: Tabs switch panels in place; these links go to other pages |  |
-| `navSignIn` [arActions] | Button `button[arButton], a[arButton]` | `variant`=primary<br>`size`=sm |  | TopNav's own guidance for signed-out visitors: Button primary sm 'Sign in' in the actions slot (otherwise it shows search and notification buttons) |  |
+| `topNav` | TopNav `ar-top-nav` | `links`=[{"value":"explore","label":"Explore"},{"value":"destination<br>`value`=explore |  | The reference's centred link row with the active state, in Airiona's pill navigation |  |
+| `navLanguage` [arActions] | Button `button[arButton], a[arButton]` | `variant`=ghost<br>`size`=sm<br>`iconStart`=globe-alt |  | The reference's language switch |  |
+| `navSignIn` [arActions] | Button `button[arButton], a[arButton]` | `variant`=secondary<br>`size`=sm |  | Sign in replaces the reference menu disc: the links are already visible at 1280 |  |
 
-### Fly on your own schedule
-
-| Element | Component | Inputs | Data | Why this one | States |
-|---|---|---|---|---|---|
-| `heroLanding` | LandingHero `ar-landing-hero` | `eyebrow`=Private aviation<br>`title`=Fly on your own schedule.<br>`lede`=Charter a jet, buy an aircraft or lease hangar space, with a<br>`image`=assets/photos/aviation/hero-sky.webp<br>`video`=assets/video/hero-sky.mp4<br>`focus`=78% 50%<br>`stats`=[{"value":"1,240","label":"Aircraft listed"},{"value":"140",<br>`headingLevel`=1<br>`docked`=true |  | A full-bleed photo hero with a looping sky video, display headline and proof figures replaces the source's headline-over-plane art; docked children let the search card straddle its edge like the source's search bar under the hero<br>Not HeroHeader: a compact mobile header with a pattern; no video, no stats, too small for a landing page at 1280<br>Not PlaceHero: a photo with a price caption for one place<br>Not RouteHeader: a route arc for results, not a landing headline |  |
-| `heroBrowseAircraft` [arActions] | Button `button[arButton], a[arButton]` | `variant`=secondary<br>`size`=lg<br>`iconStart`=paper-airplane |  | Second door into the marketplace for visitors who want to buy, not charter |  |
-| `heroHangars` [arActions] | Button `button[arButton], a[arButton]` | `variant`=ghost<br>`size`=lg<br>`iconStart`=building-office-2 |  | Third door, for owners looking for space; ghost so the two links never outrank the search |  |
-| `searchCard` | `<div>` |  |  | The search form on a raised card docked over the hero edge; the card lays out the fields like the old search section did |  |
-| `tripType` (field `tripType`) | MobileSegmented `ar-mobile-segmented` | `label`=Trip type<br>`tone`=brand<br>`options`=[{"value":"one","label":"One way"},{"value":"round","label": |  | Three always-visible options with a sliding thumb, full width on phones; brand tone is the system's rule for trip type in search<br>Not SegmentedControl: desktop pill group; MobileSegmented is full-width and thumb-sized on phones<br>Not Select: hides three options behind a tap |  |
-| `tripTypeDesktop` (field `tripType`) | SegmentedControl `ar-segmented-control` | `label`=Trip type<br>`tone`=brand<br>`options`=[{"value":"one","label":"One way"},{"value":"round","label": |  | On desktop the trip type is a compact pill group above the search row, like the source; same form control as the phone switch<br>Not MobileSegmented: full-width phone control stretched across 1200px |  |
-| `from` (field `from`) | Select `ar-select` | `label`=From<br>`placeholder`=City or airport<br>`searchable`=true<br>`searchPlaceholder`=Type a city or code<br>`iconStart`=paper-airplane<br>`emptyText`=No airport matches that | `options` ← `airports` | One of 8–50 airports with a filter field; code shown in mono beside the city, as the system asks<br>Not TextField: free text cannot be matched to an airport without a picker<br>Not FieldTile: opens a sheet; the Select already filters inline |  |
-| `to` (field `to`) | Select `ar-select` | `label`=To<br>`placeholder`=City or airport<br>`searchable`=true<br>`searchPlaceholder`=Type a city or code<br>`iconStart`=map-pin<br>`emptyText`=No airport matches that | `options` ← `airports` | Same control as From so the two line up |  |
-| `dates` (field `dates`) | DatePicker `ar-date-picker` | `label`=Travel dates<br>`mode`=range<br>`variant`=tiles<br>`startLabel`=Departure<br>`endLabel`=Return<br>`min`=2026-10-03<br>`today`=2026-10-03<br>`unit`=day<br>`inclusive`=true |  | Departure and Return as two tiles in one control, exactly the source's pair; range picking across months with the result stated in words<br>Not Calendar: an inline month takes the whole phone screen<br>Not TextField: typed dates are error-prone |  |
-| `searchSubmit` | Button `button[arButton], a[arButton]` | `variant`=primary<br>`size`=lg<br>`block`=true<br>`iconStart`=magnifying-glass |  | The one primary action: midnight ink, full width on phones; the source's round search disc becomes a labelled button so it has a visible verb; at 1280 it takes the fourth column so the row reads From, To, Dates, Search like the source bar<br>Not IconButton brand: an icon-only disc is a 44px target with no visible label; the brand disc belongs to BookingSearch only |  |
-
-### Top deals
+### The sky is yours
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `dealFeatured` | FeatureCard `ar-feature-card` | `icon`=paper-airplane<br>`openable`=true | `title` ← `deals[0].title`<br>`text` ← `deals[0].text`<br>`tone` ← `deals[0].tone` | A dark card with a title, two lines and an open button is the source's promo card minus its photo; the promo code goes in the text until FeatureCard gets an image<br>Not StayCard: a priced stay with a Reserve button<br>Not DestinationCard: rating and Book now, wrong meaning for a promotion | loading: Skeleton 248px<br>error: section hidden |
-| `dealAircraft` | MiniDestination `ar-mini-destination` | `title`=Aircraft for sale<br>`image`=assets/photos/aviation/jet-midsize.webp<br>`price`=from $2.4M<br>`duration`=1,240 listed<br>`dates`=Jets, turboprops, helicopters<br>`badge`=New |  | A photo card with a name and three short facts: the source's photo tile, with the facts the marketplace needs<br>Not PlaceCard: a save heart and rating mean a place, not a marketplace door<br>Not GAP: MiniDestination carries the photo, label and facts; the arrow disc is the whole card being a button |  |
-| `dealHangars` | MiniDestination `ar-mini-destination` | `title`=Hangar space<br>`image`=assets/photos/aviation/hangar-large.webp<br>`price`=from $1,850 / mo<br>`duration`=140 airports<br>`dates`=Nightly, monthly or yearly |  | A photo card with a name and three short facts: the source's photo tile, with the facts the marketplace needs<br>Not PlaceCard: a save heart and rating mean a place, not a marketplace door<br>Not GAP: MiniDestination carries the photo, label and facts; the arrow disc is the whole card being a button |  |
+| `splitHero` | SplitHero `ar-split-hero` | `eyebrow`=Fly. Land. Explore.<br>`title`=The sky<br>`accent`=is yours.<br>`lede`=Private jets, hand-picked destinations and hangar space, boo<br>`image`=assets/photos/aviation/landing-hero.webp<br>`video`=assets/video/landing-hero.mp4<br>`focus`=42% 50%<br>`badge`={"value":"28K+","title":"Happy flyers","text":"joined this y<br>`storyLabel`=Watch the story<br>`headingLevel`=1<br>`docked`=true |  | SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, the glass travellers badge and the story ring button; docked children straddle its bottom edge like the reference search pill<br>Not LandingHero: full-bleed photo with copy on top; the reference splits copy and photo side by side<br>Not HeroHeader: compact mobile header, no video, no badge |  |
+| `heroBook` [arActions] | Button `button[arButton], a[arButton]` | `variant`=primary<br>`size`=lg<br>`iconEnd`=arrow-right |  | The reference's Start Exploring pill: the one primary action, straight to the booking page |  |
+| `heroSearch` | BookingSearch `ar-booking-search` |  |  | The reference's search pill: trip type, From ⇄ To, dates and travellers with the brand search disc, the system's flight search<br>Not html card with Select and DatePicker fields: the reference is a single compact bar; BookingSearch is that bar and opens each picker from its tile |  |
 
-### Most popular airlines
-
-| Element | Component | Inputs | Data | Why this one | States |
-|---|---|---|---|---|---|
-| `airline` | MiniDestination `ar-mini-destination` |  | `title` ← `item.title`<br>`image` ← `item.image`<br>`price` ← `item.price`<br>`duration` ← `item.duration`<br>`dates` ← `item.dates`<br>`badge` ← `item.badge` | A compact photo card with a name and three small facts; the carousel peeks the next card like the source<br>Not PlaceCard: region/location/rating are for places<br>Not SnapCarousel: the section's scroll-x layout already snaps and bleeds; no need for a second scroller | loading: Skeleton card<br>error: section hidden |
-
-### Book your hotel
+### Offers and featured destinations
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `hotel` | DestinationCard `ar-destination-card` |  | `title` ← `item.name`<br>`rating` ← `item.rating`<br>`meta` ← `item.distance`<br>`image` ← `item.image`<br>`saved` ← `item.saved` | A photo card with name, star rating, a distance line and a small Book now button is exactly the source's hotel card<br>Not StayCard: hero card for one featured stay with a price and tags<br>Not PlaceCard: no Book now button | loading: Skeleton card<br>empty: IllustrationCallout<br>error: Toast with Retry |
+| `offerColumn` | `<div>` |  |  | Offer and proof stack beside the destinations at 1280, side by side on tablets |  |
+| `promo` | PromoBanner `ar-promo-banner` | `image`=assets/photos/aviation/promo-jet.webp<br>`eyebrow`=Limited time<br>`title`=Empty legs up to<br>`highlight`=40% off<br>`text`=One-way repositioning flights across the Gulf this month.<br>`action`=View deals |  | The reference's limited-offer photo card<br>Not FeatureCard: no photo; the reference card is a photo with a blue fade |  |
+| `stats` | StatStrip `ar-stat-strip` | `label`=Airiona in numbers<br>`items`=[{"icon":"globe-alt","value":"140","label":"Airports"},{"ico |  | The reference's three proof figures with tinted icon discs |  |
+| `featuredColumn` | `<div>` |  |  | Heading and cards as one column |  |
+| `featuredHead` | SectionHeader `ar-section-header` | `title`=Featured destinations<br>`action`=View all<br>`chevron`=true |  | Title with the reference's View all link |  |
+| `featuredGrid` | `<div>` |  |  | The reference carousel: one card and a peek on phones, three per view from tablets up, swiping sideways |  |
+| `destination` | PlaceCard `ar-place-card` |  | `title` ← `item.title`<br>`region` ← `item.region`<br>`location` ← `item.location`<br>`rating` ← `item.rating`<br>`image` ← `item.image`<br>`saved` ← `item.saved` | The reference's tall photo card with a heart, the name, a from-price and the rating<br>Not DestinationCard: adds a Book now button the reference cards do not have |  |
+
+### Why fly with Airiona
+
+| Element | Component | Inputs | Data | Why this one | States |
+|---|---|---|---|---|---|
+| `whyVerified` | FeatureCard `ar-feature-card` | `icon`=shield-check<br>`title`=Verified operators<br>`text`=Every operator is checked for its air operator certificate, <br>`tone`=light |  | Icon, title and two lines: one promise per card |  |
+| `whyPrice` | FeatureCard `ar-feature-card` | `icon`=banknotes<br>`title`=All-in prices<br>`text`=Crew, fuel, airport fees and VAT in one number before you re<br>`tone`=dark |  | The middle promise in the dark tone draws the eye to price, the first question |  |
+| `whyFast` | FeatureCard `ar-feature-card` | `icon`=clock<br>`title`=Confirmed in minutes<br>`text`=Operators answer within the 15-minute price hold, day or nig<br>`tone`=light |  | Speed is the third question |  |
+
+### More than a flight
+
+| Element | Component | Inputs | Data | Why this one | States |
+|---|---|---|---|---|---|
+| `market` | MiniDestination `ar-mini-destination` |  | `title` ← `item.title`<br>`image` ← `item.image`<br>`price` ← `item.price`<br>`duration` ← `item.duration`<br>`dates` ← `item.dates`<br>`badge` ← `item.badge` | Compact photo cards with three short facts; each opens its marketplace |  |
+
+### Footer
+
+| Element | Component | Inputs | Data | Why this one | States |
+|---|---|---|---|---|---|
+| `footerLine` | `<p>` |  |  |  |  |
 
 ### Tabs
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `tabBar` | TabBar `ar-tab-bar` | `items`=[{"value":"home","label":"Home","icon":"home"},{"value":"boo<br>`value`=home<br>`variant`=labels<br>`label`=Main |  | Home is the root of the app; a bottom tab bar is how a phone app moves between its five destinations |  |
-
-## Forms and validation
-
-### search
-
-Submit: **Search flights** → GET /api/flights/search?from&to&depart&return&trip (the app navigates to the booking page with the same query). Success: navigate. Failure: Network or 5xx: danger Toast 'Could not search right now. Check your connection and try again.' with Retry; the form stays filled. 422 (no route): message under the To field 'We don't fly this route yet.'.
-
-Errors show after a field is left or on submit; submit focuses the first invalid field.
-
-| Field | Control | Default | Rules | Messages | Keyboard / autofill |
-|---|---|---|---|---|---|
-| **Trip type** `tripType` | MobileSegmented,SegmentedControl | round | required | required: “Choose one way, round trip or multi-city.” |  |
-| **From** `from` | Select |  | required | required: “Choose the airport you are flying from.” |  |
-| **To** `to` | Select |  | required | required: “Choose where you want to fly to.” |  |
-| **Travel dates** `dates` | DatePicker |  | required, dateRange, futureDate | required: “Choose your departure and return dates.”<br>dateRange: “Pick a return date after your departure.”<br>futureDate: “Departure must be today or later.” |  |
+| `tabBar` | TabBar `ar-tab-bar` | `items`=[{"value":"home","label":"Home","icon":"home"},{"value":"boo<br>`value`=home<br>`variant`=labels<br>`label`=Main |  | Home is the root of the app; the tab bar is how a phone app moves between its five destinations |  |
 
 ## Data
 
-- **airports**: `Airport[]` from GET /api/airports?popular=1 (the 12 most-booked airports; the Select is searchable so the full list can stream in later). Loading: Both airport selects render disabled with a Skeleton line for the placeholder; the rest of the form stays usable. Empty: n/a (the list is static and bundled as a fallback). Error: Fall back to the bundled list; no message, the fallback is complete enough to search.
-- **deals**: `Deal[]` from GET /api/promotions?placement=home-deals (first item is the featured deal). Loading: One Skeleton block the height of the FeatureCard (248px) and two tile-sized blocks. Empty: The whole Top flight deals section is hidden. Error: Section hidden; no toast (promotions are not what the person came for).
-- **airlines**: `Airline[]` from GET /api/airlines/popular?from=<home airport> (sorted by bookings in the last 30 days, max 8). Loading: Three Skeleton cards in the carousel at the card height. Empty: Section hidden. Error: Section hidden; no toast.
-- **hotels**: `Hotel[]` from GET /api/stays/featured?city=<home city>&limit=3. Loading: Three Skeleton cards in the final grid. Empty: IllustrationCallout: 'No featured stays near you yet' with a 'Browse all stays' link. Error: Toast (danger) 'Could not load stays' with Retry; keep the last loaded cards.
+- **destinations**: `Destination[]` from GET /api/destinations/featured (six, ranked by bookings this season). Loading: Six PlaceCard skeletons. Empty: Section hidden. Error: Section hidden; the search still works.
+- **marketplaces**: `Tile[]` from Static: the three Airiona marketplaces with live counts from GET /api/marketplace/summary. Loading: Three MiniDestination skeletons. Empty: Section hidden. Error: Section hidden.
 
 ```ts
-interface Airport {
-  value: string;
-  label: string;
-  meta: string;
-}
-interface Deal {
-  code: string;
+interface Destination {
   title: string;
-  text: string;
-  tone: 'dark' | 'light';
+  region: string;
+  location: string;
+  rating: string;
+  image: string;
+  saved: boolean;
 }
-interface Airline {
+interface Tile {
   title: string;
   image: string;
   price: string;
   duration: string;
   dates: string;
   badge: string?;
-}
-interface Hotel {
-  name: string;
-  rating: number;
-  distance: string;
-  image: string;
-  saved: boolean;
 }
 ```
 
@@ -150,38 +130,30 @@ Sample data: `projects/playground/src/app/pages/flight-home/flight-home.data.ts`
 
 | Where | Use | Why |
 |---|---|---|
-| Arriving from the app's other tabs and leaving to the results page | RouteTransition (fade-through) | Top-level change of context; the results page is a sibling destination, not a step |
+| Arriving from another tab or the sign-in | RouteTransition (fade-through) | Top-level destination |
 
 Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({ motion: 'reduce' })`.
 
 ## Accessibility
 
-- One h1: the LandingHero title. AppBar large renders its title as h2 (headingLevel 2) and the content sections use h2 titles.
-- The search Button has a visible verb label ('Search flights') and the magnifying glass is decorative.
-- The two airport Selects announce their filter field; the empty text 'No airport matches that' is read when nothing matches.
-- The airline carousel is a scrollable region: cards are buttons with the airline name as accessible name (MiniDestination (press)).
-- DestinationCard's Book now buttons must name the hotel for screen readers (the component labels them 'Book now <title>' or the app adds aria-label); verify on handoff.
-- After a failed search, focus moves to the first invalid field (page-form.ts) and the toast is announced.
-- The hero video is decorative (aria-hidden, muted, no controls needed): it never carries information, and it stops under prefers-reduced-motion.
+- One h1: "The sky is yours." (the SplitHero title and accent are one heading). The AppBar title is not a heading; sections use h2.
+- The hero video is decorative: muted, aria-hidden, no controls; it never plays under reduced motion or data saver. The ring button is labelled "Watch the story" and opens the film with controls.
+- The search tiles are buttons that name their field and value; the search disc is labelled Search flights.
+- Destination cards are buttons named by the destination; the heart says Save or Remove from saved.
 - The tab bar is a nav landmark labelled Main, hidden at 1280 where the top navigation takes over.
 
 ## Gaps
 
 | Element | Need | Nearest today | Proposal |
 |---|---|---|---|
-| dealFeatured | FeatureCard with a photo panel and an eyebrow (promo code) for the source's wide deal card | FeatureCard (used; conveys title, text and open button without the photo) | Add image and eyebrow inputs to FeatureCard, photo on the left from 768px |
+| featuredGrid | Prev/next arrow buttons beside the carousel, as in the reference | SnapCarousel (snap and peek, no arrows); scroll-x layout | Add an `arrows` input to SnapCarousel: two IconButtons that scroll by one card and disable at the ends |
 
 ## Notes
 
-- Phone order: brand bar, hero with the search card docked over its edge, deals, airlines, hotels, and the app tab bar fixed at the bottom (Home selected). The search keeps its own button inside the card, so no sticky action bar is added.
-- The source's five nav links are hidden on phones (the AppBar carries brand and Sign in); in the product app the Flights tab bar is the app shell's, not this page's.
-- Trip type defaults to round trip like the source. One way should hide the Return tile and switch the DatePicker to mode single: cross-field behaviour for the app (a valueChanges subscription), not expressible in the spec.
-- The airline cards show a 'from' fare, destination count and season because MiniDestination renders three fact rows; these are assumptions (the source shows only the airline name and photo). All three airline photos use jet-clouds.webp because the asset set has one aircraft photo.
-- The featured deal is a FeatureCard without the cabin photo; the promo code DTOUR2026 lives in the text. The two photo tiles are MiniDestination cards into the aircraft and hangar marketplaces. See gaps.
-- Dates: the DatePicker value is an ISO [start, end] range; dateRange and futureDate validate it. Prices under days are not shown on the landing page (no route chosen yet).
-- Airports: eight bundled airports are the fallback; the Select is searchable so a larger list can be loaded.
-- Hero copy, figures and the two marketplace buttons are this conversion's: the product is an aircraft and hangar marketplace with charter booking, so the hero opens all three doors and the search stays the primary action.
-- Desktop search row: the trip type is a SegmentedControl above the row at 1280 (the phone keeps MobileSegmented); both place the same form field.
+- Style: Airiona's own type (Bricolage Grotesque display, Geist text) replaces the reference serif; the italic accent line becomes the Ion Blue accent with a hand-drawn underline. Colours, radii and shadows are the system's.
+- Hero frame and video: the photo is the first frame of a 5.25s seamless loop generated from it; the video fades in 1200ms after load, so the first paint is the still frame and the page never waits on video.
+- Copy is Airiona's: the reference is a travel brand; the figures (140 airports, 1,240 aircraft, 28K+ flyers) match the marketplace pages.
+- Phone order: brand bar, hero (copy, photo, search docked over its edge), offer and stats, featured destinations (swipe), why Airiona, marketplaces, footer, tab bar.
 
 ## Spec check
 

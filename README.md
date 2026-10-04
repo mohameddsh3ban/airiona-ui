@@ -58,7 +58,7 @@ Ten pages built through the pipeline, each with its spec, handoff and screenshot
 
 | Page | What it shows |
 |---|---|
-| `flight-home` | Home: LandingHero with the looping sky video, the flight search docked over its edge, deals, airlines, hotels |
+| `flight-home` | The landing page: SplitHero (a still frame that becomes a looping video after load, travellers badge, story button), flight search docked over its edge, empty-leg promo and stats beside a destinations carousel, why Airiona, the marketplaces |
 | `flight-booking` | The central booking flow: route, trip, aircraft offers, passenger, summary, sticky request bar |
 | `stay-checkout` | Hotel checkout with guest details and payment summary |
 | `login` | Sign-in on AuthShell: form beside a cinematic video panel with rotating highlights |

@@ -6,37 +6,28 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 23,
+   "targetCount": 26,
    "tiny": [],
    "fixedCount": 1,
-   "height": 3670,
+   "height": 2591,
    "h1s": [
-    "Fly on your own schedule."
+    "The sky is yours."
    ],
    "skips": 0,
    "covered": [],
-   "pageErrors": [],
-   "submit:search": {
-    "msgs": [
-     "Choose the airport you are flying from.",
-     "Choose where you want to fly to.",
-     "Choose your departure and return dates."
-    ],
-    "focusInForm": true,
-    "focused": "button"
-   }
+   "pageErrors": []
   },
   "768": {
    "overflow": 0,
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 23,
+   "targetCount": 26,
    "tiny": [],
    "fixedCount": 1,
-   "height": 3036,
+   "height": 2530,
    "h1s": [
-    "Fly on your own schedule."
+    "The sky is yours."
    ],
    "skips": 0,
    "covered": [],
@@ -47,12 +38,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 23,
+   "targetCount": 27,
    "tiny": [],
    "fixedCount": 0,
-   "height": 2056,
+   "height": 1855,
    "h1s": [
-    "Fly on your own schedule."
+    "The sky is yours."
    ],
    "skips": 0,
    "covered": [],

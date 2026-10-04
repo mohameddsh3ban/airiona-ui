@@ -677,7 +677,7 @@ declare global {
       Ring: typeof Ring; MetricTile: typeof MetricTile; PillBarChart: typeof PillBarChart; SegmentGauge: typeof SegmentGauge; RatingBreakdown: typeof RatingBreakdown; Leaderboard: typeof Leaderboard; StripeDistribution: typeof StripeDistribution; Heatmap: typeof Heatmap; AbsenceCard: typeof AbsenceCard; ToggleTile: typeof ToggleTile; ArrivalTile: typeof ArrivalTile; RingStatCard: typeof RingStatCard; HabitTile: typeof HabitTile; GateTile: typeof GateTile; VoiceRecorder: typeof VoiceRecorder; BatteryTile: typeof BatteryTile; MediaPlayer: typeof MediaPlayer; AnalogClock: typeof AnalogClock; RecordingTile: typeof RecordingTile; ActivityCalendar: typeof ActivityCalendar; WorldClock: typeof WorldClock; RideTile: typeof RideTile; ChargingTile: typeof ChargingTile; TripSummaryTile: typeof TripSummaryTile; Notch: typeof Notch; ProfileProjectCard: typeof ProfileProjectCard; MeetingsStrip: typeof MeetingsStrip; RoadmapGantt: typeof RoadmapGantt; DateChip: typeof DateChip; EfficiencyChart: typeof EfficiencyChart; TotalTimeTile: typeof TotalTimeTile; AssistantCard: typeof AssistantCard; PageHeader: typeof PageHeader; ChannelCard: typeof ChannelCard; PromptCard: typeof PromptCard; BalanceChart: typeof BalanceChart; HoldingsPanel: typeof HoldingsPanel; SparkBars: typeof SparkBars; PilotDashboard: typeof PilotDashboard;
       PhoneFrame: typeof PhoneFrame; StatusBar: typeof StatusBar; AppBar: typeof AppBar; TabBar: typeof TabBar; BottomSheet: typeof BottomSheet; ActionSheet: typeof ActionSheet; Fab: typeof Fab; StickyActionBar: typeof StickyActionBar; HeroHeader: typeof HeroHeader; GreetingBar: typeof GreetingBar; SearchField: typeof SearchField; SectionHeader: typeof SectionHeader; ChipScroller: typeof ChipScroller; SnapCarousel: typeof SnapCarousel; SwipeRow: typeof SwipeRow; MobileSegmented: typeof MobileSegmented; FieldTile: typeof FieldTile; FeatureCard: typeof FeatureCard; CategoryTile: typeof CategoryTile; ChecklistRow: typeof ChecklistRow; WeekStrip: typeof WeekStrip; Timeline: typeof Timeline; CalendarCard: typeof CalendarCard; AgendaCard: typeof AgendaCard; PeoplePicker: typeof PeoplePicker; PlanList: typeof PlanList; MiniStatCard: typeof MiniStatCard; TripRow: typeof TripRow; FlightSearchSheet: typeof FlightSearchSheet; RouteHeader: typeof RouteHeader; TicketCard: typeof TicketCard; BoardingPass: typeof BoardingPass; PlaceCard: typeof PlaceCard; PlaceHero: typeof PlaceHero; InfoStatRow: typeof InfoStatRow; ExpandableText: typeof ExpandableText; MiniDestination: typeof MiniDestination; IllustrationCallout: typeof IllustrationCallout; MemberPicker: typeof MemberPicker; ActivityFeed: typeof ActivityFeed; DetailList: typeof DetailList; LetterRow: typeof LetterRow; ProfileHeader: typeof ProfileHeader; OnboardingFlow: typeof OnboardingFlow;
       CountUp: typeof CountUp; SuccessBurst: typeof SuccessBurst; Skeleton: typeof Skeleton; RouteTransition: typeof RouteTransition; ScreenStack: typeof ScreenStack; QRCode: typeof QRCode;
-      AuthShell: typeof AuthShell; LandingHero: typeof LandingHero;
+      AuthShell: typeof AuthShell; LandingHero: typeof LandingHero; SplitHero: typeof SplitHero; PromoBanner: typeof PromoBanner; StatStrip: typeof StatStrip;
     };
   }
 }
@@ -709,3 +709,33 @@ export interface LandingHeroProps {
   children?: React.ReactNode; className?: string;
 }
 export declare function LandingHero(props: LandingHeroProps): React.ReactElement;
+
+export interface SplitBadge { title: string; text?: string; /** Short figure in the blue disc, e.g. "28K+". */ value?: string; people?: Array<string | { name: string; src?: string }> }
+export interface SplitHeroProps {
+  /** First line of the headline. */ title: string;
+  /** Second line, in Ion Blue with a hand-drawn underline. */ accent?: string;
+  eyebrow?: string; lede?: string;
+  /** Photo; also the poster frame the video fades in over. */ image?: string;
+  /** Looping muted video that replaces the photo once the page has settled. */ video?: string;
+  /** object-position for the photo and video. */ focus?: string;
+  badge?: SplitBadge;
+  /** Label of the ring button; the button shows only when set. */ storyLabel?: string;
+  onStory?: () => void;
+  headingLevel?: 1 | 2 | 3;
+  actions?: React.ReactNode;
+  /** Children straddle the bottom edge (the search bar). */ docked?: boolean;
+  children?: React.ReactNode; className?: string;
+}
+export declare function SplitHero(props: SplitHeroProps): React.ReactElement;
+
+export interface PromoBannerProps {
+  title: string; /** Part of the title in gold, e.g. "30% off". */ highlight?: string;
+  eyebrow?: string; text?: string; image?: string;
+  /** Label of the white button; the button shows only when set. */ action?: string; onAction?: () => void;
+  className?: string;
+}
+export declare function PromoBanner(props: PromoBannerProps): React.ReactElement;
+
+export interface StripStat { icon: string; value: string; label: string; tone?: 'blue' | 'green' | 'amber' }
+export interface StatStripProps { items?: StripStat[]; /** Accessible name of the list. */ label?: string; className?: string }
+export declare function StatStrip(props: StatStripProps): React.ReactElement;

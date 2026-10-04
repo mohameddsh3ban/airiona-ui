@@ -55,8 +55,10 @@ async function fullPageShot(page, path) {
   // layers (glass cards, grain) wrongly in that mode. Restore the size afterwards.
   const vp = page.viewportSize();
   const full = await page.evaluate(() => document.documentElement.scrollHeight);
-  if (vp && full > vp.height) { await page.setViewportSize({ width: vp.width, height: full }); await page.waitForTimeout(500); }
-  await page.screenshot({ path, fullPage: true });
+  if (vp && full > vp.height) { await page.setViewportSize({ width: vp.width, height: full }); await page.waitForTimeout(1000); }
+  // The viewport already holds the whole page; a fullPage capture would re-emulate the size and flip breakpoints
+  // mid-shot (restarting indicator transitions), so capture the viewport as it is.
+  await page.screenshot({ path, fullPage: !(vp && full > vp.height) });
   if (vp && full > vp.height) await page.setViewportSize(vp);
   await page.evaluate(() => {
     for (const el of document.querySelectorAll('[data-pg-shot]')) { el.setAttribute('style', el.dataset.pgShot); delete el.dataset.pgShot; }

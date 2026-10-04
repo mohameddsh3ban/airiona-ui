@@ -1,0 +1,17 @@
+<!-- @dsCard group="Status" height=150 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>StatStrip</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="max-width:520px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.StatStrip, {
+    label: 'Airiona in numbers',
+    items: [{ icon: 'globe-alt', value: '140', label: 'Airports' }, { icon: 'paper-airplane', value: '1,240', label: 'Aircraft', tone: 'green' }, { icon: 'users', value: '28K+', label: 'Happy flyers', tone: 'amber' }]
+  }));
+</script>
+</body>
+</html>
