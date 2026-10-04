@@ -31,15 +31,20 @@ import { PAGE_ROUTES } from './pages/pages.routes';
 })
 export class NativeView {
   private readonly sanitizer = inject(DomSanitizer);
-  // The current document's own path, so the frame works on a dev server, a static host or any sub-path.
-  private readonly path = inject(DOCUMENT).location?.pathname ?? '';
+  private readonly location = inject(DOCUMENT).location;
   /** Route parameter (`withComponentInputBinding`). */
   readonly slug = input('');
 
   private readonly page = computed(() => PAGE_ROUTES.find((r) => r.path === this.slug()));
   protected readonly title = computed(() => String(this.page()?.title ?? this.slug()));
-  // Only known page slugs reach the iframe, so the trusted URL is always this app's own page.
-  protected readonly src = computed<SafeResourceUrl | null>(() =>
-    this.page() ? this.sanitizer.bypassSecurityTrustResourceUrl(`${this.path}?native#/${this.page()!.path}`) : null,
-  );
+  // Only known page slugs reach the iframe, and the URL is this document's own absolute address with the search
+  // and hash replaced, so it can never point at another origin (a "//host" path would, if used as-is).
+  protected readonly src = computed<SafeResourceUrl | null>(() => {
+    const page = this.page();
+    if (!page || !this.location) return null;
+    const url = new URL(this.location.href);
+    url.search = '?native';
+    url.hash = `#/${page.path}`;
+    return url.origin === this.location.origin ? this.sanitizer.bypassSecurityTrustResourceUrl(url.href) : null;
+  });
 }
