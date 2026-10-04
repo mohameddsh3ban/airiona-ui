@@ -1,6 +1,7 @@
 # Builds the live showcase and deploys it to GitHub Pages on every push to main:
 #   /          the sample pages (web view and phone app view of each)
 #   /catalog/  the component catalog (React and Angular side by side)
+#   /showcase/ the case study: Dribbble/Behance shots and the 15s motion piece
 name: Deploy showcase
 
 on:
@@ -37,6 +38,7 @@ jobs:
           mkdir -p site
           cp -r dist/playground/browser/. site/
           cp -r dist/catalog site/catalog
+          cp -r showcase/site site/showcase
           touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

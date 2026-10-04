@@ -2,9 +2,9 @@
 
 The Airiona design system for flight and stay booking, in **Angular 20+** and **React 18/19**, with a catalog to browse it, one-command exports, and a Claude Code pipeline that turns page designs into Airiona pages.
 
-**Live showcase:** [Sample pages](https://mohameddsh3ban.github.io/airiona-ui/) · [Landing page](https://mohameddsh3ban.github.io/airiona-ui/#/flight-home) · [Landing as a phone app](https://mohameddsh3ban.github.io/airiona-ui/#/native/flight-home) · [Component catalog](https://mohameddsh3ban.github.io/airiona-ui/catalog/)
+**Live showcase:** [Case study](https://mohameddsh3ban.github.io/airiona-ui/showcase/) · [Sample pages](https://mohameddsh3ban.github.io/airiona-ui/) · [Landing page](https://mohameddsh3ban.github.io/airiona-ui/#/flight-home) · [Landing as a phone app](https://mohameddsh3ban.github.io/airiona-ui/#/native/flight-home) · [Component catalog](https://mohameddsh3ban.github.io/airiona-ui/catalog/)
 
-[![The ten sample pages as phone apps](docs/pages/app-views.png)](https://mohameddsh3ban.github.io/airiona-ui/)
+[![Airiona: the landing page on desktop with the booking and dashboard phone apps](showcase/dribbble/01-wheels-up.jpg)](https://mohameddsh3ban.github.io/airiona-ui/showcase/)
 
 The site rebuilds on every push to `main` (`.github/workflows/pages.yml`).
 

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Airiona — Case study</title>
+<meta name="description" content="Airiona: a light-luxury design system and product for private aviation. Charter booking, aircraft and hangar marketplaces, operator dashboard. React and Angular, 128 components.">
+<meta property="og:title" content="Airiona — a design system for private aviation">
+<meta property="og:description" content="Charter, aircraft and hangar marketplaces in one light-luxury system. 128 components, ten pages, web and native app views.">
+<meta property="og:image" content="img/01-wheels-up.jpg">
+<meta name="theme-color" content="#eceef2">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap">
+<style>
+  /* Editorial case study, light luxury: canvas paper, ink type, Ion Blue for the one accent, midnight for the
+     cinematic chapters. Images are the Dribbble shots; the motion piece plays inline. */
+  :root {
+    --canvas: #eceef2; --paper: #f6f7f9; --surface: #ffffff; --ink: #0a0f24; --muted: #545b6e; --line: #dfe3ea;
+    --blue: #2b5cff; --blue-300: #8da8ff; --midnight: #070b2a; --gold: #ffc65c;
+    --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif; --sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif; --mono: "Geist Mono", ui-monospace, monospace;
+    --gutter: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--canvas); color: var(--ink); scroll-behavior: smooth; }
+  body { margin: 0; font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; background: var(--canvas); }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap { width: 100%; max-width: 1360px; margin: 0 auto; padding-inline: var(--gutter); }
+  .bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--canvas) 86%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(10, 15, 36, 0.06); }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+  .mark { font: 700 26px/1 var(--display); letter-spacing: -0.04em; text-decoration: none; }
+  .mark i { font-style: normal; color: var(--blue); }
+  .nav { display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font: 600 14px/1 var(--sans); text-decoration: none; box-shadow: inset 0 0 0 1.5px var(--line); background: var(--surface); transition: background .2s, transform .2s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.is-ink { background: var(--ink); color: #fff; box-shadow: none; }
+
+  .kicker { font: 600 13px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: #1a45e0; }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -0.045em; text-wrap: balance; margin: 0; }
+  .lede { max-width: 60ch; color: var(--muted); font-size: clamp(17px, 1.4vw, 20px); }
+
+  .intro { padding-block: clamp(48px, 8vw, 110px) clamp(32px, 5vw, 64px); }
+  .intro h1 { font-size: clamp(48px, 8.4vw, 132px); line-height: 0.92; font-weight: 800; margin-top: 22px; }
+  .intro h1 span { color: var(--blue); }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 24px; margin-top: clamp(32px, 5vw, 56px); padding-top: 28px; border-top: 1px solid var(--line); }
+  .meta dt { font: 600 12px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .meta dd { margin: 10px 0 0; font: 600 17px/1.4 var(--sans); }
+
+  .shot { margin: 0; }
+  .shot img { width: 100%; height: auto; border-radius: clamp(14px, 2vw, 28px); background: var(--surface); box-shadow: 0 1px 2px rgba(10, 15, 36, .04), 0 30px 70px -36px rgba(10, 15, 36, .35); }
+  .shot figcaption { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px 32px; align-items: baseline; padding: 22px 4px 0; }
+  .shot figcaption b { font: 700 clamp(22px, 2.2vw, 30px)/1.1 var(--display); letter-spacing: -0.03em; }
+  .shot figcaption span { color: var(--muted); max-width: 62ch; }
+  .shot figcaption small { grid-column: 1 / -1; font: 500 12px/1 var(--mono); color: var(--muted); letter-spacing: .04em; }
+  .stack { display: grid; gap: clamp(56px, 8vw, 110px); padding-block: clamp(24px, 4vw, 48px); }
+
+  .chapter { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(24px, 5vw, 80px); align-items: end; }
+  .chapter h2 { font-size: clamp(38px, 5vw, 72px); line-height: 0.98; font-weight: 800; margin-top: 16px; }
+  .chapter p { margin: 0; }
+
+  .dark { background: radial-gradient(90% 70% at 70% 0%, #13205e 0%, var(--midnight) 60%); color: #fff; padding-block: clamp(64px, 9vw, 130px); margin-block: clamp(24px, 4vw, 48px); }
+  .dark .kicker { color: var(--blue-300); }
+  .dark .lede, .dark .shot figcaption span, .dark .shot figcaption small { color: rgba(255, 255, 255, .68); }
+  .motion { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 420px); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .motion h2 { font-size: clamp(40px, 5.4vw, 80px); line-height: .96; font-weight: 800; margin-top: 16px; }
+  .motion h2 span { color: var(--blue-300); }
+  .phone-video { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: 36px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px rgba(141, 168, 255, .25), 0 60px 120px -30px rgba(0, 0, 0, .7); }
+  .phone-video video { width: 100%; height: 100%; object-fit: cover; }
+  .beats { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 10px; counter-reset: b; }
+  .beats li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; font: 400 15px/1.45 var(--sans); color: rgba(255, 255, 255, .78); }
+  .beats li b { font: 500 13px/1.6 var(--mono); color: var(--gold); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 36px; }
+  .stat { padding: 22px 22px 20px; border-radius: 24px; background: var(--surface); box-shadow: inset 0 0 0 1px rgba(10, 15, 36, .05); }
+  .stat b { display: block; font: 800 44px/1 var(--display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .stat span { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+  .end { padding-block: clamp(64px, 9vw, 120px); text-align: center; }
+  .end h2 { font-size: clamp(44px, 7vw, 104px); line-height: .94; font-weight: 800; }
+  .end h2 i { font-style: normal; color: var(--blue); }
+  .end .nav { justify-content: center; margin-top: 32px; }
+  .foot { padding-block: 28px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 860px) {
+    .chapter, .motion { grid-template-columns: minmax(0, 1fr); }
+    .shot figcaption { grid-template-columns: minmax(0, 1fr); }
+    .phone-video { max-width: 380px; margin: 0 auto; }
+    .bar .nav .btn:not(.is-ink) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">airiona<i>.</i></a>
+    <nav class="nav" aria-label="Links">
+      <a class="btn" href="../">Live sample pages</a>
+      <a class="btn" href="../catalog/">Components</a>
+      <a class="btn is-ink" href="https://github.com/mohameddsh3ban/airiona-ui">Source</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap intro">
+    <div class="kicker">Case study · Product design &amp; engineering · 2026</div>
+    <h1>A light-luxury system for <span>private aviation.</span></h1>
+    <dl class="meta">
+      <div><dt>Product</dt><dd>Charter booking, aircraft and hangar marketplaces, operator dashboard</dd></div>
+      <div><dt>System</dt><dd>128 components in React and Angular, pixel-identical</dd></div>
+      <div><dt>Pages</dt><dd>Ten, each with a web view and a native app view</dd></div>
+      <div><dt>Built with</dt><dd>Angular 20, React 19, Claude Code, Higgsfield, Runway</dd></div>
+    </dl>
+  </section>
+
+  <div class="wrap stack">
+    <figure class="shot">
+      <img src="img/01-wheels-up.jpg" width="2000" height="1500" alt="The Airiona landing page in a tilted browser window, with the booking and dashboard phone apps floating in front of it" fetchpriority="high">
+      <figcaption><b>Wheels up</b><span>One stage, three widths: the landing page on desktop, booking and the operator dashboard as phone apps, on a single vanishing point.</span><small>01 / Cover</small></figcaption>
+    </figure>
+
+    <section class="chapter">
+      <div><div class="kicker">The brief</div><h2>Four businesses, one calm surface.</h2></div>
+      <p class="lede">Clients charter a jet from A to B. Owners sell aircraft. Hosts lease hangar space. Operators run all of it. Airiona puts the four on one account and one design language: paper-light canvas, ink type, a single Ion Blue accent, large soft radii and prices that are always all-in.</p>
+    </section>
+
+    <figure class="shot">
+      <img src="img/02-ten-pages.jpg" width="2000" height="1500" alt="Ten full-length Airiona pages laid out on an isometric grid on a midnight background" loading="lazy">
+      <figcaption><b>Ten screens. One system.</b><span>Landing, booking, both marketplaces with their detail pages, the dashboard, sign-in, sign-up and checkout, all built from the same 128 parts.</span><small>02 / Overview</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/05-exploded-hero.jpg" width="2000" height="1500" alt="Exploded view of the landing hero: the headline, the travellers badge and the flight search lifted off the page in depth" loading="lazy">
+      <figcaption><b>Built in layers</b><span>The landing hero, exploded: the headline with its hand-drawn underline, the glass travellers badge and the docked flight search. The photo is the first frame of a looping video that starts once the page has settled.</span><small>03 / Landing</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/09-dubai-to-london.jpg" width="2000" height="1500" alt="The booking page on desktop with its phone app: route globe, aircraft options with all-in prices and a request bar" loading="lazy">
+      <figcaption><b>Dubai to London, all-in</b><span>The central flow. Choose the aircraft from rows that show the photo, seats, flight time and the price that includes crew, fuel, fees and VAT. The request bar stays in reach on phones.</span><small>04 / Booking</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/10-aircraft-marketplace.jpg" width="2000" height="1500" alt="The aircraft marketplace on a phone beside the Gulfstream G550 detail page on desktop" loading="lazy">
+      <figcaption><b>A Gulfstream G550, one tap away</b><span>Listings as a compact app feed on phones and tall photo cards on desktop; the detail page carries the specification, the cabin and a contact form for the seller.</span><small>05 / Aircraft marketplace</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/11-hangar-marketplace.jpg" width="2000" height="1500" alt="The hangar marketplace on a phone beside the hangar detail page on desktop" loading="lazy">
+      <figcaption><b>A roof for the jet</b><span>Door width, clear height and area lead every hangar, because they decide whether an aircraft fits. Request space with move-in and move-out dates; the host confirms within a day.</span><small>06 / Hangar marketplace</small></figcaption>
+    </figure>
+  </div>
+
+  <section class="dark">
+    <div class="wrap stack">
+      <figure class="shot">
+        <img src="img/07-night-approach.jpg" width="2000" height="1500" alt="The sign-in page on a tilted dark browser window with the sign-up phone app, over a blurred sunset wing" loading="lazy">
+        <figcaption><b>Wheels up at golden hour</b><span>Sign-in and sign-up share one shell: the form beside a cinematic wing-at-sunset loop with rotating highlights. On phones the photo opens the screen under the status bar.</span><small>07 / Sign in · Sign up</small></figcaption>
+      </figure>
+
+      <div class="motion" id="motion">
+        <div>
+          <div class="kicker">Motion · 15 seconds</div>
+          <h2>One camera move, <span>seven scenes.</span></h2>
+          <p class="lede" style="margin-top:20px">Every cut is velocity-matched: arrivals share one ease and exits mirror it, so nothing sits still at a cut. Rendered frame by frame from the real screens, with the hero video playing inside the phone.</p>
+          <ol class="beats">
+            <li><b>0.0s</b>The headline rises over the clifftop jet; the underline draws itself.</li>
+            <li><b>1.6s</b>The hero video shrinks into the landing app's screen, which scrolls.</li>
+            <li><b>4.3s</b>Booking slides in; a tap selects Citation Latitude, all-in.</li>
+            <li><b>6.6s</b>Hard switch to midnight; revenue counts up to $1.28M.</li>
+            <li><b>9.0s</b>The component wall goes isometric; four parts pop forward.</li>
+            <li><b>11.3s</b>Whip pans: buy the jet, park the jet.</li>
+            <li><b>13.0s</b>The wordmark rises and its dot lands on the URL.</li>
+          </ol>
+        </div>
+        <div class="phone-video"><video src="airiona-motion-15s.mp4" poster="img/motion-frame.jpg" controls muted loop playsinline preload="metadata" aria-label="Airiona 15-second motion piece"></video></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap stack">
+    <figure class="shot">
+      <img src="img/03-book-buy-operate.jpg" width="2000" height="1500" alt="Three phone apps fanned out: booking, the landing page and the operator dashboard" loading="lazy">
+      <figcaption><b>Book. Buy. Operate.</b><span>Every page has a native app version below 768px, composed as an app screen rather than the desktop stacked: tab bars, peek rows, one search tile, status-bar-aware heroes.</span><small>08 / Native app</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/04-component-wall.jpg" width="2000" height="1500" alt="A tilted wall of 128 component thumbnails with a boarding pass, a revenue chart, a gauge, a destination card and an aircraft list floating above it" loading="lazy">
+      <figcaption><b>128 components</b><span>Cards, charts, tickets, gauges and calendars, each built twice, in React and in Angular, and diffed pixel for pixel on every change.</span><small>09 / Components</small></figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/06-specimen.jpg" width="2000" height="1500" alt="Type and colour specimen: Bricolage Grotesque and Geist, seven colours with hex values, three radii and three shadows" loading="lazy">
+      <figcaption><b>Specimen</b><span>Bricolage Grotesque for display, Geist for text. Seven colours, three radii, three shadows: light luxury, held to a small palette.</span><small>10 / Tokens</small></figcaption>
+    </figure>
+
+    <section class="chapter">
+      <div><div class="kicker">Process</div><h2>From design to checked page.</h2></div>
+      <div>
+        <p class="lede">Each page starts as a spec: every section mapped to a real component with a reason, typed data and validated forms, phone layout first. A pipeline builds it, screenshots it at 390, 768 and 1280 and in the app frame, and fails on sideways scroll, small tap targets, broken headings or a form that submits empty.</p>
+        <div class="stats">
+          <div class="stat"><b>128</b><span>components, React and Angular</span></div>
+          <div class="stat"><b>10</b><span>pages, 0 check errors</span></div>
+          <div class="stat"><b>4</b><span>breakpoint views per page, app view included</span></div>
+          <div class="stat"><b>128/128</b><span>pixel parity, React vs Angular</span></div>
+        </div>
+      </div>
+    </section>
+
+    <figure class="shot">
+      <img src="img/08-end-to-end.jpg" width="2000" height="1500" alt="Seven full-length phone app screens receding on a tilted plane" loading="lazy">
+      <figcaption><b>Every page, end to end</b><span>The full length of every app screen, from the hero to the tab bar.</span><small>11 / End to end</small></figcaption>
+    </figure>
+  </div>
+
+  <section class="wrap end">
+    <div class="kicker">Live</div>
+    <h2>Fly it yourself<i>.</i></h2>
+    <nav class="nav" aria-label="Live links">
+      <a class="btn is-ink" href="../#/flight-home">Open the landing page</a>
+      <a class="btn" href="../#/native/flight-home">As a phone app</a>
+      <a class="btn" href="../catalog/">Browse the components</a>
+      <a class="btn" href="https://github.com/mohameddsh3ban/airiona-ui">Source on GitHub</a>
+    </nav>
+  </section>
+  <footer class="wrap foot"><span>airiona. · Private aviation, designed.</span><span>mohameddsh3ban.github.io/airiona-ui</span></footer>
+</main>
+</body>
+</html>

@@ -163,6 +163,24 @@
         ],
         "createdAt": "2026-10-04T05:39:46.208Z",
         "reason": "Claude: Angular [src] binding inside @if(o.image) guard; scanner cannot see bound src"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "showcase/stage/video.html"
+        ],
+        "createdAt": "2026-10-04T06:51:39.078Z",
+        "reason": "Claude: motion stage; text sits on video/midnight layers the static scanner cannot see, and the hero video is clipped by design while it morphs into the phone screen"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "showcase/stage/video.html"
+        ],
+        "createdAt": "2026-10-04T06:51:40.109Z",
+        "reason": "Claude: motion stage; text sits on video/midnight layers the static scanner cannot see, and the hero video is clipped by design while it morphs into the phone screen"
       }
     ]
   }

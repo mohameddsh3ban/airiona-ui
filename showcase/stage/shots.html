@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Airiona showcase shot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<script src="kit.js"></script>
+<script src="shots.js"></script>
+<script>
+  (async () => {
+    try { window.THUMBS = await (await fetch('thumbs.json')).json(); } catch { window.THUMBS = []; }
+    const name = new URLSearchParams(location.search).get('shot') || 'wheels-up';
+    document.body.innerHTML = SHOTS[name]();
+    await document.fonts.ready;
+    await Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })));
+    document.body.dataset.ready = '1';
+  })();
+</script>
+</body>
+</html>

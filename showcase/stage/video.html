@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Airiona motion piece</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="kit.css">
+<style>
+  /* 1080x1920, 15s. Every element is placed by render(t) in video.js; nothing animates on its own. */
+  #stage { background: #eceef2; perspective: 2200px; perspective-origin: 50% 45%; }
+  .layer { position: absolute; inset: 0; }
+  .copy { position: absolute; left: 90px; right: 90px; z-index: 30; }
+  .step { font: 600 26px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: #2b5cff; }
+  .head { margin: 22px 0 0; font: 800 104px/0.96 var(--display); letter-spacing: -0.05em; color: #0a0f24; }
+  .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .line > span { display: inline-block; will-change: transform; }
+  .is-dark-copy .head { color: #fff; } .is-dark-copy .step { color: #8da8ff; }
+  .ring { position: absolute; z-index: 5; border-radius: 29px; box-shadow: 0 0 0 4px #0a0f24, 0 24px 48px -16px rgba(10,15,36,.4); }
+  .ripple { position: absolute; z-index: 6; border-radius: 50%; background: rgba(43,92,255,.28); }
+  .dot-fill { position: absolute; z-index: 6; border-radius: 50%; background: #0a0f24; box-shadow: inset 0 0 0 6px #fff, 0 0 0 3px #0a0f24; }
+  .tile { position: absolute; width: 230px; height: 160px; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 10px 28px rgba(10,15,36,.10); }
+  .tile img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-card { position: absolute; z-index: 20; border-radius: 26px; overflow: hidden; background: #fff; box-shadow: 0 60px 120px -30px rgba(10,15,36,.4), 0 20px 40px rgba(10,15,36,.12); }
+  .hero-card img { width: 100%; height: auto; }
+  .num { position: absolute; left: 0; right: 0; text-align: center; color: #fff; font: 800 230px/1 var(--display); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+  .end-word { display: flex; justify-content: center; align-items: baseline; font: 700 190px/1 var(--display); letter-spacing: -0.05em; color: #fff; }
+  .end-word .ch { display: inline-block; }
+  .end-word .clip { display: inline-flex; overflow: hidden; padding: 0 4px 24px; margin-bottom: -24px; }
+  .end-dot { display: inline-block; width: 40px; height: 40px; margin-left: 6px; border-radius: 50%; background: #5c82ff; }
+</style>
+</head>
+<body>
+<div id="stage" class="is-video">
+  <!-- backgrounds -->
+  <div id="bgLight" class="layer" style="background:radial-gradient(120% 80% at 20% 0%,#fff,#eceef2 60%,#dfe3ec)"></div>
+  <div id="bgDark" class="layer" style="background:radial-gradient(90% 60% at 60% 30%,#13205e,#070b2a 60%,#03051a)"></div>
+
+  <!-- S1 hook: full-bleed hero video that morphs into the landing phone's screen -->
+  <div id="heroBox" class="abs" style="overflow:hidden;z-index:12">
+    <video id="vHero" src="../../design-system/assets/video/landing-hero.mp4" muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 50%"></video>
+    <div id="heroScrim" class="layer" style="background:linear-gradient(180deg,rgba(7,11,42,.55) 0%,rgba(7,11,42,.05) 30%,rgba(7,11,42,.15) 55%,rgba(7,11,42,.8) 100%)"></div>
+  </div>
+  <div id="hookCopy" class="copy is-dark-copy" style="top:1180px;z-index:14">
+    <div class="step" id="hookKicker">Airiona · Private aviation</div>
+    <h1 class="head" style="font-size:150px"><span class="line"><span id="hk1">The sky</span></span><span class="line"><span id="hk2" style="color:#8da8ff">is yours.</span></span></h1>
+    <svg id="hookLine" width="560" height="40" viewBox="0 0 560 40" style="display:block;margin-top:6px"><path id="hookPath" d="M8 28 C 150 6, 360 6, 552 18" fill="none" stroke="#8da8ff" stroke-width="12" stroke-linecap="round"/></svg>
+  </div>
+
+  <!-- S2/S3 phones -->
+  <div id="phA"></div><div id="phB"></div><div id="phC"></div>
+  <div id="copy2" class="copy" style="top:150px"><div class="step">01 · Charter</div><h2 class="head"><span class="line"><span>Charter in</span></span><span class="line"><span>three taps.</span></span></h2></div>
+  <div id="copy3" class="copy" style="top:150px"><div class="step">02 · Book</div><h2 class="head"><span class="line"><span>All-in prices.</span></span><span class="line"><span style="color:#2b5cff">No surprises.</span></span></h2></div>
+
+  <!-- S4 dashboard -->
+  <div id="s4" class="layer" style="z-index:10">
+    <div id="numWrap" class="abs" style="left:0;right:0;top:560px">
+      <div class="step" style="text-align:center;color:#8da8ff">Revenue this month</div>
+      <div class="num" id="num" style="top:60px">$0</div>
+    </div>
+    <div id="dashBrowser"></div>
+    <div id="copy4" class="copy is-dark-copy" style="top:1480px"><div class="step">03 · Operate</div><h2 class="head"><span class="line"><span>Operators see</span></span><span class="line"><span style="color:#8da8ff">everything.</span></span></h2></div>
+  </div>
+
+  <!-- S5 components -->
+  <div id="s5" class="layer" style="z-index:9;perspective:none">
+    <div id="plane" class="world" style="left:-700px;top:-200px;width:3400px;height:2000px"></div>
+    <div id="s5scrim" class="layer" style="background:linear-gradient(180deg,rgba(236,238,242,.97) 0%,rgba(236,238,242,.85) 22%,rgba(236,238,242,0) 40%)"></div>
+    <div id="heroes"></div>
+    <div id="copy5" class="copy" style="top:150px"><div class="step">04 · System</div><h2 class="head"><span class="line"><span>128 components.</span></span><span class="line"><span style="color:#2b5cff">One system.</span></span></h2></div>
+  </div>
+
+  <!-- S6 marketplace whip -->
+  <div id="phD"></div><div id="phE"></div>
+  <div id="copy6a" class="copy" style="top:150px"><div class="step">05 · Marketplace</div><h2 class="head"><span class="line"><span>Buy the jet.</span></span></h2></div>
+  <div id="copy6b" class="copy" style="top:150px"><div class="step">05 · Marketplace</div><h2 class="head"><span class="line"><span style="color:#2b5cff">Park the jet.</span></span></h2></div>
+
+  <!-- S7 end card -->
+  <div id="s7" class="layer" style="z-index:40;background:#070b2a">
+    <video id="vWing" src="../../design-system/assets/video/auth-wing.mp4" muted playsinline preload="auto" style="position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(16px) saturate(1.15)"></video>
+    <div class="layer" style="background:radial-gradient(80% 60% at 50% 45%,rgba(7,11,42,.55),rgba(7,11,42,.92))"></div>
+    <div class="abs" style="left:0;right:0;top:700px;text-align:center">
+      <div class="step" id="endKicker" style="color:#8da8ff">Private aviation, designed.</div>
+      <div class="end-word" id="endWord" style="margin-top:40px"></div>
+      <div id="endUrl" style="margin-top:56px;font:500 34px/1 var(--sans);color:#8da8ff">mohameddsh3ban.github.io/airiona-ui</div>
+      <div id="endRule" style="width:520px;height:2px;margin:26px auto 0;background:#ffc65c;transform-origin:left center"></div>
+    </div>
+  </div>
+  <div class="grain" style="opacity:.06"></div>
+</div>
+<script src="kit.js"></script>
+<script src="video.js"></script>
+</body>
+</html>

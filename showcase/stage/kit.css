@@ -1,0 +1,75 @@
+/* Showcase kit: device frames, backgrounds and type for the Airiona Dribbble/Behance shots and the motion piece.
+   Every shot is a 1600x1200 #stage (rendered at 2x); the video stage is 1080x1920. Screens are real captures. */
+:root {
+  --canvas: #eceef2; --surface: #ffffff; --ink: #0a0f24; --ink-muted: #545b6e; --midnight: #070b2a;
+  --blue: #2b5cff; --blue-300: #8da8ff; --blue-50: #eef3ff; --blue-900: #0b1a5c; --gold: #ffc65c;
+  --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif; --sans: "Geist", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #11131a; }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+img { display: block; }
+
+#stage { position: relative; width: 1600px; height: 1200px; overflow: hidden; isolation: isolate; perspective: 2400px; perspective-origin: 50% 40%; }
+#stage.is-video { width: 1080px; height: 1920px; }
+.bg-light { background: radial-gradient(120% 90% at 20% 0%, #ffffff 0%, var(--canvas) 55%, #dfe3ec 100%); }
+.bg-dark { background: radial-gradient(90% 70% at 70% 30%, #13205e 0%, var(--midnight) 60%, #03051a 100%); color: #fff; }
+.bg-blue { background: radial-gradient(100% 90% at 30% 20%, #5c82ff 0%, var(--blue) 45%, #1534b0 100%); color: #fff; }
+.bg-sunset { background: linear-gradient(160deg, #0b1a5c 0%, #3a2a6b 38%, #c0623a 78%, #ffc65c 100%); color: #fff; }
+.glow { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+.grain { position: absolute; inset: -50%; z-index: 50; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 3D groups: a "world" that holds tilted devices */
+.world { position: absolute; transform-style: preserve-3d; }
+.abs { position: absolute; }
+.p3d { transform-style: preserve-3d; }
+
+/* Phone: --w is the device width; the screen keeps the 390x844 capture ratio */
+.phone { --w: 320px; position: absolute; width: var(--w); padding: calc(var(--w) * 0.034); border-radius: calc(var(--w) * 0.165); background: linear-gradient(145deg, #2a2f3d, #0b0d14 40%, #05060b);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.14), 0 calc(var(--w) * 0.12) calc(var(--w) * 0.24) calc(var(--w) * -0.06) rgba(7, 11, 42, 0.45); }
+.phone__screen { position: relative; overflow: hidden; aspect-ratio: 390 / 844; border-radius: calc(var(--w) * 0.135); background: var(--canvas); }
+.phone__screen > img, .phone__screen > video { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.phone__screen > img.scroll { position: absolute; left: 0; top: 0; width: 100%; height: auto; object-fit: fill; }
+.phone__island { position: absolute; z-index: 3; top: 2.1%; left: 50%; width: 30%; height: 4.1%; margin-left: -15%; border-radius: 999px; background: #000; }
+.phone__home { position: absolute; z-index: 3; bottom: 1.1%; left: 50%; width: 34%; height: 0.6%; margin-left: -17%; border-radius: 9px; background: var(--ink); opacity: 0.85; }
+.phone__status { position: absolute; z-index: 3; top: 0; left: 0; right: 0; height: 5.9%; display: flex; align-items: center; justify-content: space-between; padding: 1.8% 8.5% 0 9.5%;
+  font: 600 calc(var(--w) * 0.045)/1 var(--sans); color: var(--ink); }
+.phone__status.is-light { color: #fff; }
+.phone__status svg { height: calc(var(--w) * 0.036); fill: currentColor; }
+.phone.is-flat { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.14); }
+
+/* Browser window: --w is the window width; the screen keeps the 1440x900 capture ratio */
+.browser { --w: 1100px; position: absolute; width: var(--w); border-radius: calc(var(--w) * 0.014); overflow: hidden; background: #fff;
+  box-shadow: 0 0 0 1px rgba(10, 15, 36, 0.08), 0 calc(var(--w) * 0.05) calc(var(--w) * 0.1) calc(var(--w) * -0.02) rgba(7, 11, 42, 0.35); }
+.browser__bar { display: flex; align-items: center; gap: calc(var(--w) * 0.006); height: calc(var(--w) * 0.032); padding: 0 calc(var(--w) * 0.012); background: #f4f5f8; border-bottom: 1px solid #e2e5eb; }
+.browser__bar i { width: calc(var(--w) * 0.0085); height: calc(var(--w) * 0.0085); border-radius: 50%; background: #ff5f57; }
+.browser__bar i:nth-child(2) { background: #febc2e; } .browser__bar i:nth-child(3) { background: #28c840; }
+.browser__url { margin: 0 auto; padding: calc(var(--w) * 0.003) calc(var(--w) * 0.02); border-radius: 999px; background: #fff; font: 500 calc(var(--w) * 0.0105)/1.4 var(--sans); color: var(--ink-muted); box-shadow: inset 0 0 0 1px #e2e5eb; }
+.browser__screen { position: relative; aspect-ratio: 1440 / 900; overflow: hidden; }
+.browser__screen > img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.browser.is-dark .browser__bar { background: #151a33; border-color: #22284a; }
+.browser.is-dark .browser__url { background: #0b1030; color: #8f97b8; box-shadow: none; }
+
+/* Type on the canvas */
+.kicker { font: 600 18px/1 var(--sans); letter-spacing: 0.22em; text-transform: uppercase; }
+.display { font: 800 96px/0.94 var(--display); letter-spacing: -0.05em; margin: 0; }
+.wordmark { font: 700 44px/1 var(--display); letter-spacing: -0.04em; }
+.wordmark i { font-style: normal; color: var(--blue); }
+.bg-dark .wordmark i, .bg-blue .wordmark i, .bg-sunset .wordmark i { color: var(--blue-300); }
+.muted { opacity: 0.66; }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; font: 600 16px/1 var(--sans); background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.card { position: absolute; border-radius: 28px; background: #fff; box-shadow: 0 30px 60px -24px rgba(7, 11, 42, 0.35); overflow: hidden; }
+.card > img { width: 100%; height: 100%; object-fit: cover; }
+.reflect { -webkit-box-reflect: below 6px linear-gradient(transparent 70%, rgba(255, 255, 255, 0.18)); }
+
+/* Bezel-less device (the brief's modern frame): the screen itself, rounded, with a 1px rim */
+.phone.is-bare { padding: 0; background: none; border-radius: calc(var(--w) * 0.12); box-shadow: 0 0 0 1px rgba(10, 15, 36, 0.08), 0 60px 120px -30px rgba(10, 15, 36, 0.35), 0 20px 40px rgba(10, 15, 36, 0.12); }
+.phone.is-bare .phone__screen { border-radius: calc(var(--w) * 0.12); }
+.phone.is-bare .phone__island { display: none; }
+.bg-dark .phone.is-bare, .phone.is-bare.on-dark { box-shadow: 0 0 0 1px rgba(141, 168, 255, 0.25), 0 60px 120px -30px rgba(0, 0, 0, 0.7); }
+.browser.is-bare { box-shadow: 0 0 0 1px rgba(10, 15, 36, 0.08), 0 60px 120px -30px rgba(10, 15, 36, 0.35), 0 20px 40px rgba(10, 15, 36, 0.12); border-radius: 24px; }
+
+/* iOS-style status strip over scrolled content */
+.phone__status.is-frosted { background: linear-gradient(180deg, rgba(236,238,242,.96) 0%, rgba(236,238,242,.86) 70%, rgba(236,238,242,0) 100%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); height: 7%; }
