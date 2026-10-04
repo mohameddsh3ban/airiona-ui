@@ -3,6 +3,8 @@
 
 export type Listing = {
   id: string;
+  facts: string;
+  base: string;
   title: string;
   price: string;
   unit: string;
@@ -31,6 +33,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
   "hangars": [
     {
       "id": "dwc-4",
+      "facts": "38 m door · 11 m · 2,900 m²",
+      "base": "Dubai South · DWC",
       "title": "Hangar 4 · Dubai South (DWC)",
       "price": "$2,400",
       "unit": "/ month",
@@ -45,6 +49,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
     },
     {
       "id": "ruh-b2",
+      "facts": "24 m door · 8 m · shared",
+      "base": "Riyadh · RUH",
       "title": "Bay B2 · Riyadh King Khalid (RUH)",
       "price": "$1,850",
       "unit": "/ month",
@@ -59,6 +65,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
     },
     {
       "id": "doh-exec",
+      "facts": "42 m door · lounge · crew rest",
+      "base": "Doha · DOH",
       "title": "Executive hangar · Doha (DOH)",
       "price": "$3,100",
       "unit": "/ month",
@@ -73,6 +81,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
     },
     {
       "id": "auh-h1",
+      "facts": "18 m door · covered bay",
+      "base": "Abu Dhabi · AUH",
       "title": "Heli deck H1 · Abu Dhabi (AUH)",
       "price": "$900",
       "unit": "/ month",
@@ -87,6 +97,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
     },
     {
       "id": "mct-3",
+      "facts": "30 m door · 9 m · towing",
+      "base": "Muscat · MCT",
       "title": "Hangar 3 · Muscat (MCT)",
       "price": "$1,600",
       "unit": "/ month",
@@ -101,6 +113,8 @@ export const HANGARMARKET_SAMPLE: HangarMarketPageData = {
     },
     {
       "id": "bah-fbo",
+      "facts": "36 m door · customs on site",
+      "base": "Bahrain · BAH",
       "title": "FBO hangar · Bahrain (BAH)",
       "price": "$420",
       "unit": "/ night",

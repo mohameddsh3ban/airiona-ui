@@ -3,7 +3,7 @@
 // Change the spec and regenerate; copy this folder into the product app once the page is signed off.
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ArAppBar, ArBadge, ArBookingSteps, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArInfoStatRow, ArPlaceCard, ArQuantityStepper, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav, type ArInfoStat, type ArTopNavLink, type ArTopNavUser } from '@airiona/ui';
+import { ArAppBar, ArBadge, ArBookingSteps, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArInfoStatRow, ArMiniDestination, ArPlaceCard, ArQuantityStepper, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav, type ArInfoStat, type ArTopNavLink, type ArTopNavUser } from '@airiona/ui';
 import { pageForm } from '../../shared/page-form';
 import { dateRange, futureDate, phone } from '../../shared/validators';
 import { STAYCHECKOUT_SAMPLE } from './stay-checkout.data';
@@ -11,7 +11,7 @@ import { STAYCHECKOUT_SAMPLE } from './stay-checkout.data';
 /** Stay checkout. Primary action: Pay and confirm the stay. */
 @Component({
   selector: 'pg-stay-checkout',
-  imports: [ReactiveFormsModule, ArAppBar, ArBadge, ArBookingSteps, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArInfoStatRow, ArPlaceCard, ArQuantityStepper, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav],
+  imports: [ReactiveFormsModule, ArAppBar, ArBadge, ArBookingSteps, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArInfoStatRow, ArMiniDestination, ArPlaceCard, ArQuantityStepper, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './stay-checkout.page.html',
   styleUrl: './stay-checkout.page.css',

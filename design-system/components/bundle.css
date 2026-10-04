@@ -2286,6 +2286,22 @@
 .ar-auth__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font: 400 12px/16px var(--font-sans); color: var(--ink-subtle); }
 .ar-auth__media { display: none; }
 
+/* Phones: an app sign-in screen. The photo strip opens the screen under the status bar, full-bleed with rounded
+   bottom corners, and the brand and actions sit over it in white. */
+@media (max-width: 767.98px) {
+  .ar-auth__col { padding-top: 0; }
+  .ar-auth__top { position: absolute; z-index: 2; top: calc(var(--m-status-h) + 2px); left: 20px; right: 16px; }
+  .ar-auth__top .ar-wordmark { color: #ffffff; }
+  .ar-auth__top .ar-wordmark i { color: var(--blue-300); }
+  .ar-auth__top .ar-btn--ghost { color: #ffffff; }
+  .ar-auth__top .ar-btn--ghost:hover:not(:disabled) { background: rgba(255, 255, 255, 0.14); }
+  .ar-auth__strip { height: calc(240px + var(--m-status-h)); margin: 0 -20px 4px; border-radius: 0 0 34px 34px; box-shadow: none; }
+  .ar-auth__strip img { object-position: 85% 55%; }
+  .ar-auth__strip::after { background: linear-gradient(180deg, rgba(7, 11, 42, 0.62) 0%, rgba(7, 11, 42, 0) 34%, rgba(7, 11, 42, 0) 52%, rgba(7, 11, 42, 0.78) 100%); }
+  .ar-auth__strip-title { left: 20px; right: 20px; bottom: 22px; font-size: 26px; line-height: 30px; }
+  .ar-auth__body { align-items: flex-start; padding-top: 24px; }
+}
+
 /* Building blocks for the projected form */
 .ar-auth-head { display: flex; flex-direction: column; gap: 6px; }
 .ar-auth-head h1 { margin: 0; font: 700 34px/38px var(--font-display); letter-spacing: -0.035em; text-wrap: balance; }
@@ -2541,3 +2557,29 @@
   :is(.ar-split, .ar-promo, .ar-statstrip) *, .ar-split { animation: none !important; transition: none !important; }
   .ar-split__video { display: none; }
 }
+
+/* ===================== OptionList =====================
+   Pick one option from rich rows (photo, title, facts, price). One column on phones, more as room allows. */
+.ar-optlist { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ar-optlist__label { font: 500 14px/20px var(--font-sans); color: var(--ink); }
+.ar-optlist__items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 10px; }
+.ar-opt { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 76px; margin: 0; padding: 10px 14px 10px 10px; border: 0; border-radius: 22px; background: var(--surface); color: var(--ink); text-align: left; font: inherit; cursor: pointer; box-shadow: inset 0 0 0 1.5px var(--line); transition: box-shadow var(--duration-base) var(--ar-ease), transform var(--duration-fast) var(--ar-ease); }
+.ar-opt:hover:not(:disabled) { box-shadow: inset 0 0 0 1.5px var(--line-strong); }
+.ar-opt:active:not(:disabled) { transform: scale(0.985); }
+.ar-opt.is-selected { box-shadow: inset 0 0 0 2px var(--ink), var(--shadow-card); }
+.ar-opt:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 2px; }
+.ar-opt:disabled { opacity: 0.5; cursor: not-allowed; }
+.ar-opt__media { flex: none; width: 76px; height: 56px; border-radius: 14px; overflow: hidden; background: var(--sky-200); }
+.ar-opt__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ar-opt__body { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.ar-opt__badge { margin-bottom: 2px; padding: 2px 8px; border-radius: 999px; background: var(--blue-50); color: var(--blue-700); font: 600 11px/16px var(--font-sans); }
+.ar-opt__title { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 15px/20px var(--font-sans); }
+.ar-opt__meta { font: 400 13px/18px var(--font-sans); color: var(--ink-muted); }
+.ar-opt__side { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.ar-opt__price { font: 700 16px/20px var(--font-display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.ar-opt__side small { font: 400 12px/16px var(--font-sans); color: var(--ink-muted); }
+.ar-opt__radio { flex: none; width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--line-control); transition: box-shadow var(--duration-base) var(--ar-ease-spring); }
+.ar-opt.is-selected .ar-opt__radio { box-shadow: inset 0 0 0 7px var(--ink); }
+.ar-optlist.is-invalid .ar-opt { box-shadow: inset 0 0 0 1.5px var(--danger); }
+.ar-optlist__error { display: flex; align-items: center; gap: 6px; margin: 0; font: 500 13px/18px var(--font-sans); color: var(--danger); }
+@media (prefers-reduced-motion: reduce) { .ar-opt, .ar-opt__radio { transition: none; } }

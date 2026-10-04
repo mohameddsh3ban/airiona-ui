@@ -62,6 +62,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
 | `stayCard` | PlaceCard `ar-place-card` |  | `title` ← `stay.name`<br>`region` ← `stay.region`<br>`location` ← `stay.location`<br>`rating` ← `stay.rating`<br>`image` ← `stay.image` | The stay as the traveller saw it on the listing: photo, name, place, rating<br>Not StayCard: a hero card with its own Reserve button; this page already has the pay action |  |
+| `stayPhone` | MiniDestination `ar-mini-destination` |  | `title` ← `stay.name`<br>`image` ← `stay.image`<br>`price` ← `stay.total`<br>`duration` ← `stay.region`<br>`dates` ← `stay.location` | On phones the stay is a compact photo card with the name, total, region and place, so the trip and payment fields start on the first screen; the tall PlaceCard returns from tablets up<br>Not PlaceCard: about 400px tall on a phone: the whole first screen is a photo |  |
 | `facts` | InfoStatRow `ar-info-stat-row` | `items`=[{"icon":"calendar-days","label":"15–19 Oct"},{"icon":"users |  | Three quick facts under the photo |  |
 | `cancellation` | Badge `ar-badge` | `tone`=success<br>`icon`=check-circle |  | Reassurance right before paying; the success tone marks it as good news |  |
 | `priceLines` | DetailList `ar-detail-list` |  | `items` ← `stay.priceLines` | Label and value rows for the price breakdown, total last |  |
@@ -168,6 +169,7 @@ Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({
 - Phone order: steps and title, the stay summary, trip and traveller form, then the sticky pay bar. On desktop the summary moves to the right column and the pay button sits under the form.
 - Dates and guests arrive prefilled from the stay page; changing them refreshes the quote (stay.total and price lines).
 - The pay bar shows the current total; in the app it reads the same quote as the price lines.
+- Phones show the stay as a compact MiniDestination card (photo, name, total, region, place); the tall PlaceCard is for tablets and desktop.
 
 ## Spec check
 

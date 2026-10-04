@@ -10,6 +10,7 @@ import {
   ArSplitHero,
   ArPromoBanner,
   ArStatStrip,
+  ArOptionList,
   ArBookingSearch,
   ArMeetingsStrip,
   ArPhoneFrame,
@@ -205,6 +206,20 @@ class StatStripDemo {
   ];
 }
 
+@Component({
+  imports: [ArOptionList],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<div style="max-width: 420px"><ar-option-list label="Aircraft" [options]="options" [(value)]="value" /></div>`,
+})
+class OptionListDemo {
+  protected readonly value = signal<string | null>('latitude');
+  protected readonly options = [
+    { value: 'cj4', title: 'Citation CJ4', meta: '6 seats · 7 h 40 m', price: '$39,200', note: 'all-in', image: 'photos/aviation/jet-light.webp' },
+    { value: 'latitude', title: 'Citation Latitude', meta: '9 seats · 7 h 25 m', price: '$48,400', note: 'all-in', image: 'photos/aviation/jet-midsize.webp', badge: 'Best value' },
+    { value: 'g550', title: 'Gulfstream G550', meta: '16 seats · 6 h 50 m', price: '$94,300', note: 'all-in', image: 'photos/aviation/jet-heavy.webp' },
+  ];
+}
+
 export const INTEGRATION_DEMOS: DemoDef[] = [
   { name: 'ProfileProjectCard', group: 'Workspace', component: ProfileProjectCardDemo, height: 376 },
   { name: 'MeetingsStrip', group: 'Workspace', component: MeetingsStripDemo, height: 330 },
@@ -216,4 +231,5 @@ export const INTEGRATION_DEMOS: DemoDef[] = [
   { name: 'SplitHero', group: 'Screens', component: SplitHeroDemo, height: 1180, stage: 'padding:24px 24px 32px;' },
   { name: 'PromoBanner', group: 'Booking', component: PromoBannerDemo, height: 300, stage: 'max-width:460px;' },
   { name: 'StatStrip', group: 'Status', component: StatStripDemo, height: 150, stage: 'max-width:520px;' },
+  { name: 'OptionList', group: 'Forms', component: OptionListDemo, height: 340 },
 ];

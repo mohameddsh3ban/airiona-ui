@@ -32,7 +32,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 | **Book a flight** `topbar` | Phone title and broker shortcut | stack | ↑ | ↑ |  | hidden at lg |
 | **Your route** `route` | The A to B the whole page is about, shown as the route arc | stack | ↑ | ↑ |  |  |
 | **Trip** `trip` | Where, when and how many: changing any of it refreshes the offers | stack | grid-2 | grid-4 |  |  |
-| **Choose your aircraft** `offers` | Aircraft that can fly this route on that date, with all-in prices | scroll-x | grid-2 | grid-3 |  |  |
+| **Choose your aircraft** `offers` | Aircraft that can fly this route on that date, with all-in prices: the choice itself | stack | ↑ | ↑ |  |  |
 | **Lead passenger** `passenger` | Who flies and how the operator reaches them | stack | grid-2 | ↑ |  |  |
 | **Trip summary** `summary` | What the request costs; beside the form on desktop | stack | ↑ | ↑ (aside) |  |  |
 | **Request** `request` | The total and the request button, always in reach on phones | stack | ↑ | ↑ | base: bottom, lg: none |  |
@@ -75,8 +75,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `offer` | FlightTicket `ar-flight-ticket` |  | `image` ← `item.image`<br>`from` ← `item.from`<br>`to` ← `item.to`<br>`flight` ← `item.aircraft`<br>`airline` ← `item.operator`<br>`cabin` ← `item.category`<br>`duration` ← `item.duration`<br>`details` ← `item.details` | The flight card with the aircraft photo on top: for charter the aircraft is the product, so the photo stays (unlike scheduled-flight results)<br>Not TicketCard: no photo and fare-style, for scheduled seats<br>Not StayCard: no route line |  |
-| `aircraft` (field `aircraft`) | Select `ar-select` |  | `options` ← `aircraftOptions` | The choice itself: one of the offers, with route, seats and price in each option; cards above show the aircraft |  |
+| `aircraft` (field `aircraft`) | OptionList `ar-option-list` |  | `options` ← `aircraftCards` | One selectable row per aircraft with its photo, category, route facts and all-in price: the native way to choose (like picking a ride), one column on phones and three on desktop. It is the form field itself, so there is no separate dropdown<br>Not FlightTicket + Select: the old pairing: tall tickets broke the phone layout and the choice lived in a separate dropdown<br>Not MobileSegmented: three aircraft need photos and prices, not short labels |  |
 
 ### Lead passenger
 
@@ -120,7 +119,7 @@ Errors show after a field is left or on submit; submit focuses the first invalid
 | **To** `to` | Select | LTN | required | required: “Choose where you fly to.” |  |
 | **Departure** `departure` | DatePicker | 2026-10-15 | required, futureDate | required: “Choose a departure date.”<br>futureDate: “Departure can't be in the past.” |  |
 | **Passengers** `passengers` | QuantityStepper | 4 | min(1), max(19) | min: “At least one passenger flies.”<br>max: “For more than 19 passengers, talk to a broker.” |  |
-| **Aircraft** `aircraft` | Select |  | required | required: “Choose the aircraft you want.” |  |
+| **Aircraft** `aircraft` | OptionList |  | required | required: “Choose the aircraft you want.” |  |
 | **Full name** `fullName` | TextField |  | required, minLength(3), maxLength(80) | required: “Enter the lead passenger's name as on the passport.”<br>minLength: “Enter the full name.”<br>maxLength: “Use at most 80 characters.” | autocomplete=name |
 | **Email** `email` | TextField |  | required, email | required: “Enter an email for the confirmation.”<br>email: “Enter an email like name@example.com.” | type=email, autocomplete=email, inputMode=email |
 | **Mobile phone** `phone` | TextField |  | required, phone | required: “Enter a phone number the crew can reach.”<br>phone: “Enter a phone number with country code, like +971 50 123 4567.” | type=tel, autocomplete=tel, inputMode=tel |
@@ -130,8 +129,7 @@ Errors show after a field is left or on submit; submit focuses the first invalid
 ## Data
 
 - **airports**: `Airport[]` from GET /api/airports?query= (searchable, nearest first). Loading: Select shows 'Searching airports…'. Empty: Select empty text: 'No airport matches that. Try the city or the IATA code.'. Error: Select hint: 'Airports could not load. Type the IATA code.'.
-- **offers**: `Offer[]` from GET /api/charter/offers?from&to&date&passengers. Loading: Three Skeleton cards in the offer layout. Empty: No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.. Error: Toast 'Offers could not load' with Retry; the trip form stays as typed.
-- **aircraftOptions**: `AircraftOption[]` from derived from offers. Loading: Select disabled until offers load. Empty: Select hidden when there are no offers. Error: as offers.
+- **aircraftCards**: `AircraftCard[]` from GET /api/charter/offers?from&to&date&pax (aircraft that can fly the route that day, all-in prices). Loading: Three OptionList row skeletons. Empty: No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.. Error: Inline error with Retry; the trip form stays filled.
 - **quote**: `Quote` from POST /api/charter/quote { offerId, passengers } (recomputed when the aircraft or passengers change). Loading: Price lines show Skeleton rows; the request button stays disabled. Empty: —. Error: Toast 'We could not price this trip' with Retry.
 
 ```ts
@@ -177,6 +175,15 @@ interface Quote {
   priceLines: Fact[];
   total: string;
 }
+interface AircraftCard {
+  value: string;
+  title: string;
+  meta: string;
+  price: string;
+  note: string;
+  image: string;
+  badge: string?;
+}
 ```
 
 Sample data: `projects/playground/src/app/pages/flight-booking/flight-booking.data.ts`.
@@ -203,6 +210,7 @@ Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({
 - Return trips add a return date field and a second leg on each offer; the sample shows one way.
 - The request bar total follows the selected aircraft (quote.total); the sample shows the midsize offer.
 - No card entry here: charter is confirmed by the operator first, then paid by invoice or card link.
+- Choose your aircraft is one OptionList: each row is an offer with its photo, category, stops, duration, seats and the all-in price; selecting a row is the form value (required). The tickets and the separate dropdown are gone.
 
 ## Spec check
 

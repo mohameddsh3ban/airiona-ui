@@ -38,6 +38,14 @@
         [rating]="data.stay.rating"
         [image]="data.stay.image"
       />
+      <ar-mini-destination
+        class="pg-el-stayPhone"
+        [title]="data.stay.name"
+        [image]="data.stay.image"
+        [price]="data.stay.total"
+        [duration]="data.stay.region"
+        [dates]="data.stay.location"
+      />
       <ar-info-stat-row class="pg-el-facts" [items]="factsItems" />
       <ar-badge class="pg-el-cancellation" tone="success" icon="check-circle">Free cancellation until 12 Oct</ar-badge>
       <ar-detail-list class="pg-el-priceLines" [items]="data.stay.priceLines" />

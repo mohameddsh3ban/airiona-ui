@@ -33,7 +33,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 | **Hangar space** `head` | Desktop page title and intro | stack | ↑ | ↑ |  | hidden at base |
 | **Search and filters** `filters` | Narrow the list: free text, category and sort order | stack | grid-2 | grid-3 |  |  |
 | **Hangars listings** `results` | The listings | stack | grid-2 | grid-3 |  |  |
-| **Aircraft for sale** `cross` | Cross-sell into the other marketplace | scroll-x | ↑ | grid-3 |  |  |
+| **Aircraft for sale** `cross` | Cross-sell into the other marketplace | peek | ↑ | grid-3 |  |  |
 | **Tabs** `tabs` | Phone and tablet app navigation, always in thumb reach | stack | ↑ | ↑ | base: bottom, lg: none | hidden at lg |
 
 ## Components
@@ -73,6 +73,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 |---|---|---|---|---|---|
 | `resultCount` | `<h2>` |  |  |  |  |
 | `listing` | StayCard `ar-stay-card` | `cta`=View details | `title` ← `item.title`<br>`price` ← `item.price`<br>`unit` ← `item.unit`<br>`description` ← `item.description`<br>`tags` ← `item.tags`<br>`image` ← `item.image`<br>`photos` ← `item.photos`<br>`saved` ← `item.saved` | A tall photo card with title, three-line description, two tags and a price with one action: the system card for a priced listing<br>Not DestinationCard: rating and Book now, for places<br>Not MiniDestination: too small for a listing that costs millions |  |
+| `listingPhone` | MiniDestination `ar-mini-destination` |  | `title` ← `item.title`<br>`image` ← `item.image`<br>`price` ← `item.price`<br>`duration` ← `item.base`<br>`dates` ← `item.facts`<br>`badge` ← `item.tags[0]` | On phones a listing is a compact photo card with the name, price, base and three facts, the app feed pattern; the tall StayCard returns from tablets up<br>Not StayCard: about 550px tall at 390px wide: one listing per screen |  |
 
 ### Aircraft for sale
 
@@ -94,6 +95,8 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 ```ts
 interface Listing {
   id: string;
+  facts: string;
+  base: string;
   title: string;
   price: string;
   unit: string;
@@ -134,7 +137,7 @@ Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({
 
 - Door width and clear height decide whether an aircraft fits; they lead each description.
 - Nightly prices are for overnight stays (FBO hangars); everything else is monthly.
-- Phones get the tab bar (Hangars selected); at 1280 the top navigation replaces it.
+- Phones get the tab bar (Hangars selected); at 1280 the top navigation replaces it. On phones listings are compact MiniDestination cards and sorting lives in the filter sheet (the search field button).
 
 ## Spec check
 

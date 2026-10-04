@@ -12303,6 +12303,164 @@
    ]
   },
   {
+   "name": "OptionList",
+   "slug": "option-list",
+   "group": "Forms",
+   "kind": "component",
+   "height": 340,
+   "stage": "",
+   "summary": "Pick one option from rich rows: a photo, a title, short facts, a price and a radio mark. Use it to choose an aircraft, a cabin or a plan, anywhere the choice needs more than a label. It is one column on phones and adds columns as room allows. The whole row is the touch target, and arrow keys move and select (a radio group with a roving tab stop). It is a form control: `[(value)]`, `[(ngModel)]`, `formControlName`.",
+   "provides": "",
+   "notes": [],
+   "motion": [],
+   "readme": "# OptionList\n\nPick one option from rich rows: a photo, a title, short facts, a price and a radio mark. Use it to choose an aircraft, a cabin or a plan, anywhere the choice needs more than a label. It is one column on phones and adds columns as room allows. The whole row is the touch target, and arrow keys move and select (a radio group with a roving tab stop). It is a form control: `[(value)]`, `[(ngModel)]`, `formControlName`.\n\n```jsx\n<OptionList label=\"Aircraft\" options={aircraft} value={choice} onChange={setChoice} error={error} />\n```\n\n```html\n<ar-option-list label=\"Aircraft\" [options]=\"aircraft\" formControlName=\"aircraft\" [error]=\"form.error('aircraft')\" />\n```\n\nKeep `meta` to two short facts and `note` to one word (\"all-in\", \"per night\"). Use `badge` on at most one option (\"Best value\"). Use a Select instead when the options are plain labels, and MobileSegmented when there are two or three short ones.\n",
+   "react": {
+    "import": "import { OptionList } from '@airiona/react';",
+    "props": [
+     {
+      "name": "options",
+      "type": "OptionCard[]",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "value",
+      "type": "string | null",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "defaultValue",
+      "type": "string | null",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "label",
+      "type": "string",
+      "optional": true,
+      "doc": "Visible label and accessible name of the group."
+     },
+     {
+      "name": "error",
+      "type": "string | null",
+      "optional": true,
+      "doc": "Shows the message in red under the list and marks the group invalid."
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { OptionList } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <div style={{ maxWidth: 420 }}>\n      <OptionList\n        label=\"Aircraft\"\n        defaultValue=\"latitude\"\n        options={[{ value: \"cj4\", title: \"Citation CJ4\", meta: \"6 seats · 7 h 40 m\", price: \"$39,200\", note: \"all-in\", image: \"/assets/photos/aviation/jet-light.webp\" }, { value: \"latitude\", title: \"Citation Latitude\", meta: \"9 seats · 7 h 25 m\", price: \"$48,400\", note: \"all-in\", image: \"/assets/photos/aviation/jet-midsize.webp\", badge: \"Best value\" }, { value: \"g550\", title: \"Gulfstream G550\", meta: \"16 seats · 6 h 50 m\", price: \"$94,300\", note: \"all-in\", image: \"/assets/photos/aviation/jet-heavy.webp\" }]}\n      />\n    </div>\n  );\n}\n",
+    "uses": [
+     "OptionList"
+    ]
+   },
+   "angular": {
+    "import": "import { ArOptionList } from '@airiona/ui';",
+    "className": "ArOptionList",
+    "selector": "ar-option-list",
+    "tag": "ar-option-list",
+    "attr": null,
+    "formControl": true,
+    "inputs": [
+     {
+      "name": "value",
+      "kind": "model",
+      "type": "string | null",
+      "default": "null",
+      "doc": ""
+     },
+     {
+      "name": "options",
+      "kind": "input",
+      "type": "ArOptionCard[]",
+      "default": "[]",
+      "doc": ""
+     },
+     {
+      "name": "label",
+      "kind": "input",
+      "type": "string",
+      "doc": "Visible label and accessible name of the group."
+     },
+     {
+      "name": "error",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Shows the message in red under the list and marks the group invalid."
+     }
+    ],
+    "outputs": [],
+    "slots": [],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/forms/option-list.component.ts",
+    "doc": "Short facts under the title, e.g. \"7 seats · 6 h 50 m\". */ meta?: string; /** Formatted price on the right, e.g. \"$48,400\". */ price?: string; /** Line under the price, e.g. \"all-in\". */ note?: string; /** Thumbnail photo. */ image?: string; /** Small pill above the title, e.g. \"Best value\". */ badge?: string; disabled?: boolean; } /** Pick one option from rich rows (photo, title, facts, price): the native way to choose an aircraft, a cabin or a plan. A radio group: arrow keys move and select, and the whole row is the target. The choice is a form value: `[(value)]`, `[(ngModel)]`, `formControlName`.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArOptionList } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArOptionList],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <div style=\"max-width: 420px\"><ar-option-list label=\"Aircraft\" [options]=\"options\" [(value)]=\"value\" /></div>\n  `,\n})\nexport class Example {\n  protected readonly value = signal<string | null>('latitude');\n  protected readonly options = [\n  { value: 'cj4', title: 'Citation CJ4', meta: '6 seats · 7 h 40 m', price: '$39,200', note: 'all-in', image: 'photos/aviation/jet-light.webp' },\n  { value: 'latitude', title: 'Citation Latitude', meta: '9 seats · 7 h 25 m', price: '$48,400', note: 'all-in', image: 'photos/aviation/jet-midsize.webp', badge: 'Best value' },\n  { value: 'g550', title: 'Gulfstream G550', meta: '16 seats · 6 h 50 m', price: '$94,300', note: 'all-in', image: 'photos/aviation/jet-heavy.webp' },\n  ];\n}\n",
+    "uses": [
+     "ArOptionList"
+    ]
+   },
+   "keywords": [
+    "option",
+    "list",
+    "forms",
+    "pick",
+    "from",
+    "rich",
+    "rows",
+    "photo",
+    "title",
+    "short",
+    "facts",
+    "price",
+    "radio",
+    "mark",
+    "choose",
+    "aircraft",
+    "cabin",
+    "plan",
+    "anywhere",
+    "choice",
+    "needs",
+    "more",
+    "than",
+    "label",
+    "column",
+    "phones",
+    "adds",
+    "columns",
+    "room",
+    "allows",
+    "whole",
+    "touch",
+    "target",
+    "arrow",
+    "keys",
+    "move",
+    "select",
+    "group",
+    "with",
+    "roving",
+    "stop",
+    "form",
+    "control",
+    "value",
+    "ngmodel",
+    "formcontrolname"
+   ]
+  },
+  {
    "name": "PageHeader",
    "slug": "page-header",
    "group": "Navigation",

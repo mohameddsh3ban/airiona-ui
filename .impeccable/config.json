@@ -154,6 +154,15 @@
         ],
         "createdAt": "2026-10-04T04:23:39.027Z",
         "reason": "Claude: Angular [src] binding inside @if(image()) guard; scanner cannot see bound src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/forms/option-list.component.ts"
+        ],
+        "createdAt": "2026-10-04T05:39:46.208Z",
+        "reason": "Claude: Angular [src] binding inside @if(o.image) guard; scanner cannot see bound src"
       }
     ]
   }

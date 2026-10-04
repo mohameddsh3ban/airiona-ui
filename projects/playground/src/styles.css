@@ -18,8 +18,7 @@ html.is-native :is(input, textarea, [contenteditable]) { -webkit-user-select: te
 /* Content starts under the status bar; fixed bottom bars clear the home indicator. */
 html.is-native main.pg { --pg-pad-top: calc(16px + var(--m-status-h)); padding-top: var(--pg-pad-top); }
 html.is-native main.pg:has(> .ar-auth, .ar-auth) { padding-top: 0; }
-html.is-native .ar-auth__col { padding-top: calc(16px + var(--m-status-h)); padding-bottom: calc(16px + var(--m-home-h)); }
-html.is-native .ar-auth__strip { border-radius: 22px; }
+html.is-native .ar-auth__col { padding-bottom: calc(16px + var(--m-home-h)); }
 /* A press feels like a tap on a native control. */
 html.is-native :is(button, a, [role="button"]):active { transition-duration: 60ms; }
 

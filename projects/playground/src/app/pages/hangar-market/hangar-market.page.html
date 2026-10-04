@@ -74,6 +74,20 @@
       } @empty {
         <p class="pg-empty pg-el-listing">Nothing matches these filters. Clear a filter or widen the search.</p>
       }
+      @for (item of data.hangars; track $index) {
+        <ar-mini-destination
+          class="pg-el-listingPhone"
+          [title]="item.title"
+          [image]="item.image"
+          [price]="item.price"
+          [duration]="item.base"
+          [dates]="item.facts"
+          [badge]="item.tags[0]"
+          (press)="openListing($event)"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-listingPhone">Nothing matches these filters. Clear a filter or widen the search.</p>
+      }
     </div>
   </section>
 

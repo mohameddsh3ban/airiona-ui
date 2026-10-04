@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"},{"name":"AuthShell"},{"name":"LandingHero"},{"name":"SplitHero"},{"name":"PromoBanner"},{"name":"StatStrip"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"},{"name":"AuthShell"},{"name":"LandingHero"},{"name":"SplitHero"},{"name":"PromoBanner"},{"name":"StatStrip"},{"name":"OptionList"}]} */
 (function () {
   "use strict";
   var React = window.React;
@@ -2801,6 +2801,51 @@
       }));
   }
 
+  /* OptionList: pick one option from a list of rich rows (photo, title, facts, price), the native way to choose an
+     aircraft, a cabin or a plan. A radio group: arrow keys move and select, the whole row is the target. */
+  function OptionList(props) {
+    var opts = props.options || [];
+    var st = useControlled(props.value, props.defaultValue !== undefined ? props.defaultValue : null, props.onChange);
+    var refs = React.useRef([]);
+    var sel = -1;
+    opts.forEach(function (o, i) { if (o.value === st[0]) sel = i; });
+    var tab = sel >= 0 ? sel : 0;
+    function choose(i, focus) {
+      var o = opts[i];
+      if (!o || o.disabled) return;
+      haptic();
+      st[1](o.value);
+      if (focus && refs.current[i]) refs.current[i].focus();
+    }
+    function onKey(e) {
+      var d = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
+      if (!d || !opts.length) return;
+      e.preventDefault();
+      var n = opts.length, i = tab;
+      for (var k = 0; k < n; k++) { i = (i + d + n) % n; if (!opts[i].disabled) break; }
+      choose(i, true);
+    }
+    return h("div", { className: cx("ar ar-optlist", props.error && "is-invalid", props.className) },
+      props.label ? h("span", { className: "ar-optlist__label", "aria-hidden": "true" }, props.label) : null,
+      h("div", { className: "ar-optlist__items", role: "radiogroup", "aria-label": props.label, "aria-invalid": props.error ? "true" : undefined, onKeyDown: onKey },
+        opts.map(function (o, i) {
+          var on = i === sel;
+          return h("button", {
+            key: o.value, ref: function (el) { refs.current[i] = el; }, type: "button", role: "radio", "aria-checked": on ? "true" : "false",
+            tabIndex: i === tab ? 0 : -1, disabled: o.disabled, className: cx("ar-opt", "m-tap", on && "is-selected"),
+            onClick: function () { choose(i, false); },
+          },
+            o.image ? h("span", { className: "ar-opt__media" }, h("img", { src: o.image, alt: "" })) : null,
+            h("span", { className: "ar-opt__body" },
+              o.badge ? h("span", { className: "ar-opt__badge" }, o.badge) : null,
+              h("b", { className: "ar-opt__title" }, o.title),
+              o.meta ? h("span", { className: "ar-opt__meta" }, o.meta) : null),
+            o.price || o.note ? h("span", { className: "ar-opt__side" }, o.price ? h("b", { className: "ar-opt__price" }, o.price) : null, o.note ? h("small", null, o.note) : null) : null,
+            h("span", { className: "ar-opt__radio", "aria-hidden": "true" }));
+        })),
+      props.error ? h("p", { className: "ar-optlist__error", role: "alert" }, h(Icon, { name: "exclamation-triangle", size: 16 }), props.error) : null);
+  }
+
   var api = {
     Icon: Icon, Scene: Scene, Button: Button, IconButton: IconButton, SegmentedControl: SegmentedControl, Chip: Chip,
     TextField: TextField, Checkbox: Checkbox, Switch: Switch, QuantityStepper: QuantityStepper, Calendar: Calendar,
@@ -2811,7 +2856,7 @@
     Tabs: Tabs, Tooltip: Tooltip, DatePicker: DatePicker,
     Ring: Ring, MetricTile: MetricTile, PillBarChart: PillBarChart, SegmentGauge: SegmentGauge, RatingBreakdown: RatingBreakdown, Leaderboard: Leaderboard, StripeDistribution: StripeDistribution, Heatmap: Heatmap, AbsenceCard: AbsenceCard, ToggleTile: ToggleTile, ArrivalTile: ArrivalTile, RingStatCard: RingStatCard, HabitTile: HabitTile, GateTile: GateTile, VoiceRecorder: VoiceRecorder, BatteryTile: BatteryTile, MediaPlayer: MediaPlayer, AnalogClock: AnalogClock, RecordingTile: RecordingTile, ActivityCalendar: ActivityCalendar, WorldClock: WorldClock, RideTile: RideTile, ChargingTile: ChargingTile, TripSummaryTile: TripSummaryTile, Notch: Notch, ProfileProjectCard: ProfileProjectCard, MeetingsStrip: MeetingsStrip, RoadmapGantt: RoadmapGantt, DateChip: DateChip, EfficiencyChart: EfficiencyChart, TotalTimeTile: TotalTimeTile, AssistantCard: AssistantCard, PageHeader: PageHeader, ChannelCard: ChannelCard, PromptCard: PromptCard, BalanceChart: BalanceChart, HoldingsPanel: HoldingsPanel, SparkBars: SparkBars, PilotDashboard: PilotDashboard,
     PhoneFrame: PhoneFrame, StatusBar: StatusBar, AppBar: AppBar, TabBar: TabBar, BottomSheet: BottomSheet, ActionSheet: ActionSheet, Fab: Fab, StickyActionBar: StickyActionBar, HeroHeader: HeroHeader, GreetingBar: GreetingBar, SearchField: SearchField, SectionHeader: SectionHeader, ChipScroller: ChipScroller, SnapCarousel: SnapCarousel, SwipeRow: SwipeRow, MobileSegmented: MobileSegmented, FieldTile: FieldTile, FeatureCard: FeatureCard, CategoryTile: CategoryTile, ChecklistRow: ChecklistRow, WeekStrip: WeekStrip, Timeline: Timeline, CalendarCard: CalendarCard, AgendaCard: AgendaCard, PeoplePicker: PeoplePicker, PlanList: PlanList, MiniStatCard: MiniStatCard, TripRow: TripRow, FlightSearchSheet: FlightSearchSheet, RouteHeader: RouteHeader, TicketCard: TicketCard, BoardingPass: BoardingPass, PlaceCard: PlaceCard, PlaceHero: PlaceHero, InfoStatRow: InfoStatRow, ExpandableText: ExpandableText, MiniDestination: MiniDestination, IllustrationCallout: IllustrationCallout, MemberPicker: MemberPicker, ActivityFeed: ActivityFeed, DetailList: DetailList, LetterRow: LetterRow, ProfileHeader: ProfileHeader, OnboardingFlow: OnboardingFlow,
-    AuthShell: AuthShell, LandingHero: LandingHero, SplitHero: SplitHero, PromoBanner: PromoBanner, StatStrip: StatStrip, CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
+    AuthShell: AuthShell, LandingHero: LandingHero, SplitHero: SplitHero, PromoBanner: PromoBanner, StatStrip: StatStrip, OptionList: OptionList, CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
     motion: { reduce: reduceMotion, useIndicator: useIndicator, usePresence: usePresence }
   };
   window.Airiona = Object.assign(window.Airiona || {}, api);

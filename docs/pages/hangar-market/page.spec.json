@@ -13,6 +13,8 @@
   "types": {
     "Listing": {
       "id": "string",
+      "facts": "string",
+      "base": "string",
       "title": "string",
       "price": "string",
       "unit": "string",
@@ -39,6 +41,8 @@
       "sample": [
         {
           "id": "dwc-4",
+          "facts": "38 m door · 11 m · 2,900 m²",
+          "base": "Dubai South · DWC",
           "title": "Hangar 4 · Dubai South (DWC)",
           "price": "$2,400",
           "unit": "/ month",
@@ -53,6 +57,8 @@
         },
         {
           "id": "ruh-b2",
+          "facts": "24 m door · 8 m · shared",
+          "base": "Riyadh · RUH",
           "title": "Bay B2 · Riyadh King Khalid (RUH)",
           "price": "$1,850",
           "unit": "/ month",
@@ -67,6 +73,8 @@
         },
         {
           "id": "doh-exec",
+          "facts": "42 m door · lounge · crew rest",
+          "base": "Doha · DOH",
           "title": "Executive hangar · Doha (DOH)",
           "price": "$3,100",
           "unit": "/ month",
@@ -81,6 +89,8 @@
         },
         {
           "id": "auh-h1",
+          "facts": "18 m door · covered bay",
+          "base": "Abu Dhabi · AUH",
           "title": "Heli deck H1 · Abu Dhabi (AUH)",
           "price": "$900",
           "unit": "/ month",
@@ -95,6 +105,8 @@
         },
         {
           "id": "mct-3",
+          "facts": "30 m door · 9 m · towing",
+          "base": "Muscat · MCT",
           "title": "Hangar 3 · Muscat (MCT)",
           "price": "$1,600",
           "unit": "/ month",
@@ -109,6 +121,8 @@
         },
         {
           "id": "bah-fbo",
+          "facts": "36 m door · customs on site",
+          "base": "Bahrain · BAH",
           "title": "FBO hangar · Bahrain (BAH)",
           "price": "$420",
           "unit": "/ night",
@@ -331,6 +345,10 @@
         {
           "id": "sort",
           "component": "Select",
+          "show": {
+            "base": false,
+            "md": true
+          },
           "inputs": {
             "label": "Sort by",
             "options": [
@@ -439,6 +457,10 @@
           "events": {
             "reserve": "openListing"
           },
+          "show": {
+            "base": false,
+            "md": true
+          },
           "why": "A tall photo card with title, three-line description, two tags and a price with one action: the system card for a priced listing",
           "alternatives": [
             {
@@ -451,6 +473,32 @@
             }
           ],
           "notes": "Routes to the detail page; the heart saves to the watchlist"
+        },
+        {
+          "id": "listingPhone",
+          "component": "MiniDestination",
+          "each": "hangars",
+          "show": {
+            "md": false
+          },
+          "bind": {
+            "title": "item.title",
+            "image": "item.image",
+            "price": "item.price",
+            "duration": "item.base",
+            "dates": "item.facts",
+            "badge": "item.tags[0]"
+          },
+          "events": {
+            "press": "openListing"
+          },
+          "why": "On phones a listing is a compact photo card with the name, price, base and three facts, the app feed pattern; the tall StayCard returns from tablets up",
+          "alternatives": [
+            {
+              "component": "StayCard",
+              "rejected": "about 550px tall at 390px wide: one listing per screen"
+            }
+          ]
         }
       ]
     },
@@ -461,7 +509,7 @@
       "intro": "Verified listings with records checked.",
       "purpose": "Cross-sell into the other marketplace",
       "layout": {
-        "base": "scroll-x",
+        "base": "peek",
         "lg": "grid-3"
       },
       "elements": [
@@ -559,6 +607,6 @@
   "notes": [
     "Door width and clear height decide whether an aircraft fits; they lead each description.",
     "Nightly prices are for overnight stays (FBO hangars); everything else is monthly.",
-    "Phones get the tab bar (Hangars selected); at 1280 the top navigation replaces it."
+    "Phones get the tab bar (Hangars selected); at 1280 the top navigation replaces it. On phones listings are compact MiniDestination cards and sorting lives in the filter sheet (the search field button)."
   ]
 }

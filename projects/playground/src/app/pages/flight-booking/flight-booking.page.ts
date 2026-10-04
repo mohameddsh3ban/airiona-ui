@@ -3,7 +3,7 @@
 // Change the spec and regenerate; copy this folder into the product app once the page is signed off.
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ArAppBar, ArBadge, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArFlightTicket, ArIconButton, ArInfoStatRow, ArMobileSegmented, ArQuantityStepper, ArRouteHeader, ArSegmentedControl, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav, type ArDatePreset, type ArInfoStat, type ArOption, type ArTopNavLink, type ArTopNavUser } from '@airiona/ui';
+import { ArAppBar, ArBadge, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArIconButton, ArInfoStatRow, ArMobileSegmented, ArOptionList, ArQuantityStepper, ArRouteHeader, ArSegmentedControl, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav, type ArDatePreset, type ArInfoStat, type ArOption, type ArTopNavLink, type ArTopNavUser } from '@airiona/ui';
 import { pageForm } from '../../shared/page-form';
 import { futureDate, phone } from '../../shared/validators';
 import { FLIGHTBOOKING_SAMPLE } from './flight-booking.data';
@@ -11,7 +11,7 @@ import { FLIGHTBOOKING_SAMPLE } from './flight-booking.data';
 /** Book a flight. Primary action: Request the flight on the chosen aircraft. */
 @Component({
   selector: 'pg-flight-booking',
-  imports: [ReactiveFormsModule, ArAppBar, ArBadge, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArFlightTicket, ArIconButton, ArInfoStatRow, ArMobileSegmented, ArQuantityStepper, ArRouteHeader, ArSegmentedControl, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav],
+  imports: [ReactiveFormsModule, ArAppBar, ArBadge, ArButton, ArCheckbox, ArDatePicker, ArDetailList, ArDialog, ArIconButton, ArInfoStatRow, ArMobileSegmented, ArOptionList, ArQuantityStepper, ArRouteHeader, ArSegmentedControl, ArSelect, ArStickyActionBar, ArSuccessBurst, ArTextField, ArTopNav],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flight-booking.page.html',
   styleUrl: './flight-booking.page.css',

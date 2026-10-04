@@ -1,0 +1,21 @@
+<!-- @dsCard group="Forms" height=340 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>OptionList</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage"></div>
+<script>
+  var A = window.Airiona, h = React.createElement, P = '../../assets/photos/aviation/';
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { maxWidth: 420 } }, h(A.OptionList, {
+    label: 'Aircraft', defaultValue: 'latitude',
+    options: [
+      { value: 'cj4', title: 'Citation CJ4', meta: '6 seats · 7 h 40 m', price: '$39,200', note: 'all-in', image: P + 'jet-light.webp' },
+      { value: 'latitude', title: 'Citation Latitude', meta: '9 seats · 7 h 25 m', price: '$48,400', note: 'all-in', image: P + 'jet-midsize.webp', badge: 'Best value' },
+      { value: 'g550', title: 'Gulfstream G550', meta: '16 seats · 6 h 50 m', price: '$94,300', note: 'all-in', image: P + 'jet-heavy.webp' }
+    ]
+  })));
+</script>
+</body>
+</html>

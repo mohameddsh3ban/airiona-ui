@@ -54,12 +54,12 @@ Open http://127.0.0.1:4400. Setup for product apps, CI and Claude Code: [docs/SE
 
 ## Sample pages
 
-Ten pages built through the pipeline, each with its spec, handoff and screenshots in `docs/pages/<page>/`. Every page has a web view (`#/<page>`, responsive 390 to 1280) and an app view (`#/native/<page>`): the same page in app mode inside a phone frame, with the status bar and home indicator as safe areas, a bottom tab bar on root screens, and no scrollbars, tap flash or overscroll. On a phone the app view fills the screen.
+Ten pages built through the pipeline, each with its spec, handoff and screenshots in `docs/pages/<page>/`. Every page has a web view (`#/<page>`, responsive 390 to 1280; below 768px each page is composed as a native app screen, not the desktop stacked) and an app view (`#/native/<page>`): the same page in app mode inside a phone frame, with the status bar and home indicator as safe areas, a bottom tab bar on root screens, and no scrollbars, tap flash or overscroll. On a phone the app view fills the screen.
 
 | Page | What it shows |
 |---|---|
 | `flight-home` | The landing page: SplitHero (a still frame that becomes a looping video after load, travellers badge, story button), flight search docked over its edge, empty-leg promo and stats beside a destinations carousel, why Airiona, the marketplaces |
-| `flight-booking` | The central booking flow: route, trip, aircraft offers, passenger, summary, sticky request bar |
+| `flight-booking` | The central booking flow: route, trip, the aircraft choice as an OptionList (photo, facts, all-in price), passenger, summary, sticky request bar |
 | `stay-checkout` | Hotel checkout with guest details and payment summary |
 | `login` | Sign-in on AuthShell: form beside a cinematic video panel with rotating highlights |
 | `signup` | Sign-up on the same shell, form on the right, account type and terms |

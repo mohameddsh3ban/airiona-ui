@@ -255,6 +255,31 @@
               "component": "StayCard",
               "rejected": "a hero card with its own Reserve button; this page already has the pay action"
             }
+          ],
+          "show": {
+            "base": false,
+            "md": true
+          }
+        },
+        {
+          "id": "stayPhone",
+          "component": "MiniDestination",
+          "show": {
+            "md": false
+          },
+          "bind": {
+            "title": "stay.name",
+            "image": "stay.image",
+            "price": "stay.total",
+            "duration": "stay.region",
+            "dates": "stay.location"
+          },
+          "why": "On phones the stay is a compact photo card with the name, total, region and place, so the trip and payment fields start on the first screen; the tall PlaceCard returns from tablets up",
+          "alternatives": [
+            {
+              "component": "PlaceCard",
+              "rejected": "about 400px tall on a phone: the whole first screen is a photo"
+            }
           ]
         },
         {
@@ -714,6 +739,7 @@
   "notes": [
     "Phone order: steps and title, the stay summary, trip and traveller form, then the sticky pay bar. On desktop the summary moves to the right column and the pay button sits under the form.",
     "Dates and guests arrive prefilled from the stay page; changing them refreshes the quote (stay.total and price lines).",
-    "The pay bar shows the current total; in the app it reads the same quote as the price lines."
+    "The pay bar shows the current total; in the app it reads the same quote as the price lines.",
+    "Phones show the stay as a compact MiniDestination card (photo, name, total, region, place); the tall PlaceCard is for tablets and desktop."
   ]
 }

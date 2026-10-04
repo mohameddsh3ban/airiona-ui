@@ -1,6 +1,6 @@
 /* Hangars: generated from docs/pages/hangar-market/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */
 :host { display: block; }
-.pg { --m-gutter: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }
+.pg { --m-gutter: 16px; --pg-pad-top: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }
 .pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }
 .pg-h { margin: 0; }
 .pg-intro { color: var(--ink-muted); max-width: 65ch; }
@@ -20,6 +20,7 @@
 .pg-figure { display: grid; gap: 8px; align-content: start; }
 .pg-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 24px; background: var(--surface-sunken); }
 .pg-card { padding: 20px; border-radius: 28px; background: var(--surface); box-shadow: var(--shadow-float); }
+.pg-card--tight { padding: 8px; border-radius: 26px; }
 .pg-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .pg-toast { position: fixed; z-index: 60; left: 16px; right: 16px; top: calc(16px + env(safe-area-inset-top, 0px)); display: flex; justify-content: center; }
 .pg-s--tabs > .pg-g > * { position: relative; inset: auto; }
@@ -28,7 +29,7 @@
 .pg-s--head > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--filters > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--results > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
-.pg-s--cross > .pg-g { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(80%, 320px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+.pg-s--cross > .pg-g { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
 .pg-s--cross > .pg-g > * { scroll-snap-align: start; }
 .pg-s--tabs > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 @media (min-width: 768px) {
@@ -39,7 +40,7 @@
   .pg-el-resultCount { grid-column: span 2; }
 }
 @media (min-width: 1280px) {
-  .pg { --m-gutter: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }
+  .pg { --m-gutter: 32px; --pg-pad-top: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }
   .pg-s--filters > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
   .pg-s--results > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
   .pg-s--cross > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
@@ -53,14 +54,18 @@
   .pg-s--head { display: none !important; }
   .pg-s--tabs { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }
   .pg { padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
+  .pg-el-sort { display: none !important; }
+  .pg-el-listing { display: none !important; }
 }
 @media (min-width: 768px) and (max-width: 1279.98px) {
   .pg-s--nav { display: none !important; }
   .pg-s--head { display: none !important; }
   .pg-s--tabs { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }
   .pg { padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
+  .pg-el-listingPhone { display: none !important; }
 }
 @media (min-width: 1280px) {
   .pg-s--topbar { display: none !important; }
   .pg-s--tabs { display: none !important; }
+  .pg-el-listingPhone { display: none !important; }
 }

@@ -101,26 +101,10 @@
     <h2 class="pg-h m-title-2" id="pg-h-offers">Choose your aircraft</h2>
     <p class="pg-intro body">Prices are for the whole aircraft and include crew, fuel, airport fees and VAT.</p>
     <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
-        @for (item of data.offers; track $index) {
-          <ar-flight-ticket
-            class="pg-el-offer"
-            [image]="item.image"
-            [from]="item.from"
-            [to]="item.to"
-            [flight]="item.aircraft"
-            [airline]="item.operator"
-            [cabin]="item.category"
-            [duration]="item.duration"
-            [details]="item.details"
-          />
-        } @empty {
-          <p class="pg-empty pg-el-offer">No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.</p>
-        }
-        <ar-select
+        <ar-option-list
           class="pg-el-aircraft"
-          placeholder="Choose an aircraft"
           label="Aircraft"
-          [options]="data.aircraftOptions"
+          [options]="data.aircraftCards"
           formControlName="aircraft"
           [error]="bookingForm.error('aircraft')"
         />

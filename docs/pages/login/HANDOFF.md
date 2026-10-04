@@ -6,11 +6,11 @@
 |---|---|
 | Audience | A returning client, operator or hangar host signing in on a phone between flights or on a desktop at the office; they know their email and want to be through in under ten seconds. |
 | Primary action | Sign in with email and password |
-| Source | brief · `D:/XIII/share/Work/Pilot_100/frontend/src/app/features/auth/login` |
+| Source | brief · `reference product sign-in screen (internal, not in this repository)` |
 | Route | `/login` (playground: `#/login`) |
 | Framework | angular |
 
-Pilot 100's login: a split screen with the form on one side and a looping cinematic panel on the other, highlight cards that rotate with progress ticks, a slim image strip on phones. Rebuilt in Airiona's light luxury style with the AuthShell component; copy and highlights are Airiona's (charter booking, aircraft marketplace, hangar space).
+The reference sign-in: a split screen with the form on one side and a looping cinematic panel on the other, highlight cards that rotate with progress ticks, a slim image strip on phones. Rebuilt in Airiona's light luxury style with the AuthShell component; copy and highlights are Airiona's (charter booking, aircraft marketplace, hangar space).
 
 ## Screens
 
@@ -36,7 +36,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `shell` | AuthShell `ar-auth-shell` | `headline`=Your aircraft, your schedule.<br>`highlights`=[{"title":"All-in prices","text":"Crew, fuel, airport fees a<br>`side`=left<br>`mediaLabel`=About Airiona<br>`poster`=assets/photos/aviation/auth-wing.webp<br>`video`=assets/video/auth-wing.mp4<br>`stripImage`=assets/photos/aviation/auth-wing-strip.webp |  | Pilot 100's sign-in trick in Airiona: the form column beside a cinematic media panel (poster, looping video after load, scrim, grain, rotating highlight cards with progress ticks that pause on hover or focus); a slim photo strip on phones<br>Not section split with HeroHeader: the old login: a mobile header stretched into an aside, no motion, no highlights, and the art fell below the form on phones<br>Not OnboardingFlow: a multi-step carousel for first launch, not a sign-in screen |  |
+| `shell` | AuthShell `ar-auth-shell` | `headline`=Your aircraft, your schedule.<br>`highlights`=[{"title":"All-in prices","text":"Crew, fuel, airport fees a<br>`side`=left<br>`mediaLabel`=About Airiona<br>`poster`=assets/photos/aviation/auth-wing.webp<br>`video`=assets/video/auth-wing.mp4<br>`stripImage`=assets/photos/aviation/auth-wing-strip.webp |  | The reference product's split-screen sign-in, in Airiona: the form column beside a cinematic media panel (poster, looping video after load, scrim, grain, rotating highlight cards with progress ticks that pause on hover or focus); a slim photo strip on phones<br>Not section split with HeroHeader: the old login: a mobile header stretched into an aside, no motion, no highlights, and the art fell below the form on phones<br>Not OnboardingFlow: a multi-step carousel for first launch, not a sign-in screen |  |
 | `help` [arActions] | Button `button[arButton], a[arButton]` | `variant`=ghost<br>`size`=sm<br>`iconStart`=question-mark-circle |  | Help stays one tap away without competing with the form |  |
 | `privacy` [arFoot] | `<a>` |  |  |  |  |
 | `head` | `<div>` |  |  |  |  |

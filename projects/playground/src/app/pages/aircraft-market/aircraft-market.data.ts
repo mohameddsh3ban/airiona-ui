@@ -3,6 +3,8 @@
 
 export type Listing = {
   id: string;
+  facts: string;
+  base: string;
   title: string;
   price: string;
   unit: string;
@@ -31,6 +33,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
   "aircraft": [
     {
       "id": "g550",
+      "facts": "2016 · 4,210 hrs · 16 seats",
+      "base": "Dubai World Central",
       "title": "Gulfstream G550",
       "price": "$24.5M",
       "unit": "asking",
@@ -45,6 +49,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
     },
     {
       "id": "praetor",
+      "facts": "2020 · 1,180 hrs · 12 seats",
+      "base": "Riyadh King Khalid",
       "title": "Embraer Praetor 600",
       "price": "$16.9M",
       "unit": "asking",
@@ -59,6 +65,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
     },
     {
       "id": "cj4",
+      "facts": "2019 · 1,640 hrs · 9 seats",
+      "base": "Doha Hamad",
       "title": "Cessna Citation CJ4",
       "price": "$8.2M",
       "unit": "asking",
@@ -73,6 +81,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
     },
     {
       "id": "challenger",
+      "facts": "2017 · 2,950 hrs · 10 seats",
+      "base": "Muscat",
       "title": "Bombardier Challenger 350",
       "price": "$13.2M",
       "unit": "asking",
@@ -87,6 +97,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
     },
     {
       "id": "pc12",
+      "facts": "2022 · 420 hrs · 8 seats",
+      "base": "Abu Dhabi",
       "title": "Pilatus PC-12 NGX",
       "price": "$5.4M",
       "unit": "asking",
@@ -101,6 +113,8 @@ export const AIRCRAFTMARKET_SAMPLE: AircraftMarketPageData = {
     },
     {
       "id": "h145",
+      "facts": "2018 · 1,930 hrs · 8 seats",
+      "base": "Jeddah",
       "title": "Airbus H145",
       "price": "$7.9M",
       "unit": "asking",

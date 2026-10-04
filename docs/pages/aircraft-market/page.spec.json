@@ -13,6 +13,8 @@
   "types": {
     "Listing": {
       "id": "string",
+      "facts": "string",
+      "base": "string",
       "title": "string",
       "price": "string",
       "unit": "string",
@@ -39,6 +41,8 @@
       "sample": [
         {
           "id": "g550",
+          "facts": "2016 · 4,210 hrs · 16 seats",
+          "base": "Dubai World Central",
           "title": "Gulfstream G550",
           "price": "$24.5M",
           "unit": "asking",
@@ -53,6 +57,8 @@
         },
         {
           "id": "praetor",
+          "facts": "2020 · 1,180 hrs · 12 seats",
+          "base": "Riyadh King Khalid",
           "title": "Embraer Praetor 600",
           "price": "$16.9M",
           "unit": "asking",
@@ -67,6 +73,8 @@
         },
         {
           "id": "cj4",
+          "facts": "2019 · 1,640 hrs · 9 seats",
+          "base": "Doha Hamad",
           "title": "Cessna Citation CJ4",
           "price": "$8.2M",
           "unit": "asking",
@@ -81,6 +89,8 @@
         },
         {
           "id": "challenger",
+          "facts": "2017 · 2,950 hrs · 10 seats",
+          "base": "Muscat",
           "title": "Bombardier Challenger 350",
           "price": "$13.2M",
           "unit": "asking",
@@ -95,6 +105,8 @@
         },
         {
           "id": "pc12",
+          "facts": "2022 · 420 hrs · 8 seats",
+          "base": "Abu Dhabi",
           "title": "Pilatus PC-12 NGX",
           "price": "$5.4M",
           "unit": "asking",
@@ -109,6 +121,8 @@
         },
         {
           "id": "h145",
+          "facts": "2018 · 1,930 hrs · 8 seats",
+          "base": "Jeddah",
           "title": "Airbus H145",
           "price": "$7.9M",
           "unit": "asking",
@@ -331,6 +345,10 @@
         {
           "id": "sort",
           "component": "Select",
+          "show": {
+            "base": false,
+            "md": true
+          },
           "inputs": {
             "label": "Sort by",
             "options": [
@@ -439,6 +457,10 @@
           "events": {
             "reserve": "openListing"
           },
+          "show": {
+            "base": false,
+            "md": true
+          },
           "why": "A tall photo card with title, three-line description, two tags and a price with one action: the system card for a priced listing",
           "alternatives": [
             {
@@ -451,6 +473,32 @@
             }
           ],
           "notes": "Routes to the detail page; the heart saves to the watchlist"
+        },
+        {
+          "id": "listingPhone",
+          "component": "MiniDestination",
+          "each": "aircraft",
+          "show": {
+            "md": false
+          },
+          "bind": {
+            "title": "item.title",
+            "image": "item.image",
+            "price": "item.price",
+            "duration": "item.base",
+            "dates": "item.facts",
+            "badge": "item.tags[0]"
+          },
+          "events": {
+            "press": "openListing"
+          },
+          "why": "On phones a listing is a compact photo card with the name, price, base and three facts, the app feed pattern; the tall StayCard returns from tablets up",
+          "alternatives": [
+            {
+              "component": "StayCard",
+              "rejected": "about 550px tall at 390px wide: one listing per screen"
+            }
+          ]
         }
       ]
     },
@@ -461,7 +509,7 @@
       "intro": "Monthly and nightly space at 140 airports.",
       "purpose": "Cross-sell into the other marketplace",
       "layout": {
-        "base": "scroll-x",
+        "base": "peek",
         "lg": "grid-3"
       },
       "elements": [
@@ -559,6 +607,6 @@
   "notes": [
     "Prices are asking prices in USD; the server formats them. Hours are airframe total time.",
     "The filter button opens the full filter sheet (price range, year, hours, base); it is a separate screen and not part of this page.",
-    "Phones get the tab bar (Aircraft selected); at 1280 the top navigation replaces it."
+    "Phones get the tab bar (Aircraft selected); at 1280 the top navigation replaces it. On phones listings are compact MiniDestination cards and sorting lives in the filter sheet (the search field button)."
   ]
 }
