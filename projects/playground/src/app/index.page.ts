@@ -10,8 +10,12 @@ import { PAGE_ROUTES } from './pages/pages.routes';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="ar" style="max-width: 760px; margin: 0 auto; padding: 32px 16px">
-      <h1 class="m-large-title" style="margin: 0 0 8px">Sample pages</h1>
-      <p style="color: var(--ink-muted); margin: 0 0 24px">Generated from specs in <code>docs/pages/</code>. Web opens the responsive page; App opens it as an installed phone app.</p>
+      <h1 class="m-large-title" style="margin: 0 0 8px">Airiona sample pages</h1>
+      <p style="color: var(--ink-muted); margin: 0 0 16px">Private charter, aircraft and hangar marketplaces, built with the Airiona design system. Web opens the responsive page; App opens it as an installed phone app.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px">
+        <a arButton variant="secondary" size="sm" iconStart="squares-2x2" href="catalog/">Component catalog</a>
+        <a arButton variant="ghost" size="sm" iconStart="code-bracket" href="https://github.com/mohameddsh3ban/airiona-ui" target="_blank" rel="noopener">Source on GitHub</a>
+      </div>
       @for (r of pages; track r.path) {
         <div style="display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 18px; margin-bottom: 10px; border-radius: 20px; background: var(--surface)">
           <span style="flex: 1; min-width: 0"><b>{{ r.title }}</b> <span style="color: var(--ink-subtle)">/{{ r.path }}</span></span>

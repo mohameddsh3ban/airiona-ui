@@ -1,0 +1,54 @@
+# Builds the live showcase and deploys it to GitHub Pages on every push to main:
+#   /          the sample pages (web view and phone app view of each)
+#   /catalog/  the component catalog (React and Angular side by side)
+name: Deploy showcase
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Build the component catalog
+        run: node tools/build-catalog.mjs --thumbs
+      - name: Build the sample pages
+        run: npm run playground:build
+      - name: Assemble the site
+        run: |
+          mkdir -p site
+          cp -r dist/playground/browser/. site/
+          cp -r dist/catalog site/catalog
+          touch site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
