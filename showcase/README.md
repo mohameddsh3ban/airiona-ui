@@ -1,6 +1,6 @@
 # Airiona showcase
 
-Dribbble/Behance stills, a 15-second motion piece and a case-study page, all made from real captures of the sample pages.
+Dribbble/Behance stills, a 24-second motion piece and a case-study page, all made from real captures of the sample pages.
 
 Live case study: https://mohameddsh3ban.github.io/airiona-ui/showcase/
 
@@ -19,7 +19,7 @@ Live case study: https://mohameddsh3ban.github.io/airiona-ui/showcase/
 | 9 | **Dubai to London, all-in**: booking on desktop and phone | `dribbble/09-dubai-to-london.jpg` | Behance chapter |
 | 10 | **A Gulfstream G550, one tap away**: aircraft marketplace | `dribbble/10-aircraft-marketplace.jpg` | Behance chapter |
 | 11 | **A roof for the jet**: hangar marketplace | `dribbble/11-hangar-marketplace.jpg` | Behance chapter |
-| 12 | **Motion, 15s**: 1080x1920 vertical reel with music and sound | `site/airiona-motion-15s.mp4` | Reels, Shorts, TikTok, LinkedIn, Dribbble video |
+| 12 | **Motion, 24s**: 1080x1920 vertical reel with music and sound, ending on the credit with a voice-over (Mohamed Shaban, m2a-dev team, m2a-dev.de) | `site/airiona-motion.mp4` | Reels, Shorts, TikTok, LinkedIn |
 
 Stills are 3200x2400 (Dribbble 2x, 4:3). Web versions at 2000x1500 live in `site/img/`.
 
@@ -32,4 +32,6 @@ node tools/showcase/render.mjs         # renders the stills into showcase/out/sh
 node tools/showcase/render-video.mjs   # renders the motion piece frame by frame and mixes the sound
 ```
 
-`showcase/stage/` holds the compositions: `kit.css`/`kit.js` (device frames), `shots.js` (one function per still) and `video.html`/`video.js` (the timeline: `render(t)` places every element for a time, so each frame is exact). Music and sound effects are in `showcase/audio/` (generated with Runway). The hero loops and photos were generated with Higgsfield.
+`showcase/stage/` holds the compositions: `kit.css`/`kit.js` (device frames), `shots.js` (one function per still) and `video.html`/`video.js` (the timeline: `render(t)` places every element for a time, so each frame is exact). Music and sound effects are in `showcase/audio/` (generated with Runway). Sound is synced to picture from one source: `video.js` exports `window.CUES` (every whoosh, tap and chime, computed from the same times the motion uses), and `mix-audio.mjs` places each effect so its loudest moment lands on that frame; `mix-audio.mjs --stem out.wav` writes the effects alone for checking. The closing voice-over is generated locally with Qwen3-TTS 1.7B CustomVoice (`tools/showcase/voiceover.py`); `showcase/audio/voiceover.json` picks the clip and sets its start and the moment the domain appears, and the renderer sizes the video to it. The hero loops and photos were generated with Higgsfield.
+
+Made by Mohamed Shaban, [m2a-dev](https://www.m2a-dev.de/) team.

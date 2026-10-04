@@ -1,6 +1,11 @@
-// Airiona 15s motion piece (1080x1920, 30fps). Deterministic: window.render(t) places every element for time t
+// Airiona motion piece (1080x1920, 30fps, 18.5s: 15s reel plus the credit card). Deterministic: window.render(t) places every element for time t
 // (seconds), so the renderer can step frame by frame. One ease family: expo-out for every arrival, its mirror
 // expo-in for every exit, smooth for continuous camera moves; nothing sits still at a cut.
+
+/* Voice-over timing, passed by the renderer: ?vo=<start s>&visit=<absolute s when she says "visit"> */
+const Q = new URLSearchParams(location.search);
+const VO_START = Number(Q.get('vo') || 15.45);
+const VISIT_AT = Number(Q.get('visit') || 16.45);
 
 /* ---------- easing ---------- */
 function bezier(x1, y1, x2, y2) {
@@ -77,6 +82,32 @@ function copyIn(id, t, a, out) {
   el.style.opacity = String(1 - pOut);
   void pIn;
 }
+
+/* ---------- sound cues ----------
+   Every visual hit, in seconds, from the same constants the motion uses, so sound and picture cannot drift.
+   A whoosh peaks at the moment of greatest motion: the middle of a smooth move, just after an arrival starts,
+   as an exit ends. A tap lands as a popping element becomes visible; the chime lands where the falling dot
+   first touches down. */
+function firstArrival(ease, a, b) {
+  for (let i = 0; i <= 1000; i++) if (ease(i / 1000) >= 1) return a + (b - a) * (i / 1000);
+  return b;
+}
+window.CUES = [
+  { t: 0.24, sound: 'whoosh', gain: 0.35 },                     // title lines rise
+  { t: 1.875, sound: 'whoosh', gain: 0.55 },                    // hero video shrinks into the phone (smooth 1.55 to 2.2)
+  { t: 4.42, sound: 'whoosh', gain: 0.5 },                      // booking arrives, landing slides to the fan
+  { t: 5.46, sound: 'tap', gain: 0.95 },                        // tap ripple on Citation Latitude
+  { t: 6.66, sound: 'whoosh', gain: 0.6 },                      // hard switch to midnight, phones fall at full speed
+  { t: 7.5, sound: 'whoosh', gain: 0.45 },                      // dashboard rises
+  { t: 8.96, sound: 'whoosh', gain: 0.55 },                     // dashboard tilts away, switch to light
+  ...[0, 1, 2, 3].map((i) => ({ t: 9.39 + i * 0.12, sound: 'tap', gain: 0.4 })), // four parts pop in
+  { t: 11.35, sound: 'whoosh', gain: 0.6 },                     // whip: components out, aircraft market in
+  { t: 12.25, sound: 'whoosh', gain: 0.6 },                     // whip: aircraft out, hangars in
+  { t: 13.05, sound: 'whoosh', gain: 0.5 },                     // into the end card
+  { t: firstArrival(POP, 13.3, 13.8), sound: 'chime', gain: 0.85 }, // the logo dot lands
+  { t: 15.1, sound: 'whoosh', gain: 0.5 },                      // end card lifts, credit rises
+  { t: VISIT_AT + 0.04, sound: 'tap', gain: 0.85 },           // m2a-dev.de pill pops in
+];
 
 /* ---------- render ---------- */
 window.render = function render(t) {
@@ -180,8 +211,11 @@ window.render = function render(t) {
   /* S7 end card 12.9 to 15 */
   const s7 = $('s7');
   const endIn = seg(t, 12.85, 13.15);
-  s7.style.display = t >= 12.85 ? '' : 'none';
+  s7.style.display = t >= 12.85 && t < 15.3 ? '' : 'none';
   s7.style.opacity = String(endIn);
+  // Hands over to the credit: the end card lifts away as the credit card rises after it (one continuous move).
+  const lift = IN(seg(t, 14.85, 15.2));
+  s7.style.transform = `translateY(${-lift * 1920}px)`;
   css($('endKicker'), { opacity: String(OUT(seg(t, 13.55, 13.95))), transform: `translateY(${lerp(16, 0, OUT(seg(t, 13.55, 14.0)))}px)` });
   [...'airiona'].forEach((_, i) => css($(`ch${i}`), { transform: `translateY(${lerp(115, 0, OUT(seg(t, 13.0 + i * 0.045, 13.6 + i * 0.045)))}%)` }));
   const drop = POP(seg(t, 13.3, 13.8));
@@ -189,6 +223,26 @@ window.render = function render(t) {
   css($('endDot'), { transform: `translateY(${lerp(-420, 0, drop)}px) scale(${pulse})`, opacity: String(seg(t, 13.3, 13.4)) });
   css($('endUrl'), { opacity: String(OUT(seg(t, 13.75, 14.15))), transform: `translateY(${lerp(18, 0, OUT(seg(t, 13.75, 14.2)))}px)` });
   css($('endRule'), { transform: `scaleX(${OUT(seg(t, 13.9, 14.45))})` });
+
+  /* S8 credit 15.0 to 18.5 */
+  const s8 = $('s8');
+  s8.style.display = t >= 14.9 ? '' : 'none';
+  css(s8, { transform: `translateY(${lerp(1920, 0, OUT(seg(t, 14.95, 15.6)))}px)` });
+  // Never still: the type drifts up slowly and the mint light wanders while the voice-over plays.
+  const drift = SMOOTH(seg(t, 15.6, VO_START + 9));
+  css($('crCopy'), { transform: `translateY(${-drift * 46}px)` });
+  css($('crGlow'), { transform: `translate(${drift * 260}px, ${-drift * 180}px) scale(${1 + drift * 0.25})` });
+  css($('crKicker'), { opacity: String(OUT(seg(t, 15.35, 15.75))), transform: `translateY(${lerp(18, 0, OUT(seg(t, 15.35, 15.8)))}px)` });
+  ['cr1', 'cr2'].forEach((id, i) => css($(id), { transform: `translateY(${lerp(112, 0, OUT(seg(t, 15.45 + i * 0.1, 16.1 + i * 0.1)))}%)` }));
+  css($('crRole'), { opacity: String(OUT(seg(t, 15.85, 16.3))), transform: `translateY(${lerp(22, 0, OUT(seg(t, 15.85, 16.35)))}px)` });
+  css($('crRule'), { transform: `scaleX(${OUT(seg(t, 16.05, 16.7))})` });
+  const mAt = Math.max(16.25, VISIT_AT - 0.45);
+  css($('crMore'), { opacity: String(OUT(seg(t, mAt, mAt + 0.4))), transform: `translateY(${lerp(18, 0, OUT(seg(t, mAt, mAt + 0.45)))}px)` });
+  const fAt = VISIT_AT + 0.5;
+  css($('crFoot'), { opacity: String(OUT(seg(t, fAt, fAt + 0.5))), transform: `translateY(${lerp(24, 0, OUT(seg(t, fAt, fAt + 0.6)))}px)` });
+  const pill = POP(seg(t, VISIT_AT, VISIT_AT + 0.55));
+  const breathe = t > VISIT_AT + 0.75 ? 1 + 0.025 * Math.sin((t - VISIT_AT - 0.75) * Math.PI * 1.5) : 1;
+  css($('crPill'), { opacity: String(seg(t, VISIT_AT, VISIT_AT + 0.15)), transform: `scale(${lerp(0.6, 1, pill) * breathe})` });
 
   // Videos follow the timeline exactly.
   return seekAll(t);
