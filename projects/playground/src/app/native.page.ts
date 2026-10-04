@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DOCUMENT, computed, inject, input } from '@angular/core';
 import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { ArButton, ArPhoneFrame } from '@airiona/ui';
@@ -22,7 +22,7 @@ import { PAGE_ROUTES } from './pages/pages.routes';
         <a arButton variant="secondary" size="sm" iconStart="computer-desktop" [routerLink]="'/' + slug()">Web view</a>
       </header>
       <ar-phone-frame class="pg-native__frame" [width]="412" [height]="844">
-        <iframe class="pg-native__view" [src]="url" [title]="title() + ', app view'"></iframe>
+        <iframe class="pg-native__view" name="pg-native" [src]="url" [title]="title() + ', app view'"></iframe>
       </ar-phone-frame>
     } @else {
       <p class="pg-native__missing">No page called "{{ slug() }}". <a routerLink="/">See all pages</a>.</p>
@@ -31,6 +31,8 @@ import { PAGE_ROUTES } from './pages/pages.routes';
 })
 export class NativeView {
   private readonly sanitizer = inject(DomSanitizer);
+  // The current document's own path, so the frame works on a dev server, a static host or any sub-path.
+  private readonly path = inject(DOCUMENT).location?.pathname ?? '';
   /** Route parameter (`withComponentInputBinding`). */
   readonly slug = input('');
 
@@ -38,6 +40,6 @@ export class NativeView {
   protected readonly title = computed(() => String(this.page()?.title ?? this.slug()));
   // Only known page slugs reach the iframe, so the trusted URL is always this app's own page.
   protected readonly src = computed<SafeResourceUrl | null>(() =>
-    this.page() ? this.sanitizer.bypassSecurityTrustResourceUrl(`index.html?native#/${this.page()!.path}`) : null,
+    this.page() ? this.sanitizer.bypassSecurityTrustResourceUrl(`${this.path}?native#/${this.page()!.path}`) : null,
   );
 }
