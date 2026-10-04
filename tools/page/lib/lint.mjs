@@ -105,6 +105,7 @@ export function lint(spec, { target = spec.target || 'angular' } = {}) {
   // sections and elements
   const ids = new Set();
   const placedFields = new Map();
+  if (spec.canvas !== undefined && !['page', 'full'].includes(spec.canvas)) E('canvas', '"page" (default: centred, padded) or "full" (edge to edge, for an AuthShell or a full-screen view)');
   let stickyBottom = false;
   for (const s of spec.sections || []) {
     const sp = `sections.${s.id}`;
@@ -180,6 +181,9 @@ export function lint(spec, { target = spec.target || 'angular' } = {}) {
         if (el.tag === 'a' && !el.href) E(`${ep}.href`, 'a link needs href (or it is not reachable by keyboard)');
         if (el.tag === 'img' && el.alt === undefined) E(`${ep}.alt`, 'images need alt text ("" for decorative)');
         for (const k of ['bind', 'events', 'inputs', 'field', 'submit']) if (el[k] !== undefined) E(`${ep}.${k}`, `html elements ignore "${k}"; use an Airiona component (a Button for actions, a TextField for input)`);
+        // A container element can lay its children out like a section does (a search card docked in a hero).
+        for (const [bp, v] of Object.entries(el.layout || {})) { if (!BP.includes(bp)) E(`${ep}.layout`, `unknown breakpoint "${bp}"`); else if (!LAYOUTS.includes(v)) E(`${ep}.layout.${bp}`, `unknown layout "${v}" (${LAYOUTS.join(', ')})`); }
+        if (el.layout && !(el.children || []).length) W(`${ep}.layout`, 'layout arranges children; this element has none');
         visit(el.children, section, el, ownItem);
         continue;
       }

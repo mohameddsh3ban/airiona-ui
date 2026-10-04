@@ -1,0 +1,33 @@
+<!-- @dsCard group="Screens" height=860 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AuthShell</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:0;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.AuthShell, {
+    poster: '../../assets/photos/aviation/auth-wing.webp', video: '../../assets/video/auth-wing.mp4', stripImage: '../../assets/photos/aviation/auth-wing-strip.webp',
+    headline: 'Your aircraft, your schedule.',
+    highlights: [
+      { title: 'All-in prices', text: 'Crew, fuel, airport fees and VAT in one number before you request.' },
+      { title: 'Confirmed in minutes', text: 'Operators answer a request within the 15-minute price hold.' },
+      { title: 'Hangars on the same account', text: 'Book space at 140 airports for the aircraft you fly or own.' }
+    ],
+    actions: h(A.Button, { variant: 'ghost', size: 'sm', iconStart: 'question-mark-circle' }, 'Help'),
+    footer: h('a', { className: 'ar-auth-link', href: '#' }, 'Privacy')
+  },
+    h('div', { className: 'ar-auth-head' }, h('h1', null, 'Welcome back'), h('p', null, 'Sign in to book flights and manage your hangar space.')),
+    h(A.TextField, { label: 'Email', type: 'email', iconStart: 'envelope', placeholder: 'name@example.com', autoComplete: 'email' }),
+    h(A.TextField, { label: 'Password', type: 'password', iconStart: 'lock-closed', autoComplete: 'current-password' }),
+    h('div', { className: 'ar-auth-row' }, h(A.Checkbox, { label: 'Keep me signed in' }), h('a', { className: 'ar-auth-link', href: '#' }, 'Forgot password?')),
+    h(A.Button, { variant: 'primary', size: 'lg', block: true }, 'Sign in'),
+    h('p', { className: 'ar-auth-divider' }, 'or'),
+    h(A.Button, { variant: 'secondary', size: 'lg', block: true, iconStart: 'device-phone-mobile' }, 'Continue with passkey'),
+    h('p', { className: 'ar-auth-switch' }, 'New to Airiona? ', h('a', { className: 'ar-auth-link', href: '#' }, 'Create an account'))
+  ));
+</script>
+</body>
+</html>

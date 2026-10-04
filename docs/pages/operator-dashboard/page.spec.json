@@ -1,0 +1,619 @@
+{
+  "page": "operator-dashboard",
+  "title": "Operator dashboard",
+  "route": "operator-dashboard",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "product brief: Airiona operator side",
+    "notes": "The home screen for an operator who charters, sells and hosts on Airiona: this month in numbers, revenue, fleet use, the latest bookings and the best-earning aircraft. No design source; built mobile first with the dashboard widgets."
+  },
+  "audience": "An operator or flight department manager checking the business on a phone in the morning and at a desk later; they look for what needs action first (new requests), then money.",
+  "primaryAction": "Open a booking that needs action",
+  "types": {
+    "Kpi": {
+      "label": "string",
+      "value": "string",
+      "icon": "string",
+      "delta": "string",
+      "caption": "string",
+      "tone": "'surface' | 'ink' | 'brand'"
+    },
+    "Booking": {
+      "id": "string",
+      "client": "string",
+      "route": "string",
+      "aircraft": "string",
+      "date": "string",
+      "status": "string",
+      "total": "string"
+    }
+  },
+  "data": [
+    {
+      "name": "kpis",
+      "type": "Kpi[]",
+      "source": "GET /api/operator/summary?month=2026-10",
+      "sample": [
+        {
+          "label": "Revenue this month",
+          "value": "$1.28M",
+          "icon": "banknotes",
+          "delta": "+18%",
+          "caption": "vs September",
+          "tone": "ink"
+        },
+        {
+          "label": "Flights flown",
+          "value": "46",
+          "icon": "paper-airplane",
+          "delta": "+6",
+          "caption": "vs September",
+          "tone": "surface"
+        },
+        {
+          "label": "Open requests",
+          "value": "9",
+          "icon": "inbox",
+          "delta": "+3",
+          "caption": "since yesterday",
+          "tone": "surface"
+        },
+        {
+          "label": "Hangar occupancy",
+          "value": "87%",
+          "icon": "building-office-2",
+          "delta": "-4%",
+          "caption": "vs September",
+          "tone": "surface"
+        }
+      ],
+      "states": {
+        "empty": "Zeros with the caption \"No activity yet this month\"",
+        "loading": "Four StatCard skeletons",
+        "error": "Inline error with Retry"
+      }
+    },
+    {
+      "name": "bookings",
+      "type": "Booking[]",
+      "source": "GET /api/operator/bookings?status=all&limit=8",
+      "sample": [
+        {
+          "id": "AR-58213",
+          "client": "Omar Saleh",
+          "route": "DXB → LTN",
+          "aircraft": "Citation Latitude",
+          "date": "15 Oct",
+          "status": "Awaiting you",
+          "total": "$48,400"
+        },
+        {
+          "id": "AR-58190",
+          "client": "Layla Haddad",
+          "route": "RUH → NCE",
+          "aircraft": "Praetor 600",
+          "date": "14 Oct",
+          "status": "Confirmed",
+          "total": "$62,900"
+        },
+        {
+          "id": "AR-58177",
+          "client": "Hamad Al-Thani",
+          "route": "DOH → GVA",
+          "aircraft": "G550",
+          "date": "12 Oct",
+          "status": "Confirmed",
+          "total": "$94,300"
+        },
+        {
+          "id": "AR-58164",
+          "client": "Sara Kim",
+          "route": "AUH → MLE",
+          "aircraft": "Challenger 350",
+          "date": "11 Oct",
+          "status": "Paid",
+          "total": "$41,750"
+        },
+        {
+          "id": "AR-58151",
+          "client": "Yusuf Demir",
+          "route": "IST → DXB",
+          "aircraft": "Citation CJ4",
+          "date": "09 Oct",
+          "status": "Flown",
+          "total": "$28,600"
+        },
+        {
+          "id": "AR-58139",
+          "client": "Nadia Farouk",
+          "route": "JED → CAI",
+          "aircraft": "H145",
+          "date": "07 Oct",
+          "status": "Flown",
+          "total": "$9,800"
+        }
+      ],
+      "states": {
+        "empty": "No bookings yet this month.",
+        "loading": "Table skeleton, six rows",
+        "error": "Inline error with Retry"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "Desktop navigation: the product destinations and the signed-in account",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "dashboard",
+                "label": "Dashboard"
+              },
+              {
+                "value": "requests",
+                "label": "Requests"
+              },
+              {
+                "value": "fleet",
+                "label": "Fleet"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars"
+              }
+            ],
+            "value": "dashboard",
+            "user": {
+              "name": "Gulf Executive Aviation",
+              "email": "ops@gulfexec.example"
+            }
+          },
+          "why": "The product's four destinations with the signed-in account; replaces the phone tab bar at 1280",
+          "children": [
+            {
+              "id": "navAction",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Add aircraft",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm",
+                "iconStart": "plus"
+              },
+              "events": {
+                "click": "addAircraft"
+              },
+              "why": "Growing the fleet is the operator's main setup task"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "topbar",
+      "title": "Dashboard",
+      "heading": false,
+      "purpose": "Phone title with the operator name",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "appBar",
+          "component": "AppBar",
+          "inputs": {
+            "title": "Dashboard",
+            "large": true,
+            "eyebrow": "Gulf Executive Aviation",
+            "accent": true
+          },
+          "why": "Root screen of the Home tab: large title, the page h1 on phones",
+          "children": [
+            {
+              "id": "bell",
+              "component": "IconButton",
+              "slot": "arActions",
+              "inputs": {
+                "icon": "bell",
+                "label": "Notifications, 3 new",
+                "variant": "surface",
+                "badge": true
+              },
+              "events": {
+                "click": "openNotifications"
+              },
+              "why": "New requests and messages"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "title": "Dashboard",
+      "heading": false,
+      "purpose": "Desktop page header with period tabs",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "pageHeader",
+          "component": "PageHeader",
+          "inputs": {
+            "title": "Good morning, Gulf Executive",
+            "tabs": [
+              {
+                "value": "month",
+                "label": "This month"
+              },
+              {
+                "value": "quarter",
+                "label": "Quarter"
+              },
+              {
+                "value": "year",
+                "label": "Year"
+              }
+            ],
+            "tab": "month"
+          },
+          "why": "The dashboard header: title and period tabs",
+          "children": [
+            {
+              "id": "export",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Export",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm",
+                "iconStart": "arrow-down-tray"
+              },
+              "events": {
+                "click": "exportReport"
+              },
+              "why": "Monthly report for the accountant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kpis",
+      "title": "This month",
+      "heading": false,
+      "purpose": "Four numbers that sum up the month",
+      "layout": {
+        "base": "grid-2",
+        "lg": "grid-4"
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "kpi",
+          "component": "StatCard",
+          "each": "kpis",
+          "bind": {
+            "label": "item.label",
+            "value": "item.value",
+            "icon": "item.icon",
+            "delta": "item.delta",
+            "caption": "item.caption",
+            "tone": "item.tone"
+          },
+          "why": "Label, counted-up figure and a delta with what it is compared to"
+        }
+      ]
+    },
+    {
+      "id": "revenue",
+      "title": "Revenue",
+      "heading": true,
+      "purpose": "Charter and hangar revenue over the year",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "revenueChart",
+          "component": "BalanceChart",
+          "inputs": {
+            "label": "Charter revenue",
+            "value": "$9.84M",
+            "bars": [
+              520,
+              610,
+              580,
+              720,
+              690,
+              810,
+              760,
+              880,
+              940,
+              1120,
+              1080,
+              1280
+            ],
+            "max": 1400,
+            "yLabels": [
+              "$1.4M",
+              "$1M",
+              "$500k",
+              "0"
+            ],
+            "selection": [
+              8,
+              11
+            ],
+            "tooltip": {
+              "value": "$1.28M",
+              "date": "Oct 2026"
+            },
+            "ranges": [
+              "3M",
+              "6M",
+              "YTD",
+              "1Y"
+            ],
+            "range": "1Y",
+            "ariaLabel": "Charter revenue by month, last 12 months"
+          },
+          "why": "One figure, monthly bars and range tabs: the system revenue widget"
+        }
+      ]
+    },
+    {
+      "id": "fleet",
+      "title": "Fleet",
+      "heading": true,
+      "purpose": "How hard the fleet works; beside the chart on desktop",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2",
+        "lg": "stack"
+      },
+      "area": {
+        "lg": "aside"
+      },
+      "elements": [
+        {
+          "id": "utilisation",
+          "component": "SegmentGauge",
+          "inputs": {
+            "eyebrow": "Fleet",
+            "title": "Utilisation",
+            "total": "72%",
+            "totalLabel": "of available hours",
+            "segments": [
+              {
+                "label": "Flying",
+                "value": 46,
+                "display": "46%"
+              },
+              {
+                "label": "Positioning",
+                "value": 14,
+                "display": "14%"
+              },
+              {
+                "label": "Maintenance",
+                "value": 12,
+                "display": "12%"
+              },
+              {
+                "label": "Idle",
+                "value": 28,
+                "display": "28%"
+              }
+            ],
+            "ariaLabel": "Fleet utilisation: 72% of available hours"
+          },
+          "why": "Four parts of one whole around a counted-up total"
+        },
+        {
+          "id": "topAircraft",
+          "component": "Leaderboard",
+          "inputs": {
+            "eyebrow": "This month",
+            "title": "Top earners",
+            "items": [
+              {
+                "name": "G550 · A6-ARN",
+                "role": "Heavy jet",
+                "score": "$412k",
+                "label": "revenue"
+              },
+              {
+                "name": "Praetor 600 · A6-PRT",
+                "role": "Super-midsize",
+                "score": "$318k",
+                "label": "revenue"
+              },
+              {
+                "name": "Latitude · A6-LAT",
+                "role": "Midsize",
+                "score": "$264k",
+                "label": "revenue",
+                "roleTone": "success"
+              }
+            ],
+            "ariaLabel": "Top earning aircraft this month"
+          },
+          "why": "Ranked list of three with a figure each"
+        }
+      ]
+    },
+    {
+      "id": "bookings",
+      "title": "Latest bookings",
+      "heading": true,
+      "purpose": "What needs action and what is coming",
+      "layout": {
+        "base": "stack"
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "bookingTable",
+          "component": "DataTable",
+          "inputs": {
+            "caption": "Newest first. Awaiting you means the client is waiting for your confirmation.",
+            "searchable": true,
+            "searchPlaceholder": "Search client, route or reference",
+            "clickableRows": true,
+            "columns": [
+              {
+                "key": "id",
+                "header": "Reference",
+                "sortable": true
+              },
+              {
+                "key": "client",
+                "header": "Client",
+                "sortable": true
+              },
+              {
+                "key": "route",
+                "header": "Route"
+              },
+              {
+                "key": "aircraft",
+                "header": "Aircraft"
+              },
+              {
+                "key": "date",
+                "header": "Date",
+                "sortable": true
+              },
+              {
+                "key": "status",
+                "header": "Status",
+                "sortable": true
+              },
+              {
+                "key": "total",
+                "header": "Total",
+                "sortable": true
+              }
+            ]
+          },
+          "bind": {
+            "rows": "bookings"
+          },
+          "events": {
+            "rowClick": "openBooking"
+          },
+          "why": "Sortable, searchable table that scrolls sideways on phones; rows open the booking"
+        }
+      ]
+    },
+    {
+      "id": "tabs",
+      "title": "Tabs",
+      "heading": false,
+      "purpose": "Phone and tablet app navigation, always in thumb reach",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "sticky": {
+        "base": "bottom",
+        "lg": "none"
+      },
+      "elements": [
+        {
+          "id": "tabBar",
+          "component": "TabBar",
+          "inputs": {
+            "items": [
+              {
+                "value": "dashboard",
+                "label": "Home",
+                "icon": "squares-2x2"
+              },
+              {
+                "value": "requests",
+                "label": "Requests",
+                "icon": "inbox",
+                "badge": true
+              },
+              {
+                "value": "fleet",
+                "label": "Fleet",
+                "icon": "paper-airplane"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars",
+                "icon": "building-office-2"
+              },
+              {
+                "value": "account",
+                "label": "Account",
+                "icon": "user-circle"
+              }
+            ],
+            "value": "dashboard",
+            "variant": "labels",
+            "label": "Main"
+          },
+          "why": "Root screens of a phone app get a bottom tab bar; labels make five destinations unambiguous"
+        }
+      ]
+    }
+  ],
+  "forms": [],
+  "motion": [
+    {
+      "where": "Arriving from the tab bar",
+      "component": "RouteTransition",
+      "variant": "fade-through",
+      "why": "Top-level destination"
+    }
+  ],
+  "a11y": [
+    "One h1: the AppBar title on phones and tablets, the PageHeader title at 1280.",
+    "Charts have an aria-label that states the figure; bars are decorative.",
+    "The bookings table has a caption explaining the statuses; sortable headers announce their sort direction."
+  ],
+  "gaps": [],
+  "notes": [
+    "Phone order: KPIs (2×2), revenue, fleet, bookings, then the tab bar. Desktop puts fleet beside revenue and the table full width.",
+    "Status text is plain in this sample; in the product app use an arCell template with a Badge per status."
+  ]
+}

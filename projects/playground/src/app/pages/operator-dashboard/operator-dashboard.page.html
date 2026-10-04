@@ -1,0 +1,139 @@
+<!-- Operator dashboard: generated from docs/pages/operator-dashboard/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="dashboard" [user]="topNavUser">
+        <button
+          arButton
+          arActions
+          class="pg-el-navAction"
+          variant="secondary"
+          size="sm"
+          iconStart="plus"
+          (click)="addAircraft($event)"
+        >Add aircraft</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--topbar" aria-label="Dashboard">
+    <div class="pg-g">
+      <ar-app-bar
+        class="pg-el-appBar"
+        title="Dashboard"
+        [large]="true"
+        eyebrow="Gulf Executive Aviation"
+        [accent]="true"
+      >
+        <button
+          arIconButton
+          arActions
+          class="pg-el-bell"
+          icon="bell"
+          label="Notifications, 3 new"
+          variant="surface"
+          [badge]="true"
+          (click)="openNotifications($event)"
+        ></button>
+      </ar-app-bar>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--head" aria-label="Dashboard">
+    <div class="pg-g">
+      <ar-page-header class="pg-el-pageHeader" title="Good morning, Gulf Executive" [tabs]="pageHeaderTabs" tab="month">
+        <button
+          arButton
+          arActions
+          class="pg-el-export"
+          variant="secondary"
+          size="sm"
+          iconStart="arrow-down-tray"
+          (click)="exportReport($event)"
+        >Export</button>
+      </ar-page-header>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--kpis" aria-label="This month">
+    <div class="pg-g">
+      @for (item of data.kpis; track $index) {
+        <ar-stat-card
+          class="pg-el-kpi"
+          [label]="item.label"
+          [value]="item.value"
+          [icon]="item.icon"
+          [delta]="item.delta"
+          [caption]="item.caption"
+          [tone]="item.tone"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-kpi">Zeros with the caption "No activity yet this month"</p>
+      }
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--revenue" aria-labelledby="pg-h-revenue">
+    <h2 class="pg-h m-title-2" id="pg-h-revenue">Revenue</h2>
+    <div class="pg-g">
+      <ar-balance-chart
+        class="pg-el-revenueChart"
+        label="Charter revenue"
+        value="$9.84M"
+        [bars]="revenueChartBars"
+        [max]="1400"
+        [yLabels]="revenueChartYLabels"
+        [selection]="revenueChartSelection"
+        [tooltip]="revenueChartTooltip"
+        [ranges]="revenueChartRanges"
+        range="1Y"
+        ariaLabel="Charter revenue by month, last 12 months"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--fleet" aria-labelledby="pg-h-fleet">
+    <h2 class="pg-h m-title-2" id="pg-h-fleet">Fleet</h2>
+    <div class="pg-g">
+      <ar-segment-gauge
+        class="pg-el-utilisation"
+        eyebrow="Fleet"
+        title="Utilisation"
+        total="72%"
+        totalLabel="of available hours"
+        [segments]="utilisationSegments"
+        ariaLabel="Fleet utilisation: 72% of available hours"
+      />
+      <ar-leaderboard
+        class="pg-el-topAircraft"
+        eyebrow="This month"
+        title="Top earners"
+        [items]="topAircraftItems"
+        ariaLabel="Top earning aircraft this month"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--bookings" aria-labelledby="pg-h-bookings">
+    <h2 class="pg-h m-title-2" id="pg-h-bookings">Latest bookings</h2>
+    <div class="pg-g">
+      <ar-data-table
+        class="pg-el-bookingTable"
+        caption="Newest first. Awaiting you means the client is waiting for your confirmation."
+        [searchable]="true"
+        searchPlaceholder="Search client, route or reference"
+        [clickableRows]="true"
+        [columns]="bookingTableColumns"
+        [rows]="data.bookings"
+        (rowClick)="openBooking($event)"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--tabs" aria-label="Tabs">
+    <div class="pg-g">
+      <ar-tab-bar class="pg-el-tabBar" [items]="tabBarItems" value="dashboard" variant="labels" label="Main" />
+    </div>
+  </section>
+</main>
+

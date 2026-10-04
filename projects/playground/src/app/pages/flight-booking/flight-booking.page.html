@@ -1,0 +1,213 @@
+<!-- Book a flight: generated from docs/pages/flight-booking/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="book" [user]="topNavUser">
+        <button arButton arActions class="pg-el-navHelp" variant="secondary" size="sm" iconStart="phone">Talk to a broker</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--topbar" aria-label="Book a flight">
+    <div class="pg-g">
+      <ar-app-bar class="pg-el-appBar" title="Book a flight" [large]="true" eyebrow="Private charter" [accent]="true">
+        <button arIconButton arActions class="pg-el-callBroker" icon="phone" label="Talk to a broker" variant="surface" ></button>
+      </ar-app-bar>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--route" aria-label="Your route">
+    <div class="pg-g">
+      <ar-route-header
+        class="pg-el-routeHeader"
+        title="Dubai to London"
+        image="assets/art/route-globe.webp"
+        [from]="data.quote.from"
+        [to]="data.quote.to"
+        [meta]="data.quote.summary"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--trip" aria-label="Trip">
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        <h1 class="m-large-title pg-el-desktopTitle">Book a flight</h1>
+        <ar-mobile-segmented
+          class="pg-el-tripType"
+          tone="brand"
+          [options]="tripTypeOptions"
+          label="Trip type"
+          formControlName="tripType"
+        />
+        @if (bookingForm.error('tripType'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-segmented-control
+          class="pg-el-tripTypeDesktop"
+          tone="brand"
+          [options]="tripTypeDesktopOptions"
+          label="Trip type"
+          formControlName="tripType"
+        />
+        @if (bookingForm.error('tripType'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-select
+          class="pg-el-from"
+          [searchable]="true"
+          searchPlaceholder="City or airport code"
+          iconStart="map-pin"
+          emptyText="No airport matches that."
+          label="From"
+          [options]="data.airports"
+          formControlName="from"
+          [error]="bookingForm.error('from')"
+        />
+        <ar-select
+          class="pg-el-to"
+          [searchable]="true"
+          searchPlaceholder="City or airport code"
+          iconStart="map-pin"
+          emptyText="No airport matches that."
+          label="To"
+          [options]="data.airports"
+          formControlName="to"
+          [error]="bookingForm.error('to')"
+        />
+        <ar-date-picker
+          class="pg-el-departure"
+          mode="single"
+          min="2026-10-04"
+          [presets]="departurePresets"
+          label="Departure"
+          formControlName="departure"
+          [error]="bookingForm.error('departure')"
+        />
+        <ar-quantity-stepper
+          class="pg-el-passengers"
+          description="Adults and children"
+          [min]="1"
+          [max]="19"
+          label="Passengers"
+          formControlName="passengers"
+        />
+        @if (bookingForm.error('passengers'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--offers" aria-labelledby="pg-h-offers">
+    <h2 class="pg-h m-title-2" id="pg-h-offers">Choose your aircraft</h2>
+    <p class="pg-intro body">Prices are for the whole aircraft and include crew, fuel, airport fees and VAT.</p>
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        @for (item of data.offers; track $index) {
+          <ar-flight-ticket
+            class="pg-el-offer"
+            [image]="item.image"
+            [from]="item.from"
+            [to]="item.to"
+            [flight]="item.aircraft"
+            [airline]="item.operator"
+            [cabin]="item.category"
+            [duration]="item.duration"
+            [details]="item.details"
+          />
+        } @empty {
+          <p class="pg-empty pg-el-offer">No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.</p>
+        }
+        <ar-select
+          class="pg-el-aircraft"
+          placeholder="Choose an aircraft"
+          label="Aircraft"
+          [options]="data.aircraftOptions"
+          formControlName="aircraft"
+          [error]="bookingForm.error('aircraft')"
+        />
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--passenger" aria-labelledby="pg-h-passenger">
+    <h2 class="pg-h m-title-2" id="pg-h-passenger">Lead passenger</h2>
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        <ar-text-field
+          class="pg-el-fullName"
+          autocomplete="name"
+          iconStart="user"
+          label="Full name"
+          formControlName="fullName"
+          [error]="bookingForm.error('fullName')"
+        />
+        <ar-text-field
+          class="pg-el-email"
+          type="email"
+          autocomplete="email"
+          inputMode="email"
+          iconStart="envelope"
+          hint="Confirmation and invoice go here"
+          label="Email"
+          formControlName="email"
+          [error]="bookingForm.error('email')"
+        />
+        <ar-text-field
+          class="pg-el-phone"
+          type="tel"
+          autocomplete="tel"
+          inputMode="tel"
+          iconStart="phone"
+          hint="The crew may call before departure"
+          label="Mobile phone"
+          formControlName="phone"
+          [error]="bookingForm.error('phone')"
+        />
+        <ar-text-field
+          class="pg-el-requests"
+          autocomplete="off"
+          placeholder="Catering, pets, ground transport"
+          label="Requests"
+          formControlName="requests"
+          [error]="bookingForm.error('requests')"
+        />
+        <ar-checkbox
+          class="pg-el-terms"
+          label="I agree to the charter terms and the cancellation policy"
+          formControlName="terms"
+        />
+        @if (bookingForm.error('terms'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--summary" aria-labelledby="pg-h-summary">
+    <h2 class="pg-h m-title-2" id="pg-h-summary">Trip summary</h2>
+    <div class="pg-g">
+      <ar-info-stat-row class="pg-el-flightFacts" [items]="flightFactsItems" />
+      <ar-detail-list class="pg-el-priceLines" [items]="data.quote.priceLines" />
+      <ar-badge class="pg-el-hold" tone="warning" icon="clock">Price held for 15 minutes</ar-badge>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--request" aria-label="Request">
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        <ar-sticky-action-bar class="pg-el-requestBar">
+          <strong arSummary class="m-title-2 pg-el-requestTotal">$48,400</strong>
+          <span arSummary class="m-footnote pg-muted pg-el-requestAircraft">Citation Latitude · 4 passengers</span>
+          <button
+            arButton
+            class="pg-el-requestButton"
+            variant="primary"
+            size="lg"
+            iconEnd="paper-airplane"
+            type="submit"
+            [loading]="bookingForm.pending()"
+          >Request flight</button>
+        </ar-sticky-action-bar>
+    </form>
+  </section>
+</main>
+
+<ar-dialog [(open)]="bookingDone" [icon]="false" title="Request sent">
+  <ar-success-burst title="You're flying to London">Request AR-58213 · Thu, 15 Oct · DXB to LTN · the operator confirms within 15 minutes</ar-success-burst>
+  <button arButton arFooter variant="primary" type="button" (click)="bookingDone.set(false)">View trip</button>
+</ar-dialog>

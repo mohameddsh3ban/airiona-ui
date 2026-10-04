@@ -10,6 +10,7 @@ The spec records every decision about one page. `lint` checks it against the rea
 | `title` | yes | Human title ("Stay checkout"). |
 | `route` | no | Route in the product app; defaults to `page`. |
 | `target` | no | `angular` (default) or `react`. Lint checks inputs against that framework's API. |
+| `canvas` | no | `page` (default: centred column, page padding) or `full` (edge to edge, no padding or section gaps) for pages whose one component draws the whole screen, such as an AuthShell sign-in. |
 | `source` | yes | `{ kind: screenshot \| figma \| url \| html \| brief, ref, notes }`. `notes` holds what the source does not show (phone layout, missing states). |
 | `audience` | yes | Who uses the page, on what device, in what situation. |
 | `primaryAction` | yes | The one job of the page ("Pay and confirm the stay"). |
@@ -77,7 +78,7 @@ The spec records every decision about one page. `lint` checks it against the rea
   "a11y": "...", "notes": "..."
 }
 ```
-- `component`: a component name from the index, `"html"` (with `tag`: h1–h4, p, span, div, section, small, strong, a, ul, ol, li, img, hr, figure, figcaption, time, address; plus `class`, `text`, `href` for `a`, `src` and `alt` for `img`; html elements take no `inputs`, `bind`, `events`, `field` or `submit`), or `"GAP"` (with a `gaps` entry).
+- `component`: a component name from the index, `"html"` (with `tag`: h1–h4, p, span, div, section, small, strong, a, ul, ol, li, img, hr, figure, figcaption, time, address; plus `class`, `text`, `href` for `a`, `src` and `alt` for `img`; html elements take no `inputs`, `bind`, `events`, `field` or `submit`), or `"GAP"` (with a `gaps` entry). A container (`div`, `section`) can take `layout` per breakpoint, like a section, to arrange its `children`; that is how a search form docks inside a LandingHero. Page classes for html: `pg-card` (raised surface), `pg-figure` + `pg-photo` (a rounded 16:10 photo with a caption), `pg-muted`, `pg-link`, `pg-divider`, `pg-sr-only`.
 - `inputs`: literal values for the component's inputs. Strings become attributes, everything else a typed property. Only inputs the component has (`describe` lists them) plus `aria-*`, `data-*`, `role`, `title`, `type`, `href`, `class`, `style`, `id`, `tabindex`, `target`, `rel`. A string for an input typed as a union (`variant`, `tone`) must be one of its values.
 - `bind`: input → data path (`"stay.name"`, `"stays[0].price"`). Lint resolves the path through `types` and the sample: the field must exist, an index must be inside the sample, and a field feeding a union input must be typed with that union.
 - `each`: repeats the element for every item of a list (`"each": "hotels"`); inside it `bind` paths start with `item` (`"title": "item.name"`). `empty` is the text shown when the list is empty (defaults to the data's `states.empty`). Use it for any list, so the page renders as many items as the data has.

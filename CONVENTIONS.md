@@ -4,7 +4,7 @@ Airiona's look lives entirely in `projects/airiona-ui/src/styles/components.css`
 
 ## Sources of truth
 
-- React reference implementation: `C:/Users/ASUS/AppData/Local/Temp/claude/C--Users-ASUS-Desktop-ref-airiona/3ce010e6-1500-409f-9a6b-54690f27a737/scratchpad/airiona-ds/project/components/bundle.js` (`h(tag, props, ...children)` is `React.createElement`).
+- React reference implementation: `design-system/components/bundle.js` (`h(tag, props, ...children)` is `React.createElement`).
 - Preview bodies (what each component's demo shows): `.../scratchpad/gen-previews.cjs` — find `comp("Name", "Group", height, \`...body...\`, \`# README...\`)`.
 - Types the React API exposes: `.../scratchpad/airiona-ds/project/components/index.d.ts`.
 - READMEs with usage rules: `.../scratchpad/airiona-ds/project/components/<Name>/README.md`.

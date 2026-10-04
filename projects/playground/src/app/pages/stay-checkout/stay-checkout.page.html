@@ -1,0 +1,165 @@
+<!-- Stay checkout: generated from docs/pages/stay-checkout/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="stays" [user]="topNavUser">
+        <button arButton arActions class="pg-el-navHelp" variant="ghost" size="sm" iconStart="question-mark-circle">Help</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--topbar" aria-label="Checkout">
+    <div class="pg-g">
+      <ar-app-bar
+        class="pg-el-appBar"
+        title="Checkout"
+        [showBack]="true"
+        backLabel="Back to the stay"
+        (back)="backToStay($event)"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--steps" aria-label="Confirm and pay">
+    <div class="pg-g">
+      <ar-booking-steps class="pg-el-progress" [steps]="progressSteps" [current]="3" />
+      <h1 class="m-large-title pg-el-title">Confirm and pay</h1>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--summary" aria-labelledby="pg-h-summary">
+    <h2 class="pg-h m-title-2" id="pg-h-summary">Your stay</h2>
+    <div class="pg-g">
+      <ar-place-card
+        class="pg-el-stayCard"
+        [title]="data.stay.name"
+        [region]="data.stay.region"
+        [location]="data.stay.location"
+        [rating]="data.stay.rating"
+        [image]="data.stay.image"
+      />
+      <ar-info-stat-row class="pg-el-facts" [items]="factsItems" />
+      <ar-badge class="pg-el-cancellation" tone="success" icon="check-circle">Free cancellation until 12 Oct</ar-badge>
+      <ar-detail-list class="pg-el-priceLines" [items]="data.stay.priceLines" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--details" aria-label="Trip and traveller">
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        <h2 class="m-title-2 pg-el-tripHeading">Your trip</h2>
+        <ar-date-picker
+          class="pg-el-dates"
+          mode="range"
+          variant="tiles"
+          startLabel="Check-in"
+          endLabel="Check-out"
+          min="2026-10-04"
+          [maxNights]="28"
+          label="Dates"
+          formControlName="dates"
+          [error]="bookingForm.error('dates')"
+        />
+        <ar-quantity-stepper
+          class="pg-el-adults"
+          description="Age 13 or above"
+          [min]="1"
+          [max]="8"
+          label="Adults"
+          formControlName="adults"
+        />
+        @if (bookingForm.error('adults'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-quantity-stepper
+          class="pg-el-children"
+          description="Ages 2–12"
+          [min]="0"
+          [max]="6"
+          label="Children"
+          formControlName="children"
+        />
+        @if (bookingForm.error('children'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <h2 class="m-title-2 pg-el-travellerHeading">Lead traveller</h2>
+        <ar-text-field
+          class="pg-el-firstName"
+          autocomplete="given-name"
+          label="First name"
+          formControlName="firstName"
+          [error]="bookingForm.error('firstName')"
+        />
+        <ar-text-field
+          class="pg-el-lastName"
+          autocomplete="family-name"
+          label="Last name"
+          formControlName="lastName"
+          [error]="bookingForm.error('lastName')"
+        />
+        <ar-text-field
+          class="pg-el-email"
+          type="email"
+          autocomplete="email"
+          inputMode="email"
+          iconStart="envelope"
+          hint="We send the booking here"
+          label="Email"
+          formControlName="email"
+          [error]="bookingForm.error('email')"
+        />
+        <ar-text-field
+          class="pg-el-phone"
+          type="tel"
+          autocomplete="tel"
+          inputMode="tel"
+          iconStart="phone"
+          hint="For the host on the day"
+          label="Mobile phone"
+          formControlName="phone"
+          [error]="bookingForm.error('phone')"
+        />
+        <ar-select
+          class="pg-el-country"
+          [searchable]="true"
+          searchPlaceholder="Search countries"
+          label="Country of residence"
+          [options]="data.countries"
+          formControlName="country"
+          [error]="bookingForm.error('country')"
+        />
+        <ar-checkbox
+          class="pg-el-terms"
+          label="I agree to the house rules and the cancellation policy"
+          formControlName="terms"
+        />
+        @if (bookingForm.error('terms'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <!-- GAP payment: see gaps in the spec. Placeholder until the component exists. -->
+        <div class="pg-gap pg-el-payment">Card details: payment provider's embedded form</div>
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--pay" aria-label="Pay">
+    <form class="pg-g" [formGroup]="booking" (ngSubmit)="submitBooking()" novalidate>
+        <ar-sticky-action-bar class="pg-el-payBar">
+          <strong arSummary class="m-title-2 pg-el-payTotal">$1,284</strong>
+          <span arSummary class="m-footnote pg-muted pg-el-payNights">4 nights · 2 guests</span>
+          <button
+            arButton
+            class="pg-el-payButton"
+            variant="primary"
+            size="lg"
+            iconEnd="lock-closed"
+            type="submit"
+            [loading]="bookingForm.pending()"
+          >Pay $1,284</button>
+        </ar-sticky-action-bar>
+    </form>
+  </section>
+</main>
+
+<ar-dialog [(open)]="bookingDone" [icon]="false" title="Booking confirmed">
+  <ar-success-burst title="You're going to Bavaria">Booking K7QX2M · 15–19 Oct · Nordic Pine Lodge</ar-success-burst>
+  <button arButton arFooter variant="primary" type="button" (click)="bookingDone.set(false)">View booking</button>
+</ar-dialog>

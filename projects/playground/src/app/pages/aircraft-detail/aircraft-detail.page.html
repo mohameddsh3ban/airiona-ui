@@ -1,0 +1,154 @@
+<!-- Aircraft: generated from docs/pages/aircraft-detail/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="aircraft" [user]="topNavUser">
+        <button
+          arButton
+          arActions
+          class="pg-el-navAction"
+          variant="secondary"
+          size="sm"
+          iconStart="plus"
+          (click)="listAircraft($event)"
+        >List your aircraft</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--hero" aria-label="Gulfstream G550">
+    <div class="pg-g">
+      <h1 class="pg-sr-only pg-el-pageTitle">Gulfstream G550</h1>
+      <ar-place-hero
+        class="pg-el-placeHero"
+        title="Gulfstream G550"
+        location="Dubai World Central · DWC"
+        price="$24.5M"
+        priceLabel="Asking price"
+        image="assets/photos/aviation/jet-heavy.webp"
+        (back)="goBack($event)"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--facts" aria-label="Key facts">
+    <div class="pg-g">
+      <ar-info-stat-row class="pg-el-factRow" [items]="factRowItems" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--about" aria-labelledby="pg-h-about">
+    <h2 class="pg-h m-title-2" id="pg-h-about">About</h2>
+    <div class="pg-g">
+      <ar-expandable-text class="pg-el-aboutText" [lines]="4">One owner since new and flown by a corporate flight department on a Part 91 programme. The 72-month inspection was completed at Gulfstream Savannah in March 2026, with new brakes, a fresh battery and updated navigation databases. The cabin was refurbished in 2023: sixteen seats in three zones, six of them berthable, a forward galley and an aft lavatory with shower. All logbooks and records are digital and available to verified buyers on request; the aircraft has no damage history.</ar-expandable-text>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--specs" aria-labelledby="pg-h-specs">
+    <h2 class="pg-h m-title-2" id="pg-h-specs">Specification</h2>
+    <div class="pg-g">
+      <ar-detail-list class="pg-el-specList" [items]="specListItems" />
+      <figure class="pg-figure pg-el-photo">
+        <img class="pg-photo pg-el-photoImg" src="assets/photos/aviation/jet-cabin.webp" alt="The G550 cabin: cream leather club seats, walnut tables and oval windows" />
+        <figcaption class="pg-muted m-footnote pg-el-photoCaption">Mid cabin, refurbished 2023</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--amenities" aria-labelledby="pg-h-amenities">
+    <h2 class="pg-h m-title-2" id="pg-h-amenities">On board</h2>
+    <div class="pg-g">
+      <ar-amenity-list class="pg-el-amenityList" [items]="amenityListItems" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--contact" aria-labelledby="pg-h-contact">
+    <h2 class="pg-h m-title-2" id="pg-h-contact">Contact the seller</h2>
+    <p class="pg-intro body">The broker replies within one business day. Records are shared after a short verification.</p>
+    <form class="pg-g" [formGroup]="enquiry" (ngSubmit)="submitEnquiry()" novalidate>
+        <ar-text-field
+          class="pg-el-fullName"
+          autocomplete="name"
+          iconStart="user"
+          label="Full name"
+          formControlName="fullName"
+          [error]="enquiryForm.error('fullName')"
+        />
+        <ar-text-field
+          class="pg-el-email"
+          type="email"
+          autocomplete="email"
+          inputMode="email"
+          iconStart="envelope"
+          label="Email"
+          formControlName="email"
+          [error]="enquiryForm.error('email')"
+        />
+        <ar-text-field
+          class="pg-el-phone"
+          type="tel"
+          autocomplete="tel"
+          inputMode="tel"
+          iconStart="phone"
+          label="Phone"
+          formControlName="phone"
+          [error]="enquiryForm.error('phone')"
+        />
+        <ar-mobile-segmented
+          class="pg-el-intent"
+          label="I want to"
+          tone="brand"
+          [options]="intentOptions"
+          formControlName="intent"
+        />
+        @if (enquiryForm.error('intent'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <ar-text-field
+          class="pg-el-message"
+          placeholder="Ask about records, delivery or a viewing"
+          autocomplete="off"
+          label="Message (optional)"
+          formControlName="message"
+          [error]="enquiryForm.error('message')"
+        />
+        <ar-checkbox class="pg-el-financing" label="I would like financing options" formControlName="financing" />
+        @if (enquiryForm.error('financing'); as message) {
+          <p class="pg-error" role="alert">{{ message }}</p>
+        }
+        <button
+          arButton
+          class="pg-el-desktopSubmit"
+          variant="primary"
+          size="lg"
+          [block]="true"
+          iconEnd="arrow-right"
+          type="submit"
+          [loading]="enquiryForm.pending()"
+        >Contact seller</button>
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--cta" aria-label="Send">
+    <form class="pg-g" [formGroup]="enquiry" (ngSubmit)="submitEnquiry()" novalidate>
+        <ar-sticky-action-bar class="pg-el-ctaBar">
+          <strong arSummary class="m-title-2 pg-el-ctaTotal">$24.5M</strong>
+          <span arSummary class="m-footnote pg-muted pg-el-ctaNote">Asking · negotiable</span>
+          <button
+            arButton
+            class="pg-el-ctaButton"
+            variant="primary"
+            size="lg"
+            iconEnd="arrow-right"
+            type="submit"
+            [loading]="enquiryForm.pending()"
+          >Contact seller</button>
+        </ar-sticky-action-bar>
+    </form>
+  </section>
+</main>
+
+<ar-dialog [(open)]="enquiryDone" [icon]="false" title="Message sent">
+  <ar-success-burst title="The broker has your message">Expect a reply within one business day. We emailed you a copy.</ar-success-burst>
+  <button arButton arFooter variant="primary" type="button" (click)="enquiryDone.set(false)">Done</button>
+</ar-dialog>

@@ -1,0 +1,242 @@
+{
+  "page": "flight-booking",
+  "title": "Book a flight",
+  "route": "book",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "",
+    "notes": "The central page of the product: a client books a private flight from A to B. One page carries the whole booking: route, trip details, aircraft offers for that route, the chosen aircraft, the lead passenger and the request. Prices are quoted per aircraft for the whole flight; the booking is a request the operator confirms, paid by invoice or card after confirmation (no card entry on this page)."
+  },
+  "audience": "A client (often an assistant booking for someone) on a phone or laptop, who knows the route and date and wants the right aircraft at a clear all-in price",
+  "primaryAction": "Request the flight on the chosen aircraft",
+  "types": {
+    "Airport": { "value": "string", "label": "string", "meta": "string" },
+    "Endpoint": { "code": "string", "city": "string", "time": "string" },
+    "Fact": { "label": "string", "value": "string" },
+    "Offer": {
+      "id": "string", "aircraft": "string", "category": "string", "operator": "string", "image": "string",
+      "from": "Endpoint", "to": "Endpoint", "duration": "string", "details": "Fact[]"
+    },
+    "AircraftOption": { "value": "string", "label": "string", "description": "string", "meta": "string" },
+    "RouteEnd": { "code": "string", "city": "string" },
+    "Quote": { "from": "RouteEnd", "to": "RouteEnd", "summary": "string", "priceLines": "Fact[]", "total": "string" }
+  },
+  "data": [
+    {
+      "name": "airports", "type": "Airport[]", "source": "GET /api/airports?query= (searchable, nearest first)",
+      "sample": [
+        { "value": "DXB", "label": "Dubai International", "meta": "DXB" },
+        { "value": "DWC", "label": "Dubai Al Maktoum", "meta": "DWC" },
+        { "value": "LTN", "label": "London Luton", "meta": "LTN" },
+        { "value": "FAB", "label": "Farnborough", "meta": "FAB" },
+        { "value": "NCE", "label": "Nice Côte d'Azur", "meta": "NCE" },
+        { "value": "GVA", "label": "Geneva", "meta": "GVA" },
+        { "value": "RUH", "label": "Riyadh King Khalid", "meta": "RUH" },
+        { "value": "MLE", "label": "Malé Velana", "meta": "MLE" }
+      ],
+      "states": { "loading": "Select shows 'Searching airports…'", "empty": "Select empty text: 'No airport matches that. Try the city or the IATA code.'", "error": "Select hint: 'Airports could not load. Type the IATA code.'" }
+    },
+    {
+      "name": "offers", "type": "Offer[]", "source": "GET /api/charter/offers?from&to&date&passengers",
+      "sample": [
+        {
+          "id": "o-light", "aircraft": "Phenom 300E", "category": "Light jet", "operator": "Skyline Executive", "image": "assets/photos/aviation/jet-light.webp",
+          "from": { "code": "DXB", "city": "Dubai", "time": "09:30" }, "to": { "code": "LTN", "city": "London", "time": "14:50" }, "duration": "1 stop · ATH · 8 h 20 m",
+          "details": [{ "label": "Seats", "value": "6" }, { "label": "Bags", "value": "6" }, { "label": "Price", "value": "$32,900" }]
+        },
+        {
+          "id": "o-mid", "aircraft": "Citation Latitude", "category": "Midsize jet", "operator": "Gulf Air Charter", "image": "assets/photos/aviation/jet-midsize.webp",
+          "from": { "code": "DXB", "city": "Dubai", "time": "09:30" }, "to": { "code": "LTN", "city": "London", "time": "13:55" }, "duration": "Non-stop · 7 h 25 m",
+          "details": [{ "label": "Seats", "value": "9" }, { "label": "Bags", "value": "10" }, { "label": "Price", "value": "$48,400" }]
+        },
+        {
+          "id": "o-heavy", "aircraft": "Global 6500", "category": "Long-range jet", "operator": "Meridian Private", "image": "assets/photos/aviation/jet-heavy.webp",
+          "from": { "code": "DXB", "city": "Dubai", "time": "09:30" }, "to": { "code": "LTN", "city": "London", "time": "13:40" }, "duration": "Non-stop · 7 h 10 m",
+          "details": [{ "label": "Seats", "value": "14" }, { "label": "Bags", "value": "18" }, { "label": "Price", "value": "$86,500" }]
+        }
+      ],
+      "states": { "loading": "Three Skeleton cards in the offer layout", "empty": "No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.", "error": "Toast 'Offers could not load' with Retry; the trip form stays as typed" }
+    },
+    {
+      "name": "aircraftOptions", "type": "AircraftOption[]", "source": "derived from offers",
+      "sample": [
+        { "value": "o-light", "label": "Phenom 300E · Light jet", "description": "1 stop · 8 h 20 m · 6 seats", "meta": "$32,900" },
+        { "value": "o-mid", "label": "Citation Latitude · Midsize jet", "description": "Non-stop · 7 h 25 m · 9 seats", "meta": "$48,400" },
+        { "value": "o-heavy", "label": "Global 6500 · Long-range jet", "description": "Non-stop · 7 h 10 m · 14 seats", "meta": "$86,500" }
+      ],
+      "states": { "loading": "Select disabled until offers load", "empty": "Select hidden when there are no offers", "error": "as offers" }
+    },
+    {
+      "name": "quote", "type": "Quote", "source": "POST /api/charter/quote { offerId, passengers } (recomputed when the aircraft or passengers change)",
+      "sample": {
+        "from": { "code": "DXB", "city": "Dubai" }, "to": { "code": "LTN", "city": "London" },
+        "summary": "Thu, 15 Oct · 4 passengers",
+        "priceLines": [
+          { "label": "Flight, Citation Latitude", "value": "$44,200" },
+          { "label": "Airport and handling fees", "value": "$2,650" },
+          { "label": "Catering for 4", "value": "$560" },
+          { "label": "VAT", "value": "$990" },
+          { "label": "Total (USD)", "value": "$48,400" }
+        ],
+        "total": "$48,400"
+      },
+      "states": { "loading": "Price lines show Skeleton rows; the request button stays disabled", "error": "Toast 'We could not price this trip' with Retry" }
+    }
+  ],
+  "sections": [
+    {
+      "id": "nav", "title": "Site navigation", "heading": false, "purpose": "Desktop navigation", "layout": { "base": "stack" },
+      "show": { "base": false, "lg": true }, "area": { "lg": "full" },
+      "elements": [
+        {
+          "id": "topNav", "component": "TopNav",
+          "inputs": { "links": [{ "value": "book", "label": "Book" }, { "value": "trips", "label": "My trips" }, { "value": "aircraft", "label": "Aircraft" }, { "value": "hangars", "label": "Hangars" }], "value": "book", "user": { "name": "Omar Saleh", "email": "omar@example.com" } },
+          "why": "The product's four destinations with the signed-in client",
+          "children": [{ "id": "navHelp", "component": "Button", "slot": "arActions", "text": "Talk to a broker", "inputs": { "variant": "secondary", "size": "sm", "iconStart": "phone" }, "why": "Charter clients expect a human; replaces TopNav's default search and bell" }]
+        }
+      ]
+    },
+    {
+      "id": "topbar", "title": "Book a flight", "heading": false, "purpose": "Phone title and broker shortcut", "layout": { "base": "stack" },
+      "show": { "lg": false },
+      "elements": [
+        {
+          "id": "appBar", "component": "AppBar", "inputs": { "title": "Book a flight", "large": true, "eyebrow": "Private charter", "accent": true },
+          "why": "Root screen of the Book tab: large title (the page h1 on phones and tablets)",
+          "children": [{ "id": "callBroker", "component": "IconButton", "slot": "arActions", "inputs": { "icon": "phone", "label": "Talk to a broker", "variant": "surface" }, "why": "One-tap call to a broker" }]
+        }
+      ]
+    },
+    {
+      "id": "route", "title": "Your route", "heading": false, "purpose": "The A to B the whole page is about, shown as the route arc", "layout": { "base": "stack" },
+      "bleed": { "base": true }, "area": { "lg": "full" },
+      "elements": [
+        {
+          "id": "routeHeader", "component": "RouteHeader",
+          "bind": { "from": "quote.from", "to": "quote.to", "meta": "quote.summary" },
+          "inputs": { "title": "Dubai to London", "image": "assets/art/route-globe.webp" },
+          "why": "The system's route header: both airports, the arc between them and the trip line; it makes the A to B the hero",
+          "alternatives": [{ "component": "HeroHeader", "rejected": "no route; a generic headline panel" }]
+        }
+      ]
+    },
+    {
+      "id": "trip", "title": "Trip", "heading": false, "purpose": "Where, when and how many: changing any of it refreshes the offers", "layout": { "base": "stack", "md": "grid-2", "lg": "grid-4" },
+      "form": "booking",
+      "elements": [
+        { "id": "desktopTitle", "component": "html", "tag": "h1", "class": "m-large-title", "text": "Book a flight", "show": { "base": false, "lg": true }, "span": { "md": "full" } },
+        {
+          "id": "tripType", "component": "MobileSegmented", "field": "tripType", "inputs": { "tone": "brand", "options": [{ "value": "one", "label": "One way" }, { "value": "return", "label": "Return" }] },
+          "show": { "lg": false }, "span": { "md": "full" }, "why": "Two always-visible options with a thumb-sized switch on phones"
+        },
+        {
+          "id": "tripTypeDesktop", "component": "SegmentedControl", "field": "tripType", "inputs": { "tone": "brand", "options": [{ "value": "one", "label": "One way" }, { "value": "return", "label": "Return" }] },
+          "show": { "base": false, "lg": true }, "span": { "lg": "full" }, "why": "Compact pill group above the trip row on desktop; same form control"
+        },
+        { "id": "from", "component": "Select", "field": "from", "bind": { "options": "airports" }, "inputs": { "searchable": true, "searchPlaceholder": "City or airport code", "iconStart": "map-pin", "emptyText": "No airport matches that." }, "why": "One airport from many; searchable by city or IATA code" },
+        { "id": "to", "component": "Select", "field": "to", "bind": { "options": "airports" }, "inputs": { "searchable": true, "searchPlaceholder": "City or airport code", "iconStart": "map-pin", "emptyText": "No airport matches that." }, "why": "Same control as From so the pair reads as one route" },
+        {
+          "id": "departure", "component": "DatePicker", "field": "departure", "inputs": { "mode": "single", "min": "2026-10-04", "presets": [{ "label": "Tomorrow", "value": "2026-10-04" }, { "label": "This Friday", "value": "2026-10-09" }] },
+          "why": "One departure date with quick presets; a charter can leave any day",
+          "alternatives": [{ "component": "Calendar", "rejected": "an inline month takes the phone screen" }]
+        },
+        { "id": "passengers", "component": "QuantityStepper", "field": "passengers", "inputs": { "description": "Adults and children", "min": 1, "max": 19 }, "why": "A bounded count; the maximum is the largest cabin offered" }
+      ]
+    },
+    {
+      "id": "offers", "title": "Choose your aircraft", "purpose": "Aircraft that can fly this route on that date, with all-in prices", "layout": { "base": "scroll-x", "md": "grid-2", "lg": "grid-3" },
+      "intro": "Prices are for the whole aircraft and include crew, fuel, airport fees and VAT.",
+      "form": "booking",
+      "elements": [
+        {
+          "id": "offer", "component": "FlightTicket", "each": "offers", "empty": "No aircraft can fly this route on that date. Try the day before or after, or a nearby airport.",
+          "bind": { "image": "item.image", "from": "item.from", "to": "item.to", "flight": "item.aircraft", "airline": "item.operator", "cabin": "item.category", "duration": "item.duration", "details": "item.details" },
+          "why": "The flight card with the aircraft photo on top: for charter the aircraft is the product, so the photo stays (unlike scheduled-flight results)",
+          "alternatives": [{ "component": "TicketCard", "rejected": "no photo and fare-style, for scheduled seats" }, { "component": "StayCard", "rejected": "no route line" }]
+        },
+        {
+          "id": "aircraft", "component": "Select", "field": "aircraft", "bind": { "options": "aircraftOptions" }, "span": { "base": "full", "md": "full", "lg": "full" },
+          "why": "The choice itself: one of the offers, with route, seats and price in each option; cards above show the aircraft",
+          "notes": "In the app, tapping a card also sets this field."
+        }
+      ]
+    },
+    {
+      "id": "passenger", "title": "Lead passenger", "purpose": "Who flies and how the operator reaches them", "layout": { "base": "stack", "md": "grid-2" },
+      "form": "booking",
+      "elements": [
+        { "id": "fullName", "component": "TextField", "field": "fullName", "inputs": { "iconStart": "user" }, "span": { "md": "full" }, "why": "Name as on the passport, for the manifest" },
+        { "id": "email", "component": "TextField", "field": "email", "inputs": { "iconStart": "envelope", "hint": "Confirmation and invoice go here" }, "why": "Email keyboard and autofill" },
+        { "id": "phone", "component": "TextField", "field": "phone", "inputs": { "iconStart": "phone", "hint": "The crew may call before departure" }, "why": "Phone keyboard and autofill" },
+        { "id": "requests", "component": "TextField", "field": "requests", "inputs": { "placeholder": "Catering, pets, ground transport" }, "span": { "md": "full" }, "why": "Free text for the operator; optional" },
+        { "id": "terms", "component": "Checkbox", "field": "terms", "span": { "md": "full" }, "why": "Explicit agreement to the charter terms (requiredTrue)" }
+      ]
+    },
+    {
+      "id": "summary", "title": "Trip summary", "purpose": "What the request costs; beside the form on desktop", "layout": { "base": "stack" },
+      "area": { "lg": "aside" },
+      "elements": [
+        { "id": "flightFacts", "component": "InfoStatRow", "inputs": { "items": [{ "icon": "clock", "label": "7 h 25 m" }, { "icon": "users", "label": "4 of 9 seats" }, { "icon": "briefcase", "label": "10 bags" }] }, "why": "The three numbers clients ask first" },
+        { "id": "priceLines", "component": "DetailList", "bind": { "items": "quote.priceLines" }, "why": "Label and value rows for the all-in price, total last" },
+        { "id": "hold", "component": "Badge", "inputs": { "tone": "warning", "icon": "clock" }, "text": "Price held for 15 minutes", "why": "Charter prices move; the hold explains the urgency without pressure" }
+      ]
+    },
+    {
+      "id": "request", "title": "Request", "heading": false, "purpose": "The total and the request button, always in reach on phones", "layout": { "base": "stack" },
+      "form": "booking",
+      "sticky": { "base": "bottom", "lg": "none" },
+      "elements": [
+        {
+          "id": "requestBar", "component": "StickyActionBar", "why": "The system's bottom CTA: price summary plus one 60px button",
+          "children": [
+            { "id": "requestTotal", "component": "html", "tag": "strong", "slot": "arSummary", "class": "m-title-2", "text": "$48,400" },
+            { "id": "requestAircraft", "component": "html", "tag": "span", "slot": "arSummary", "class": "m-footnote pg-muted", "text": "Citation Latitude · 4 passengers" },
+            { "id": "requestButton", "component": "Button", "submit": true, "text": "Request flight", "inputs": { "variant": "primary", "size": "lg", "iconEnd": "paper-airplane" }, "why": "The one primary action; the operator confirms within the hold" }
+          ]
+        }
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "booking",
+      "submit": {
+        "label": "Request flight",
+        "action": "POST /api/charter/requests { offerId, tripType, from, to, departure, passengers, leadPassenger, requests }",
+        "success": { "kind": "burst", "title": "You're flying to London", "text": "Request AR-58213 · Thu, 15 Oct · DXB to LTN · the operator confirms within 15 minutes", "dialogTitle": "Request sent", "action": "View trip" },
+        "failure": "Offer no longer available (410): Toast 'That aircraft was just booked' and the offers refresh; any other error: danger Toast with Retry and the form kept"
+      },
+      "fields": [
+        { "name": "tripType", "label": "Trip type", "component": ["MobileSegmented", "SegmentedControl"], "default": "one", "validators": [{ "type": "required" }], "messages": { "required": "Choose one way or return." } },
+        { "name": "from", "label": "From", "component": "Select", "default": "DXB", "validators": [{ "type": "required" }], "messages": { "required": "Choose where you fly from." } },
+        { "name": "to", "label": "To", "component": "Select", "default": "LTN", "validators": [{ "type": "required" }], "messages": { "required": "Choose where you fly to." } },
+        { "name": "departure", "label": "Departure", "component": "DatePicker", "default": "2026-10-15", "validators": [{ "type": "required" }, { "type": "futureDate" }], "messages": { "required": "Choose a departure date.", "futureDate": "Departure can't be in the past." } },
+        { "name": "passengers", "label": "Passengers", "component": "QuantityStepper", "default": 4, "validators": [{ "type": "min", "value": 1 }, { "type": "max", "value": 19 }], "messages": { "min": "At least one passenger flies.", "max": "For more than 19 passengers, talk to a broker." } },
+        { "name": "aircraft", "label": "Aircraft", "component": "Select", "default": null, "inputs": { "placeholder": "Choose an aircraft" }, "validators": [{ "type": "required" }], "messages": { "required": "Choose the aircraft you want." } },
+        { "name": "fullName", "label": "Full name", "component": "TextField", "default": "", "inputs": { "autocomplete": "name" }, "validators": [{ "type": "required" }, { "type": "minLength", "value": 3 }, { "type": "maxLength", "value": 80 }], "messages": { "required": "Enter the lead passenger's name as on the passport.", "minlength": "Enter the full name.", "maxlength": "Use at most 80 characters." } },
+        { "name": "email", "label": "Email", "component": "TextField", "default": "", "inputs": { "type": "email", "autocomplete": "email", "inputMode": "email" }, "validators": [{ "type": "required" }, { "type": "email" }], "messages": { "required": "Enter an email for the confirmation.", "email": "Enter an email like name@example.com." } },
+        { "name": "phone", "label": "Mobile phone", "component": "TextField", "default": "", "inputs": { "type": "tel", "autocomplete": "tel", "inputMode": "tel" }, "validators": [{ "type": "required" }, { "type": "phone" }], "messages": { "required": "Enter a phone number the crew can reach.", "phone": "Enter a phone number with country code, like +971 50 123 4567." } },
+        { "name": "requests", "label": "Requests", "component": "TextField", "default": "", "inputs": { "autocomplete": "off" }, "validators": [{ "type": "maxLength", "value": 500 }], "messages": { "maxlength": "Keep requests under 500 characters." } },
+        { "name": "terms", "label": "I agree to the charter terms and the cancellation policy", "component": "Checkbox", "default": false, "validators": [{ "type": "requiredTrue" }], "messages": { "required": "Tick to agree before requesting." } }
+      ]
+    }
+  ],
+  "motion": [
+    { "where": "Arriving from search or the home page", "component": "RouteTransition", "variant": "fade-through", "why": "Top-level destination" },
+    { "where": "Offers after the trip changes", "component": "Skeleton", "why": "Offers load in place without the layout jumping" },
+    { "where": "After the request is sent", "component": "SuccessBurst", "why": "The one celebration at the end of the booking" }
+  ],
+  "a11y": [
+    "One h1: AppBar large title on phones and tablets, the visible 'Book a flight' heading on desktop.",
+    "The offer carousel on phones is a scrollable region; each card names the aircraft, operator and price in text.",
+    "Submit moves focus to the first invalid field; the success dialog takes focus and returns it to the request button when closed."
+  ],
+  "gaps": [],
+  "notes": [
+    "Phone order: title, route, trip details, aircraft offers (swipe), the aircraft choice, lead passenger, price summary, sticky request bar. Desktop: route full width, then the form on the left and the price summary sticky on the right.",
+    "Return trips add a return date field and a second leg on each offer; the sample shows one way.",
+    "The request bar total follows the selected aircraft (quote.total); the sample shows the midsize offer.",
+    "No card entry here: charter is confirmed by the operator first, then paid by invoice or card link."
+  ]
+}

@@ -308,9 +308,9 @@
     },
     {
       "id": "hero",
-      "title": "Convenient online flight booking",
+      "title": "Fly on your own schedule",
       "heading": false,
-      "purpose": "The source's hero: eyebrow, display headline and the 3D plane; sets the page's h1",
+      "purpose": "The page's opening: a cinematic sky with the headline, proof figures and the flight search docked over its lower edge, so the primary action is on the first screen",
       "layout": {
         "base": "stack"
       },
@@ -321,228 +321,269 @@
       "area": {
         "lg": "full"
       },
-      "elements": [
-        {
-          "id": "heroHeader",
-          "component": "HeroHeader",
-          "inputs": {
-            "eyebrow": "Ready for take-off",
-            "title": "Convenient online flight booking",
-            "image": "assets/art/jet-3d.webp",
-            "headingLevel": 1
-          },
-          "why": "A midnight header with art and a display title is the system's version of the source's headline-over-plane hero; it also carries the page's single h1",
-          "alternatives": [
-            {
-              "component": "RouteHeader",
-              "rejected": "shows a route arc for results, not a landing headline"
-            },
-            {
-              "component": "PlaceHero",
-              "rejected": "a photo with price caption for one place"
-            },
-            {
-              "component": "html h1",
-              "rejected": "loses the art panel the source leans on"
-            }
-          ],
-          "children": [
-            {
-              "id": "heroLede",
-              "component": "html",
-              "tag": "p",
-              "class": "body",
-              "slot": "arBelowTitle",
-              "text": "Flights, stays and transfers in one booking."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "search",
-      "title": "Search flights",
-      "heading": false,
-      "purpose": "The reason the page exists: route, dates and trip type, then search",
-      "layout": {
-        "base": "stack",
-        "md": "grid-2",
-        "lg": "grid-4"
-      },
-      "area": {
-        "lg": "full"
-      },
       "form": "search",
       "elements": [
         {
-          "id": "tripType",
-          "component": "MobileSegmented",
-          "field": "tripType",
+          "id": "heroLanding",
+          "component": "LandingHero",
           "inputs": {
-            "label": "Trip type",
-            "tone": "brand",
-            "options": [
+            "eyebrow": "Private aviation",
+            "title": "Fly on your own schedule.",
+            "lede": "Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes.",
+            "image": "assets/photos/aviation/hero-sky.webp",
+            "video": "assets/video/hero-sky.mp4",
+            "focus": "78% 50%",
+            "stats": [
               {
-                "value": "one",
-                "label": "One way"
+                "value": "1,240",
+                "label": "Aircraft listed"
               },
               {
-                "value": "round",
-                "label": "Round trip"
+                "value": "140",
+                "label": "Airports with hangars"
               },
               {
-                "value": "multi",
-                "label": "Multi-city"
+                "value": "15 min",
+                "label": "Average reply"
               }
-            ]
+            ],
+            "headingLevel": 1,
+            "docked": true
           },
-          "span": {
-            "md": 2
-          },
-          "why": "Three always-visible options with a sliding thumb, full width on phones; brand tone is the system's rule for trip type in search",
+          "why": "A full-bleed photo hero with a looping sky video, display headline and proof figures replaces the source's headline-over-plane art; docked children let the search card straddle its edge like the source's search bar under the hero",
           "alternatives": [
             {
-              "component": "SegmentedControl",
-              "rejected": "desktop pill group; MobileSegmented is full-width and thumb-sized on phones"
+              "component": "HeroHeader",
+              "rejected": "a compact mobile header with a pattern; no video, no stats, too small for a landing page at 1280"
             },
             {
-              "component": "Select",
-              "rejected": "hides three options behind a tap"
+              "component": "PlaceHero",
+              "rejected": "a photo with a price caption for one place"
+            },
+            {
+              "component": "RouteHeader",
+              "rejected": "a route arc for results, not a landing headline"
             }
           ],
-          "show": {
-            "lg": false
-          }
-        },
-        {
-          "id": "tripTypeDesktop",
-          "component": "SegmentedControl",
-          "field": "tripType",
-          "inputs": {
-            "label": "Trip type",
-            "tone": "brand",
-            "options": [
-              {
-                "value": "one",
-                "label": "One way"
-              },
-              {
-                "value": "round",
-                "label": "Round trip"
-              },
-              {
-                "value": "multi",
-                "label": "Multi-city"
-              }
-            ]
-          },
-          "show": {
-            "base": false,
-            "lg": true
-          },
-          "span": {
-            "lg": "full"
-          },
-          "why": "On desktop the trip type is a compact pill group above the search row, like the source; same form control as the phone switch",
-          "alternatives": [
+          "notes": "The video plays only from 1024px, 1200ms after load, paused off screen and never under reduced motion; phones get the poster cropped at 78% so the jet stays in view.",
+          "children": [
             {
-              "component": "MobileSegmented",
-              "rejected": "full-width phone control stretched across 1200px"
-            }
-          ]
-        },
-        {
-          "id": "from",
-          "component": "Select",
-          "field": "from",
-          "inputs": {
-            "label": "From",
-            "placeholder": "City or airport",
-            "searchable": true,
-            "searchPlaceholder": "Type a city or code",
-            "iconStart": "paper-airplane",
-            "emptyText": "No airport matches that"
-          },
-          "bind": {
-            "options": "airports"
-          },
-          "why": "One of 8–50 airports with a filter field; code shown in mono beside the city, as the system asks",
-          "alternatives": [
-            {
-              "component": "TextField",
-              "rejected": "free text cannot be matched to an airport without a picker"
+              "id": "heroBrowseAircraft",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Browse aircraft",
+              "inputs": {
+                "variant": "secondary",
+                "size": "lg",
+                "iconStart": "paper-airplane"
+              },
+              "events": {
+                "click": "goToAircraft"
+              },
+              "why": "Second door into the marketplace for visitors who want to buy, not charter",
+              "notes": "Routes to /aircraft-market"
             },
             {
-              "component": "FieldTile",
-              "rejected": "opens a sheet; the Select already filters inline"
-            }
-          ]
-        },
-        {
-          "id": "to",
-          "component": "Select",
-          "field": "to",
-          "inputs": {
-            "label": "To",
-            "placeholder": "City or airport",
-            "searchable": true,
-            "searchPlaceholder": "Type a city or code",
-            "iconStart": "map-pin",
-            "emptyText": "No airport matches that"
-          },
-          "bind": {
-            "options": "airports"
-          },
-          "why": "Same control as From so the two line up"
-        },
-        {
-          "id": "dates",
-          "component": "DatePicker",
-          "field": "dates",
-          "inputs": {
-            "label": "Travel dates",
-            "mode": "range",
-            "variant": "tiles",
-            "startLabel": "Departure",
-            "endLabel": "Return",
-            "min": "2026-10-03",
-            "today": "2026-10-03",
-            "unit": "day",
-            "inclusive": true
-          },
-          "why": "Departure and Return as two tiles in one control, exactly the source's pair; range picking across months with the result stated in words",
-          "alternatives": [
-            {
-              "component": "Calendar",
-              "rejected": "an inline month takes the whole phone screen"
+              "id": "heroHangars",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Find hangar space",
+              "inputs": {
+                "variant": "ghost",
+                "size": "lg",
+                "iconStart": "building-office-2"
+              },
+              "events": {
+                "click": "goToHangars"
+              },
+              "why": "Third door, for owners looking for space; ghost so the two links never outrank the search",
+              "notes": "Routes to /hangar-market"
             },
             {
-              "component": "TextField",
-              "rejected": "typed dates are error-prone"
-            }
-          ],
-          "notes": "When tripType is 'one' the Return tile should be hidden and the field switch to mode single; this is a cross-field rule for the app (see notes)"
-        },
-        {
-          "id": "searchSubmit",
-          "component": "Button",
-          "submit": true,
-          "text": "Search flights",
-          "inputs": {
-            "variant": "primary",
-            "size": "lg",
-            "block": true,
-            "iconStart": "magnifying-glass"
-          },
-          "span": {
-            "md": 2,
-            "lg": 1
-          },
-          "why": "The one primary action: midnight ink, full width on phones; the source's round search disc becomes a labelled button so it has a visible verb; at 1280 it takes the fourth column so the row reads From, To, Dates, Search like the source bar",
-          "alternatives": [
-            {
-              "component": "IconButton brand",
-              "rejected": "an icon-only disc is a 44px target with no visible label; the brand disc belongs to BookingSearch only"
+              "id": "searchCard",
+              "component": "html",
+              "tag": "div",
+              "class": "pg-card",
+              "layout": {
+                "base": "stack",
+                "md": "grid-2",
+                "lg": "grid-4"
+              },
+              "why": "The search form on a raised card docked over the hero edge; the card lays out the fields like the old search section did",
+              "children": [
+                {
+                  "id": "tripType",
+                  "component": "MobileSegmented",
+                  "field": "tripType",
+                  "inputs": {
+                    "label": "Trip type",
+                    "tone": "brand",
+                    "options": [
+                      {
+                        "value": "one",
+                        "label": "One way"
+                      },
+                      {
+                        "value": "round",
+                        "label": "Round trip"
+                      },
+                      {
+                        "value": "multi",
+                        "label": "Multi-city"
+                      }
+                    ]
+                  },
+                  "span": {
+                    "md": 2
+                  },
+                  "why": "Three always-visible options with a sliding thumb, full width on phones; brand tone is the system's rule for trip type in search",
+                  "alternatives": [
+                    {
+                      "component": "SegmentedControl",
+                      "rejected": "desktop pill group; MobileSegmented is full-width and thumb-sized on phones"
+                    },
+                    {
+                      "component": "Select",
+                      "rejected": "hides three options behind a tap"
+                    }
+                  ],
+                  "show": {
+                    "lg": false
+                  }
+                },
+                {
+                  "id": "tripTypeDesktop",
+                  "component": "SegmentedControl",
+                  "field": "tripType",
+                  "inputs": {
+                    "label": "Trip type",
+                    "tone": "brand",
+                    "options": [
+                      {
+                        "value": "one",
+                        "label": "One way"
+                      },
+                      {
+                        "value": "round",
+                        "label": "Round trip"
+                      },
+                      {
+                        "value": "multi",
+                        "label": "Multi-city"
+                      }
+                    ]
+                  },
+                  "show": {
+                    "base": false,
+                    "lg": true
+                  },
+                  "span": {
+                    "lg": "full"
+                  },
+                  "why": "On desktop the trip type is a compact pill group above the search row, like the source; same form control as the phone switch",
+                  "alternatives": [
+                    {
+                      "component": "MobileSegmented",
+                      "rejected": "full-width phone control stretched across 1200px"
+                    }
+                  ]
+                },
+                {
+                  "id": "from",
+                  "component": "Select",
+                  "field": "from",
+                  "inputs": {
+                    "label": "From",
+                    "placeholder": "City or airport",
+                    "searchable": true,
+                    "searchPlaceholder": "Type a city or code",
+                    "iconStart": "paper-airplane",
+                    "emptyText": "No airport matches that"
+                  },
+                  "bind": {
+                    "options": "airports"
+                  },
+                  "why": "One of 8–50 airports with a filter field; code shown in mono beside the city, as the system asks",
+                  "alternatives": [
+                    {
+                      "component": "TextField",
+                      "rejected": "free text cannot be matched to an airport without a picker"
+                    },
+                    {
+                      "component": "FieldTile",
+                      "rejected": "opens a sheet; the Select already filters inline"
+                    }
+                  ]
+                },
+                {
+                  "id": "to",
+                  "component": "Select",
+                  "field": "to",
+                  "inputs": {
+                    "label": "To",
+                    "placeholder": "City or airport",
+                    "searchable": true,
+                    "searchPlaceholder": "Type a city or code",
+                    "iconStart": "map-pin",
+                    "emptyText": "No airport matches that"
+                  },
+                  "bind": {
+                    "options": "airports"
+                  },
+                  "why": "Same control as From so the two line up"
+                },
+                {
+                  "id": "dates",
+                  "component": "DatePicker",
+                  "field": "dates",
+                  "inputs": {
+                    "label": "Travel dates",
+                    "mode": "range",
+                    "variant": "tiles",
+                    "startLabel": "Departure",
+                    "endLabel": "Return",
+                    "min": "2026-10-03",
+                    "today": "2026-10-03",
+                    "unit": "day",
+                    "inclusive": true
+                  },
+                  "why": "Departure and Return as two tiles in one control, exactly the source's pair; range picking across months with the result stated in words",
+                  "alternatives": [
+                    {
+                      "component": "Calendar",
+                      "rejected": "an inline month takes the whole phone screen"
+                    },
+                    {
+                      "component": "TextField",
+                      "rejected": "typed dates are error-prone"
+                    }
+                  ],
+                  "notes": "When tripType is 'one' the Return tile should be hidden and the field switch to mode single; this is a cross-field rule for the app (see notes)"
+                },
+                {
+                  "id": "searchSubmit",
+                  "component": "Button",
+                  "submit": true,
+                  "text": "Search flights",
+                  "inputs": {
+                    "variant": "primary",
+                    "size": "lg",
+                    "block": true,
+                    "iconStart": "magnifying-glass"
+                  },
+                  "span": {
+                    "md": 2,
+                    "lg": 1
+                  },
+                  "why": "The one primary action: midnight ink, full width on phones; the source's round search disc becomes a labelled button so it has a visible verb; at 1280 it takes the fourth column so the row reads From, To, Dates, Search like the source bar",
+                  "alternatives": [
+                    {
+                      "component": "IconButton brand",
+                      "rejected": "an icon-only disc is a 44px target with no visible label; the brand disc belongs to BookingSearch only"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -550,9 +591,9 @@
     },
     {
       "id": "deals",
-      "title": "Top flight deals",
+      "title": "Top deals",
       "heading": true,
-      "purpose": "Promotions: one featured deal and two quick links to hotels and domestic flights",
+      "purpose": "Promotions: one featured charter deal and two doors into the aircraft and hangar marketplaces",
       "layout": {
         "base": "stack",
         "lg": "grid-3"
@@ -591,19 +632,60 @@
           "notes": "The source's cabin photo is not shown: FeatureCard has no image input (logged under gaps as a proposal, not a GAP element, because the card still conveys the deal)."
         },
         {
-          "id": "dealHotels",
-          "component": "GAP",
-          "text": "Photo tile · Hotel bookings · arrow",
-          "why": "Photo tile with a label and an open arrow"
+          "id": "dealAircraft",
+          "component": "MiniDestination",
+          "inputs": {
+            "title": "Aircraft for sale",
+            "image": "assets/photos/aviation/jet-midsize.webp",
+            "price": "from $2.4M",
+            "duration": "1,240 listed",
+            "dates": "Jets, turboprops, helicopters",
+            "badge": "New"
+          },
+          "events": {
+            "press": "goToAircraft"
+          },
+          "why": "A photo card with a name and three short facts: the source's photo tile, with the facts the marketplace needs",
+          "alternatives": [
+            {
+              "component": "PlaceCard",
+              "rejected": "a save heart and rating mean a place, not a marketplace door"
+            },
+            {
+              "component": "GAP",
+              "rejected": "MiniDestination carries the photo, label and facts; the arrow disc is the whole card being a button"
+            }
+          ],
+          "notes": "Routes to /aircraft-market"
         },
         {
-          "id": "dealDomestic",
-          "component": "GAP",
-          "text": "Photo tile · Book domestic · arrow",
-          "why": "Photo tile with a label and an open arrow"
+          "id": "dealHangars",
+          "component": "MiniDestination",
+          "inputs": {
+            "title": "Hangar space",
+            "image": "assets/photos/aviation/hangar-large.webp",
+            "price": "from $1,850 / mo",
+            "duration": "140 airports",
+            "dates": "Nightly, monthly or yearly"
+          },
+          "events": {
+            "press": "goToHangars"
+          },
+          "why": "A photo card with a name and three short facts: the source's photo tile, with the facts the marketplace needs",
+          "alternatives": [
+            {
+              "component": "PlaceCard",
+              "rejected": "a save heart and rating mean a place, not a marketplace door"
+            },
+            {
+              "component": "GAP",
+              "rejected": "MiniDestination carries the photo, label and facts; the arrow disc is the whole card being a button"
+            }
+          ],
+          "notes": "Routes to /hangar-market"
         }
       ],
-      "intro": "Discover top flight deals for elite travel at unprecedented prices."
+      "intro": "Charter fares, aircraft for sale and hangar space across the network."
     },
     {
       "id": "airlines",
@@ -692,6 +774,61 @@
         }
       ],
       "intro": "Stays our travellers rate highest, a short walk from the centre."
+    },
+    {
+      "id": "tabs",
+      "title": "Tabs",
+      "heading": false,
+      "purpose": "Phone and tablet app navigation, always in thumb reach",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "sticky": {
+        "base": "bottom",
+        "lg": "none"
+      },
+      "elements": [
+        {
+          "id": "tabBar",
+          "component": "TabBar",
+          "inputs": {
+            "items": [
+              {
+                "value": "home",
+                "label": "Home",
+                "icon": "home"
+              },
+              {
+                "value": "book",
+                "label": "Book",
+                "icon": "paper-airplane"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft",
+                "icon": "rocket-launch"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars",
+                "icon": "building-office-2"
+              },
+              {
+                "value": "account",
+                "label": "Account",
+                "icon": "user-circle"
+              }
+            ],
+            "value": "home",
+            "variant": "labels",
+            "label": "Main"
+          },
+          "why": "Home is the root of the app; a bottom tab bar is how a phone app moves between its five destinations"
+        }
+      ]
     }
   ],
   "forms": [
@@ -699,10 +836,10 @@
       "id": "search",
       "submit": {
         "label": "Search flights",
-        "action": "GET /api/flights/search?from&to&depart&return&trip (the app navigates to the results route with the same query)",
+        "action": "GET /api/flights/search?from&to&depart&return&trip (the app navigates to the booking page with the same query)",
         "success": {
           "kind": "navigate",
-          "to": "/flights/results"
+          "to": "/flight-booking"
         },
         "failure": "Network or 5xx: danger Toast 'Could not search right now. Check your connection and try again.' with Retry; the form stays filled. 422 (no route): message under the To field 'We don't fly this route yet.'"
       },
@@ -786,26 +923,16 @@
     }
   ],
   "a11y": [
-    "One h1: the HeroHeader title. AppBar large renders its title as h2 (headingLevel 2) and the content sections use h2 titles.",
+    "One h1: the LandingHero title. AppBar large renders its title as h2 (headingLevel 2) and the content sections use h2 titles.",
     "The search Button has a visible verb label ('Search flights') and the magnifying glass is decorative.",
     "The two airport Selects announce their filter field; the empty text 'No airport matches that' is read when nothing matches.",
     "The airline carousel is a scrollable region: cards are buttons with the airline name as accessible name (MiniDestination (press)).",
     "DestinationCard's Book now buttons must name the hotel for screen readers (the component labels them 'Book now <title>' or the app adds aria-label); verify on handoff.",
-    "After a failed search, focus moves to the first invalid field (page-form.ts) and the toast is announced."
+    "After a failed search, focus moves to the first invalid field (page-form.ts) and the toast is announced.",
+    "The hero video is decorative (aria-hidden, muted, no controls needed): it never carries information, and it stops under prefers-reduced-motion.",
+    "The tab bar is a nav landmark labelled Main, hidden at 1280 where the top navigation takes over."
   ],
   "gaps": [
-    {
-      "element": "dealHotels",
-      "need": "A photo tile with a short label on a frosted plate and a round open-arrow button (the source's Hotel bookings / Book domestic tiles)",
-      "nearest": "MiniDestination (photo + title, but price/duration/dates rows) or CategoryTile (icon, name, count, progress bar, no photo)",
-      "proposal": "Add a PromoTile component: photo, one label, optional eyebrow, round open arrow (IconButton ink), 4:3 on phones and square in grids"
-    },
-    {
-      "element": "dealDomestic",
-      "need": "Same photo tile as dealHotels",
-      "nearest": "MiniDestination / CategoryTile",
-      "proposal": "Same PromoTile component"
-    },
     {
       "element": "dealFeatured",
       "need": "FeatureCard with a photo panel and an eyebrow (promo code) for the source's wide deal card",
@@ -814,14 +941,14 @@
     }
   ],
   "notes": [
-    "Phone order: brand bar, hero, search form, deals, airlines, hotels. The form sits directly under the hero (one screen down) so it is the first thing a thumb reaches; no sticky bottom bar because it would duplicate the form's own Search button and cover the cards (answers the lint warning about sticky.base bottom).",
+    "Phone order: brand bar, hero with the search card docked over its edge, deals, airlines, hotels, and the app tab bar fixed at the bottom (Home selected). The search keeps its own button inside the card, so no sticky action bar is added.",
     "The source's five nav links are hidden on phones (the AppBar carries brand and Sign in); in the product app the Flights tab bar is the app shell's, not this page's.",
     "Trip type defaults to round trip like the source. One way should hide the Return tile and switch the DatePicker to mode single: cross-field behaviour for the app (a valueChanges subscription), not expressible in the spec.",
     "The airline cards show a 'from' fare, destination count and season because MiniDestination renders three fact rows; these are assumptions (the source shows only the airline name and photo). All three airline photos use jet-clouds.webp because the asset set has one aircraft photo.",
-    "The featured deal is a FeatureCard without the cabin photo; the promo code DTOUR2026 lives in the text. See gaps.",
+    "The featured deal is a FeatureCard without the cabin photo; the promo code DTOUR2026 lives in the text. The two photo tiles are MiniDestination cards into the aircraft and hangar marketplaces. See gaps.",
     "Dates: the DatePicker value is an ISO [start, end] range; dateRange and futureDate validate it. Prices under days are not shown on the landing page (no route chosen yet).",
     "Airports: eight bundled airports are the fallback; the Select is searchable so a larger list can be loaded.",
-    "The hero lede sentence is this conversion's addition: the source has none, the HeroHeader has an arBelowTitle slot and the page reads better with one line under a display title.",
+    "Hero copy, figures and the two marketplace buttons are this conversion's: the product is an aircraft and hangar marketplace with charter booking, so the hero opens all three doors and the search stays the primary action.",
     "Desktop search row: the trip type is a SegmentedControl above the row at 1280 (the phone keeps MobileSegmented); both place the same form field."
   ]
 }

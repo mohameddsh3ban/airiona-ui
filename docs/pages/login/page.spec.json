@@ -1,334 +1,224 @@
 {
   "page": "login",
-  "title": "Log in",
+  "title": "Sign in",
   "route": "login",
   "target": "angular",
-  "source": {
-    "kind": "screenshot",
-    "ref": "docs/pages/login/source.jpg",
-    "notes": "The source is a desktop sign-in page: a pill top nav, a two-panel card (blue fabric art with a headline on the left, the form on the right) and a dark footer. It shows no phone layout, no error states and no pending state; those are designed here. The brand in the source is a placeholder (Glintz); this conversion uses Airiona."
-  },
-  "audience": "A returning traveller signing in on their phone to manage a trip, sometimes on hotel or airport Wi-Fi, often with saved passwords",
-  "primaryAction": "Sign in with email and password",
+  "canvas": "full",
   "types": {},
   "data": [],
+  "motion": [
+    {
+      "where": "Moving between sign-in and sign-up",
+      "component": "RouteTransition",
+      "variant": "fade-through",
+      "why": "The two screens are siblings; the form column swaps sides, so a fade-through reads as the card turning over rather than a slide"
+    }
+  ],
+  "gaps": [],
+  "source": {
+    "kind": "brief",
+    "ref": "reference product sign-in screen (internal, not in this repository)",
+    "notes": "The reference sign-in: a split screen with the form on one side and a looping cinematic panel on the other, highlight cards that rotate with progress ticks, a slim image strip on phones. Rebuilt in Airiona's light luxury style with the AuthShell component; copy and highlights are Airiona's (charter booking, aircraft marketplace, hangar space)."
+  },
+  "audience": "A returning client, operator or hangar host signing in on a phone between flights or on a desktop at the office; they know their email and want to be through in under ten seconds.",
+  "primaryAction": "Sign in with email and password",
   "sections": [
     {
-      "id": "topbar",
-      "title": "Airiona",
+      "id": "auth",
+      "title": "Sign in",
       "heading": false,
-      "purpose": "Brand and a way back to the public site on phones",
+      "purpose": "The whole screen: brand, form and the media panel",
       "layout": {
         "base": "stack"
-      },
-      "show": {
-        "base": true,
-        "lg": false
-      },
-      "elements": [
-        {
-          "id": "appBar",
-          "component": "AppBar",
-          "inputs": {
-            "title": "Airiona"
-          },
-          "why": "Phone screens get a compact top bar; the source's four-link pill nav does not fit 390px",
-          "alternatives": [
-            {
-              "component": "TopNav",
-              "rejected": "four links plus brand overflow a phone; it returns at 1280"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "nav",
-      "title": "Site navigation",
-      "heading": false,
-      "purpose": "The source's pill navigation: brand plus Home, Services, Features, Team",
-      "layout": {
-        "base": "stack"
-      },
-      "show": {
-        "base": false,
-        "lg": true
-      },
-      "elements": [
-        {
-          "id": "topNav",
-          "component": "TopNav",
-          "inputs": {
-            "links": [
-              {
-                "value": "home",
-                "label": "Home"
-              },
-              {
-                "value": "services",
-                "label": "Services"
-              },
-              {
-                "value": "features",
-                "label": "Features"
-              },
-              {
-                "value": "team",
-                "label": "Team"
-              }
-            ]
-          },
-          "why": "Matches the source's centred pill of links with the brand on the left",
-          "alternatives": [
-            {
-              "component": "SideNav",
-              "rejected": "an app sidebar for a public sign-in page"
-            }
-          ],
-          "children": [
-            {
-              "id": "navSignup",
-              "component": "Button",
-              "slot": "arActions",
-              "text": "Sign up",
-              "inputs": {
-                "variant": "secondary",
-                "size": "sm"
-              },
-              "events": {
-                "click": "goToSignup"
-              },
-              "why": "Fills TopNav's actions slot; without it TopNav shows its default search and notification buttons, which a signed-out page cannot use",
-              "notes": "Routes to /signup"
-            }
-          ]
-        }
-      ],
-      "area": {
-        "lg": "full"
-      }
-    },
-    {
-      "id": "signIn",
-      "title": "Log in",
-      "heading": false,
-      "purpose": "The form: the reason the page exists, so it comes first on phones",
-      "layout": {
-        "base": "stack"
-      },
-      "area": {
-        "lg": "aside"
       },
       "form": "login",
       "elements": [
         {
-          "id": "heading",
-          "component": "html",
-          "tag": "h1",
-          "class": "m-large-title",
-          "text": "Log in"
-        },
-        {
-          "id": "lede",
-          "component": "html",
-          "tag": "p",
-          "class": "body",
-          "text": "Please log in to your account to continue."
-        },
-        {
-          "id": "email",
-          "component": "TextField",
-          "field": "email",
+          "id": "shell",
+          "component": "AuthShell",
           "inputs": {
-            "label": "Email",
-            "type": "email",
-            "autocomplete": "email",
-            "inputMode": "email",
-            "iconStart": "envelope",
-            "placeholder": "name@example.com"
+            "headline": "Your aircraft, your schedule.",
+            "highlights": [
+              {
+                "title": "All-in prices",
+                "text": "Crew, fuel, airport fees and VAT in one number before you request."
+              },
+              {
+                "title": "Confirmed in minutes",
+                "text": "Operators answer a request within the 15-minute price hold."
+              },
+              {
+                "title": "Hangars on the same account",
+                "text": "Book space at 140 airports for the aircraft you fly or own."
+              }
+            ],
+            "side": "left",
+            "mediaLabel": "About Airiona",
+            "poster": "assets/photos/aviation/auth-wing.webp",
+            "video": "assets/video/auth-wing.mp4",
+            "stripImage": "assets/photos/aviation/auth-wing-strip.webp"
           },
-          "why": "Labelled field with an icon, hint and error built in; type email brings up the @ keyboard",
+          "why": "The reference product's split-screen sign-in, in Airiona: the form column beside a cinematic media panel (poster, looping video after load, scrim, grain, rotating highlight cards with progress ticks that pause on hover or focus); a slim photo strip on phones",
           "alternatives": [
             {
-              "component": "FieldTile",
-              "rejected": "opens a picker, not the keyboard"
-            }
-          ]
-        },
-        {
-          "id": "password",
-          "component": "TextField",
-          "field": "password",
-          "inputs": {
-            "label": "Password",
-            "type": "password",
-            "autocomplete": "current-password",
-            "iconStart": "lock-closed"
-          },
-          "why": "Same field family as email; with type password it brings its own Show password button, and current-password lets password managers fill it"
-        },
-        {
-          "id": "remember",
-          "component": "Checkbox",
-          "field": "remember",
-          "inputs": {
-            "label": "Remember me"
-          },
-          "why": "Independent yes/no choice inside a form",
-          "alternatives": [
-            {
-              "component": "Switch",
-              "rejected": "switches apply immediately; this is part of the submission"
-            }
-          ]
-        },
-        {
-          "id": "forgot",
-          "component": "html",
-          "tag": "a",
-          "class": "pg-link",
-          "text": "Forgot password?",
-          "href": "#/forgot-password"
-        },
-        {
-          "id": "submit",
-          "component": "Button",
-          "submit": true,
-          "text": "Log in",
-          "inputs": {
-            "variant": "primary",
-            "size": "lg",
-            "block": true
-          },
-          "why": "The one primary action: midnight ink pill, full width on every size like the source"
-        },
-        {
-          "id": "or",
-          "component": "html",
-          "tag": "p",
-          "class": "pg-divider",
-          "text": "Or continue with"
-        },
-        {
-          "id": "social",
-          "component": "GAP",
-          "text": "Facebook · Apple · Google sign-in",
-          "why": "Brand sign-in buttons"
-        },
-        {
-          "id": "signup",
-          "component": "html",
-          "tag": "p",
-          "class": "body-sm",
-          "text": "Don't have an account?",
-          "notes": "‘Sign up’ links to /signup. The source says ‘Sign in’ here; that is a copy error in the source.",
-          "children": [
-            {
-              "id": "signupLink",
-              "component": "html",
-              "tag": "a",
-              "class": "pg-link",
-              "href": "#/signup",
-              "text": "Sign up"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "promo",
-      "title": "Manage your trips in one place",
-      "heading": false,
-      "purpose": "The source's left art panel: brand art and a one-line promise",
-      "layout": {
-        "base": "stack"
-      },
-      "show": {
-        "base": false,
-        "md": true
-      },
-      "elements": [
-        {
-          "id": "hero",
-          "component": "HeroHeader",
-          "inputs": {
-            "eyebrow": "Airiona",
-            "title": "Manage your trips in one place",
-            "image": "assets/art/globe.webp",
-            "headingLevel": 2
-          },
-          "why": "Midnight panel with art and a headline, the system's version of the source's blue fabric panel",
-          "alternatives": [
-            {
-              "component": "StayCard",
-              "rejected": "a priced stay card, wrong meaning"
+              "component": "section split with HeroHeader",
+              "rejected": "the old login: a mobile header stretched into an aside, no motion, no highlights, and the art fell below the form on phones"
             },
             {
-              "component": "FeatureCard",
-              "rejected": "smaller card with an open button"
+              "component": "OnboardingFlow",
+              "rejected": "a multi-step carousel for first launch, not a sign-in screen"
             }
           ],
+          "notes": "Sign-in puts the form left, sign-up right, so switching between them flips the card.",
           "children": [
             {
-              "id": "heroText",
+              "id": "help",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Help",
+              "inputs": {
+                "variant": "ghost",
+                "size": "sm",
+                "iconStart": "question-mark-circle"
+              },
+              "events": {
+                "click": "openHelp"
+              },
+              "why": "Help stays one tap away without competing with the form",
+              "notes": "Opens the help centre in a new tab"
+            },
+            {
+              "id": "privacy",
+              "component": "html",
+              "tag": "a",
+              "class": "ar-auth-link",
+              "text": "Privacy",
+              "slot": "arFoot",
+              "href": "#/legal/privacy"
+            },
+            {
+              "id": "head",
+              "component": "html",
+              "tag": "div",
+              "class": "ar-auth-head",
+              "children": [
+                {
+                  "id": "title",
+                  "component": "html",
+                  "tag": "h1",
+                  "text": "Welcome back"
+                },
+                {
+                  "id": "lede",
+                  "component": "html",
+                  "tag": "p",
+                  "text": "Sign in to book flights, follow your listings and manage hangar space."
+                }
+              ]
+            },
+            {
+              "id": "email",
+              "component": "TextField",
+              "field": "email",
+              "why": "Email with the envelope icon, email keyboard and autofill"
+            },
+            {
+              "id": "password",
+              "component": "TextField",
+              "field": "password",
+              "why": "Password with the built-in show/hide toggle and current-password autofill"
+            },
+            {
+              "id": "options",
+              "component": "html",
+              "tag": "div",
+              "class": "ar-auth-row",
+              "children": [
+                {
+                  "id": "remember",
+                  "component": "Checkbox",
+                  "field": "remember",
+                  "why": "Optional; keeps the session for 30 days"
+                },
+                {
+                  "id": "forgot",
+                  "component": "html",
+                  "tag": "a",
+                  "class": "ar-auth-link",
+                  "text": "Forgot password?",
+                  "href": "#/forgot-password"
+                }
+              ]
+            },
+            {
+              "id": "submit",
+              "component": "Button",
+              "submit": true,
+              "text": "Sign in",
+              "inputs": {
+                "variant": "primary",
+                "size": "lg",
+                "block": true
+              },
+              "why": "The one primary action, full width, midnight ink"
+            },
+            {
+              "id": "or",
               "component": "html",
               "tag": "p",
-              "class": "body",
-              "text": "Track every booking in real time.",
-              "slot": "arBelowTitle"
+              "class": "ar-auth-divider",
+              "text": "or"
+            },
+            {
+              "id": "passkey",
+              "component": "Button",
+              "text": "Continue with passkey",
+              "inputs": {
+                "variant": "secondary",
+                "size": "lg",
+                "block": true,
+                "iconStart": "finger-print",
+                "type": "button"
+              },
+              "events": {
+                "click": "signInWithPasskey"
+              },
+              "why": "Passkeys are the fastest sign-in on phones; secondary so the form stays the default",
+              "notes": "navigator.credentials.get with the WebAuthn challenge from POST /api/auth/passkey/challenge"
+            },
+            {
+              "id": "switch",
+              "component": "html",
+              "tag": "p",
+              "class": "ar-auth-switch",
+              "text": "New to Airiona?",
+              "children": [
+                {
+                  "id": "signupLink",
+                  "component": "html",
+                  "tag": "a",
+                  "class": "ar-auth-link",
+                  "text": "Create an account",
+                  "href": "#/signup"
+                }
+              ]
             }
           ]
         }
       ]
-    },
-    {
-      "id": "footer",
-      "title": "Contact and legal",
-      "heading": false,
-      "purpose": "Contact line, legal links and copyright from the source footer",
-      "layout": {
-        "base": "stack",
-        "md": "split"
-      },
-      "elements": [
-        {
-          "id": "pitch",
-          "component": "html",
-          "tag": "p",
-          "class": "m-title-2 pg-muted",
-          "text": "Planning a group trip or a corporate account? Talk to us."
-        },
-        {
-          "id": "contact",
-          "component": "html",
-          "tag": "p",
-          "class": "body-sm",
-          "text": "Contact us · hello@airiona.com"
-        },
-        {
-          "id": "legal",
-          "component": "html",
-          "tag": "p",
-          "class": "caption pg-muted",
-          "text": "Terms · Cookie policy · Privacy settings · © 2026 Airiona"
-        }
-      ],
-      "area": {
-        "lg": "full"
-      }
     }
   ],
   "forms": [
     {
       "id": "login",
       "submit": {
-        "label": "Log in",
+        "label": "Sign in",
         "action": "POST /api/auth/session { email, password, remember }",
         "success": {
           "kind": "navigate",
-          "to": "/"
+          "to": "/flight-home"
         },
-        "failure": "401: danger Toast ‘That email and password don't match.’ and clear only the password; 429: Toast ‘Too many tries. Wait a minute and try again.’ with the button disabled for the wait"
+        "failure": "401: danger Toast 'That email and password don't match.' and clear only the password; 429: Toast 'Too many tries. Wait a minute and try again.' with the button disabled for the wait"
       },
       "fields": [
         {
@@ -339,7 +229,9 @@
           "inputs": {
             "type": "email",
             "autocomplete": "email",
-            "inputMode": "email"
+            "inputMode": "email",
+            "iconStart": "envelope",
+            "placeholder": "name@example.com"
           },
           "validators": [
             {
@@ -354,7 +246,7 @@
             }
           ],
           "messages": {
-            "required": "Enter the email you signed up with.",
+            "required": "Enter your email.",
             "email": "Enter an email like name@example.com.",
             "maxlength": "Emails are at most 254 characters."
           }
@@ -366,7 +258,8 @@
           "default": "",
           "inputs": {
             "type": "password",
-            "autocomplete": "current-password"
+            "autocomplete": "current-password",
+            "iconStart": "lock-closed"
           },
           "validators": [
             {
@@ -384,7 +277,7 @@
         },
         {
           "name": "remember",
-          "label": "Remember me",
+          "label": "Keep me signed in",
           "component": "Checkbox",
           "default": false,
           "validators": [],
@@ -393,31 +286,15 @@
       ]
     }
   ],
-  "motion": [
-    {
-      "where": "Arriving from the public site and leaving after sign-in",
-      "component": "RouteTransition",
-      "variant": "fade-through",
-      "why": "Top-level change of context"
-    }
-  ],
   "a11y": [
-    "One h1 (‘Log in’); the promo hero renders its title as h2 (headingLevel 2).",
-    "After a failed sign-in, focus returns to the password field and the toast is announced (role=status).",
-    "Do not block paste in the password field."
-  ],
-  "gaps": [
-    {
-      "element": "social",
-      "need": "Facebook, Apple and Google sign-in buttons with brand marks",
-      "nearest": "IconButton (no brand glyphs in Heroicons)",
-      "proposal": "Add a SocialSignIn component with official brand marks and provider-required wording (‘Continue with Google’), full-width on phones"
-    }
+    "One h1: \"Welcome back\". The media headline and highlight cards are paragraphs; inactive cards are aria-hidden so a screen reader hears only the current one.",
+    "The highlight ticks are buttons named \"Show highlight 2 of 3: …\"; rotation pauses while focus is in the form or the pointer is on the panel.",
+    "The video is decorative (aria-hidden, muted, no PiP), starts 1200ms after load on wide screens only, and never plays under prefers-reduced-motion.",
+    "After an empty submit, focus moves to the first invalid field and each field shows its message (page-form.ts)."
   ],
   "notes": [
-    "Phone order: form first, art hidden (it adds height without helping sign-in); the art returns from 768.",
-    "The source's 'Forget password?' is corrected to 'Forgot password?'.",
-    "No sticky bottom bar: the whole form fits above the fold at 390 × 844, so the button is already in reach.",
-    "The source's nav has nothing on the right; TopNav needs something in its actions slot (otherwise it shows search and notifications), so it carries a Sign up button."
+    "No sticky bottom bar: the form is one short column and the Sign in button is on the first phone screen (answers the lint warning about sticky.base bottom).",
+    "The phone strip is a 176px crop of the same photo with the headline on it, so the brand moment survives on small screens without pushing the form below the fold.",
+    "Passkey sign-in is a separate flow (WebAuthn); the button is type=\"button\" so it never submits the form."
   ]
 }

@@ -677,6 +677,35 @@ declare global {
       Ring: typeof Ring; MetricTile: typeof MetricTile; PillBarChart: typeof PillBarChart; SegmentGauge: typeof SegmentGauge; RatingBreakdown: typeof RatingBreakdown; Leaderboard: typeof Leaderboard; StripeDistribution: typeof StripeDistribution; Heatmap: typeof Heatmap; AbsenceCard: typeof AbsenceCard; ToggleTile: typeof ToggleTile; ArrivalTile: typeof ArrivalTile; RingStatCard: typeof RingStatCard; HabitTile: typeof HabitTile; GateTile: typeof GateTile; VoiceRecorder: typeof VoiceRecorder; BatteryTile: typeof BatteryTile; MediaPlayer: typeof MediaPlayer; AnalogClock: typeof AnalogClock; RecordingTile: typeof RecordingTile; ActivityCalendar: typeof ActivityCalendar; WorldClock: typeof WorldClock; RideTile: typeof RideTile; ChargingTile: typeof ChargingTile; TripSummaryTile: typeof TripSummaryTile; Notch: typeof Notch; ProfileProjectCard: typeof ProfileProjectCard; MeetingsStrip: typeof MeetingsStrip; RoadmapGantt: typeof RoadmapGantt; DateChip: typeof DateChip; EfficiencyChart: typeof EfficiencyChart; TotalTimeTile: typeof TotalTimeTile; AssistantCard: typeof AssistantCard; PageHeader: typeof PageHeader; ChannelCard: typeof ChannelCard; PromptCard: typeof PromptCard; BalanceChart: typeof BalanceChart; HoldingsPanel: typeof HoldingsPanel; SparkBars: typeof SparkBars; PilotDashboard: typeof PilotDashboard;
       PhoneFrame: typeof PhoneFrame; StatusBar: typeof StatusBar; AppBar: typeof AppBar; TabBar: typeof TabBar; BottomSheet: typeof BottomSheet; ActionSheet: typeof ActionSheet; Fab: typeof Fab; StickyActionBar: typeof StickyActionBar; HeroHeader: typeof HeroHeader; GreetingBar: typeof GreetingBar; SearchField: typeof SearchField; SectionHeader: typeof SectionHeader; ChipScroller: typeof ChipScroller; SnapCarousel: typeof SnapCarousel; SwipeRow: typeof SwipeRow; MobileSegmented: typeof MobileSegmented; FieldTile: typeof FieldTile; FeatureCard: typeof FeatureCard; CategoryTile: typeof CategoryTile; ChecklistRow: typeof ChecklistRow; WeekStrip: typeof WeekStrip; Timeline: typeof Timeline; CalendarCard: typeof CalendarCard; AgendaCard: typeof AgendaCard; PeoplePicker: typeof PeoplePicker; PlanList: typeof PlanList; MiniStatCard: typeof MiniStatCard; TripRow: typeof TripRow; FlightSearchSheet: typeof FlightSearchSheet; RouteHeader: typeof RouteHeader; TicketCard: typeof TicketCard; BoardingPass: typeof BoardingPass; PlaceCard: typeof PlaceCard; PlaceHero: typeof PlaceHero; InfoStatRow: typeof InfoStatRow; ExpandableText: typeof ExpandableText; MiniDestination: typeof MiniDestination; IllustrationCallout: typeof IllustrationCallout; MemberPicker: typeof MemberPicker; ActivityFeed: typeof ActivityFeed; DetailList: typeof DetailList; LetterRow: typeof LetterRow; ProfileHeader: typeof ProfileHeader; OnboardingFlow: typeof OnboardingFlow;
       CountUp: typeof CountUp; SuccessBurst: typeof SuccessBurst; Skeleton: typeof Skeleton; RouteTransition: typeof RouteTransition; ScreenStack: typeof ScreenStack; QRCode: typeof QRCode;
+      AuthShell: typeof AuthShell; LandingHero: typeof LandingHero;
     };
   }
 }
+
+export interface AuthHighlight { title: string; text: string }
+export interface AuthShellProps {
+  /** Still frame for the media panel (also the strip on phones unless stripImage is set). */ poster: string;
+  /** Looping muted video for the media panel; plays on wide screens once the page has settled. */ video?: string;
+  /** Smaller crop for the phone strip. */ stripImage?: string;
+  headline?: string; highlights?: AuthHighlight[];
+  /** Form column side on wide screens: left (sign-in) or right (sign-up). */ side?: 'left' | 'right';
+  /** Wider form column for long forms. */ wide?: boolean;
+  brand?: React.ReactNode; actions?: React.ReactNode; footer?: React.ReactNode; legal?: string;
+  /** Milliseconds each highlight stays up. */ interval?: number; mediaLabel?: string;
+  children?: React.ReactNode; className?: string;
+}
+export declare function AuthShell(props: AuthShellProps): React.ReactElement;
+
+export interface LandingStat { value: string; label: string }
+export interface LandingHeroProps {
+  title: string; eyebrow?: string; lede?: string;
+  /** Backdrop photo; also the poster the video fades in over. */ image?: string;
+  /** Looping muted video; plays on wide screens (>=1024px) once the page has settled. */ video?: string;
+  /** object-position for the photo, so the subject stays in a narrow phone crop (for example "78% 50%"). */ focus?: string;
+  stats?: LandingStat[];
+  /** Heading level of the title: 1 (default) for the page's own hero. */ headingLevel?: 1 | 2 | 3;
+  actions?: React.ReactNode;
+  /** Children straddle the bottom edge (a search card). */ docked?: boolean;
+  children?: React.ReactNode; className?: string;
+}
+export declare function LandingHero(props: LandingHeroProps): React.ReactElement;

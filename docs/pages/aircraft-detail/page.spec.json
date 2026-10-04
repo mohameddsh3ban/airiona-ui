@@ -1,0 +1,602 @@
+{
+  "page": "aircraft-detail",
+  "title": "Aircraft",
+  "route": "aircraft-detail",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "product brief: Airiona aircraft and hangar marketplaces",
+    "notes": "The detail page behind one aircraft listing card: photo, key facts, description, specification, amenities and a contact form that stays in reach on phones."
+  },
+  "audience": "A buyer, broker or flight department checking one aircraft in detail on a phone, deciding whether to ask for records.",
+  "primaryAction": "Contact the seller",
+  "types": {},
+  "data": [],
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "Desktop navigation: the product destinations and the signed-in account",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "book",
+                "label": "Book"
+              },
+              {
+                "value": "trips",
+                "label": "My trips"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars"
+              }
+            ],
+            "value": "aircraft",
+            "user": {
+              "name": "Omar Saleh",
+              "email": "omar@example.com"
+            }
+          },
+          "why": "The product's four destinations with the signed-in account; replaces the phone tab bar at 1280",
+          "children": [
+            {
+              "id": "navAction",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "List your aircraft",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm",
+                "iconStart": "plus"
+              },
+              "events": {
+                "click": "listAircraft"
+              },
+              "why": "The sell door stays in the header"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "title": "Gulfstream G550",
+      "heading": false,
+      "purpose": "The listing photo with the name, base and price",
+      "layout": {
+        "base": "stack"
+      },
+      "bleed": {
+        "base": true,
+        "md": false
+      },
+      "elements": [
+        {
+          "id": "pageTitle",
+          "component": "html",
+          "tag": "h1",
+          "class": "pg-sr-only",
+          "text": "Gulfstream G550"
+        },
+        {
+          "id": "placeHero",
+          "component": "PlaceHero",
+          "inputs": {
+            "title": "Gulfstream G550",
+            "location": "Dubai World Central · DWC",
+            "price": "$24.5M",
+            "priceLabel": "Asking price",
+            "image": "assets/photos/aviation/jet-heavy.webp"
+          },
+          "events": {
+            "back": "goBack"
+          },
+          "why": "Full-width photo with glass back and bookmark buttons and a plate with the name, place and price: the system detail header",
+          "alternatives": [
+            {
+              "component": "LandingHero",
+              "rejected": "a page-opening marketing hero, not a listing photo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "facts",
+      "title": "Key facts",
+      "heading": false,
+      "purpose": "The four numbers buyers check first",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "factRow",
+          "component": "InfoStatRow",
+          "inputs": {
+            "items": [
+              {
+                "icon": "clock",
+                "label": "4,210 hrs"
+              },
+              {
+                "icon": "user-group",
+                "label": "16 seats"
+              },
+              {
+                "icon": "calendar",
+                "label": "2016"
+              },
+              {
+                "icon": "globe-alt",
+                "label": "6,750 nm"
+              }
+            ]
+          },
+          "why": "Icon and short label in one row, scannable at a glance"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "heading": true,
+      "purpose": "The seller description, clamped on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "aboutText",
+          "component": "ExpandableText",
+          "inputs": {
+            "lines": 4
+          },
+          "text": "One owner since new and flown by a corporate flight department on a Part 91 programme. The 72-month inspection was completed at Gulfstream Savannah in March 2026, with new brakes, a fresh battery and updated navigation databases. The cabin was refurbished in 2023: sixteen seats in three zones, six of them berthable, a forward galley and an aft lavatory with shower. All logbooks and records are digital and available to verified buyers on request; the aircraft has no damage history.",
+          "why": "Long seller copy clamped to four lines with Read more"
+        }
+      ]
+    },
+    {
+      "id": "specs",
+      "title": "Specification",
+      "heading": true,
+      "purpose": "Every figure a buyer or broker compares",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2"
+      },
+      "elements": [
+        {
+          "id": "specList",
+          "component": "DetailList",
+          "inputs": {
+            "items": [
+              {
+                "label": "Serial number",
+                "value": "5530"
+              },
+              {
+                "label": "Registration",
+                "value": "A6-ARN"
+              },
+              {
+                "label": "Total time",
+                "value": "4,210 hours"
+              },
+              {
+                "label": "Landings",
+                "value": "1,870"
+              },
+              {
+                "label": "Engines",
+                "value": "2 × Rolls-Royce BR710 C4-11"
+              },
+              {
+                "label": "Engine programme",
+                "value": "CorporateCare Enhanced"
+              },
+              {
+                "label": "Avionics",
+                "value": "Honeywell PlaneView, EVS II"
+              },
+              {
+                "label": "Last inspection",
+                "value": "72-month, Mar 2026"
+              }
+            ]
+          },
+          "why": "Label and value rows, the system way to list facts"
+        },
+        {
+          "id": "photo",
+          "component": "html",
+          "tag": "figure",
+          "class": "pg-figure",
+          "children": [
+            {
+              "id": "photoImg",
+              "component": "html",
+              "tag": "img",
+              "class": "pg-photo",
+              "src": "assets/photos/aviation/jet-cabin.webp",
+              "alt": "The G550 cabin: cream leather club seats, walnut tables and oval windows"
+            },
+            {
+              "id": "photoCaption",
+              "component": "html",
+              "tag": "figcaption",
+              "class": "pg-muted m-footnote",
+              "text": "Mid cabin, refurbished 2023"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amenities",
+      "title": "On board",
+      "heading": true,
+      "purpose": "What comes with it",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "amenityList",
+          "component": "AmenityList",
+          "inputs": {
+            "items": [
+              {
+                "icon": "wifi",
+                "label": "Ka-band Wi-Fi"
+              },
+              {
+                "icon": "moon",
+                "label": "6 berths"
+              },
+              {
+                "icon": "tv",
+                "label": "Cabin screens"
+              },
+              {
+                "icon": "fire",
+                "label": "Full galley"
+              },
+              {
+                "icon": "sparkles",
+                "label": "Shower"
+              },
+              {
+                "icon": "shield-check",
+                "label": "No damage history"
+              }
+            ]
+          },
+          "why": "Icon tiles summing up the facilities, 4–6 items"
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact the seller",
+      "heading": true,
+      "intro": "The broker replies within one business day. Records are shared after a short verification.",
+      "purpose": "Reach the seller or host; beside the details on desktop",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2",
+        "lg": "stack"
+      },
+      "area": {
+        "lg": "aside"
+      },
+      "form": "enquiry",
+      "elements": [
+        {
+          "id": "fullName",
+          "component": "TextField",
+          "field": "fullName",
+          "why": "Who is asking"
+        },
+        {
+          "id": "email",
+          "component": "TextField",
+          "field": "email",
+          "why": "Where the records link goes"
+        },
+        {
+          "id": "phone",
+          "component": "TextField",
+          "field": "phone",
+          "why": "Brokers call serious buyers"
+        },
+        {
+          "id": "intent",
+          "component": "MobileSegmented",
+          "field": "intent",
+          "why": "Buy, lease or charter changes who answers",
+          "span": {
+            "md": 2
+          }
+        },
+        {
+          "id": "message",
+          "component": "TextField",
+          "field": "message",
+          "span": {
+            "md": 2
+          },
+          "why": "Optional question for the seller"
+        },
+        {
+          "id": "financing",
+          "component": "Checkbox",
+          "field": "financing",
+          "span": {
+            "md": 2
+          },
+          "why": "Optional; routes the lead to a financing partner as well"
+        },
+        {
+          "id": "desktopSubmit",
+          "component": "Button",
+          "submit": true,
+          "text": "Contact seller",
+          "inputs": {
+            "variant": "primary",
+            "size": "lg",
+            "block": true,
+            "iconEnd": "arrow-right"
+          },
+          "show": {
+            "base": false,
+            "lg": true
+          },
+          "why": "At 1280 the form sits in the side column with its own button; the sticky bar is a phone and tablet pattern"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "title": "Send",
+      "heading": false,
+      "purpose": "Price and the one action, always in reach on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "form": "enquiry",
+      "sticky": {
+        "base": "bottom"
+      },
+      "show": {
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "ctaBar",
+          "component": "StickyActionBar",
+          "why": "The system's bottom CTA: price summary plus one button",
+          "children": [
+            {
+              "id": "ctaTotal",
+              "component": "html",
+              "tag": "strong",
+              "class": "m-title-2",
+              "text": "$24.5M",
+              "slot": "arSummary"
+            },
+            {
+              "id": "ctaNote",
+              "component": "html",
+              "tag": "span",
+              "class": "m-footnote pg-muted",
+              "text": "Asking · negotiable",
+              "slot": "arSummary"
+            },
+            {
+              "id": "ctaButton",
+              "component": "Button",
+              "submit": true,
+              "text": "Contact seller",
+              "inputs": {
+                "variant": "primary",
+                "size": "lg",
+                "iconEnd": "arrow-right"
+              },
+              "why": "The one primary action"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "where": "Arriving from the listing card",
+      "component": "RouteTransition",
+      "variant": "shared-axis-x",
+      "why": "Forward navigation from the list; back returns along the same axis"
+    }
+  ],
+  "a11y": [
+    "One h1: \"Gulfstream G550\", visually hidden because the PlaceHero plate shows the name; sections use h2.",
+    "The photo has alt text describing what it shows; the PlaceHero photo is named by the listing title.",
+    "The sticky bar submits the contact form; on an empty submit focus moves to the first invalid field.",
+    "The intent switch is a labelled group of three options; arrow keys move between them."
+  ],
+  "gaps": [],
+  "notes": [
+    "Records are behind buyer verification; the form only starts the conversation.",
+    "The second photo is the cabin; the gallery (5 photos) opens from the PlaceHero in the product app."
+  ],
+  "forms": [
+    {
+      "id": "enquiry",
+      "submit": {
+        "label": "Contact seller",
+        "action": "POST /api/aircraft/g550/enquiries { fullName, email, phone, intent, message, financing }",
+        "success": {
+          "kind": "burst",
+          "dialogTitle": "Message sent",
+          "title": "The broker has your message",
+          "text": "Expect a reply within one business day. We emailed you a copy.",
+          "action": "Done"
+        },
+        "failure": "Network or 5xx: danger Toast with Retry, the form stays filled; 429: Toast asking to wait a minute"
+      },
+      "fields": [
+        {
+          "name": "fullName",
+          "label": "Full name",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "autocomplete": "name",
+            "iconStart": "user"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "maxLength",
+              "value": 80
+            }
+          ],
+          "messages": {
+            "required": "Enter your name.",
+            "maxlength": "Names are at most 80 characters."
+          }
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email",
+            "iconStart": "envelope"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "email"
+            }
+          ],
+          "messages": {
+            "required": "Enter your email.",
+            "email": "Enter an email like name@example.com."
+          }
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "tel",
+            "autocomplete": "tel",
+            "inputMode": "tel",
+            "iconStart": "phone"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "phone"
+            }
+          ],
+          "messages": {
+            "required": "Enter a phone number.",
+            "phone": "Enter a number with its country code, like +971 50 123 4567."
+          }
+        },
+        {
+          "name": "intent",
+          "label": "I want to",
+          "component": "MobileSegmented",
+          "default": "buy",
+          "inputs": {
+            "label": "I want to",
+            "tone": "brand",
+            "options": [
+              {
+                "value": "buy",
+                "label": "Buy"
+              },
+              {
+                "value": "lease",
+                "label": "Lease"
+              },
+              {
+                "value": "charter",
+                "label": "Charter"
+              }
+            ]
+          },
+          "validators": [
+            {
+              "type": "required"
+            }
+          ],
+          "messages": {
+            "required": "Choose what you want to do."
+          }
+        },
+        {
+          "name": "message",
+          "label": "Message (optional)",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "placeholder": "Ask about records, delivery or a viewing",
+            "autocomplete": "off"
+          },
+          "validators": [
+            {
+              "type": "maxLength",
+              "value": 500
+            }
+          ],
+          "messages": {
+            "maxlength": "Keep it under 500 characters."
+          }
+        },
+        {
+          "name": "financing",
+          "label": "I would like financing options",
+          "component": "Checkbox",
+          "default": false,
+          "validators": [],
+          "messages": {}
+        }
+      ]
+    }
+  ]
+}

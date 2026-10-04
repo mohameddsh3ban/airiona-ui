@@ -1,0 +1,60 @@
+{
+ "page": "operator-dashboard",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 18,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2413,
+   "h1s": [
+    "Dashboard"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 18,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2117,
+   "h1s": [
+    "Dashboard"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 21,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1666,
+   "h1s": [
+    "Good morning, Gulf Executive"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

@@ -6,7 +6,7 @@ How a page moves from a design to a merged Airiona page, and who does what.
 design (screenshot / Figma / URL / brief)
   └─ Claude Code: /airiona-page-convert  ──►  docs/pages/<page>/page.spec.json   (decisions, checked)
                                              docs/pages/<page>/HANDOFF.md        (for review)
-                                             docs/pages/<page>/shots/*.png       (390 / 768 / 1280)
+                                             docs/pages/<page>/shots/*.png       (390 / 768 / 1280 / native)
                                              projects/playground/src/app/pages/<page>/  (working page)
   └─ review (design + engineering)  ──►  spec changes, re-run check
   └─ engineer moves the page into the product app, wires real data and APIs

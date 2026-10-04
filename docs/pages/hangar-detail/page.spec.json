@@ -1,0 +1,672 @@
+{
+  "page": "hangar-detail",
+  "title": "Hangar",
+  "route": "hangar-detail",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "product brief: Airiona aircraft and hangar marketplaces",
+    "notes": "The detail page behind one hangar listing card: photo, key facts, description, specification, amenities and a contact form that stays in reach on phones."
+  },
+  "audience": "An owner or flight department manager checking whether one hangar fits their aircraft and dates, usually on a phone.",
+  "primaryAction": "Request hangar space",
+  "types": {},
+  "data": [],
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "Desktop navigation: the product destinations and the signed-in account",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "book",
+                "label": "Book"
+              },
+              {
+                "value": "trips",
+                "label": "My trips"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars"
+              }
+            ],
+            "value": "hangars",
+            "user": {
+              "name": "Omar Saleh",
+              "email": "omar@example.com"
+            }
+          },
+          "why": "The product's four destinations with the signed-in account; replaces the phone tab bar at 1280",
+          "children": [
+            {
+              "id": "navAction",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "List your hangar",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm",
+                "iconStart": "plus"
+              },
+              "events": {
+                "click": "listHangar"
+              },
+              "why": "The host door stays in the header"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "title": "Hangar 4, Dubai South",
+      "heading": false,
+      "purpose": "The listing photo with the name, base and price",
+      "layout": {
+        "base": "stack"
+      },
+      "bleed": {
+        "base": true,
+        "md": false
+      },
+      "elements": [
+        {
+          "id": "pageTitle",
+          "component": "html",
+          "tag": "h1",
+          "class": "pg-sr-only",
+          "text": "Hangar 4, Dubai South"
+        },
+        {
+          "id": "placeHero",
+          "component": "PlaceHero",
+          "inputs": {
+            "title": "Hangar 4, Dubai South",
+            "location": "Dubai World Central · DWC",
+            "price": "$2,400",
+            "priceLabel": "Per month",
+            "image": "assets/photos/aviation/hangar-large.webp"
+          },
+          "events": {
+            "back": "goBack"
+          },
+          "why": "Full-width photo with glass back and bookmark buttons and a plate with the name, place and price: the system detail header",
+          "alternatives": [
+            {
+              "component": "LandingHero",
+              "rejected": "a page-opening marketing hero, not a listing photo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "facts",
+      "title": "Key facts",
+      "heading": false,
+      "purpose": "The four numbers buyers check first",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "factRow",
+          "component": "InfoStatRow",
+          "inputs": {
+            "items": [
+              {
+                "icon": "arrows-right-left",
+                "label": "38 m door"
+              },
+              {
+                "icon": "arrows-up-down",
+                "label": "11 m height"
+              },
+              {
+                "icon": "square-3-stack-3d",
+                "label": "2,900 m²"
+              },
+              {
+                "icon": "sun",
+                "label": "Climate"
+              }
+            ]
+          },
+          "why": "Icon and short label in one row, scannable at a glance"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "heading": true,
+      "purpose": "The seller description, clamped on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "aboutText",
+          "component": "ExpandableText",
+          "inputs": {
+            "lines": 4
+          },
+          "text": "A climate-controlled hangar on the business aviation side of Dubai World Central, two minutes from the FBO and customs. The 38-metre door and 11-metre clear height take anything up to a Global 7500 or a G700, and the floor is epoxy-sealed with ground power at every bay. Monthly leases include towing, a weekly exterior wash and 24/7 security with access logs; line maintenance from two approved organisations is on call.",
+          "why": "Long seller copy clamped to four lines with Read more"
+        }
+      ]
+    },
+    {
+      "id": "specs",
+      "title": "Specification",
+      "heading": true,
+      "purpose": "Every figure a buyer or broker compares",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2"
+      },
+      "elements": [
+        {
+          "id": "specList",
+          "component": "DetailList",
+          "inputs": {
+            "items": [
+              {
+                "label": "Door width",
+                "value": "38 m"
+              },
+              {
+                "label": "Clear height",
+                "value": "11 m"
+              },
+              {
+                "label": "Floor area",
+                "value": "2,900 m²"
+              },
+              {
+                "label": "Largest aircraft",
+                "value": "Global 7500, G700"
+              },
+              {
+                "label": "Ground power",
+                "value": "400 Hz at every bay"
+              },
+              {
+                "label": "Fire protection",
+                "value": "Foam deluge, NFPA 409"
+              },
+              {
+                "label": "Access",
+                "value": "24/7, logged"
+              },
+              {
+                "label": "Minimum term",
+                "value": "1 month"
+              }
+            ]
+          },
+          "why": "Label and value rows, the system way to list facts"
+        },
+        {
+          "id": "photo",
+          "component": "html",
+          "tag": "figure",
+          "class": "pg-figure",
+          "children": [
+            {
+              "id": "photoImg",
+              "component": "html",
+              "tag": "img",
+              "class": "pg-photo",
+              "src": "assets/photos/aviation/hangar-small.webp",
+              "alt": "Inside the hangar: a midsize jet under bright LED lights on a sealed grey floor"
+            },
+            {
+              "id": "photoCaption",
+              "component": "html",
+              "tag": "figcaption",
+              "class": "pg-muted m-footnote",
+              "text": "Bay 2, with a midsize jet for scale"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amenities",
+      "title": "On board",
+      "heading": true,
+      "purpose": "What comes with it",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "amenityList",
+          "component": "AmenityList",
+          "inputs": {
+            "items": [
+              {
+                "icon": "sun",
+                "label": "Climate control"
+              },
+              {
+                "icon": "bolt",
+                "label": "Ground power"
+              },
+              {
+                "icon": "shield-check",
+                "label": "24/7 security"
+              },
+              {
+                "icon": "wrench-screwdriver",
+                "label": "Line maintenance"
+              },
+              {
+                "icon": "truck",
+                "label": "Towing included"
+              },
+              {
+                "icon": "sparkles",
+                "label": "Weekly wash"
+              }
+            ]
+          },
+          "why": "Icon tiles summing up the facilities, 4–6 items"
+        }
+      ]
+    },
+    {
+      "id": "reviews",
+      "title": "What tenants say",
+      "heading": true,
+      "purpose": "Trust from people who parked here",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "rating",
+          "component": "RatingBreakdown",
+          "inputs": {
+            "score": "4.8",
+            "scoreLabel": "42 tenant reviews",
+            "segments": [
+              {
+                "label": "Excellent",
+                "value": 81
+              },
+              {
+                "label": "Good",
+                "value": 14
+              },
+              {
+                "label": "Average",
+                "value": 4
+              },
+              {
+                "label": "Poor",
+                "value": 1
+              }
+            ],
+            "note": "Tenants rate security and towing highest.",
+            "title": "Tenant rating"
+          },
+          "why": "Score with a split bar: one figure and how it breaks down"
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Request space",
+      "heading": true,
+      "intro": "The host confirms availability within a day. Nothing is charged until they do.",
+      "purpose": "Reach the seller or host; beside the details on desktop",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2",
+        "lg": "stack"
+      },
+      "area": {
+        "lg": "aside"
+      },
+      "form": "lease",
+      "elements": [
+        {
+          "id": "aircraftSize",
+          "component": "Select",
+          "field": "aircraftSize",
+          "why": "Size decides whether it fits and the price"
+        },
+        {
+          "id": "registration",
+          "component": "TextField",
+          "field": "registration",
+          "why": "The host checks the aircraft against the door and insurance"
+        },
+        {
+          "id": "leaseDates",
+          "component": "DatePicker",
+          "field": "leaseDates",
+          "span": {
+            "md": 2
+          },
+          "why": "Move-in and move-out as two tiles in one range picker"
+        },
+        {
+          "id": "fullName",
+          "component": "TextField",
+          "field": "fullName",
+          "why": "Who is asking"
+        },
+        {
+          "id": "email",
+          "component": "TextField",
+          "field": "email",
+          "why": "Where the confirmation goes"
+        },
+        {
+          "id": "phone",
+          "component": "TextField",
+          "field": "phone",
+          "span": {
+            "md": 2
+          },
+          "why": "Hosts call to arrange the first tow-in"
+        },
+        {
+          "id": "desktopSubmit",
+          "component": "Button",
+          "submit": true,
+          "text": "Request space",
+          "inputs": {
+            "variant": "primary",
+            "size": "lg",
+            "block": true,
+            "iconEnd": "arrow-right"
+          },
+          "show": {
+            "base": false,
+            "lg": true
+          },
+          "why": "At 1280 the form sits in the side column with its own button; the sticky bar is a phone and tablet pattern"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "title": "Send",
+      "heading": false,
+      "purpose": "Price and the one action, always in reach on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "form": "lease",
+      "sticky": {
+        "base": "bottom"
+      },
+      "show": {
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "ctaBar",
+          "component": "StickyActionBar",
+          "why": "The system's bottom CTA: price summary plus one button",
+          "children": [
+            {
+              "id": "ctaTotal",
+              "component": "html",
+              "tag": "strong",
+              "class": "m-title-2",
+              "text": "$2,400 / mo",
+              "slot": "arSummary"
+            },
+            {
+              "id": "ctaNote",
+              "component": "html",
+              "tag": "span",
+              "class": "m-footnote pg-muted",
+              "text": "Towing and security included",
+              "slot": "arSummary"
+            },
+            {
+              "id": "ctaButton",
+              "component": "Button",
+              "submit": true,
+              "text": "Request space",
+              "inputs": {
+                "variant": "primary",
+                "size": "lg",
+                "iconEnd": "arrow-right"
+              },
+              "why": "The one primary action"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "where": "Arriving from the listing card",
+      "component": "RouteTransition",
+      "variant": "shared-axis-x",
+      "why": "Forward navigation from the list; back returns along the same axis"
+    }
+  ],
+  "a11y": [
+    "One h1: \"Hangar 4, Dubai South\", visually hidden because the PlaceHero plate shows the name; sections use h2.",
+    "The photo has alt text describing what it shows; the PlaceHero photo is named by the listing title.",
+    "The sticky bar submits the contact form; on an empty submit focus moves to the first invalid field.",
+    "The date range announces the selected nights in words; dateRange and futureDate errors are read out."
+  ],
+  "gaps": [],
+  "notes": [
+    "Fit is checked server side from the registration (type, wingspan, tail height); the Select is for the price estimate.",
+    "Monthly pricing; nightly stays are on FBO hangars only."
+  ],
+  "forms": [
+    {
+      "id": "lease",
+      "submit": {
+        "label": "Request space",
+        "action": "POST /api/hangars/dwc-4/requests { aircraftSize, registration, leaseDates, fullName, email, phone }",
+        "success": {
+          "kind": "burst",
+          "dialogTitle": "Request sent",
+          "title": "Space requested",
+          "text": "Hangar 4 · Dubai South · the host confirms within one day.",
+          "action": "Done"
+        },
+        "failure": "409 (dates taken): message under the dates 'Those dates were just booked. Pick another range.'; network: danger Toast with Retry"
+      },
+      "fields": [
+        {
+          "name": "aircraftSize",
+          "label": "Aircraft size",
+          "component": "Select",
+          "default": null,
+          "inputs": {
+            "placeholder": "Choose a size",
+            "iconStart": "paper-airplane",
+            "options": [
+              {
+                "value": "heli",
+                "label": "Helicopter"
+              },
+              {
+                "value": "light",
+                "label": "Light jet"
+              },
+              {
+                "value": "midsize",
+                "label": "Midsize or super-midsize jet"
+              },
+              {
+                "value": "heavy",
+                "label": "Heavy or ultra-long-range jet"
+              }
+            ]
+          },
+          "validators": [
+            {
+              "type": "required"
+            }
+          ],
+          "messages": {
+            "required": "Choose your aircraft size."
+          }
+        },
+        {
+          "name": "registration",
+          "label": "Registration",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "placeholder": "A6-ARN",
+            "autocomplete": "off",
+            "iconStart": "identification"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "pattern",
+              "value": "^[A-Za-z0-9]{1,2}-?[A-Za-z0-9]{2,5}$"
+            }
+          ],
+          "messages": {
+            "required": "Enter the registration.",
+            "pattern": "Enter a registration like A6-ARN or N550GA."
+          }
+        },
+        {
+          "name": "leaseDates",
+          "label": "Dates",
+          "component": "DatePicker",
+          "default": null,
+          "inputs": {
+            "label": "Dates",
+            "mode": "range",
+            "variant": "tiles",
+            "startLabel": "Move in",
+            "endLabel": "Move out",
+            "min": "2026-10-03",
+            "today": "2026-10-03",
+            "unit": "night"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "dateRange"
+            },
+            {
+              "type": "futureDate"
+            }
+          ],
+          "messages": {
+            "required": "Choose your dates.",
+            "dateRange": "Choose a move-out date after move-in.",
+            "futureDate": "Dates must be in the future."
+          }
+        },
+        {
+          "name": "fullName",
+          "label": "Full name",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "autocomplete": "name",
+            "iconStart": "user"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "maxLength",
+              "value": 80
+            }
+          ],
+          "messages": {
+            "required": "Enter your name.",
+            "maxlength": "Names are at most 80 characters."
+          }
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email",
+            "iconStart": "envelope"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "email"
+            }
+          ],
+          "messages": {
+            "required": "Enter your email.",
+            "email": "Enter an email like name@example.com."
+          }
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "tel",
+            "autocomplete": "tel",
+            "inputMode": "tel",
+            "iconStart": "phone"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "phone"
+            }
+          ],
+          "messages": {
+            "required": "Enter a phone number.",
+            "phone": "Enter a number with its country code, like +971 50 123 4567."
+          }
+        }
+      ]
+    }
+  ]
+}

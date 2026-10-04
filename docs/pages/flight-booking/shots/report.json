@@ -1,0 +1,71 @@
+{
+ "page": "flight-booking",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 16,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2468,
+   "h1s": [
+    "Book a flight"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": [],
+   "submit:booking": {
+    "msgs": [
+     "Choose the aircraft you want.",
+     "Enter the lead passenger's name as on the passport.",
+     "Enter an email for the confirmation.",
+     "Enter a phone number the crew can reach.",
+     "Tick to agree before requesting."
+    ],
+    "focusInForm": true,
+    "focused": "button"
+   }
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 16,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2674,
+   "h1s": [
+    "Book a flight"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 20,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1842,
+   "h1s": [
+    "Book a flight"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

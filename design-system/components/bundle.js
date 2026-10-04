@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Airiona","components":[{"name":"Icon"},{"name":"Scene"},{"name":"Button"},{"name":"IconButton"},{"name":"SegmentedControl"},{"name":"Chip"},{"name":"TextField"},{"name":"Checkbox"},{"name":"Switch"},{"name":"QuantityStepper"},{"name":"Calendar"},{"name":"BookingSearch"},{"name":"Badge"},{"name":"Rating"},{"name":"Toast"},{"name":"BookingSteps"},{"name":"Avatar"},{"name":"AvatarStack"},{"name":"FlightTicket"},{"name":"StayCard"},{"name":"DestinationCard"},{"name":"BookingBar"},{"name":"AmenityList"},{"name":"StatCard"},{"name":"SideNav"},{"name":"TopNav"},{"name":"Dialog"},{"name":"Select"},{"name":"Menu"},{"name":"DataTable"},{"name":"Tabs"},{"name":"Tooltip"},{"name":"DatePicker"},{"name":"Ring"},{"name":"MetricTile"},{"name":"PillBarChart"},{"name":"SegmentGauge"},{"name":"RatingBreakdown"},{"name":"Leaderboard"},{"name":"StripeDistribution"},{"name":"Heatmap"},{"name":"AbsenceCard"},{"name":"ToggleTile"},{"name":"ArrivalTile"},{"name":"RingStatCard"},{"name":"HabitTile"},{"name":"GateTile"},{"name":"VoiceRecorder"},{"name":"BatteryTile"},{"name":"MediaPlayer"},{"name":"AnalogClock"},{"name":"RecordingTile"},{"name":"ActivityCalendar"},{"name":"WorldClock"},{"name":"RideTile"},{"name":"ChargingTile"},{"name":"TripSummaryTile"},{"name":"Notch"},{"name":"ProfileProjectCard"},{"name":"MeetingsStrip"},{"name":"RoadmapGantt"},{"name":"DateChip"},{"name":"EfficiencyChart"},{"name":"TotalTimeTile"},{"name":"AssistantCard"},{"name":"PageHeader"},{"name":"ChannelCard"},{"name":"PromptCard"},{"name":"BalanceChart"},{"name":"HoldingsPanel"},{"name":"SparkBars"},{"name":"PilotDashboard"},{"name":"PhoneFrame"},{"name":"StatusBar"},{"name":"AppBar"},{"name":"TabBar"},{"name":"BottomSheet"},{"name":"ActionSheet"},{"name":"Fab"},{"name":"StickyActionBar"},{"name":"HeroHeader"},{"name":"GreetingBar"},{"name":"SearchField"},{"name":"SectionHeader"},{"name":"ChipScroller"},{"name":"SnapCarousel"},{"name":"SwipeRow"},{"name":"MobileSegmented"},{"name":"FieldTile"},{"name":"FeatureCard"},{"name":"CategoryTile"},{"name":"ChecklistRow"},{"name":"WeekStrip"},{"name":"Timeline"},{"name":"CalendarCard"},{"name":"AgendaCard"},{"name":"PeoplePicker"},{"name":"PlanList"},{"name":"MiniStatCard"},{"name":"TripRow"},{"name":"FlightSearchSheet"},{"name":"RouteHeader"},{"name":"TicketCard"},{"name":"BoardingPass"},{"name":"PlaceCard"},{"name":"PlaceHero"},{"name":"InfoStatRow"},{"name":"ExpandableText"},{"name":"MiniDestination"},{"name":"IllustrationCallout"},{"name":"MemberPicker"},{"name":"ActivityFeed"},{"name":"DetailList"},{"name":"LetterRow"},{"name":"ProfileHeader"},{"name":"OnboardingFlow"},{"name":"CountUp"},{"name":"SuccessBurst"},{"name":"Skeleton"},{"name":"RouteTransition"},{"name":"ScreenStack"},{"name":"QRCode"},{"name":"AuthShell"},{"name":"LandingHero"}]} */
 (function () {
   "use strict";
   var React = window.React;
@@ -2589,6 +2589,130 @@
   ];
   OnboardingFlow.copy = ONBOARDING_COPY;
 
+  /* AuthShell: split-screen sign-in and sign-up. The form column on one side, a cinematic media panel on the
+     other: poster frame, a looping video once the page has settled (wide screens, motion allowed), scrim, grain,
+     headline and highlight cards that rotate when each progress tick finishes. Below 1024px the panel becomes
+     a slim image strip above the form. side="right" puts the form on the right (sign-up), so moving between
+     the two screens flips the card. */
+  function AuthShell(props) {
+    var highlights = props.highlights || [];
+    var interval = props.interval || 5600;
+    var hasWindow = typeof window !== "undefined" && !!window.matchMedia;
+    var wide = useState(hasWindow ? window.matchMedia("(min-width: 1024px)").matches : true);
+    var active = useState(0), hover = useState(false), focus = useState(false), ready = useState(false);
+    var videoRef = React.useRef(null);
+    React.useEffect(function () {
+      if (!hasWindow) return undefined;
+      var q = window.matchMedia("(min-width: 1024px)");
+      var on = function () { wide[1](q.matches); };
+      on();
+      if (q.addEventListener) q.addEventListener("change", on); else q.addListener(on);
+      return function () { if (q.removeEventListener) q.removeEventListener("change", on); else q.removeListener(on); };
+    }, []);
+    React.useEffect(function () {
+      var v = videoRef.current;
+      if (!v || !props.video || reduceMotion()) return undefined;
+      var cancelled = false, timer = 0;
+      var start = function () { if (cancelled) return; v.src = props.video; var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      var later = function () { timer = setTimeout(start, 1200); };
+      if (document.readyState === "complete") later(); else window.addEventListener("load", later, { once: true });
+      return function () { cancelled = true; clearTimeout(timer); window.removeEventListener("load", later); };
+    }, [wide[0], props.video]);
+    var next = function () { if (highlights.length > 1) active[1](function (i) { return (i + 1) % highlights.length; }); };
+    var parallax = function (e) {
+      if (reduceMotion()) return;
+      var r = e.currentTarget.getBoundingClientRect();
+      e.currentTarget.style.setProperty("--ar-px", (((e.clientX - r.left) / r.width - 0.5) * -20).toFixed(1) + "px");
+      e.currentTarget.style.setProperty("--ar-py", (((e.clientY - r.top) / r.height - 0.5) * -20).toFixed(1) + "px");
+    };
+    var paused = hover[0] || focus[0];
+    var cards = highlights.length ? h("div", { className: "ar-auth__cards" }, highlights.map(function (x, i) {
+      return h("div", { key: i, className: cx("ar-auth__card", i === active[0] && "is-active"), "aria-hidden": i === active[0] ? undefined : "true" }, h("b", null, x.title), h("span", null, x.text));
+    })) : null;
+    var ticks = highlights.length > 1 ? h("div", { className: cx("ar-auth__ticks", paused && "is-paused"), role: "group", "aria-label": "Highlights", style: { "--ar-auth-interval": interval + "ms" } }, highlights.map(function (x, i) {
+      return h("button", {
+        key: i, type: "button", className: cx("ar-auth__tick", i === active[0] && "is-active", i < active[0] && "is-done"),
+        "aria-label": "Show highlight " + (i + 1) + " of " + highlights.length + ": " + x.title, "aria-current": i === active[0] ? "true" : undefined,
+        onClick: function () { active[1](i); },
+      }, h("i", { onAnimationEnd: i === active[0] ? next : undefined }));
+    })) : null;
+    return h("div", { className: cx("ar ar-auth", props.side === "right" && "ar-auth--flip", props.wide && "ar-auth--wide", props.className) },
+      h("main", { className: "ar-auth__col", onFocus: function () { focus[1](true); }, onBlur: function () { focus[1](false); } },
+        h("header", { className: "ar-auth__top" }, props.brand || h(Wordmark), h("div", { className: "ar-auth__actions" }, props.actions)),
+        h("div", { className: "ar-auth__strip", "aria-hidden": "true" },
+          !wide[0] ? h("img", { src: props.stripImage || props.poster, alt: "" }) : null,
+          props.headline ? h("p", { className: "ar-auth__strip-title" }, props.headline) : null),
+        h("div", { className: "ar-auth__body" }, h("div", { className: "ar-auth__form" }, props.children)),
+        h("footer", { className: "ar-auth__foot" }, props.footer, h("span", null, props.legal || "© Airiona"))),
+      h("aside", {
+        className: "ar-auth__media", "aria-label": props.mediaLabel || "About Airiona",
+        onPointerEnter: function () { hover[1](true); }, onPointerLeave: function () { hover[1](false); }, onPointerMove: parallax,
+      },
+        h("div", { className: "ar-auth__frame" },
+          h("div", { className: "ar-auth__layer" },
+            wide[0] ? h("img", { className: "ar-auth__poster", src: props.poster, alt: "", "aria-hidden": "true" }) : null,
+            wide[0] && props.video ? h("video", { ref: videoRef, className: cx("ar-auth__video", ready[0] && "is-ready"), muted: true, loop: true, playsInline: true, preload: "none", "aria-hidden": "true", tabIndex: -1, disablePictureInPicture: true, onPlaying: function () { ready[1](true); } }) : null),
+          h("span", { className: "ar-auth__scrim", "aria-hidden": "true" }),
+          h("span", { className: "ar-auth__vignette", "aria-hidden": "true" }),
+          h("span", { className: "ar-auth__grain", "aria-hidden": "true" }),
+          h("div", { className: "ar-auth__copy" }, props.headline ? h("p", { className: "ar-auth__headline" }, props.headline) : null, cards, ticks))));
+  }
+
+  /* LandingHero: the page-opening hero of a landing or home page. A full-bleed photo with a looping video once the
+     page has settled (wide screens, motion allowed, paused while off screen), a scrim that keeps the copy legible,
+     an eyebrow pill, a display headline, a lede, actions and a row of proof figures. Children dock over the
+     bottom edge when `docked` is set (a search card). Phones get the photo only, cropped at `focus`. */
+  function LandingHero(props) {
+    var Tag = "h" + (props.headingLevel || 1);
+    var stats = props.stats || [];
+    var hasWindow = typeof window !== "undefined" && !!window.matchMedia;
+    var wide = useState(hasWindow ? window.matchMedia("(min-width: 1024px)").matches : false);
+    var ready = useState(false);
+    var videoRef = React.useRef(null);
+    React.useEffect(function () {
+      if (!hasWindow) return undefined;
+      var q = window.matchMedia("(min-width: 1024px)");
+      var on = function () { wide[1](q.matches); };
+      on();
+      if (q.addEventListener) q.addEventListener("change", on); else q.addListener(on);
+      return function () { if (q.removeEventListener) q.removeEventListener("change", on); else q.removeListener(on); };
+    }, []);
+    React.useEffect(function () {
+      var v = videoRef.current;
+      if (!v || !props.video || reduceMotion()) return undefined;
+      var cancelled = false, timer = 0, io = null;
+      var start = function () {
+        if (cancelled) return;
+        v.src = props.video;
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+        if (typeof IntersectionObserver !== "undefined") {
+          io = new IntersectionObserver(function (es) { var e = es[0]; if (e.isIntersecting) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } else v.pause(); });
+          io.observe(v);
+        }
+      };
+      var later = function () { timer = setTimeout(start, 1200); };
+      if (document.readyState === "complete") later(); else window.addEventListener("load", later, { once: true });
+      return function () { cancelled = true; clearTimeout(timer); window.removeEventListener("load", later); if (io) io.disconnect(); };
+    }, [wide[0], props.video]);
+    var docked = !!props.docked;
+    return h("section", { className: cx("ar ar-landing", docked && "ar-landing--docked", props.className), style: props.focus ? { "--ar-landing-focus": props.focus } : undefined },
+      h("div", { className: "ar-landing__frame" },
+        h("div", { className: "ar-landing__media", "aria-hidden": "true" },
+          props.image ? h("img", { className: "ar-landing__poster", src: props.image, alt: "" }) : null,
+          wide[0] && props.video ? h("video", { ref: videoRef, className: cx("ar-landing__video", ready[0] && "is-ready"), muted: true, loop: true, playsInline: true, preload: "none", tabIndex: -1, disablePictureInPicture: true, onPlaying: function () { ready[1](true); } }) : null),
+        h("span", { className: "ar-landing__scrim", "aria-hidden": "true" }),
+        h("span", { className: "ar-landing__grain", "aria-hidden": "true" }),
+        h("div", { className: "ar-landing__content" },
+          props.eyebrow ? h("p", { className: "ar-landing__eyebrow" }, props.eyebrow) : null,
+          h(Tag, { className: "ar-landing__title" }, props.title),
+          props.lede ? h("p", { className: "ar-landing__lede" }, props.lede) : null,
+          props.actions ? h("div", { className: "ar-landing__actions" }, props.actions) : null,
+          stats.length ? h("dl", { className: "ar-landing__stats" }, stats.map(function (s, i) {
+            return h("div", { key: i, className: "ar-landing__stat" }, h("dt", null, s.label), h("dd", null, s.value));
+          })) : null)),
+      docked ? h("div", { className: "ar-landing__dock" }, props.children) : null);
+  }
+
   var api = {
     Icon: Icon, Scene: Scene, Button: Button, IconButton: IconButton, SegmentedControl: SegmentedControl, Chip: Chip,
     TextField: TextField, Checkbox: Checkbox, Switch: Switch, QuantityStepper: QuantityStepper, Calendar: Calendar,
@@ -2599,7 +2723,7 @@
     Tabs: Tabs, Tooltip: Tooltip, DatePicker: DatePicker,
     Ring: Ring, MetricTile: MetricTile, PillBarChart: PillBarChart, SegmentGauge: SegmentGauge, RatingBreakdown: RatingBreakdown, Leaderboard: Leaderboard, StripeDistribution: StripeDistribution, Heatmap: Heatmap, AbsenceCard: AbsenceCard, ToggleTile: ToggleTile, ArrivalTile: ArrivalTile, RingStatCard: RingStatCard, HabitTile: HabitTile, GateTile: GateTile, VoiceRecorder: VoiceRecorder, BatteryTile: BatteryTile, MediaPlayer: MediaPlayer, AnalogClock: AnalogClock, RecordingTile: RecordingTile, ActivityCalendar: ActivityCalendar, WorldClock: WorldClock, RideTile: RideTile, ChargingTile: ChargingTile, TripSummaryTile: TripSummaryTile, Notch: Notch, ProfileProjectCard: ProfileProjectCard, MeetingsStrip: MeetingsStrip, RoadmapGantt: RoadmapGantt, DateChip: DateChip, EfficiencyChart: EfficiencyChart, TotalTimeTile: TotalTimeTile, AssistantCard: AssistantCard, PageHeader: PageHeader, ChannelCard: ChannelCard, PromptCard: PromptCard, BalanceChart: BalanceChart, HoldingsPanel: HoldingsPanel, SparkBars: SparkBars, PilotDashboard: PilotDashboard,
     PhoneFrame: PhoneFrame, StatusBar: StatusBar, AppBar: AppBar, TabBar: TabBar, BottomSheet: BottomSheet, ActionSheet: ActionSheet, Fab: Fab, StickyActionBar: StickyActionBar, HeroHeader: HeroHeader, GreetingBar: GreetingBar, SearchField: SearchField, SectionHeader: SectionHeader, ChipScroller: ChipScroller, SnapCarousel: SnapCarousel, SwipeRow: SwipeRow, MobileSegmented: MobileSegmented, FieldTile: FieldTile, FeatureCard: FeatureCard, CategoryTile: CategoryTile, ChecklistRow: ChecklistRow, WeekStrip: WeekStrip, Timeline: Timeline, CalendarCard: CalendarCard, AgendaCard: AgendaCard, PeoplePicker: PeoplePicker, PlanList: PlanList, MiniStatCard: MiniStatCard, TripRow: TripRow, FlightSearchSheet: FlightSearchSheet, RouteHeader: RouteHeader, TicketCard: TicketCard, BoardingPass: BoardingPass, PlaceCard: PlaceCard, PlaceHero: PlaceHero, InfoStatRow: InfoStatRow, ExpandableText: ExpandableText, MiniDestination: MiniDestination, IllustrationCallout: IllustrationCallout, MemberPicker: MemberPicker, ActivityFeed: ActivityFeed, DetailList: DetailList, LetterRow: LetterRow, ProfileHeader: ProfileHeader, OnboardingFlow: OnboardingFlow,
-    CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
+    AuthShell: AuthShell, LandingHero: LandingHero, CountUp: CountUp, SuccessBurst: SuccessBurst, Skeleton: Skeleton, RouteTransition: RouteTransition, ScreenStack: ScreenStack, QRCode: QRCode,
     motion: { reduce: reduceMotion, useIndicator: useIndicator, usePresence: usePresence }
   };
   window.Airiona = Object.assign(window.Airiona || {}, api);

@@ -1,0 +1,381 @@
+{
+  "page": "signup",
+  "title": "Create account",
+  "route": "signup",
+  "target": "angular",
+  "canvas": "full",
+  "types": {},
+  "data": [],
+  "motion": [
+    {
+      "where": "Moving between sign-in and sign-up",
+      "component": "RouteTransition",
+      "variant": "fade-through",
+      "why": "The two screens are siblings; the form column swaps sides, so a fade-through reads as the card turning over rather than a slide"
+    }
+  ],
+  "gaps": [],
+  "source": {
+    "kind": "brief",
+    "ref": "docs/pages/login/page.spec.json",
+    "notes": "Sign-up uses the same AuthShell layout as sign-in with the form on the right, a different photo (the apron at dusk) and highlights for new members. Fields come from the product: name, email, phone, password, account type (traveller, operator, hangar host) and terms."
+  },
+  "audience": "A first-time visitor who came from a listing, a charter quote or the home page, usually on a phone; they will give a name, email, phone and password if the form is short and tells them why each is needed.",
+  "primaryAction": "Create an account",
+  "sections": [
+    {
+      "id": "auth",
+      "title": "Create account",
+      "heading": false,
+      "purpose": "The whole screen: brand, form and the media panel",
+      "layout": {
+        "base": "stack"
+      },
+      "form": "signup",
+      "elements": [
+        {
+          "id": "shell",
+          "component": "AuthShell",
+          "inputs": {
+            "headline": "One account for every flight.",
+            "highlights": [
+              {
+                "title": "Charter, buy or lease",
+                "text": "Request a jet, make an offer on an aircraft or book hangar space from the same account."
+              },
+              {
+                "title": "Verified operators",
+                "text": "Every operator and hangar host is checked for certificates and insurance before they list."
+              },
+              {
+                "title": "Pay when it is confirmed",
+                "text": "Nothing is charged until the operator confirms your request."
+              }
+            ],
+            "side": "right",
+            "mediaLabel": "About Airiona",
+            "poster": "assets/photos/aviation/auth-apron.webp",
+            "stripImage": "assets/photos/aviation/auth-apron-strip.webp"
+          },
+          "why": "The reference product's split-screen sign-in, in Airiona: the form column beside a cinematic media panel (poster, looping video after load, scrim, grain, rotating highlight cards with progress ticks that pause on hover or focus); a slim photo strip on phones",
+          "alternatives": [
+            {
+              "component": "section split with HeroHeader",
+              "rejected": "the old login: a mobile header stretched into an aside, no motion, no highlights, and the art fell below the form on phones"
+            },
+            {
+              "component": "OnboardingFlow",
+              "rejected": "a multi-step carousel for first launch, not a sign-in screen"
+            }
+          ],
+          "notes": "Sign-in puts the form left, sign-up right, so switching between them flips the card.",
+          "children": [
+            {
+              "id": "help",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Help",
+              "inputs": {
+                "variant": "ghost",
+                "size": "sm",
+                "iconStart": "question-mark-circle"
+              },
+              "events": {
+                "click": "openHelp"
+              },
+              "why": "Help stays one tap away without competing with the form",
+              "notes": "Opens the help centre in a new tab"
+            },
+            {
+              "id": "privacy",
+              "component": "html",
+              "tag": "a",
+              "class": "ar-auth-link",
+              "text": "Privacy",
+              "slot": "arFoot",
+              "href": "#/legal/privacy"
+            },
+            {
+              "id": "head",
+              "component": "html",
+              "tag": "div",
+              "class": "ar-auth-head",
+              "children": [
+                {
+                  "id": "title",
+                  "component": "html",
+                  "tag": "h1",
+                  "text": "Create your account"
+                },
+                {
+                  "id": "lede",
+                  "component": "html",
+                  "tag": "p",
+                  "text": "Two minutes, then you can request flights, list an aircraft or book hangar space."
+                }
+              ]
+            },
+            {
+              "id": "fullName",
+              "component": "TextField",
+              "field": "fullName",
+              "why": "One name field: no first/last split, which fails for many names"
+            },
+            {
+              "id": "email",
+              "component": "TextField",
+              "field": "email",
+              "why": "Sign-in identifier and where confirmations go"
+            },
+            {
+              "id": "phone",
+              "component": "TextField",
+              "field": "phone",
+              "why": "Operators call to confirm departure details; the hint says so"
+            },
+            {
+              "id": "password",
+              "component": "TextField",
+              "field": "password",
+              "why": "New password with the rule stated before the user types, not after"
+            },
+            {
+              "id": "accountType",
+              "component": "MobileSegmented",
+              "field": "accountType",
+              "why": "Three always-visible roles in one tap; changes what the dashboard shows first",
+              "alternatives": [
+                {
+                  "component": "Select",
+                  "rejected": "hides three short options behind a tap"
+                }
+              ]
+            },
+            {
+              "id": "terms",
+              "component": "Checkbox",
+              "field": "terms",
+              "why": "Required consent, unticked by default",
+              "notes": "The terms and privacy pages open from the footer links"
+            },
+            {
+              "id": "submit",
+              "component": "Button",
+              "submit": true,
+              "text": "Create account",
+              "inputs": {
+                "variant": "primary",
+                "size": "lg",
+                "block": true
+              },
+              "why": "The one primary action"
+            },
+            {
+              "id": "switch",
+              "component": "html",
+              "tag": "p",
+              "class": "ar-auth-switch",
+              "text": "Already have an account?",
+              "children": [
+                {
+                  "id": "loginLink",
+                  "component": "html",
+                  "tag": "a",
+                  "class": "ar-auth-link",
+                  "text": "Sign in",
+                  "href": "#/login"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "signup",
+      "submit": {
+        "label": "Create account",
+        "action": "POST /api/accounts { fullName, email, phone, password, accountType, terms }",
+        "success": {
+          "kind": "burst",
+          "dialogTitle": "Account created",
+          "title": "Welcome to Airiona",
+          "text": "We sent a confirmation link to your email. Open it to verify your account.",
+          "action": "Continue"
+        },
+        "failure": "409 (email exists): message under Email 'An account with this email exists. Sign in instead.'; 422: messages under the fields the server names; network: danger Toast with Retry and the form stays filled"
+      },
+      "fields": [
+        {
+          "name": "fullName",
+          "label": "Full name",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "autocomplete": "name",
+            "iconStart": "user",
+            "placeholder": "As on your passport"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "maxLength",
+              "value": 80
+            }
+          ],
+          "messages": {
+            "required": "Enter your name.",
+            "maxlength": "Names are at most 80 characters."
+          }
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email",
+            "iconStart": "envelope",
+            "placeholder": "name@example.com"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "email"
+            },
+            {
+              "type": "maxLength",
+              "value": 254
+            }
+          ],
+          "messages": {
+            "required": "Enter your email.",
+            "email": "Enter an email like name@example.com.",
+            "maxlength": "Emails are at most 254 characters."
+          }
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "tel",
+            "autocomplete": "tel",
+            "inputMode": "tel",
+            "iconStart": "phone",
+            "placeholder": "+971 50 123 4567",
+            "hint": "Operators use it to confirm departure details."
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "phone"
+            }
+          ],
+          "messages": {
+            "required": "Enter a phone number.",
+            "phone": "Enter a number with its country code, like +971 50 123 4567."
+          }
+        },
+        {
+          "name": "password",
+          "label": "Password",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "password",
+            "autocomplete": "new-password",
+            "iconStart": "lock-closed",
+            "hint": "At least 8 characters, with a letter and a number."
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "minLength",
+              "value": 8
+            },
+            {
+              "type": "pattern",
+              "value": "^(?=.*[A-Za-z])(?=.*\\d).+$"
+            }
+          ],
+          "messages": {
+            "required": "Choose a password.",
+            "minlength": "Use at least 8 characters.",
+            "pattern": "Add at least one letter and one number."
+          }
+        },
+        {
+          "name": "accountType",
+          "label": "I'm joining as",
+          "component": "MobileSegmented",
+          "default": "client",
+          "inputs": {
+            "label": "I'm joining as",
+            "tone": "brand",
+            "options": [
+              {
+                "value": "client",
+                "label": "Traveller"
+              },
+              {
+                "value": "operator",
+                "label": "Operator"
+              },
+              {
+                "value": "hangar",
+                "label": "Hangar host"
+              }
+            ]
+          },
+          "validators": [
+            {
+              "type": "required"
+            }
+          ],
+          "messages": {
+            "required": "Choose how you will use Airiona."
+          }
+        },
+        {
+          "name": "terms",
+          "label": "I accept the terms and privacy policy",
+          "component": "Checkbox",
+          "default": false,
+          "validators": [
+            {
+              "type": "requiredTrue"
+            }
+          ],
+          "messages": {
+            "required": "Accept the terms to create your account."
+          }
+        }
+      ]
+    }
+  ],
+  "a11y": [
+    "One h1: \"Create your account\".",
+    "Password rules are in the hint before typing, and the pattern message names what is missing.",
+    "The account type group is labelled \"I'm joining as\"; arrow keys move between the three roles.",
+    "The terms checkbox error is announced (role=\"alert\") and focus moves to it on submit when it is the first invalid field."
+  ],
+  "notes": [
+    "No sticky bottom bar: the Create account button follows the last field and a sticky copy would cover the terms line (answers the lint warning about sticky.base bottom).",
+    "Sign-up shows the poster without video: the apron photo has no loop yet; add `video` when one is cut (export the poster from its first frame).",
+    "Operators and hangar hosts get a verification step after the first sign-in (certificates, insurance); it is not part of this form so the form stays short."
+  ]
+}

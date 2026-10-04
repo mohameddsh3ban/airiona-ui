@@ -17,7 +17,7 @@ Everything you produce is checked by tools in this repository. Never claim a ste
 | `node tools/page/airiona.mjs describe <Component>` | Read a component's inputs, outputs, slots, guidance and a working example. **Do this before using any component.** |
 | `node tools/page/airiona.mjs new <page>` | Start `docs/pages/<page>/page.spec.json`. |
 | `node tools/page/airiona.mjs lint <page>` | Check the spec against the real component APIs and the rules below. |
-| `node tools/page/airiona.mjs check <page>` | Lint, scaffold the Angular page, build it, screenshot 390/768/1280, run the phone checks, write `HANDOFF.md`. |
+| `node tools/page/airiona.mjs check <page>` | Lint, scaffold the Angular page, build it, screenshot 390/768/1280 and the app view (`native.png`), run the phone checks, write `HANDOFF.md`. |
 | `docs/components/INDEX.md` | All 122 components, one line each, by group. Read it once per session. |
 
 If `catalog/data/manifest.json` is missing, run `node tools/gen-manifest.mjs` first.

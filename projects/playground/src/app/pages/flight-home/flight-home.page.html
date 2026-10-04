@@ -16,96 +16,115 @@
     </div>
   </section>
 
-  <section class="pg-s pg-s--hero" aria-label="Convenient online flight booking">
-    <div class="pg-g">
-      <ar-hero-header
-        class="pg-el-heroHeader"
-        eyebrow="Ready for take-off"
-        title="Convenient online flight booking"
-        image="assets/art/jet-3d.webp"
-        [headingLevel]="1"
-      >
-        <p arBelowTitle class="body pg-el-heroLede">Flights, stays and transfers in one booking.</p>
-      </ar-hero-header>
-    </div>
-  </section>
-
-  <section class="pg-s pg-s--search" aria-label="Search flights">
+  <section class="pg-s pg-s--hero" aria-label="Fly on your own schedule">
     <form class="pg-g" [formGroup]="search" (ngSubmit)="submitSearch()" novalidate>
-        <ar-mobile-segmented
-          class="pg-el-tripType"
-          label="Trip type"
-          tone="brand"
-          [options]="tripTypeOptions"
-          formControlName="tripType"
-        />
-        @if (searchForm.error('tripType'); as message) {
-          <p class="pg-error" role="alert">{{ message }}</p>
-        }
-        <ar-segmented-control
-          class="pg-el-tripTypeDesktop"
-          label="Trip type"
-          tone="brand"
-          [options]="tripTypeDesktopOptions"
-          formControlName="tripType"
-        />
-        @if (searchForm.error('tripType'); as message) {
-          <p class="pg-error" role="alert">{{ message }}</p>
-        }
-        <ar-select
-          class="pg-el-from"
-          label="From"
-          placeholder="City or airport"
-          [searchable]="true"
-          searchPlaceholder="Type a city or code"
-          iconStart="paper-airplane"
-          emptyText="No airport matches that"
-          [options]="data.airports"
-          formControlName="from"
-          [error]="searchForm.error('from')"
-        />
-        <ar-select
-          class="pg-el-to"
-          label="To"
-          placeholder="City or airport"
-          [searchable]="true"
-          searchPlaceholder="Type a city or code"
-          iconStart="map-pin"
-          emptyText="No airport matches that"
-          [options]="data.airports"
-          formControlName="to"
-          [error]="searchForm.error('to')"
-        />
-        <ar-date-picker
-          class="pg-el-dates"
-          label="Travel dates"
-          mode="range"
-          variant="tiles"
-          startLabel="Departure"
-          endLabel="Return"
-          min="2026-10-03"
-          today="2026-10-03"
-          unit="day"
-          [inclusive]="true"
-          formControlName="dates"
-          [error]="searchForm.error('dates')"
-        />
-        <button
-          arButton
-          class="pg-el-searchSubmit"
-          variant="primary"
-          size="lg"
-          [block]="true"
-          iconStart="magnifying-glass"
-          type="submit"
-          [loading]="searchForm.pending()"
-        >Search flights</button>
+        <ar-landing-hero
+          class="pg-el-heroLanding"
+          eyebrow="Private aviation"
+          title="Fly on your own schedule."
+          lede="Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes."
+          image="assets/photos/aviation/hero-sky.webp"
+          video="assets/video/hero-sky.mp4"
+          focus="78% 50%"
+          [stats]="heroLandingStats"
+          [headingLevel]="1"
+          [docked]="true"
+        >
+          <button
+            arButton
+            arActions
+            class="pg-el-heroBrowseAircraft"
+            variant="secondary"
+            size="lg"
+            iconStart="paper-airplane"
+            (click)="goToAircraft($event)"
+          >Browse aircraft</button>
+          <button
+            arButton
+            arActions
+            class="pg-el-heroHangars"
+            variant="ghost"
+            size="lg"
+            iconStart="building-office-2"
+            (click)="goToHangars($event)"
+          >Find hangar space</button>
+          <div class="pg-card pg-el-searchCard">
+            <ar-mobile-segmented
+              class="pg-el-tripType"
+              label="Trip type"
+              tone="brand"
+              [options]="tripTypeOptions"
+              formControlName="tripType"
+            />
+            @if (searchForm.error('tripType'); as message) {
+              <p class="pg-error" role="alert">{{ message }}</p>
+            }
+            <ar-segmented-control
+              class="pg-el-tripTypeDesktop"
+              label="Trip type"
+              tone="brand"
+              [options]="tripTypeDesktopOptions"
+              formControlName="tripType"
+            />
+            @if (searchForm.error('tripType'); as message) {
+              <p class="pg-error" role="alert">{{ message }}</p>
+            }
+            <ar-select
+              class="pg-el-from"
+              label="From"
+              placeholder="City or airport"
+              [searchable]="true"
+              searchPlaceholder="Type a city or code"
+              iconStart="paper-airplane"
+              emptyText="No airport matches that"
+              [options]="data.airports"
+              formControlName="from"
+              [error]="searchForm.error('from')"
+            />
+            <ar-select
+              class="pg-el-to"
+              label="To"
+              placeholder="City or airport"
+              [searchable]="true"
+              searchPlaceholder="Type a city or code"
+              iconStart="map-pin"
+              emptyText="No airport matches that"
+              [options]="data.airports"
+              formControlName="to"
+              [error]="searchForm.error('to')"
+            />
+            <ar-date-picker
+              class="pg-el-dates"
+              label="Travel dates"
+              mode="range"
+              variant="tiles"
+              startLabel="Departure"
+              endLabel="Return"
+              min="2026-10-03"
+              today="2026-10-03"
+              unit="day"
+              [inclusive]="true"
+              formControlName="dates"
+              [error]="searchForm.error('dates')"
+            />
+            <button
+              arButton
+              class="pg-el-searchSubmit"
+              variant="primary"
+              size="lg"
+              [block]="true"
+              iconStart="magnifying-glass"
+              type="submit"
+              [loading]="searchForm.pending()"
+            >Search flights</button>
+          </div>
+        </ar-landing-hero>
     </form>
   </section>
 
   <section class="pg-s pg-s--deals" aria-labelledby="pg-h-deals">
-    <h2 class="pg-h m-title-2" id="pg-h-deals">Top flight deals</h2>
-    <p class="pg-intro body">Discover top flight deals for elite travel at unprecedented prices.</p>
+    <h2 class="pg-h m-title-2" id="pg-h-deals">Top deals</h2>
+    <p class="pg-intro body">Charter fares, aircraft for sale and hangar space across the network.</p>
     <div class="pg-g">
       <ar-feature-card
         class="pg-el-dealFeatured"
@@ -116,10 +135,25 @@
         [tone]="data.deals[0].tone"
         (open)="openDeal($event)"
       />
-      <!-- GAP dealHotels: see gaps in the spec. Placeholder until the component exists. -->
-      <div class="pg-gap pg-el-dealHotels">Photo tile · Hotel bookings · arrow</div>
-      <!-- GAP dealDomestic: see gaps in the spec. Placeholder until the component exists. -->
-      <div class="pg-gap pg-el-dealDomestic">Photo tile · Book domestic · arrow</div>
+      <ar-mini-destination
+        class="pg-el-dealAircraft"
+        title="Aircraft for sale"
+        image="assets/photos/aviation/jet-midsize.webp"
+        price="from $2.4M"
+        duration="1,240 listed"
+        dates="Jets, turboprops, helicopters"
+        badge="New"
+        (press)="goToAircraft($event)"
+      />
+      <ar-mini-destination
+        class="pg-el-dealHangars"
+        title="Hangar space"
+        image="assets/photos/aviation/hangar-large.webp"
+        price="from $1,850 / mo"
+        duration="140 airports"
+        dates="Nightly, monthly or yearly"
+        (press)="goToHangars($event)"
+      />
     </div>
   </section>
 
@@ -160,6 +194,12 @@
       } @empty {
         <p class="pg-empty pg-el-hotel">IllustrationCallout: 'No featured stays near you yet' with a 'Browse all stays' link</p>
       }
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--tabs" aria-label="Tabs">
+    <div class="pg-g">
+      <ar-tab-bar class="pg-el-tabBar" [items]="tabBarItems" value="home" variant="labels" label="Main" />
     </div>
   </section>
 </main>

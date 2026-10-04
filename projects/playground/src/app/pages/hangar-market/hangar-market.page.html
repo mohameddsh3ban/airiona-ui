@@ -1,0 +1,107 @@
+<!-- Hangars: generated from docs/pages/hangar-market/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="hangars" [user]="topNavUser">
+        <button
+          arButton
+          arActions
+          class="pg-el-navAction"
+          variant="secondary"
+          size="sm"
+          iconStart="plus"
+          (click)="listHangar($event)"
+        >List your hangar</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--topbar" aria-label="Hangars">
+    <div class="pg-g">
+      <ar-app-bar class="pg-el-appBar" title="Hangar space" [large]="true" eyebrow="Marketplace" [accent]="true">
+        <button
+          arIconButton
+          arActions
+          class="pg-el-appBarAction"
+          icon="plus"
+          label="List your hangar"
+          variant="surface"
+          (click)="listHangar($event)"
+        ></button>
+      </ar-app-bar>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--head" aria-label="Hangar space">
+    <div class="pg-g">
+      <h1 class="m-title-1 pg-el-desktopTitle">Hangar space</h1>
+      <p class="pg-muted pg-el-desktopIntro">Nightly, monthly and yearly space at 140 airports, from hosts checked for insurance and security.</p>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--filters" aria-label="Search and filters">
+    <div class="pg-g">
+      <ar-search-field
+        class="pg-el-search"
+        placeholder="Search hangars"
+        label="Search hangars"
+        [showFilter]="true"
+        filterLabel="More filters"
+        (filter)="openFilters($event)"
+      />
+      <ar-select class="pg-el-sort" label="Sort by" [options]="sortOptions" value="near" iconStart="arrows-up-down" />
+      <ar-chip-scroller class="pg-el-category" [options]="categoryOptions" value="all" label="Category" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--results" aria-label="Hangars listings">
+    <div class="pg-g">
+      <h2 class="pg-muted m-footnote pg-el-resultCount">86 hangars in the Gulf · nearest first</h2>
+      @for (item of data.hangars; track $index) {
+        <ar-stay-card
+          class="pg-el-listing"
+          cta="View details"
+          [title]="item.title"
+          [price]="item.price"
+          [unit]="item.unit"
+          [description]="item.description"
+          [tags]="item.tags"
+          [image]="item.image"
+          [photos]="item.photos"
+          [saved]="item.saved"
+          (reserve)="openListing($event)"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-listing">Nothing matches these filters. Clear a filter or widen the search.</p>
+      }
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--cross" aria-labelledby="pg-h-cross">
+    <h2 class="pg-h m-title-2" id="pg-h-cross">Aircraft for sale</h2>
+    <p class="pg-intro body">Verified listings with records checked.</p>
+    <div class="pg-g">
+      @for (item of data.aircraftTiles; track $index) {
+        <ar-mini-destination
+          class="pg-el-crossTile"
+          [title]="item.title"
+          [image]="item.image"
+          [price]="item.price"
+          [duration]="item.duration"
+          [dates]="item.dates"
+          [badge]="item.badge"
+          (press)="openAircraft($event)"
+        />
+      } @empty {
+        <p class="pg-empty pg-el-crossTile">Section hidden</p>
+      }
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--tabs" aria-label="Tabs">
+    <div class="pg-g">
+      <ar-tab-bar class="pg-el-tabBar" [items]="tabBarItems" value="hangars" variant="labels" label="Main" />
+    </div>
+  </section>
+</main>
+

@@ -147,19 +147,23 @@ export function scaffold(spec) {
   }).join('');
 
   /* ---- data ---- */
-  const typesTs = Object.entries(spec.types || {}).map(([n, fs]) => `export interface ${n} {\n${Object.entries(fs).map(([k, t]) => `  ${k}${/\?$/.test(t) ? '?' : ''}: ${String(t).replace(/\?$/, '').replace(/\bISODate\b/g, 'string')};`).join('\n')}\n}`).join('\n\n');
+  // Type aliases, not interfaces: aliases are assignable to index-signature inputs such as DataTable rows.
+  const typesTs = Object.entries(spec.types || {}).map(([n, fs]) => `export type ${n} = {\n${Object.entries(fs).map(([k, t]) => `  ${k}${/\?$/.test(t) ? '?' : ''}: ${String(t).replace(/\?$/, '').replace(/\bISODate\b/g, 'string')};`).join('\n')}\n};`).join('\n\n');
   const dataTs = `// Types and sample data for the ${spec.title} page. Generated from docs/pages/${slug}/page.spec.json.\n// Sources: ${(spec.data || []).map((d) => `${d.name} <- ${d.source || 'unspecified'}`).join('; ') || 'none'}.\n\n${typesTs}\n\nexport interface ${Cls}Data {\n${(spec.data || []).map((d) => `  ${d.name}: ${d.type};`).join('\n')}\n}\n\nexport const ${camel(slug).toUpperCase().replace(/-/g, '_')}_SAMPLE: ${Cls}Data = ${JSON.stringify(Object.fromEntries((spec.data || []).map((d) => [d.name, d.sample])), null, 2)};\n`;
   const sampleName = `${camel(slug).toUpperCase().replace(/-/g, '_')}_SAMPLE`;
 
   /* ---- styles: mobile first ---- */
   css.push(`/* ${spec.title}: generated from docs/pages/${slug}/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */`);
   css.push(':host { display: block; }');
-  css.push('.pg { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }');
+  css.push('.pg { --m-gutter: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }');
   css.push('.pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }');
   css.push('.pg-h { margin: 0; }');
   css.push('.pg-intro { color: var(--ink-muted); max-width: 65ch; }');
   css.push('.pg-g { min-width: 0; gap: 16px; }');
   css.push('.pg-g > * { min-width: 0; }');
+  // Listing cards cap their width for standalone use; in a page grid they fill their cell. A custom property,
+  // because it inherits through component encapsulation where a selector would not reach.
+  css.push('.pg-g { --ar-card-max: none; }');
   css.push('.pg :is(h1, h2, h3, h4, p, ul, ol, figure) { margin: 0; }');
   css.push('.pg img { display: block; max-width: 100%; height: auto; }');
   css.push('.pg-error { margin: -8px 0 0; font: 500 13px/18px var(--font-sans); color: var(--danger); }');
@@ -170,6 +174,12 @@ export function scaffold(spec) {
   css.push('.pg-divider { display: flex; align-items: center; gap: 12px; margin: 0; font: 500 13px/18px var(--font-sans); color: var(--ink-subtle); }');
   css.push('.pg-divider::before, .pg-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }');
   css.push('.pg-muted { color: var(--ink-muted); }');
+  css.push('.pg-figure { display: grid; gap: 8px; align-content: start; }');
+  css.push('.pg-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 24px; background: var(--surface-sunken); }');
+  css.push('.pg-card { padding: 20px; border-radius: 28px; background: var(--surface); box-shadow: var(--shadow-float); }');
+  css.push('.pg-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }');
+  // canvas "full": the page draws its own frame edge to edge (an auth shell, a full-screen app view).
+  if (spec.canvas === 'full') css.push('.pg { max-width: none; padding: 0; gap: 0; }', '.pg-s, .pg-g { gap: 0; }');
   css.push('.pg-toast { position: fixed; z-index: 60; left: 16px; right: 16px; top: calc(16px + env(safe-area-inset-top, 0px)); display: flex; justify-content: center; }');
 
   // Per-breakpoint values cascade upward (base -> md -> lg). RANGES are exclusive, so a value set at one breakpoint
@@ -205,20 +215,34 @@ export function scaffold(spec) {
       if (s.bleed?.[bp] === true) rules.push(`${sel} { margin-inline: ${bp === 'base' ? '-16px' : bp === 'md' ? '-24px' : '0'}; }`);
       if (s.bleed?.[bp] === false) rules.push(`${sel} { margin-inline: 0; }`);
     }
-    for (const { el } of walkElements(spec)) {
-      const span = el.span?.[bp];
-      if (span) rules.push(`.pg-el-${el.id} { grid-column: ${span === 'full' ? '1 / -1' : `span ${span}`}; }`);
+    for (const { el, section, parent } of walkElements(spec)) {
+      const own = el.component === 'html' && el.layout?.[bp];
+      if (own) rules.push(`.pg-el-${el.id} { ${LAYOUT_CSS[own]} gap: 16px; }`, `.pg-el-${el.id} > * { min-width: 0; }`);
+      // A span cascades upward like everything else, but in a one-column stack "span 2" would invent a second
+      // column; there it means the full row.
+      const span = cascade(el.span, null).find(([b]) => b === bp)[1];
+      const container = parent?.component === 'html' && parent.layout ? parent.layout : section.layout;
+      const isStack = cascade(container, 'stack').find(([b]) => b === bp)[1] === 'stack';
+      if (span && isStack && (el.span?.[bp] !== undefined || container?.[bp] !== undefined)) rules.push(`.pg-el-${el.id} { grid-column: 1 / -1; }`);
+      else if (span && el.span?.[bp] !== undefined) rules.push(`.pg-el-${el.id} { grid-column: ${span === 'full' ? '1 / -1' : `span ${span}`}; }`);
     }
-    if (bp === 'md') rules.unshift('.pg { padding-inline: 24px; gap: 32px; }');
+    if (bp === 'md') rules.unshift('.pg { --m-gutter: 24px; padding-inline: 24px; gap: 32px; }');
     if (bp === 'lg') {
-      rules.unshift('.pg { padding-inline: 32px; padding-top: 32px; gap: 36px; }');
+      rules.unshift('.pg { --m-gutter: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }');
       if (asides.length) {
         // Rows at desktop: "full" sections span both columns and split the page into blocks; inside a block the
         // main sections stack in column 1 and the block's aside sits beside them in column 2, sticky.
         rules.push('.pg { grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); column-gap: 40px; align-items: start; }');
         let row = 1, block = { start: 1, mains: 0, asides: [] };
         const close = () => {
-          block.asides.forEach((s) => rules.push(`.pg > .pg-s--${s.id} { grid-column: 2; grid-row: ${block.start} / span ${Math.max(1, block.mains)}; position: sticky; top: 24px; }`));
+          // Several asides in one block stack down column 2, one row each; the last takes the remaining rows and is
+          // the sticky one (two sticky items in one column would slide over each other).
+          const n = block.asides.length;
+          block.asides.forEach((s, i) => {
+            const last = i === n - 1;
+            const span = last ? Math.max(1, block.mains - i) : 1;
+            rules.push(`.pg > .pg-s--${s.id} { grid-column: 2; grid-row: ${block.start + i} / span ${span};${last ? ' position: sticky; top: 24px;' : ''} }`);
+          });
         };
         for (const s of (spec.sections || []).filter((x) => cascade(x.show, true)[2][1] !== false)) {
           const area = s.area?.lg || 'main';
@@ -232,6 +256,7 @@ export function scaffold(spec) {
     if (!rules.length) continue;
     css.push(min ? `@media (min-width: ${min}px) {\n  ${rules.join('\n  ')}\n}` : rules.join('\n'));
   }
+  if (spec.canvas === 'full') css.push('@media (min-width: 768px) {\n  .pg { padding: 0; gap: 0; }\n}');
   for (const [bp, rules] of Object.entries(byRange)) if (rules.length) css.push(`@media ${RANGES[bp]} {\n  ${[...new Set(rules)].join('\n  ')}\n}`);
 
   /* ---- component ---- */

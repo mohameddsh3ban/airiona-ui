@@ -20,6 +20,7 @@ export function render(spec, lintResult) {
   const shots = join(PAGES, slug, 'shots');
   if (existsSync(join(shots, '390.png'))) {
     L.push('## Screens', '', '| 390 px (phone) | 768 px (tablet) | 1280 px (desktop) |', '|---|---|---|', '| ![390](shots/390.png) | ![768](shots/768.png) | ![1280](shots/1280.png) |', '');
+    if (existsSync(join(shots, 'native.png'))) L.push('App view (the page in app mode inside the phone frame, `#/native/' + slug + '`):', '', '<img src="shots/native.png" width="260" alt="' + slug + ' as a phone app">', '');
     if (existsSync(join(shots, 'report.json'))) {
       const r = JSON.parse(readFileSync(join(shots, 'report.json'), 'utf8'));
       L.push(`Page checks (\`shoot\`): ${r.errors.length} errors, ${r.warnings.length} warnings. Spec check (\`lint\`) is at the end of this document.`, '');

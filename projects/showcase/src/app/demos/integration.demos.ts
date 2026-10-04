@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
   ArAppBar,
+  ArAuthShell,
+  ArButton,
+  ArCheckbox,
+  ArTextField,
   ArInfoStatRow,
+  ArLandingHero,
+  ArBookingSearch,
   ArMeetingsStrip,
   ArPhoneFrame,
   ArPilotDashboard,
@@ -105,10 +111,61 @@ class ScreenStackDemo {
 })
 class SparkBarsDemo {}
 
+@Component({
+  imports: [ArAuthShell, ArButton, ArCheckbox, ArTextField],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ar-auth-shell poster="photos/aviation/auth-wing.webp" video="video/auth-wing.mp4" stripImage="photos/aviation/auth-wing-strip.webp"
+      headline="Your aircraft, your schedule." [highlights]="highlights">
+      <button arActions arButton variant="ghost" size="sm" iconStart="question-mark-circle">Help</button>
+      <a arFoot class="ar-auth-link" href="#">Privacy</a>
+      <div class="ar-auth-head"><h1>Welcome back</h1><p>Sign in to book flights and manage your hangar space.</p></div>
+      <ar-text-field label="Email" type="email" iconStart="envelope" placeholder="name@example.com" autocomplete="email" />
+      <ar-text-field label="Password" type="password" iconStart="lock-closed" autocomplete="current-password" />
+      <div class="ar-auth-row"><ar-checkbox label="Keep me signed in" /><a class="ar-auth-link" href="#">Forgot password?</a></div>
+      <button arButton variant="primary" size="lg" block>Sign in</button>
+      <p class="ar-auth-divider">or</p>
+      <button arButton variant="secondary" size="lg" block iconStart="device-phone-mobile">Continue with passkey</button>
+      <p class="ar-auth-switch">New to Airiona? <a class="ar-auth-link" href="#">Create an account</a></p>
+    </ar-auth-shell>
+  `,
+})
+class AuthShellDemo {
+  protected readonly highlights = [
+    { title: 'All-in prices', text: 'Crew, fuel, airport fees and VAT in one number before you request.' },
+    { title: 'Confirmed in minutes', text: 'Operators answer a request within the 15-minute price hold.' },
+    { title: 'Hangars on the same account', text: 'Book space at 140 airports for the aircraft you fly or own.' },
+  ];
+}
+
+@Component({
+  imports: [ArLandingHero, ArBookingSearch, ArButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ar-landing-hero image="photos/aviation/hero-sky.webp" video="video/hero-sky.mp4" focus="78% 50%"
+      eyebrow="Private aviation" title="Fly on your own schedule."
+      lede="Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes."
+      [stats]="stats" docked>
+      <button arActions arButton variant="primary" size="lg" iconStart="paper-airplane">Book a flight</button>
+      <button arActions arButton variant="secondary" size="lg">Browse aircraft</button>
+      <ar-booking-search />
+    </ar-landing-hero>
+  `,
+})
+class LandingHeroDemo {
+  protected readonly stats = [
+    { value: '1,240', label: 'Aircraft listed' },
+    { value: '140', label: 'Airports with hangars' },
+    { value: '15 min', label: 'Average reply' },
+  ];
+}
+
 export const INTEGRATION_DEMOS: DemoDef[] = [
   { name: 'ProfileProjectCard', group: 'Workspace', component: ProfileProjectCardDemo, height: 376 },
   { name: 'MeetingsStrip', group: 'Workspace', component: MeetingsStripDemo, height: 330 },
   { name: 'SparkBars', group: 'Dashboard', component: SparkBarsDemo, height: 112 },
   { name: 'PilotDashboard', group: 'Screens', component: PilotDashboardDemo, height: 1587, stage: 'padding: 12px;' },
   { name: 'ScreenStack', group: 'Motion', component: ScreenStackDemo, height: 880 },
+  { name: 'AuthShell', group: 'Screens', component: AuthShellDemo, height: 860, stage: 'padding:0;' },
+  { name: 'LandingHero', group: 'Screens', component: LandingHeroDemo, height: 700, stage: 'padding:24px 24px 32px;' },
 ];

@@ -1,0 +1,71 @@
+{
+ "page": "signup",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 13,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1108,
+   "h1s": [
+    "Create your account"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": [],
+   "submit:signup": {
+    "msgs": [
+     "Enter your name.",
+     "Enter your email.",
+     "Enter a phone number.",
+     "Choose a password.",
+     "Accept the terms to create your account."
+    ],
+    "focusInForm": true,
+    "focused": "input"
+   }
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 13,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1108,
+   "h1s": [
+    "Create your account"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 16,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 936,
+   "h1s": [
+    "Create your account"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

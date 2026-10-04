@@ -29,6 +29,15 @@ Two columns where content is a set of equal items (cards `grid-2`), forms stay o
 - Grids grow (`grid-3`, `grid-4`) for listings and dashboards.
 - Phone-only parts are hidden with `show.lg: false` (TabBar, StickyActionBar when an aside carries the action); desktop parts are hidden on phones with `show.base: false` and shown again with `show.lg: true`.
 
+## App view (mobile native)
+
+Every page also runs as an installed app: `#/native/<page>` shows it in app mode (`?native`) inside the phone frame, and `check` saves that as `shots/native.png`. Design for it:
+
+- **Root screens** (a tab's first screen: home, a marketplace, a dashboard) end with a `tabs` section: a TabBar (`variant: "labels"`, 3–5 items) with `sticky: { "base": "bottom", "lg": "none" }` and `show: { "lg": false }`, because the top navigation replaces it at 1280. A page has one fixed bottom bar: a pushed screen with a StickyActionBar (detail, checkout) has no tab bar.
+- **Pushed screens** start with a back affordance (AppBar `showBack`, or PlaceHero's glass back button).
+- App mode sets `--m-status-h` (50px) and `--m-home-h` (34px). Content starts under the status bar and fixed bars clear the home indicator, so never hard-code those insets in a page.
+- Nothing may scroll sideways in the app view; the check fails if it does.
+
 ## What the check measures on the phone
 
 `check` builds only the page under check, then opens it at 390 × 844 (touch), 768 × 1024 (touch) and 1280 × 860. It fails on script errors, sideways scrolling at any width, tap targets under 24px, and any form whose empty submit shows fewer messages than its required fields. It warns on tap targets under 44px (transparent hit areas count), text under 11px, content ending under a fixed bottom bar, more or fewer than one visible h1, skipped heading levels, and focus not moving to the first invalid field.

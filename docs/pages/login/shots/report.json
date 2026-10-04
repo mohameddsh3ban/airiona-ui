@@ -6,19 +6,19 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 7,
+   "targetCount": 10,
    "tiny": [],
    "fixedCount": 0,
-   "height": 854,
+   "height": 928,
    "h1s": [
-    "Log in"
+    "Welcome back"
    ],
    "skips": 0,
    "covered": [],
    "pageErrors": [],
    "submit:login": {
     "msgs": [
-     "Enter the email you signed up with.",
+     "Enter your email.",
      "Enter your password."
     ],
     "focusInForm": true,
@@ -30,12 +30,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 7,
+   "targetCount": 10,
    "tiny": [],
    "fixedCount": 0,
-   "height": 1112,
+   "height": 1024,
    "h1s": [
-    "Log in"
+    "Welcome back"
    ],
    "skips": 0,
    "covered": [],
@@ -46,16 +46,21 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 12,
+   "targetCount": 13,
    "tiny": [],
    "fixedCount": 0,
    "height": 860,
    "h1s": [
-    "Log in"
+    "Welcome back"
    ],
    "skips": 0,
    "covered": [],
    "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
   }
  },
  "errors": [],

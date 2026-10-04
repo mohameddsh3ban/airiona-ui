@@ -1,0 +1,21 @@
+<!-- @dsCard group="Screens" height=700 -->
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>LandingHero</title>
+<style>html,body{margin:0;background:var(--canvas)}</style>
+</head>
+<body>
+<div id="root" class="ar ar-stage" style="padding:24px 24px 32px;"></div>
+<script>
+  var A = window.Airiona, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(A.LandingHero, {
+    image: '../../assets/photos/aviation/hero-sky.webp', video: '../../assets/video/hero-sky.mp4', focus: '78% 50%',
+    eyebrow: 'Private aviation', title: 'Fly on your own schedule.',
+    lede: 'Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes.',
+    stats: [{ value: '1,240', label: 'Aircraft listed' }, { value: '140', label: 'Airports with hangars' }, { value: '15 min', label: 'Average reply' }],
+    actions: [h(A.Button, { key: 'a', variant: 'primary', size: 'lg', iconStart: 'paper-airplane' }, 'Book a flight'), h(A.Button, { key: 'b', variant: 'secondary', size: 'lg' }, 'Browse aircraft')],
+    docked: true
+  }, h(A.BookingSearch, null)));
+</script>
+</body>
+</html>

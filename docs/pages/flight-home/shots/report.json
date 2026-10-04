@@ -6,12 +6,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 16,
+   "targetCount": 23,
    "tiny": [],
-   "fixedCount": 0,
-   "height": 2886,
+   "fixedCount": 1,
+   "height": 3670,
    "h1s": [
-    "Convenient online flight booking"
+    "Fly on your own schedule."
    ],
    "skips": 0,
    "covered": [],
@@ -31,12 +31,12 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 16,
+   "targetCount": 23,
    "tiny": [],
-   "fixedCount": 0,
-   "height": 2378,
+   "fixedCount": 1,
+   "height": 3036,
    "h1s": [
-    "Convenient online flight booking"
+    "Fly on your own schedule."
    ],
    "skips": 0,
    "covered": [],
@@ -47,16 +47,21 @@
    "wide": [],
    "small": [],
    "smallCount": 0,
-   "targetCount": 21,
+   "targetCount": 23,
    "tiny": [],
    "fixedCount": 0,
-   "height": 1644,
+   "height": 2056,
    "h1s": [
-    "Convenient online flight booking"
+    "Fly on your own schedule."
    ],
    "skips": 0,
    "covered": [],
    "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
   }
  },
  "errors": [],

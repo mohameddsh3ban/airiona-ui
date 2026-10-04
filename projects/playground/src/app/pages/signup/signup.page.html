@@ -1,0 +1,104 @@
+<!-- Create account: generated from docs/pages/signup/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--auth" aria-label="Create account">
+    <form class="pg-g" [formGroup]="signup" (ngSubmit)="submitSignup()" novalidate>
+        <ar-auth-shell
+          class="pg-el-shell"
+          headline="One account for every flight."
+          [highlights]="shellHighlights"
+          side="right"
+          mediaLabel="About Airiona"
+          poster="assets/photos/aviation/auth-apron.webp"
+          stripImage="assets/photos/aviation/auth-apron-strip.webp"
+        >
+          <button
+            arButton
+            arActions
+            class="pg-el-help"
+            variant="ghost"
+            size="sm"
+            iconStart="question-mark-circle"
+            (click)="openHelp($event)"
+          >Help</button>
+          <a arFoot class="ar-auth-link pg-el-privacy" href="#/legal/privacy">Privacy</a>
+          <div class="ar-auth-head pg-el-head">
+            <h1 class="pg-el-title">Create your account</h1>
+            <p class="pg-el-lede">Two minutes, then you can request flights, list an aircraft or book hangar space.</p>
+          </div>
+          <ar-text-field
+            class="pg-el-fullName"
+            autocomplete="name"
+            iconStart="user"
+            placeholder="As on your passport"
+            label="Full name"
+            formControlName="fullName"
+            [error]="signupForm.error('fullName')"
+          />
+          <ar-text-field
+            class="pg-el-email"
+            type="email"
+            autocomplete="email"
+            inputMode="email"
+            iconStart="envelope"
+            [placeholder]="emailPlaceholder"
+            label="Email"
+            formControlName="email"
+            [error]="signupForm.error('email')"
+          />
+          <ar-text-field
+            class="pg-el-phone"
+            type="tel"
+            autocomplete="tel"
+            inputMode="tel"
+            iconStart="phone"
+            placeholder="+971 50 123 4567"
+            hint="Operators use it to confirm departure details."
+            label="Phone"
+            formControlName="phone"
+            [error]="signupForm.error('phone')"
+          />
+          <ar-text-field
+            class="pg-el-password"
+            type="password"
+            autocomplete="new-password"
+            iconStart="lock-closed"
+            hint="At least 8 characters, with a letter and a number."
+            label="Password"
+            formControlName="password"
+            [error]="signupForm.error('password')"
+          />
+          <ar-mobile-segmented
+            class="pg-el-accountType"
+            label="I'm joining as"
+            tone="brand"
+            [options]="accountTypeOptions"
+            formControlName="accountType"
+          />
+          @if (signupForm.error('accountType'); as message) {
+            <p class="pg-error" role="alert">{{ message }}</p>
+          }
+          <ar-checkbox class="pg-el-terms" label="I accept the terms and privacy policy" formControlName="terms" />
+          @if (signupForm.error('terms'); as message) {
+            <p class="pg-error" role="alert">{{ message }}</p>
+          }
+          <button
+            arButton
+            class="pg-el-submit"
+            variant="primary"
+            size="lg"
+            [block]="true"
+            type="submit"
+            [loading]="signupForm.pending()"
+          >Create account</button>
+          <p class="ar-auth-switch pg-el-switch">Already have an account? 
+            <a class="ar-auth-link pg-el-loginLink" href="#/login">Sign in</a>
+          </p>
+        </ar-auth-shell>
+    </form>
+  </section>
+</main>
+
+<ar-dialog [(open)]="signupDone" [icon]="false" title="Account created">
+  <ar-success-burst title="Welcome to Airiona">We sent a confirmation link to your email. Open it to verify your account.</ar-success-burst>
+  <button arButton arFooter variant="primary" type="button" (click)="signupDone.set(false)">Continue</button>
+</ar-dialog>

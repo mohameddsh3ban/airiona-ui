@@ -18,7 +18,10 @@
     "export": "node tools/export.mjs",
     "export:png": "node tools/shoot.mjs png",
     "page": "node tools/page/airiona.mjs",
-    "page:regression": "node tools/page/regression.mjs"
+    "page:regression": "node tools/page/regression.mjs",
+    "playground": "ng serve playground",
+    "playground:build": "ng build playground --base-href ./",
+    "playground:serve": "node tools/serve.mjs dist/playground/browser 4475"
   },
   "prettier": {
     "printWidth": 100,

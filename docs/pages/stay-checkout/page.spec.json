@@ -1,0 +1,719 @@
+{
+  "page": "stay-checkout",
+  "title": "Stay checkout",
+  "route": "stays/:id/checkout",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "",
+    "notes": "Sample page: the last step of booking a stay. Traveller arrives from the stay page with dates and guests chosen, confirms them, enters the lead traveller's details and pays. Payment card entry is the provider's embedded UI (see gaps)."
+  },
+  "audience": "A traveller on a phone finishing a booking they already chose, often in a hurry and on mobile data",
+  "primaryAction": "Pay and confirm the stay",
+  "types": {
+    "PriceLine": {
+      "label": "string",
+      "value": "string"
+    },
+    "Stay": {
+      "id": "string",
+      "name": "string",
+      "region": "string",
+      "location": "string",
+      "rating": "string",
+      "image": "string",
+      "nights": "number",
+      "total": "string",
+      "cancellation": "string",
+      "priceLines": "PriceLine[]"
+    },
+    "Country": {
+      "value": "string",
+      "label": "string"
+    }
+  },
+  "data": [
+    {
+      "name": "stay",
+      "type": "Stay",
+      "source": "GET /api/stays/:id/quote?checkIn&checkOut&adults&children",
+      "sample": {
+        "id": "nordic-pine-lodge",
+        "name": "Nordic Pine Lodge",
+        "region": "Bavaria",
+        "location": "Nuremberg, Germany",
+        "rating": "4.8",
+        "image": "assets/photos/forest-cabin.webp",
+        "nights": 4,
+        "total": "$1,284",
+        "cancellation": "Free cancellation until 12 Oct",
+        "priceLines": [
+          {
+            "label": "$296 × 4 nights",
+            "value": "$1,184"
+          },
+          {
+            "label": "Cleaning fee",
+            "value": "$60"
+          },
+          {
+            "label": "Service fee",
+            "value": "$40"
+          },
+          {
+            "label": "Total (USD)",
+            "value": "$1,284"
+          }
+        ]
+      },
+      "states": {
+        "loading": "Skeleton in the shape of the stay card and price lines; the pay bar stays visible but disabled",
+        "error": "Toast with Retry; if the quote expired, an IllustrationCallout asking to pick dates again"
+      }
+    },
+    {
+      "name": "countries",
+      "type": "Country[]",
+      "source": "static list (ISO 3166), most used first",
+      "sample": [
+        {
+          "value": "DE",
+          "label": "Germany"
+        },
+        {
+          "value": "AE",
+          "label": "United Arab Emirates"
+        },
+        {
+          "value": "GB",
+          "label": "United Kingdom"
+        },
+        {
+          "value": "US",
+          "label": "United States"
+        },
+        {
+          "value": "FR",
+          "label": "France"
+        },
+        {
+          "value": "JP",
+          "label": "Japan"
+        }
+      ],
+      "states": {
+        "loading": "n/a (bundled)",
+        "empty": "n/a",
+        "error": "n/a"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "Desktop navigation",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "flights",
+                "label": "Flights"
+              },
+              {
+                "value": "stays",
+                "label": "Stays"
+              },
+              {
+                "value": "trips",
+                "label": "Trips"
+              }
+            ],
+            "value": "stays",
+            "user": {
+              "name": "Maya Haddad",
+              "email": "maya@example.com"
+            }
+          },
+          "why": "Desktop app navigation with the signed-in traveller",
+          "children": [
+            {
+              "id": "navHelp",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "Help",
+              "inputs": {
+                "variant": "ghost",
+                "size": "sm",
+                "iconStart": "question-mark-circle"
+              },
+              "why": "Replaces TopNav's default search and bell, which do not belong in checkout"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "topbar",
+      "title": "Checkout",
+      "heading": false,
+      "purpose": "Phone top bar with back to the stay",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "appBar",
+          "component": "AppBar",
+          "inputs": {
+            "title": "Checkout",
+            "showBack": true,
+            "backLabel": "Back to the stay"
+          },
+          "events": {
+            "back": "backToStay"
+          },
+          "why": "Compact bar with back on a detail-level screen",
+          "notes": "Navigates to /stays/:id"
+        }
+      ]
+    },
+    {
+      "id": "steps",
+      "title": "Confirm and pay",
+      "heading": false,
+      "purpose": "Where the traveller is in the booking, and the page title",
+      "layout": {
+        "base": "stack"
+      },
+      "elements": [
+        {
+          "id": "progress",
+          "component": "BookingSteps",
+          "inputs": {
+            "steps": [
+              "Search",
+              "Select",
+              "Details",
+              "Pay",
+              "Done"
+            ],
+            "current": 3
+          },
+          "why": "The checkout progress line from the system"
+        },
+        {
+          "id": "title",
+          "component": "html",
+          "tag": "h1",
+          "class": "m-large-title",
+          "text": "Confirm and pay"
+        }
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Your stay",
+      "purpose": "What is being paid for; beside the form on desktop",
+      "layout": {
+        "base": "stack"
+      },
+      "area": {
+        "lg": "aside"
+      },
+      "elements": [
+        {
+          "id": "stayCard",
+          "component": "PlaceCard",
+          "bind": {
+            "title": "stay.name",
+            "region": "stay.region",
+            "location": "stay.location",
+            "rating": "stay.rating",
+            "image": "stay.image"
+          },
+          "why": "The stay as the traveller saw it on the listing: photo, name, place, rating",
+          "alternatives": [
+            {
+              "component": "StayCard",
+              "rejected": "a hero card with its own Reserve button; this page already has the pay action"
+            }
+          ]
+        },
+        {
+          "id": "facts",
+          "component": "InfoStatRow",
+          "inputs": {
+            "items": [
+              {
+                "icon": "calendar-days",
+                "label": "15–19 Oct"
+              },
+              {
+                "icon": "users",
+                "label": "2 guests"
+              },
+              {
+                "icon": "moon",
+                "label": "4 nights"
+              }
+            ]
+          },
+          "why": "Three quick facts under the photo"
+        },
+        {
+          "id": "cancellation",
+          "component": "Badge",
+          "bind": {},
+          "inputs": {
+            "tone": "success",
+            "icon": "check-circle"
+          },
+          "text": "Free cancellation until 12 Oct",
+          "why": "Reassurance right before paying; the success tone marks it as good news"
+        },
+        {
+          "id": "priceLines",
+          "component": "DetailList",
+          "bind": {
+            "items": "stay.priceLines"
+          },
+          "why": "Label and value rows for the price breakdown, total last"
+        }
+      ]
+    },
+    {
+      "id": "details",
+      "title": "Trip and traveller",
+      "heading": false,
+      "purpose": "Confirm dates and guests, then the lead traveller's details",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2"
+      },
+      "form": "booking",
+      "elements": [
+        {
+          "id": "tripHeading",
+          "component": "html",
+          "tag": "h2",
+          "class": "m-title-2",
+          "text": "Your trip",
+          "span": {
+            "md": "full"
+          }
+        },
+        {
+          "id": "dates",
+          "component": "DatePicker",
+          "field": "dates",
+          "span": {
+            "md": "full"
+          },
+          "inputs": {
+            "mode": "range",
+            "variant": "tiles",
+            "startLabel": "Check-in",
+            "endLabel": "Check-out",
+            "min": "2026-10-04",
+            "maxNights": 28
+          },
+          "why": "Check-in and check-out side by side with the range calendar, the system's booking date control",
+          "alternatives": [
+            {
+              "component": "Calendar",
+              "rejected": "a full inline month takes the whole phone screen"
+            }
+          ]
+        },
+        {
+          "id": "adults",
+          "component": "QuantityStepper",
+          "field": "adults",
+          "inputs": {
+            "description": "Age 13 or above",
+            "min": 1,
+            "max": 8
+          },
+          "why": "Counting guests with bounded minus and plus"
+        },
+        {
+          "id": "children",
+          "component": "QuantityStepper",
+          "field": "children",
+          "inputs": {
+            "description": "Ages 2–12",
+            "min": 0,
+            "max": 6
+          },
+          "why": "Same control as adults"
+        },
+        {
+          "id": "travellerHeading",
+          "component": "html",
+          "tag": "h2",
+          "class": "m-title-2",
+          "text": "Lead traveller",
+          "span": {
+            "md": "full"
+          }
+        },
+        {
+          "id": "firstName",
+          "component": "TextField",
+          "field": "firstName",
+          "why": "Name as on the passport; given name and family name separate for autofill"
+        },
+        {
+          "id": "lastName",
+          "component": "TextField",
+          "field": "lastName",
+          "why": "Pairs with the given name on tablet and desktop"
+        },
+        {
+          "id": "email",
+          "component": "TextField",
+          "field": "email",
+          "inputs": {
+            "iconStart": "envelope",
+            "hint": "We send the booking here"
+          },
+          "why": "Email keyboard and autofill"
+        },
+        {
+          "id": "phone",
+          "component": "TextField",
+          "field": "phone",
+          "inputs": {
+            "iconStart": "phone",
+            "hint": "For the host on the day"
+          },
+          "why": "Phone keyboard and autofill"
+        },
+        {
+          "id": "country",
+          "component": "Select",
+          "field": "country",
+          "bind": {
+            "options": "countries"
+          },
+          "inputs": {
+            "searchable": true,
+            "searchPlaceholder": "Search countries"
+          },
+          "span": {
+            "md": "full"
+          },
+          "why": "One of many options; searchable"
+        },
+        {
+          "id": "terms",
+          "component": "Checkbox",
+          "field": "terms",
+          "span": {
+            "md": "full"
+          },
+          "why": "Consent must be an explicit tick (requiredTrue)"
+        },
+        {
+          "id": "payment",
+          "component": "GAP",
+          "text": "Card details: payment provider's embedded form",
+          "span": {
+            "md": "full"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pay",
+      "title": "Pay",
+      "heading": false,
+      "purpose": "The total and the pay button, always in reach on phones",
+      "layout": {
+        "base": "stack"
+      },
+      "form": "booking",
+      "sticky": {
+        "base": "bottom",
+        "lg": "none"
+      },
+      "elements": [
+        {
+          "id": "payBar",
+          "component": "StickyActionBar",
+          "why": "The system's bottom CTA: price summary plus one 60px button",
+          "alternatives": [
+            {
+              "component": "BookingBar",
+              "rejected": "its action is not a form submit button"
+            }
+          ],
+          "children": [
+            {
+              "id": "payTotal",
+              "component": "html",
+              "tag": "strong",
+              "class": "m-title-2",
+              "text": "$1,284",
+              "slot": "arSummary"
+            },
+            {
+              "id": "payNights",
+              "component": "html",
+              "tag": "span",
+              "class": "m-footnote pg-muted",
+              "text": "4 nights · 2 guests",
+              "slot": "arSummary"
+            },
+            {
+              "id": "payButton",
+              "component": "Button",
+              "submit": true,
+              "text": "Pay $1,284",
+              "inputs": {
+                "variant": "primary",
+                "size": "lg",
+                "iconEnd": "lock-closed"
+              },
+              "why": "The single primary action; the verb and amount say exactly what happens"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "booking",
+      "submit": {
+        "label": "Pay $1,284",
+        "action": "POST /api/bookings { stayId, dates, adults, children, traveller, paymentIntentId }",
+        "success": {
+          "kind": "burst",
+          "title": "You're going to Bavaria",
+          "text": "Booking K7QX2M · 15–19 Oct · Nordic Pine Lodge",
+          "dialogTitle": "Booking confirmed",
+          "action": "View booking"
+        },
+        "failure": "Payment declined: danger Toast with the provider's message and the form kept; price changed (409): Dialog showing old and new total with Continue and Cancel"
+      },
+      "fields": [
+        {
+          "name": "dates",
+          "label": "Dates",
+          "component": "DatePicker",
+          "default": [
+            "2026-10-15",
+            "2026-10-19"
+          ],
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "dateRange"
+            },
+            {
+              "type": "futureDate"
+            }
+          ],
+          "messages": {
+            "required": "Choose check-in and check-out.",
+            "dateRange": "Check-out must be after check-in.",
+            "futureDate": "Check-in can't be in the past."
+          }
+        },
+        {
+          "name": "adults",
+          "label": "Adults",
+          "component": "QuantityStepper",
+          "default": 2,
+          "validators": [
+            {
+              "type": "min",
+              "value": 1
+            }
+          ],
+          "messages": {
+            "min": "At least one adult has to stay."
+          }
+        },
+        {
+          "name": "children",
+          "label": "Children",
+          "component": "QuantityStepper",
+          "default": 0,
+          "validators": [],
+          "messages": {}
+        },
+        {
+          "name": "firstName",
+          "label": "First name",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "autocomplete": "given-name"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "maxLength",
+              "value": 60
+            }
+          ],
+          "messages": {
+            "required": "Enter the first name as on the passport.",
+            "maxlength": "Use at most 60 characters."
+          }
+        },
+        {
+          "name": "lastName",
+          "label": "Last name",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "autocomplete": "family-name"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "maxLength",
+              "value": 60
+            }
+          ],
+          "messages": {
+            "required": "Enter the last name as on the passport.",
+            "maxlength": "Use at most 60 characters."
+          }
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "email",
+            "autocomplete": "email",
+            "inputMode": "email"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "email"
+            }
+          ],
+          "messages": {
+            "required": "Enter your email so we can send the booking.",
+            "email": "Enter an email like name@example.com."
+          }
+        },
+        {
+          "name": "phone",
+          "label": "Mobile phone",
+          "component": "TextField",
+          "default": "",
+          "inputs": {
+            "type": "tel",
+            "autocomplete": "tel",
+            "inputMode": "tel"
+          },
+          "validators": [
+            {
+              "type": "required"
+            },
+            {
+              "type": "phone"
+            }
+          ],
+          "messages": {
+            "required": "Enter a phone number the host can reach.",
+            "phone": "Enter a phone number with country code, like +49 30 1234567."
+          }
+        },
+        {
+          "name": "country",
+          "label": "Country of residence",
+          "component": "Select",
+          "default": null,
+          "validators": [
+            {
+              "type": "required"
+            }
+          ],
+          "messages": {
+            "required": "Choose your country of residence."
+          }
+        },
+        {
+          "name": "terms",
+          "label": "I agree to the house rules and the cancellation policy",
+          "component": "Checkbox",
+          "default": false,
+          "validators": [
+            {
+              "type": "requiredTrue"
+            }
+          ],
+          "messages": {
+            "required": "Tick to agree before paying."
+          }
+        }
+      ]
+    }
+  ],
+  "motion": [
+    {
+      "where": "Arriving from the stay page",
+      "component": "RouteTransition",
+      "variant": "shared-x",
+      "why": "An ordered step forward in the booking flow"
+    },
+    {
+      "where": "After payment succeeds",
+      "component": "SuccessBurst",
+      "why": "The one celebration at the end of the booking flow"
+    }
+  ],
+  "a11y": [
+    "One h1 ('Confirm and pay'); 'Your stay', 'Your trip' and 'Lead traveller' are h2.",
+    "The pay button names the amount; while paying it shows the loading state and stays focused.",
+    "Errors appear under each field after it is left or on submit; submit moves focus to the first invalid field."
+  ],
+  "gaps": [
+    {
+      "element": "payment",
+      "need": "Card entry (number, expiry, CVC) with 3-D Secure",
+      "nearest": "TextField (must not be used for card data)",
+      "proposal": "Embed the payment provider's UI (Stripe Payment Element) styled with Airiona tokens via its Appearance API; wrap it as an ar-payment-element component"
+    }
+  ],
+  "notes": [
+    "Phone order: steps and title, the stay summary, trip and traveller form, then the sticky pay bar. On desktop the summary moves to the right column and the pay button sits under the form.",
+    "Dates and guests arrive prefilled from the stay page; changing them refreshes the quote (stay.total and price lines).",
+    "The pay bar shows the current total; in the app it reads the same quote as the price lines."
+  ]
+}

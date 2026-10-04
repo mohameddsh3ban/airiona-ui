@@ -1,7 +1,7 @@
 {
  "name": "Airiona",
  "version": "1.6.0",
- "generated": "2026-10-03",
+ "generated": "2026-10-04",
  "packages": {
   "react": "@airiona/react",
   "angular": "@airiona/ui"
@@ -2010,6 +2010,262 @@
    ]
   },
   {
+   "name": "AuthShell",
+   "slug": "auth-shell",
+   "group": "Screens",
+   "kind": "screen",
+   "height": 860,
+   "stage": "padding:0;",
+   "summary": "Split-screen sign-in and sign-up: the form column on one side and a cinematic media panel on the other, with a poster frame, a looping video, a headline and rotating highlight cards. Below 1024px the panel becomes a slim image strip above the form.",
+   "provides": "`poster` (still frame, also the strip), optional `video` (muted loop), `stripImage` (phone crop), `headline`, `highlights` (`[{title, text}]`), `side` (`left` for sign-in, `right` for sign-up so the route change flips the card), `wide` (long forms), `brand`, `actions`, `footer`, `legal`, `interval` (ms per highlight), and the form as children. In Angular: `[arBrand]`, `[arActions]`, `[arFoot]` slots.",
+   "notes": [
+    "Use the `ar-auth-head`, `ar-auth-row`, `ar-auth-link`, `ar-auth-divider`, `ar-auth-social` and `ar-auth-switch` classes for the form's parts so sign-in and sign-up line up.",
+    "The video never competes with the first paint: it loads after the page has settled, only on wide screens and only when motion is allowed. Make the poster the video's first frame so the switch is invisible.",
+    "Highlights are short, factual capabilities, not statistics or testimonials. They rotate when each progress tick fills and pause while the pointer is on the panel or focus is in the form.",
+    "One h1 per screen, in the form column (\"Welcome back\", \"Create your account\"); the panel headline is decorative text."
+   ],
+   "motion": [
+    {
+     "moment": "Enter",
+     "behaviour": "The panel scales in; the brand, form fields and footer rise in a short stagger; the headline and cards follow."
+    },
+    {
+     "moment": "State change",
+     "behaviour": "Highlight cards cross-fade; the tick under the current card fills over the interval."
+    },
+    {
+     "moment": "Hover",
+     "behaviour": "The media drifts up to 10px with the pointer (parallax)."
+    },
+    {
+     "moment": "Tokens",
+     "behaviour": "duration-page · ease-enter"
+    }
+   ],
+   "readme": "# AuthShell\n\nSplit-screen sign-in and sign-up: the form column on one side and a cinematic media panel on the other, with a poster frame, a looping video, a headline and rotating highlight cards. Below 1024px the panel becomes a slim image strip above the form.\n\n**Consumer provides:** `poster` (still frame, also the strip), optional `video` (muted loop), `stripImage` (phone crop), `headline`, `highlights` (`[{title, text}]`), `side` (`left` for sign-in, `right` for sign-up so the route change flips the card), `wide` (long forms), `brand`, `actions`, `footer`, `legal`, `interval` (ms per highlight), and the form as children. In Angular: `[arBrand]`, `[arActions]`, `[arFoot]` slots.\n\n- Use the `ar-auth-head`, `ar-auth-row`, `ar-auth-link`, `ar-auth-divider`, `ar-auth-social` and `ar-auth-switch` classes for the form's parts so sign-in and sign-up line up.\n- The video never competes with the first paint: it loads after the page has settled, only on wide screens and only when motion is allowed. Make the poster the video's first frame so the switch is invisible.\n- Highlights are short, factual capabilities, not statistics or testimonials. They rotate when each progress tick fills and pause while the pointer is on the panel or focus is in the form.\n- One h1 per screen, in the form column (\"Welcome back\", \"Create your account\"); the panel headline is decorative text.\n\n## Motion\n\n| Moment | Behaviour |\n|---|---|\n| Enter | The panel scales in; the brand, form fields and footer rise in a short stagger; the headline and cards follow. |\n| State change | Highlight cards cross-fade; the tick under the current card fills over the interval. |\n| Hover | The media drifts up to 10px with the pointer (parallax). |\n| Tokens | duration-page · ease-enter |\n\nAll motion stops under `prefers-reduced-motion`; the video does not play and the highlights stop rotating.\n",
+   "react": {
+    "import": "import { AuthShell } from '@airiona/react';",
+    "props": [
+     {
+      "name": "poster",
+      "type": "string",
+      "optional": false,
+      "doc": "Still frame for the media panel (also the strip on phones unless stripImage is set)."
+     },
+     {
+      "name": "stripImage",
+      "type": "string",
+      "optional": true,
+      "doc": "Smaller crop for the phone strip."
+     },
+     {
+      "name": "headline",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "highlights",
+      "type": "AuthHighlight[]",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "side",
+      "type": "'left' | 'right'",
+      "optional": true,
+      "doc": "Form column side on wide screens: left (sign-in) or right (sign-up)."
+     },
+     {
+      "name": "wide",
+      "type": "boolean",
+      "optional": true,
+      "doc": "Wider form column for long forms."
+     },
+     {
+      "name": "brand",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "actions",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "footer",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "legal",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "interval",
+      "type": "number",
+      "optional": true,
+      "doc": "Milliseconds each highlight stays up."
+     },
+     {
+      "name": "mediaLabel",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "children",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { AuthShell, Button, Checkbox, TextField } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <AuthShell\n      poster=\"/assets/photos/aviation/auth-wing.webp\"\n      video=\"/assets/video/auth-wing.mp4\"\n      stripImage=\"/assets/photos/aviation/auth-wing-strip.webp\"\n      headline=\"Your aircraft, your schedule.\"\n      highlights={[{ title: \"All-in prices\", text: \"Crew, fuel, airport fees and VAT in one number before you request.\" }, { title: \"Confirmed in minutes\", text: \"Operators answer a request within the 15-minute price hold.\" }, { title: \"Hangars on the same account\", text: \"Book space at 140 airports for the aircraft you fly or own.\" }]}\n      actions={<Button variant=\"ghost\" size=\"sm\" iconStart=\"question-mark-circle\">Help</Button>}\n      footer={<a className=\"ar-auth-link\" href=\"#\">Privacy</a>}\n    >\n      <div className=\"ar-auth-head\">\n        <h1>Welcome back</h1>\n        <p>Sign in to book flights and manage your hangar space.</p>\n      </div>\n      <TextField\n        label=\"Email\"\n        type=\"email\"\n        iconStart=\"envelope\"\n        placeholder=\"name@example.com\"\n        autoComplete=\"email\"\n      />\n      <TextField label=\"Password\" type=\"password\" iconStart=\"lock-closed\" autoComplete=\"current-password\" />\n      <div className=\"ar-auth-row\">\n        <Checkbox label=\"Keep me signed in\" />\n        <a className=\"ar-auth-link\" href=\"#\">Forgot password?</a>\n      </div>\n      <Button variant=\"primary\" size=\"lg\" block>Sign in</Button>\n      <p className=\"ar-auth-divider\">or</p>\n      <Button variant=\"secondary\" size=\"lg\" block iconStart=\"device-phone-mobile\">Continue with passkey</Button>\n      <p className=\"ar-auth-switch\">\n        New to Airiona? \n        <a className=\"ar-auth-link\" href=\"#\">Create an account</a>\n      </p>\n    </AuthShell>\n  );\n}\n",
+    "uses": [
+     "AuthShell",
+     "Button",
+     "Checkbox",
+     "TextField"
+    ]
+   },
+   "angular": {
+    "import": "import { ArAuthShell } from '@airiona/ui';",
+    "className": "ArAuthShell",
+    "selector": "ar-auth-shell",
+    "tag": "ar-auth-shell",
+    "attr": null,
+    "formControl": false,
+    "inputs": [
+     {
+      "name": "poster",
+      "kind": "required",
+      "type": "string",
+      "doc": "Still frame for the media panel (also the phone strip unless `stripImage` is set)."
+     },
+     {
+      "name": "video",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Looping muted video for the media panel; plays on wide screens once the page has settled."
+     },
+     {
+      "name": "stripImage",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Smaller crop for the phone strip."
+     },
+     {
+      "name": "headline",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "highlights",
+      "kind": "input",
+      "type": "ArAuthHighlight[]",
+      "default": "[]",
+      "doc": ""
+     },
+     {
+      "name": "side",
+      "kind": "input",
+      "type": "'left' | 'right'",
+      "default": "'left'",
+      "doc": "Form column side on wide screens: left (sign-in) or right (sign-up)."
+     },
+     {
+      "name": "wide",
+      "kind": "input",
+      "type": "boolean",
+      "default": "false",
+      "doc": "Wider form column for long forms."
+     },
+     {
+      "name": "legal",
+      "kind": "input",
+      "type": "",
+      "default": "'© Airiona'",
+      "doc": ""
+     },
+     {
+      "name": "interval",
+      "kind": "input",
+      "type": "number",
+      "default": "5600",
+      "doc": "Milliseconds each highlight stays up."
+     },
+     {
+      "name": "mediaLabel",
+      "kind": "input",
+      "type": "",
+      "default": "'About Airiona'",
+      "doc": ""
+     }
+    ],
+    "outputs": [],
+    "slots": [
+     "[arBrand]",
+     "[arActions]",
+     "(default)",
+     "[arFoot]"
+    ],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/screens/auth-shell.component.ts",
+    "doc": "Split-screen sign-in and sign-up. The form column on one side, a cinematic media panel on the other: poster frame, a looping video once the page has settled (wide screens, motion allowed), scrim, grain, headline and highlight cards that rotate when each progress tick finishes (paused while the pointer is on the panel or focus is in the form). Below 1024px the panel becomes a slim image strip above the form. `side=\"right\"` puts the form on the right for sign-up, so moving between the two screens flips the card.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArAuthShell, ArButton, ArCheckbox, ArTextField } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArAuthShell, ArButton, ArCheckbox, ArTextField],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-auth-shell poster=\"photos/aviation/auth-wing.webp\" video=\"video/auth-wing.mp4\" stripImage=\"photos/aviation/auth-wing-strip.webp\"\n      headline=\"Your aircraft, your schedule.\" [highlights]=\"highlights\">\n      <button arActions arButton variant=\"ghost\" size=\"sm\" iconStart=\"question-mark-circle\">Help</button>\n      <a arFoot class=\"ar-auth-link\" href=\"#\">Privacy</a>\n      <div class=\"ar-auth-head\"><h1>Welcome back</h1><p>Sign in to book flights and manage your hangar space.</p></div>\n      <ar-text-field label=\"Email\" type=\"email\" iconStart=\"envelope\" placeholder=\"name@example.com\" autocomplete=\"email\" />\n      <ar-text-field label=\"Password\" type=\"password\" iconStart=\"lock-closed\" autocomplete=\"current-password\" />\n      <div class=\"ar-auth-row\"><ar-checkbox label=\"Keep me signed in\" /><a class=\"ar-auth-link\" href=\"#\">Forgot password?</a></div>\n      <button arButton variant=\"primary\" size=\"lg\" block>Sign in</button>\n      <p class=\"ar-auth-divider\">or</p>\n      <button arButton variant=\"secondary\" size=\"lg\" block iconStart=\"device-phone-mobile\">Continue with passkey</button>\n      <p class=\"ar-auth-switch\">New to Airiona? <a class=\"ar-auth-link\" href=\"#\">Create an account</a></p>\n    </ar-auth-shell>\n  `,\n})\nexport class Example {\n  protected readonly highlights = [\n  { title: 'All-in prices', text: 'Crew, fuel, airport fees and VAT in one number before you request.' },\n  { title: 'Confirmed in minutes', text: 'Operators answer a request within the 15-minute price hold.' },\n  { title: 'Hangars on the same account', text: 'Book space at 140 airports for the aircraft you fly or own.' },\n  ];\n}\n",
+    "uses": [
+     "ArAuthShell",
+     "ArButton",
+     "ArCheckbox",
+     "ArTextField"
+    ]
+   },
+   "keywords": [
+    "auth",
+    "shell",
+    "screens",
+    "split",
+    "screen",
+    "sign",
+    "form",
+    "column",
+    "side",
+    "cinematic",
+    "media",
+    "panel",
+    "other",
+    "with",
+    "poster",
+    "frame",
+    "looping",
+    "video",
+    "headline",
+    "rotating",
+    "highlight",
+    "cards",
+    "below",
+    "becomes",
+    "slim",
+    "image",
+    "strip",
+    "above"
+   ]
+  },
+  {
    "name": "Avatar",
    "slug": "avatar",
    "group": "Identity",
@@ -3284,6 +3540,30 @@
       "type": "React.ReactNode",
       "optional": true,
       "doc": "The 3D jet from the Art group (img element)."
+     },
+     {
+      "name": "actions",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "docked",
+      "type": "boolean",
+      "optional": true,
+      "doc": "Children straddle the bottom edge (a search card)."
+     },
+     {
+      "name": "children",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "doc": ""
      }
     ],
     "code": "import { BoardingPass } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <div style={{ display: \"flex\", justifyContent: \"center\", padding: \"8px 0\" }}>\n      <div style={{ width: 360, maxWidth: \"100%\" }}>\n        <BoardingPass\n          art={<img src=\"/assets/art/jet-3d.webp\" alt=\"\" />}\n          carrier=\"Airiona\"\n          cabin=\"Business\"\n          date=\"Thu, 15 Oct\"\n          time=\"Boards 08:10\"\n          from={{ code: \"DXB\", city: \"Dubai\", time: \"08:45\" }}\n          to={{ code: \"HND\", city: \"Tokyo\", time: \"23:10\" }}\n          duration=\"9h 25m\"\n          flight=\"EK 312\"\n          seat=\"4A\"\n          passenger=\"Maya Haddad\"\n          zone=\"2\"\n          seq=\"042\"\n          details={[{ label: \"Flight\", value: \"EK 312\" }, { label: \"Gate\", value: \"B18\" }, { label: \"Seat\", value: \"4A\" }, { label: \"Boarding\", value: \"08:10\" }, { label: \"Terminal\", value: \"3\" }, { label: \"Class\", value: \"Business\" }]}\n        />\n      </div>\n    </div>\n  );\n}\n",
@@ -9961,6 +10241,176 @@
     "small",
     "grey",
     "square"
+   ]
+  },
+  {
+   "name": "LandingHero",
+   "slug": "landing-hero",
+   "group": "Screens",
+   "kind": "screen",
+   "height": 700,
+   "stage": "padding:24px 24px 32px;",
+   "summary": "The opening hero of a landing or home page. A full-bleed photo, with a looping video on wide screens once the page has settled. A scrim keeps the copy legible over it. The copy is an eyebrow pill, a display headline, a lede, actions and a row of proof figures. With `docked`, the children straddle the bottom edge; a search card is the usual child.",
+   "provides": "",
+   "notes": [
+    "Use one per page, at the top. The title is the page's h1 unless you set `headingLevel`.",
+    "Pick a photo with calm space on the left for the copy. On phones the photo is cropped narrow, so set `focus` (an `object-position`) to keep the subject in view.",
+    "The video is decoration. It is muted and hidden from assistive technology. It plays only at 1024px and wider, starts 1200ms after `load` so it never competes with the first paint, and pauses while it is scrolled off screen. It never plays when the visitor prefers reduced motion. The `image` is its poster, so export the poster from the video's first frame.",
+    "Keep stats to three or four short figures. Each one is a `dt` label and a `dd` value, read label first."
+   ],
+   "motion": [],
+   "readme": "# LandingHero\n\nThe opening hero of a landing or home page. A full-bleed photo, with a looping video on wide screens once the page has settled. A scrim keeps the copy legible over it. The copy is an eyebrow pill, a display headline, a lede, actions and a row of proof figures. With `docked`, the children straddle the bottom edge; a search card is the usual child.\n\n```jsx\n<LandingHero\n  image=\"assets/photos/aviation/hero-sky.webp\" video=\"assets/video/hero-sky.mp4\" focus=\"78% 50%\"\n  eyebrow=\"Private aviation\" title=\"Fly on your own schedule.\"\n  lede=\"Charter a jet, buy an aircraft or lease hangar space.\"\n  stats={[{ value: '1,240', label: 'Aircraft listed' }, { value: '15 min', label: 'Average reply' }]}\n  actions={<Button variant=\"primary\" size=\"lg\">Book a flight</Button>}\n  docked>\n  <BookingSearch />\n</LandingHero>\n```\n\n```html\n<ar-landing-hero image=\"assets/photos/aviation/hero-sky.webp\" video=\"assets/video/hero-sky.mp4\" focus=\"78% 50%\"\n  eyebrow=\"Private aviation\" title=\"Fly on your own schedule.\" [stats]=\"stats\" docked>\n  <button arActions arButton variant=\"primary\" size=\"lg\">Book a flight</button>\n  <ar-booking-search />\n</ar-landing-hero>\n```\n\n## Guidance\n\n- Use one per page, at the top. The title is the page's h1 unless you set `headingLevel`.\n- Pick a photo with calm space on the left for the copy. On phones the photo is cropped narrow, so set `focus` (an `object-position`) to keep the subject in view.\n- The video is decoration. It is muted and hidden from assistive technology. It plays only at 1024px and wider, starts 1200ms after `load` so it never competes with the first paint, and pauses while it is scrolled off screen. It never plays when the visitor prefers reduced motion. The `image` is its poster, so export the poster from the video's first frame.\n- Keep stats to three or four short figures. Each one is a `dt` label and a `dd` value, read label first.\n\n## Motion\n\n| Element | Motion | Duration |\n| --- | --- | --- |\n| Photo | settles from 108% scale | 2400ms, enter easing |\n| Copy | rises in order, 80–100ms apart | 800ms |\n| Dock | rises after the copy | 800ms, 480ms delay |\n| Video | fades in over the poster once playing | 1200ms |\n| Grain | steps across the frame (1024px and wider) | 1.2s loop |\n\nUnder reduced motion every animation and the video are off.\n",
+   "react": {
+    "import": "import { LandingHero } from '@airiona/react';",
+    "props": [
+     {
+      "name": "title",
+      "type": "string",
+      "optional": false,
+      "doc": ""
+     },
+     {
+      "name": "eyebrow",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     },
+     {
+      "name": "lede",
+      "type": "string",
+      "optional": true,
+      "doc": ""
+     }
+    ],
+    "code": "import { BookingSearch, Button, LandingHero } from '@airiona/react';\n\nexport function Example() {\n  return (\n    <LandingHero\n      image=\"/assets/photos/aviation/hero-sky.webp\"\n      video=\"/assets/video/hero-sky.mp4\"\n      focus=\"78% 50%\"\n      eyebrow=\"Private aviation\"\n      title=\"Fly on your own schedule.\"\n      lede=\"Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes.\"\n      stats={[{ value: \"1,240\", label: \"Aircraft listed\" }, { value: \"140\", label: \"Airports with hangars\" }, { value: \"15 min\", label: \"Average reply\" }]}\n      actions={[<Button variant=\"primary\" size=\"lg\" iconStart=\"paper-airplane\">Book a flight</Button>, <Button variant=\"secondary\" size=\"lg\">Browse aircraft</Button>]}\n      docked\n    >\n      <BookingSearch />\n    </LandingHero>\n  );\n}\n",
+    "uses": [
+     "BookingSearch",
+     "Button",
+     "LandingHero"
+    ]
+   },
+   "angular": {
+    "import": "import { ArLandingHero } from '@airiona/ui';",
+    "className": "ArLandingHero",
+    "selector": "ar-landing-hero",
+    "tag": "ar-landing-hero",
+    "attr": null,
+    "formControl": false,
+    "inputs": [
+     {
+      "name": "title",
+      "kind": "required",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "eyebrow",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "lede",
+      "kind": "input",
+      "type": "string",
+      "doc": ""
+     },
+     {
+      "name": "image",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Backdrop photo; also the poster the video fades in over."
+     },
+     {
+      "name": "video",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "Looping muted video; plays on wide screens (>=1024px) once the page has settled."
+     },
+     {
+      "name": "focus",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "object-position for the photo, so the subject stays in a narrow phone crop (for example \"78% 50%\")."
+     },
+     {
+      "name": "stats",
+      "kind": "input",
+      "type": "ArLandingStat[]",
+      "default": "[]",
+      "doc": ""
+     },
+     {
+      "name": "headingLevel",
+      "kind": "input",
+      "type": "1 | 2 | 3",
+      "default": "1",
+      "doc": "Heading level of the title: 1 (default) for the page's own hero, 2 or 3 inside a page that has its h1."
+     },
+     {
+      "name": "docked",
+      "kind": "input",
+      "type": "boolean",
+      "default": "false",
+      "doc": "The default slot straddles the bottom edge."
+     }
+    ],
+    "outputs": [],
+    "slots": [
+     "[arActions]",
+     "(default)"
+    ],
+    "helpers": [],
+    "file": "projects/airiona-ui/src/lib/screens/landing-hero.component.ts",
+    "doc": "The opening hero of a landing or home page: full-bleed photo, a looping video once the page has settled (wide screens, motion allowed, paused while off screen), scrim, eyebrow pill, display headline, lede, actions and a row of proof figures. With `docked`, the default slot straddles the bottom edge (a search card). Phones get the photo only, cropped at `focus`.  /",
+    "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArLandingHero, ArBookingSearch, ArButton } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArLandingHero, ArBookingSearch, ArButton],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-landing-hero image=\"photos/aviation/hero-sky.webp\" video=\"video/hero-sky.mp4\" focus=\"78% 50%\"\n      eyebrow=\"Private aviation\" title=\"Fly on your own schedule.\"\n      lede=\"Charter a jet, buy an aircraft or lease hangar space, with all-in prices and operators who answer in minutes.\"\n      [stats]=\"stats\" docked>\n      <button arActions arButton variant=\"primary\" size=\"lg\" iconStart=\"paper-airplane\">Book a flight</button>\n      <button arActions arButton variant=\"secondary\" size=\"lg\">Browse aircraft</button>\n      <ar-booking-search />\n    </ar-landing-hero>\n  `,\n})\nexport class Example {\n  protected readonly stats = [\n  { value: '1,240', label: 'Aircraft listed' },\n  { value: '140', label: 'Airports with hangars' },\n  { value: '15 min', label: 'Average reply' },\n  ];\n}\n",
+    "uses": [
+     "ArLandingHero",
+     "ArBookingSearch",
+     "ArButton"
+    ]
+   },
+   "keywords": [
+    "landing",
+    "hero",
+    "screens",
+    "opening",
+    "home",
+    "page",
+    "full",
+    "bleed",
+    "photo",
+    "with",
+    "looping",
+    "video",
+    "wide",
+    "once",
+    "settled",
+    "scrim",
+    "keeps",
+    "copy",
+    "legible",
+    "over",
+    "eyebrow",
+    "pill",
+    "display",
+    "headline",
+    "lede",
+    "actions",
+    "proof",
+    "figures",
+    "docked",
+    "children",
+    "straddle",
+    "bottom",
+    "edge",
+    "search",
+    "card",
+    "usual",
+    "child"
    ]
   },
   {

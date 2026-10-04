@@ -1,35 +1,35 @@
 // Types and sample data for the Flight home page. Generated from docs/pages/flight-home/page.spec.json.
 // Sources: airports <- GET /api/airports?popular=1 (the 12 most-booked airports; the Select is searchable so the full list can stream in later); deals <- GET /api/promotions?placement=home-deals (first item is the featured deal); airlines <- GET /api/airlines/popular?from=<home airport> (sorted by bookings in the last 30 days, max 8); hotels <- GET /api/stays/featured?city=<home city>&limit=3.
 
-export interface Airport {
+export type Airport = {
   value: string;
   label: string;
   meta: string;
-}
+};
 
-export interface Deal {
+export type Deal = {
   code: string;
   title: string;
   text: string;
   tone: 'dark' | 'light';
-}
+};
 
-export interface Airline {
+export type Airline = {
   title: string;
   image: string;
   price: string;
   duration: string;
   dates: string;
   badge?: string;
-}
+};
 
-export interface Hotel {
+export type Hotel = {
   name: string;
   rating: number;
   distance: string;
   image: string;
   saved: boolean;
-}
+};
 
 export interface FlightHomePageData {
   airports: Airport[];

@@ -1,0 +1,564 @@
+{
+  "page": "aircraft-market",
+  "title": "Aircraft",
+  "route": "aircraft-market",
+  "target": "angular",
+  "source": {
+    "kind": "brief",
+    "ref": "product brief: Airiona aircraft and hangar marketplaces",
+    "notes": "A listing page for the aircraft marketplace. No design source: built from the product brief with the system's listing cards, mobile first, as a phone app tab with a desktop layout at 1280."
+  },
+  "audience": "A buyer or a broker browsing aircraft on a phone between meetings, comparing price, hours and base before asking for records.",
+  "primaryAction": "Open an aircraft listing",
+  "types": {
+    "Listing": {
+      "id": "string",
+      "title": "string",
+      "price": "string",
+      "unit": "string",
+      "description": "string",
+      "tags": "string[]",
+      "image": "string",
+      "photos": "number",
+      "saved": "boolean"
+    },
+    "Tile": {
+      "title": "string",
+      "image": "string",
+      "price": "string",
+      "duration": "string",
+      "dates": "string",
+      "badge": "string?"
+    }
+  },
+  "data": [
+    {
+      "name": "aircraft",
+      "type": "Listing[]",
+      "source": "GET /api/aircraft?category&sort&q&page (24 per page)",
+      "sample": [
+        {
+          "id": "g550",
+          "title": "Gulfstream G550",
+          "price": "$24.5M",
+          "unit": "asking",
+          "description": "2016 · 4,210 hours, 16 seats, 6,750 nm range. Fresh 72-month inspection, PlaneView cockpit, full records. Based at Dubai World Central.",
+          "tags": [
+            "Heavy jet",
+            "Dubai"
+          ],
+          "image": "assets/photos/aviation/jet-heavy.webp",
+          "photos": 5,
+          "saved": true
+        },
+        {
+          "id": "praetor",
+          "title": "Embraer Praetor 600",
+          "price": "$16.9M",
+          "unit": "asking",
+          "description": "2020 · 1,180 hours, 12 seats, 4,018 nm range. Ka-band Wi-Fi, fly-by-wire, on Embraer Executive Care.",
+          "tags": [
+            "Super-midsize",
+            "Riyadh"
+          ],
+          "image": "assets/photos/aviation/jet-midsize.webp",
+          "photos": 5,
+          "saved": false
+        },
+        {
+          "id": "cj4",
+          "title": "Cessna Citation CJ4",
+          "price": "$8.2M",
+          "unit": "asking",
+          "description": "2019 · 1,640 hours, 9 seats, single-pilot certified. Engines on ProParts, Garmin G3000 upgrade.",
+          "tags": [
+            "Light jet",
+            "Doha"
+          ],
+          "image": "assets/photos/aviation/jet-light.webp",
+          "photos": 4,
+          "saved": false
+        },
+        {
+          "id": "challenger",
+          "title": "Bombardier Challenger 350",
+          "price": "$13.2M",
+          "unit": "asking",
+          "description": "2017 · 2,950 hours, 10 seats, flat-floor cabin refurbished 2024. Smart Parts Plus, no damage history.",
+          "tags": [
+            "Super-midsize",
+            "Muscat"
+          ],
+          "image": "assets/photos/aviation/jet-cabin.webp",
+          "photos": 5,
+          "saved": false
+        },
+        {
+          "id": "pc12",
+          "title": "Pilatus PC-12 NGX",
+          "price": "$5.4M",
+          "unit": "asking",
+          "description": "2022 · 420 hours, 8 seats, short-field ready. Executive interior, autothrottle, still under factory warranty.",
+          "tags": [
+            "Turboprop",
+            "Abu Dhabi"
+          ],
+          "image": "assets/photos/aviation/turboprop.webp",
+          "photos": 4,
+          "saved": false
+        },
+        {
+          "id": "h145",
+          "title": "Airbus H145",
+          "price": "$7.9M",
+          "unit": "asking",
+          "description": "2018 · 1,930 hours, 8 seats, five-blade rotor. VIP configuration, Helionix avionics, hoist-ready.",
+          "tags": [
+            "Helicopter",
+            "Jeddah"
+          ],
+          "image": "assets/photos/aviation/helicopter.webp",
+          "photos": 3,
+          "saved": false
+        }
+      ],
+      "states": {
+        "empty": "Nothing matches these filters. Clear a filter or widen the search.",
+        "loading": "Six StayCard skeletons in the grid",
+        "error": "Inline error with Retry; filters stay as they were"
+      }
+    },
+    {
+      "name": "hangarTiles",
+      "type": "Tile[]",
+      "source": "GET /api/featured (three tiles from the other marketplace)",
+      "sample": [
+        {
+          "title": "Dubai South",
+          "image": "assets/photos/aviation/hangar-large.webp",
+          "price": "from $2,400 / mo",
+          "duration": "12 hangars",
+          "dates": "Heavy jets welcome",
+          "badge": "Popular"
+        },
+        {
+          "title": "Riyadh",
+          "image": "assets/photos/aviation/hangar-small.webp",
+          "price": "from $1,850 / mo",
+          "duration": "9 hangars",
+          "dates": "Shared and private"
+        },
+        {
+          "title": "Doha",
+          "image": "assets/photos/aviation/hangar-exterior.webp",
+          "price": "from $3,100 / mo",
+          "duration": "4 hangars",
+          "dates": "Lounge and crew rest"
+        }
+      ],
+      "states": {
+        "empty": "Section hidden",
+        "loading": "Three MiniDestination skeletons",
+        "error": "Section hidden; the listings above still work"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Site navigation",
+      "heading": false,
+      "purpose": "Desktop navigation: the product destinations and the signed-in account",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "area": {
+        "lg": "full"
+      },
+      "elements": [
+        {
+          "id": "topNav",
+          "component": "TopNav",
+          "inputs": {
+            "links": [
+              {
+                "value": "book",
+                "label": "Book"
+              },
+              {
+                "value": "trips",
+                "label": "My trips"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars"
+              }
+            ],
+            "value": "aircraft",
+            "user": {
+              "name": "Omar Saleh",
+              "email": "omar@example.com"
+            }
+          },
+          "why": "The product's four destinations with the signed-in account; replaces the phone tab bar at 1280",
+          "children": [
+            {
+              "id": "navAction",
+              "component": "Button",
+              "slot": "arActions",
+              "text": "List your aircraft",
+              "inputs": {
+                "variant": "secondary",
+                "size": "sm",
+                "iconStart": "plus"
+              },
+              "events": {
+                "click": "listAircraft"
+              },
+              "why": "Owners are the other side of the marketplace; the sell door stays in the header"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "topbar",
+      "title": "Aircraft",
+      "heading": false,
+      "purpose": "Phone title and the sell action",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "elements": [
+        {
+          "id": "appBar",
+          "component": "AppBar",
+          "inputs": {
+            "title": "Aircraft for sale",
+            "large": true,
+            "eyebrow": "Marketplace",
+            "accent": true
+          },
+          "why": "Root screen of a tab: large title, which is the page h1 on phones and tablets",
+          "children": [
+            {
+              "id": "appBarAction",
+              "component": "IconButton",
+              "slot": "arActions",
+              "inputs": {
+                "icon": "plus",
+                "label": "List your aircraft",
+                "variant": "surface"
+              },
+              "events": {
+                "click": "listAircraft"
+              },
+              "why": "The sell/list action in one tap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "title": "Aircraft for sale",
+      "heading": false,
+      "purpose": "Desktop page title and intro",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "base": false,
+        "lg": true
+      },
+      "elements": [
+        {
+          "id": "desktopTitle",
+          "component": "html",
+          "tag": "h1",
+          "class": "m-title-1",
+          "text": "Aircraft for sale"
+        },
+        {
+          "id": "desktopIntro",
+          "component": "html",
+          "tag": "p",
+          "class": "pg-muted",
+          "text": "1,240 aircraft from verified owners and brokers, with records checked before they list."
+        }
+      ]
+    },
+    {
+      "id": "filters",
+      "title": "Search and filters",
+      "heading": false,
+      "purpose": "Narrow the list: free text, category and sort order",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2",
+        "lg": "grid-3"
+      },
+      "elements": [
+        {
+          "id": "search",
+          "component": "SearchField",
+          "inputs": {
+            "placeholder": "Search aircraft",
+            "label": "Search aircraft",
+            "showFilter": true,
+            "filterLabel": "More filters"
+          },
+          "events": {
+            "filter": "openFilters"
+          },
+          "span": {
+            "lg": 2
+          },
+          "why": "Filled search with the filter button that opens the full filter sheet (price, year, location)",
+          "notes": "Debounce 300ms, then GET with ?q="
+        },
+        {
+          "id": "sort",
+          "component": "Select",
+          "inputs": {
+            "label": "Sort by",
+            "options": [
+              {
+                "value": "new",
+                "label": "Newest"
+              },
+              {
+                "value": "price-asc",
+                "label": "Price: low to high"
+              },
+              {
+                "value": "price-desc",
+                "label": "Price: high to low"
+              },
+              {
+                "value": "hours",
+                "label": "Fewest hours"
+              }
+            ],
+            "value": "new",
+            "iconStart": "arrows-up-down"
+          },
+          "why": "Sort order is one choice from four; a Select keeps it compact on phones"
+        },
+        {
+          "id": "category",
+          "component": "ChipScroller",
+          "inputs": {
+            "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
+              {
+                "value": "heavy",
+                "label": "Heavy jets"
+              },
+              {
+                "value": "midsize",
+                "label": "Midsize"
+              },
+              {
+                "value": "light",
+                "label": "Light jets"
+              },
+              {
+                "value": "turboprop",
+                "label": "Turboprops"
+              },
+              {
+                "value": "heli",
+                "label": "Helicopters"
+              }
+            ],
+            "value": "all",
+            "label": "Category"
+          },
+          "span": {
+            "md": 2,
+            "lg": "full"
+          },
+          "why": "Categories as one swipeable row of chips: always visible, one tap to switch"
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Aircraft listings",
+      "heading": false,
+      "purpose": "The listings",
+      "layout": {
+        "base": "stack",
+        "md": "grid-2",
+        "lg": "grid-3"
+      },
+      "elements": [
+        {
+          "id": "resultCount",
+          "component": "html",
+          "tag": "h2",
+          "class": "pg-muted m-footnote",
+          "text": "1,240 aircraft · newest first",
+          "span": {
+            "md": 2,
+            "lg": "full"
+          }
+        },
+        {
+          "id": "listing",
+          "component": "StayCard",
+          "each": "aircraft",
+          "bind": {
+            "title": "item.title",
+            "price": "item.price",
+            "unit": "item.unit",
+            "description": "item.description",
+            "tags": "item.tags",
+            "image": "item.image",
+            "photos": "item.photos",
+            "saved": "item.saved"
+          },
+          "inputs": {
+            "cta": "View details"
+          },
+          "events": {
+            "reserve": "openListing"
+          },
+          "why": "A tall photo card with title, three-line description, two tags and a price with one action: the system card for a priced listing",
+          "alternatives": [
+            {
+              "component": "DestinationCard",
+              "rejected": "rating and Book now, for places"
+            },
+            {
+              "component": "MiniDestination",
+              "rejected": "too small for a listing that costs millions"
+            }
+          ],
+          "notes": "Routes to the detail page; the heart saves to the watchlist"
+        }
+      ]
+    },
+    {
+      "id": "cross",
+      "title": "Hangar space for your aircraft",
+      "heading": true,
+      "intro": "Monthly and nightly space at 140 airports.",
+      "purpose": "Cross-sell into the other marketplace",
+      "layout": {
+        "base": "scroll-x",
+        "lg": "grid-3"
+      },
+      "elements": [
+        {
+          "id": "crossTile",
+          "component": "MiniDestination",
+          "each": "hangarTiles",
+          "bind": {
+            "title": "item.title",
+            "image": "item.image",
+            "price": "item.price",
+            "duration": "item.duration",
+            "dates": "item.dates",
+            "badge": "item.badge"
+          },
+          "events": {
+            "press": "openHangars"
+          },
+          "why": "Compact photo cards that peek on phones; a door into the other marketplace"
+        }
+      ]
+    },
+    {
+      "id": "tabs",
+      "title": "Tabs",
+      "heading": false,
+      "purpose": "Phone and tablet app navigation, always in thumb reach",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "lg": false
+      },
+      "sticky": {
+        "base": "bottom",
+        "lg": "none"
+      },
+      "elements": [
+        {
+          "id": "tabBar",
+          "component": "TabBar",
+          "inputs": {
+            "items": [
+              {
+                "value": "home",
+                "label": "Home",
+                "icon": "home"
+              },
+              {
+                "value": "book",
+                "label": "Book",
+                "icon": "paper-airplane"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft",
+                "icon": "rocket-launch"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars",
+                "icon": "building-office-2"
+              },
+              {
+                "value": "account",
+                "label": "Account",
+                "icon": "user-circle"
+              }
+            ],
+            "value": "aircraft",
+            "variant": "labels",
+            "label": "Main"
+          },
+          "why": "Root screens of a phone app get a bottom tab bar; labels make five destinations unambiguous"
+        }
+      ]
+    }
+  ],
+  "forms": [],
+  "motion": [
+    {
+      "where": "Opening a listing",
+      "component": "RouteTransition",
+      "variant": "shared-axis-x",
+      "why": "List to detail is forward navigation inside the same tab"
+    }
+  ],
+  "a11y": [
+    "One h1: \"Aircraft for sale\" (the AppBar title on phones and tablets, the desktop heading at 1280).",
+    "Listing cards are articles with an h3 title; View details names the listing for screen readers via the card title.",
+    "The category chips are a labelled group; the selected chip has aria-pressed.",
+    "The tab bar is a nav landmark labelled Main, hidden at 1280 where the top navigation takes over."
+  ],
+  "gaps": [],
+  "notes": [
+    "Prices are asking prices in USD; the server formats them. Hours are airframe total time.",
+    "The filter button opens the full filter sheet (price range, year, hours, base); it is a separate screen and not part of this page.",
+    "Phones get the tab bar (Aircraft selected); at 1280 the top navigation replaces it."
+  ]
+}

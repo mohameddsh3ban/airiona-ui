@@ -1,0 +1,69 @@
+{
+ "page": "aircraft-detail",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 12,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2343,
+   "h1s": [
+    "Gulfstream G550"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": [],
+   "submit:enquiry": {
+    "msgs": [
+     "Enter your name.",
+     "Enter your email.",
+     "Enter a phone number."
+    ],
+    "focusInForm": true,
+    "focused": "input"
+   }
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 12,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 1857,
+   "h1s": [
+    "Gulfstream G550"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 17,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1497,
+   "h1s": [
+    "Gulfstream G550"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

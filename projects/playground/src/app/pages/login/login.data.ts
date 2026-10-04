@@ -1,4 +1,4 @@
-// Types and sample data for the Log in page. Generated from docs/pages/login/page.spec.json.
+// Types and sample data for the Sign in page. Generated from docs/pages/login/page.spec.json.
 // Sources: none.
 
 

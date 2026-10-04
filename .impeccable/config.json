@@ -119,6 +119,23 @@
         ],
         "createdAt": "2026-10-03T12:18:47.685Z",
         "reason": "Angular [src] binding behind a guard"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/screens/auth-shell.component.ts"
+        ],
+        "createdAt": "2026-10-03T19:55:04.474Z"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "projects/airiona-ui/src/lib/screens/landing-hero.component.ts"
+        ],
+        "createdAt": "2026-10-03T20:12:48.035Z",
+        "reason": "Claude: Angular [src] binding inside @if(image()) guard; scanner cannot see bound src"
       }
     ]
   }

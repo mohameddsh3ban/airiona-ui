@@ -1,11 +1,12 @@
 /* Flight home: generated from docs/pages/flight-home/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */
 :host { display: block; }
-.pg { display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }
+.pg { --m-gutter: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }
 .pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }
 .pg-h { margin: 0; }
 .pg-intro { color: var(--ink-muted); max-width: 65ch; }
 .pg-g { min-width: 0; gap: 16px; }
 .pg-g > * { min-width: 0; }
+.pg-g { --ar-card-max: none; }
 .pg :is(h1, h2, h3, h4, p, ul, ol, figure) { margin: 0; }
 .pg img { display: block; max-width: 100%; height: auto; }
 .pg-error { margin: -8px 0 0; font: 500 13px/18px var(--font-sans); color: var(--danger); }
@@ -16,43 +17,57 @@
 .pg-divider { display: flex; align-items: center; gap: 12px; margin: 0; font: 500 13px/18px var(--font-sans); color: var(--ink-subtle); }
 .pg-divider::before, .pg-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .pg-muted { color: var(--ink-muted); }
+.pg-figure { display: grid; gap: 8px; align-content: start; }
+.pg-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 24px; background: var(--surface-sunken); }
+.pg-card { padding: 20px; border-radius: 28px; background: var(--surface); box-shadow: var(--shadow-float); }
+.pg-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .pg-toast { position: fixed; z-index: 60; left: 16px; right: 16px; top: calc(16px + env(safe-area-inset-top, 0px)); display: flex; justify-content: center; }
+.pg-s--tabs > .pg-g > * { position: relative; inset: auto; }
 .pg-s--topbar > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--nav > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--hero > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--hero { margin-inline: -16px; }
-.pg-s--search > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--deals > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
 .pg-s--airlines > .pg-g { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(80%, 320px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
 .pg-s--airlines > .pg-g > * { scroll-snap-align: start; }
 .pg-s--hotels > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-s--tabs > .pg-g { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; }
+.pg-el-searchCard { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-flow: row; gap: 16px; }
+.pg-el-searchCard > * { min-width: 0; }
 @media (min-width: 768px) {
-  .pg { padding-inline: 24px; gap: 32px; }
+  .pg { --m-gutter: 24px; padding-inline: 24px; gap: 32px; }
   .pg-s--hero { margin-inline: 0; }
-  .pg-s--search > .pg-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; }
   .pg-s--hotels > .pg-g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-el-searchCard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; gap: 16px; }
+  .pg-el-searchCard > * { min-width: 0; }
   .pg-el-tripType { grid-column: span 2; }
   .pg-el-searchSubmit { grid-column: span 2; }
 }
 @media (min-width: 1280px) {
-  .pg { padding-inline: 32px; padding-top: 32px; gap: 36px; }
-  .pg-s--search > .pg-g { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg { --m-gutter: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }
   .pg-s--deals > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
   .pg-s--airlines > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
   .pg-s--airlines > .pg-g { overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }
   .pg-s--hotels > .pg-g { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: row; }
+  .pg-el-searchCard { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row; gap: 16px; }
+  .pg-el-searchCard > * { min-width: 0; }
   .pg-el-tripTypeDesktop { grid-column: 1 / -1; }
   .pg-el-searchSubmit { grid-column: span 1; }
 }
 @media (max-width: 767.98px) {
   .pg-s--nav { display: none !important; }
+  .pg-s--tabs { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }
+  .pg { padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
   .pg-el-tripTypeDesktop { display: none !important; }
 }
 @media (min-width: 768px) and (max-width: 1279.98px) {
   .pg-s--nav { display: none !important; }
+  .pg-s--tabs { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; }
+  .pg { padding-bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
   .pg-el-tripTypeDesktop { display: none !important; }
 }
 @media (min-width: 1280px) {
   .pg-s--topbar { display: none !important; }
+  .pg-s--tabs { display: none !important; }
   .pg-el-tripType { display: none !important; }
 }

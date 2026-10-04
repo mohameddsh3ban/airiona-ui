@@ -17,7 +17,8 @@ const clean = (slug) => { rmSync(join(PAGES, slug), { recursive: true, force: tr
 /* ---------- lint probes (mutations of the flight-home spec) ---------- */
 const base = JSON.parse(readFileSync(join(PAGES, 'flight-home/page.spec.json'), 'utf8'));
 const clone = () => JSON.parse(JSON.stringify(base));
-const find = (s, id) => s.sections.flatMap((x) => x.elements).find((e) => e.id === id);
+const all = (els) => (els || []).flatMap((e) => [e, ...all(e.children)]);
+const find = (s, id) => all(s.sections.flatMap((x) => x.elements)).find((e) => e.id === id);
 const lintProbe = (name, mutate, expect) => {
   const s = clone(); mutate(s);
   const r = lint(s);
@@ -32,13 +33,15 @@ lintProbe('item path outside each', (s) => { find(s, 'dealFeatured').bind.title 
 lintProbe('each over a non-list', (s) => { find(s, 'hotel').each = 'hotels[0]'; }, /not a list/);
 lintProbe('item field the list type lacks', (s) => { find(s, 'hotel').bind.title = 'item.nope'; }, /has no field "nope"/);
 lintProbe('bind on an html element', (s) => { s.sections.find((x) => x.id === 'deals').elements.push({ id: 'p1', component: 'html', tag: 'p', text: 'x', bind: { text: 'deals[0].text' } }); }, /html elements ignore "bind"/);
-lintProbe('submit on an html element', (s) => { s.sections.find((x) => x.id === 'search').elements.push({ id: 'p2', component: 'html', tag: 'p', text: 'Search', submit: true }); }, /html elements ignore "submit"/);
+lintProbe('submit on an html element', (s) => { s.sections.find((x) => x.id === 'hero').elements.push({ id: 'p2', component: 'html', tag: 'p', text: 'Search', submit: true }); }, /html elements ignore "submit"/);
 lintProbe('sticky value typo', (s) => { s.sections[0].sticky = { base: 'botom' }; }, /"botom" is not one of/);
 lintProbe('show value not boolean', (s) => { s.sections[0].show = { base: 'no' }; }, /true or false/);
 lintProbe('unknown source kind', (s) => { s.source.kind = 'napkin'; }, /source.kind/);
 lintProbe('unknown success kind', (s) => { s.forms[0].submit.success.kind = 'confetti'; }, /success.kind/);
 lintProbe('navigate without to', (s) => { s.forms[0].submit.success = { kind: 'navigate' }; }, /needs "to"/);
 lintProbe('gap for a missing element', (s) => { s.gaps.push({ element: 'ghost', need: 'x', nearest: 'y', proposal: 'z' }); }, /no element with this id/);
+lintProbe('unknown canvas', (s) => { s.canvas = 'wide'; }, /canvas/);
+lintProbe('html container layout typo', (s) => { find(s, 'searchCard').layout.lg = 'grid-9'; }, /unknown layout "grid-9"/);
 lintProbe('field twin with a component not listed', (s) => { find(s, 'tripTypeDesktop').component = 'Select'; }, /element is a Select/);
 {
   const r = lint(clone());

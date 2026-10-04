@@ -1,0 +1,72 @@
+{
+ "page": "stay-checkout",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 15,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2172,
+   "h1s": [
+    "Confirm and pay"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": [],
+   "submit:booking": {
+    "msgs": [
+     "Enter the first name as on the passport.",
+     "Enter the last name as on the passport.",
+     "Enter your email so we can send the booking.",
+     "Enter a phone number the host can reach.",
+     "Choose your country of residence.",
+     "Tick to agree before paying."
+    ],
+    "focusInForm": true,
+    "focused": "input"
+   }
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 15,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2326,
+   "h1s": [
+    "Confirm and pay"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 18,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1123,
+   "h1s": [
+    "Confirm and pay"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}

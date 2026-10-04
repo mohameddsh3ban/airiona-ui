@@ -1,0 +1,177 @@
+<!-- Hangar: generated from docs/pages/hangar-detail/page.spec.json -->
+<main class="ar pg">
+  <section class="pg-s pg-s--nav" aria-label="Site navigation">
+    <div class="pg-g">
+      <ar-top-nav class="pg-el-topNav" [links]="topNavLinks" value="hangars" [user]="topNavUser">
+        <button
+          arButton
+          arActions
+          class="pg-el-navAction"
+          variant="secondary"
+          size="sm"
+          iconStart="plus"
+          (click)="listHangar($event)"
+        >List your hangar</button>
+      </ar-top-nav>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--hero" aria-label="Hangar 4, Dubai South">
+    <div class="pg-g">
+      <h1 class="pg-sr-only pg-el-pageTitle">Hangar 4, Dubai South</h1>
+      <ar-place-hero
+        class="pg-el-placeHero"
+        title="Hangar 4, Dubai South"
+        location="Dubai World Central · DWC"
+        price="$2,400"
+        priceLabel="Per month"
+        image="assets/photos/aviation/hangar-large.webp"
+        (back)="goBack($event)"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--facts" aria-label="Key facts">
+    <div class="pg-g">
+      <ar-info-stat-row class="pg-el-factRow" [items]="factRowItems" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--about" aria-labelledby="pg-h-about">
+    <h2 class="pg-h m-title-2" id="pg-h-about">About</h2>
+    <div class="pg-g">
+      <ar-expandable-text class="pg-el-aboutText" [lines]="4">A climate-controlled hangar on the business aviation side of Dubai World Central, two minutes from the FBO and customs. The 38-metre door and 11-metre clear height take anything up to a Global 7500 or a G700, and the floor is epoxy-sealed with ground power at every bay. Monthly leases include towing, a weekly exterior wash and 24/7 security with access logs; line maintenance from two approved organisations is on call.</ar-expandable-text>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--specs" aria-labelledby="pg-h-specs">
+    <h2 class="pg-h m-title-2" id="pg-h-specs">Specification</h2>
+    <div class="pg-g">
+      <ar-detail-list class="pg-el-specList" [items]="specListItems" />
+      <figure class="pg-figure pg-el-photo">
+        <img class="pg-photo pg-el-photoImg" src="assets/photos/aviation/hangar-small.webp" alt="Inside the hangar: a midsize jet under bright LED lights on a sealed grey floor" />
+        <figcaption class="pg-muted m-footnote pg-el-photoCaption">Bay 2, with a midsize jet for scale</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--amenities" aria-labelledby="pg-h-amenities">
+    <h2 class="pg-h m-title-2" id="pg-h-amenities">On board</h2>
+    <div class="pg-g">
+      <ar-amenity-list class="pg-el-amenityList" [items]="amenityListItems" />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--reviews" aria-labelledby="pg-h-reviews">
+    <h2 class="pg-h m-title-2" id="pg-h-reviews">What tenants say</h2>
+    <div class="pg-g">
+      <ar-rating-breakdown
+        class="pg-el-rating"
+        score="4.8"
+        scoreLabel="42 tenant reviews"
+        [segments]="ratingSegments"
+        note="Tenants rate security and towing highest."
+        title="Tenant rating"
+      />
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--contact" aria-labelledby="pg-h-contact">
+    <h2 class="pg-h m-title-2" id="pg-h-contact">Request space</h2>
+    <p class="pg-intro body">The host confirms availability within a day. Nothing is charged until they do.</p>
+    <form class="pg-g" [formGroup]="lease" (ngSubmit)="submitLease()" novalidate>
+        <ar-select
+          class="pg-el-aircraftSize"
+          placeholder="Choose a size"
+          iconStart="paper-airplane"
+          [options]="aircraftSizeOptions"
+          label="Aircraft size"
+          formControlName="aircraftSize"
+          [error]="leaseForm.error('aircraftSize')"
+        />
+        <ar-text-field
+          class="pg-el-registration"
+          placeholder="A6-ARN"
+          autocomplete="off"
+          iconStart="identification"
+          label="Registration"
+          formControlName="registration"
+          [error]="leaseForm.error('registration')"
+        />
+        <ar-date-picker
+          class="pg-el-leaseDates"
+          label="Dates"
+          mode="range"
+          variant="tiles"
+          startLabel="Move in"
+          endLabel="Move out"
+          min="2026-10-03"
+          today="2026-10-03"
+          unit="night"
+          formControlName="leaseDates"
+          [error]="leaseForm.error('leaseDates')"
+        />
+        <ar-text-field
+          class="pg-el-fullName"
+          autocomplete="name"
+          iconStart="user"
+          label="Full name"
+          formControlName="fullName"
+          [error]="leaseForm.error('fullName')"
+        />
+        <ar-text-field
+          class="pg-el-email"
+          type="email"
+          autocomplete="email"
+          inputMode="email"
+          iconStart="envelope"
+          label="Email"
+          formControlName="email"
+          [error]="leaseForm.error('email')"
+        />
+        <ar-text-field
+          class="pg-el-phone"
+          type="tel"
+          autocomplete="tel"
+          inputMode="tel"
+          iconStart="phone"
+          label="Phone"
+          formControlName="phone"
+          [error]="leaseForm.error('phone')"
+        />
+        <button
+          arButton
+          class="pg-el-desktopSubmit"
+          variant="primary"
+          size="lg"
+          [block]="true"
+          iconEnd="arrow-right"
+          type="submit"
+          [loading]="leaseForm.pending()"
+        >Request space</button>
+    </form>
+  </section>
+
+  <section class="pg-s pg-s--cta" aria-label="Send">
+    <form class="pg-g" [formGroup]="lease" (ngSubmit)="submitLease()" novalidate>
+        <ar-sticky-action-bar class="pg-el-ctaBar">
+          <strong arSummary class="m-title-2 pg-el-ctaTotal">$2,400 / mo</strong>
+          <span arSummary class="m-footnote pg-muted pg-el-ctaNote">Towing and security included</span>
+          <button
+            arButton
+            class="pg-el-ctaButton"
+            variant="primary"
+            size="lg"
+            iconEnd="arrow-right"
+            type="submit"
+            [loading]="leaseForm.pending()"
+          >Request space</button>
+        </ar-sticky-action-bar>
+    </form>
+  </section>
+</main>
+
+<ar-dialog [(open)]="leaseDone" [icon]="false" title="Request sent">
+  <ar-success-burst title="Space requested">Hangar 4 · Dubai South · the host confirms within one day.</ar-success-burst>
+  <button arButton arFooter variant="primary" type="button" (click)="leaseDone.set(false)">Done</button>
+</ar-dialog>

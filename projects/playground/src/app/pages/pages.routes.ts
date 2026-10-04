@@ -2,6 +2,14 @@
 import { Routes } from '@angular/router';
 
 export const PAGE_ROUTES: Routes = [
+  { path: 'aircraft-detail', title: "Aircraft", loadComponent: () => import('./aircraft-detail/aircraft-detail.page').then((m) => m.AircraftDetailPage) },
+  { path: 'aircraft-market', title: "Aircraft", loadComponent: () => import('./aircraft-market/aircraft-market.page').then((m) => m.AircraftMarketPage) },
+  { path: 'flight-booking', title: "Book a flight", loadComponent: () => import('./flight-booking/flight-booking.page').then((m) => m.FlightBookingPage) },
   { path: 'flight-home', title: "Flight home", loadComponent: () => import('./flight-home/flight-home.page').then((m) => m.FlightHomePage) },
-  { path: 'login', title: "Log in", loadComponent: () => import('./login/login.page').then((m) => m.LoginPage) },
+  { path: 'hangar-detail', title: "Hangar", loadComponent: () => import('./hangar-detail/hangar-detail.page').then((m) => m.HangarDetailPage) },
+  { path: 'hangar-market', title: "Hangars", loadComponent: () => import('./hangar-market/hangar-market.page').then((m) => m.HangarMarketPage) },
+  { path: 'login', title: "Sign in", loadComponent: () => import('./login/login.page').then((m) => m.LoginPage) },
+  { path: 'operator-dashboard', title: "Operator dashboard", loadComponent: () => import('./operator-dashboard/operator-dashboard.page').then((m) => m.OperatorDashboardPage) },
+  { path: 'signup', title: "Create account", loadComponent: () => import('./signup/signup.page').then((m) => m.SignupPage) },
+  { path: 'stay-checkout', title: "Stay checkout", loadComponent: () => import('./stay-checkout/stay-checkout.page').then((m) => m.StayCheckoutPage) },
 ];

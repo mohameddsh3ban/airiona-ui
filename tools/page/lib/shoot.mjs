@@ -38,6 +38,53 @@ export function buildPlayground(slug) {
   execSync('npx ng build playground --configuration development --base-href ./ --output-path dist/playground', { stdio: 'inherit', cwd: ROOT });
 }
 
+/** Full-page captures draw fixed bars where the first screen ends; move them to the end of the page for the shot. */
+async function fullPageShot(page, path) {
+  await page.evaluate(() => {
+    const h = document.documentElement.scrollHeight;
+    for (const el of document.querySelectorAll('main.pg *')) {
+      const cs = getComputedStyle(el);
+      if (cs.position !== 'fixed' || cs.bottom === 'auto') continue;
+      el.dataset.pgShot = el.getAttribute('style') || '';
+      el.style.position = 'absolute';
+      el.style.top = `${h - el.getBoundingClientRect().height}px`;
+      el.style.bottom = 'auto';
+    }
+  });
+  // Grow the viewport to the page instead of a beyond-viewport capture: Chromium composites blurred and animated
+  // layers (glass cards, grain) wrongly in that mode. Restore the size afterwards.
+  const vp = page.viewportSize();
+  const full = await page.evaluate(() => document.documentElement.scrollHeight);
+  if (vp && full > vp.height) { await page.setViewportSize({ width: vp.width, height: full }); await page.waitForTimeout(500); }
+  await page.screenshot({ path, fullPage: true });
+  if (vp && full > vp.height) await page.setViewportSize(vp);
+  await page.evaluate(() => {
+    for (const el of document.querySelectorAll('[data-pg-shot]')) { el.setAttribute('style', el.dataset.pgShot); delete el.dataset.pgShot; }
+  });
+}
+
+/** The mobile-native option: the page in app mode inside the phone frame (#/native/<slug>), as native.png. */
+async function shootNative(browser, port, spec, out, report) {
+  const ctx = await browser.newContext({ viewport: { width: 540, height: 920 }, deviceScaleFactor: 2 });
+  const page = await ctx.newPage();
+  await page.goto(`http://127.0.0.1:${port}/index.html#/native/${spec.page}`, { waitUntil: 'networkidle' });
+  const frame = page.frameLocator('iframe.pg-native__view');
+  const ok = await frame.locator('main.pg').waitFor({ timeout: 15000 }).then(() => true, () => false);
+  if (!ok) { report.errors.push('native: the page did not render inside the app frame'); await ctx.close(); return; }
+  const handle = await page.$('iframe.pg-native__view');
+  const inner = await handle.contentFrame();
+  const native = await inner.evaluate(() => ({
+    flag: document.documentElement.classList.contains('is-native'),
+    sideways: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  }));
+  if (!native.flag) report.errors.push('native: app mode (?native) was not applied inside the frame');
+  if (native.sideways > 1) report.errors.push(`native: the app view scrolls sideways by ${native.sideways}px`);
+  await page.waitForTimeout(1600);
+  await page.locator('.pg-native__frame').screenshot({ path: join(out, 'native.png') });
+  report.viewports.native = { width: 390, height: 844, sideways: native.sideways };
+  await ctx.close();
+}
+
 export async function shoot(spec, { build = true, port = 4474 } = {}) {
   const { chromium } = await import('playwright');
   if (build) buildPlayground(spec.page);
@@ -109,7 +156,7 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
         return content.filter((el) => { const r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > top + 4 && r.top < innerHeight; }).slice(0, 3).map((el) => el.className.toString().split(' ').find((c) => c.startsWith('pg-el-')) || el.tagName.toLowerCase());
       });
       await page.evaluate(() => scrollTo(0, 0));
-      await page.screenshot({ path: join(out, `${vp.name}.png`), fullPage: true });
+      await fullPageShot(page, join(out, `${vp.name}.png`));
       const v = { ...metrics, covered, pageErrors: [...pageErrors] };
       report.viewports[vp.name] = v;
       if (pageErrors.length) report.errors.push(`${vp.name}px: script errors: ${pageErrors.slice(0, 3).join(' | ').slice(0, 300)}`);
@@ -130,30 +177,33 @@ export async function shoot(spec, { build = true, port = 4474 } = {}) {
         for (const f of spec.forms) {
           const required = (f.fields || []).filter((fd) => (fd.validators || []).some((x) => x.type === 'required' || x.type === 'requiredTrue') && (fd.default === undefined || fd.default === null || fd.default === '')).length;
           const expected = (f.fields || []).flatMap((fd) => Object.values(fd.messages || {}));
-          const section = (spec.sections || []).find((x) => x.form === f.id);
-          const res = await page.evaluate(async ({ expected, sel }) => {
-            const form = document.querySelector(sel);
-            const btn = form?.querySelector('[type="submit"]');
-            if (!btn) return { error: 'no submit button in the form' };
+          // A form can span sections (fields in one, a sticky pay bar in another): click its submit wherever it
+          // sits and look for its messages in every section of that form.
+          const sels = (spec.sections || []).filter((x) => x.form === f.id).map((x) => `main.pg .pg-s--${x.id} form`);
+          const res = await page.evaluate(async ({ expected, sels }) => {
+            const forms = sels.map((q) => document.querySelector(q)).filter(Boolean);
+            const btn = forms.map((fm) => [...fm.querySelectorAll('[type="submit"]')].find((b) => b.offsetParent !== null || getComputedStyle(b).position === 'fixed')).find(Boolean);
+            if (!btn) return { error: 'no visible submit button in the form' };
             btn.click();
             await new Promise((r) => setTimeout(r, 400));
             // Count the spec's own messages that are now visible on the page.
-            const text = [...form.querySelectorAll('*')].filter((e) => e.offsetParent !== null && e.childNodes.length && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).map((e) => e.textContent.trim());
+            const text = forms.flatMap((fm) => [...fm.querySelectorAll('*')]).filter((e) => e.offsetParent !== null && e.childNodes.length && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())).map((e) => e.textContent.trim());
             const msgs = expected.filter((m) => text.some((t) => t.includes(m)));
             const active = document.activeElement;
-            return { msgs, focusInForm: !!active && form.contains(active) && active !== btn, focused: active ? active.tagName.toLowerCase() + (active.getAttribute('aria-label') ? `[${active.getAttribute('aria-label')}]` : '') : null };
-          }, { expected, sel: `main.pg .pg-s--${section?.id} form` });
+            return { msgs, focusInForm: !!active && forms.some((fm) => fm.contains(active)) && active !== btn, focused: active ? active.tagName.toLowerCase() + (active.getAttribute('aria-label') ? `[${active.getAttribute('aria-label')}]` : '') : null };
+          }, { expected, sels });
           report.viewports[vp.name][`submit:${f.id}`] = res;
           if (res.error) report.errors.push(`form ${f.id}: ${res.error}`);
           else {
             if (required && res.msgs.length < required) report.errors.push(`form ${f.id}: empty submit showed ${res.msgs.length} messages for ${required} required fields`);
             if (required && !res.focusInForm) report.warnings.push(`form ${f.id}: focus did not move to the first invalid field (focused: ${res.focused})`);
           }
-          await page.screenshot({ path: join(out, `390-${f.id}-errors.png`), fullPage: true });
+          await fullPageShot(page, join(out, `390-${f.id}-errors.png`));
         }
       }
       await ctx.close();
     }
+    await shootNative(browser, port, spec, out, report);
   } finally {
     await browser.close();
     server.close();

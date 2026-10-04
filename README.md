@@ -49,6 +49,25 @@ Open http://127.0.0.1:4400. Setup for product apps, CI and Claude Code: [docs/SE
 | `npm run export` | Everything into `exports/`: both packages, tokens, catalog site, PNGs, the skill. |
 | `npm run export:png -- --scale 3` | PNG of every component in both frameworks at 3× device scale. |
 | `npm run page -- <command>` | The page pipeline CLI (`suggest`, `describe`, `new`, `lint`, `check`, …). |
+| `npm run playground` | Serves the sample pages with live reload on http://localhost:4200. |
+| `npm run playground:build` then `npm run playground:serve` | Static build of all sample pages on http://127.0.0.1:4475. |
+
+## Sample pages
+
+Ten pages built through the pipeline, each with its spec, handoff and screenshots in `docs/pages/<page>/`. Every page has a web view (`#/<page>`, responsive 390 to 1280) and an app view (`#/native/<page>`): the same page in app mode inside a phone frame, with the status bar and home indicator as safe areas, a bottom tab bar on root screens, and no scrollbars, tap flash or overscroll. On a phone the app view fills the screen.
+
+| Page | What it shows |
+|---|---|
+| `flight-home` | Home: LandingHero with the looping sky video, the flight search docked over its edge, deals, airlines, hotels |
+| `flight-booking` | The central booking flow: route, trip, aircraft offers, passenger, summary, sticky request bar |
+| `stay-checkout` | Hotel checkout with guest details and payment summary |
+| `login` | Sign-in on AuthShell: form beside a cinematic video panel with rotating highlights |
+| `signup` | Sign-up on the same shell, form on the right, account type and terms |
+| `aircraft-market` | Aircraft for sale: search, category chips, sort, listing cards, hangar cross-sell |
+| `aircraft-detail` | One aircraft: photo, key facts, specification, cabin photo, on-board amenities, contact the seller |
+| `hangar-market` | Hangar space: the same listing page for hangars |
+| `hangar-detail` | One hangar: door, height, area, amenities, tenant rating, request space with dates |
+| `operator-dashboard` | Operator home: KPIs, revenue, fleet use, top earners, bookings table |
 
 ## Where to change things
 

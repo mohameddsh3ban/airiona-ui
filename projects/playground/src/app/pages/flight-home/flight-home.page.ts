@@ -4,7 +4,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ArAppBar, ArButton, ArDatePicker, ArDestinationCard, ArFeatureCard, ArHeroHeader, ArMiniDestination, ArMobileSegmented, ArSegmentedControl, ArSelect, ArTopNav, type ArOption, type ArTopNavLink } from '@airiona/ui';
+import { ArAppBar, ArButton, ArDatePicker, ArDestinationCard, ArFeatureCard, ArLandingHero, ArMiniDestination, ArMobileSegmented, ArSegmentedControl, ArSelect, ArTabBar, ArTopNav, type ArLandingStat, type ArOption, type ArTabItem, type ArTopNavLink } from '@airiona/ui';
 import { pageForm } from '../../shared/page-form';
 import { dateRange, futureDate } from '../../shared/validators';
 import { FLIGHTHOME_SAMPLE } from './flight-home.data';
@@ -12,7 +12,7 @@ import { FLIGHTHOME_SAMPLE } from './flight-home.data';
 /** Flight home. Primary action: Search flights for a route and dates. */
 @Component({
   selector: 'pg-flight-home',
-  imports: [ReactiveFormsModule, ArAppBar, ArButton, ArDatePicker, ArDestinationCard, ArFeatureCard, ArHeroHeader, ArMiniDestination, ArMobileSegmented, ArSegmentedControl, ArSelect, ArTopNav],
+  imports: [ReactiveFormsModule, ArAppBar, ArButton, ArDatePicker, ArDestinationCard, ArFeatureCard, ArLandingHero, ArMiniDestination, ArMobileSegmented, ArSegmentedControl, ArSelect, ArTabBar, ArTopNav],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flight-home.page.html',
   styleUrl: './flight-home.page.css',
@@ -64,6 +64,20 @@ export class FlightHomePage {
       "label": "Cabs"
     }
   ];
+  protected readonly heroLandingStats: ArLandingStat[] = [
+    {
+      "value": "1,240",
+      "label": "Aircraft listed"
+    },
+    {
+      "value": "140",
+      "label": "Airports with hangars"
+    },
+    {
+      "value": "15 min",
+      "label": "Average reply"
+    }
+  ];
   protected readonly tripTypeOptions: Array<string | ArOption> = [
     {
       "value": "one",
@@ -92,18 +106,55 @@ export class FlightHomePage {
       "label": "Multi-city"
     }
   ];
+  protected readonly tabBarItems: ArTabItem[] = [
+    {
+      "value": "home",
+      "label": "Home",
+      "icon": "home"
+    },
+    {
+      "value": "book",
+      "label": "Book",
+      "icon": "paper-airplane"
+    },
+    {
+      "value": "aircraft",
+      "label": "Aircraft",
+      "icon": "rocket-launch"
+    },
+    {
+      "value": "hangars",
+      "label": "Hangars",
+      "icon": "building-office-2"
+    },
+    {
+      "value": "account",
+      "label": "Account",
+      "icon": "user-circle"
+    }
+  ];
   private readonly router = inject(Router);
   protected submitSearch(): void {
     this.searchForm.submit((value) => {
-      // GET /api/flights/search?from&to&depart&return&trip (the app navigates to the results route with the same query). On failure: Network or 5xx: danger Toast 'Could not search right now. Check your connection and try again.' with Retry; the form stays filled. 422 (no route): message under the To field 'We don't fly this route yet.'
+      // GET /api/flights/search?from&to&depart&return&trip (the app navigates to the booking page with the same query). On failure: Network or 5xx: danger Toast 'Could not search right now. Check your connection and try again.' with Retry; the form stays filled. 422 (no route): message under the To field 'We don't fly this route yet.'
       console.info('search submit', value);
-      void this.router.navigateByUrl("/flights/results");
+      void this.router.navigateByUrl("/flight-booking");
     });
   }
 
   protected goToSignIn(event: unknown): void {
     // Routes to /login
     console.info('goToSignIn', event);
+  }
+
+  protected goToAircraft(event: unknown): void {
+    // Routes to /aircraft-market
+    console.info('goToAircraft', event);
+  }
+
+  protected goToHangars(event: unknown): void {
+    // Routes to /hangar-market
+    console.info('goToHangars', event);
   }
 
   protected openDeal(event: unknown): void {

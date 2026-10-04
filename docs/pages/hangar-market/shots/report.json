@@ -1,0 +1,60 @@
+{
+ "page": "hangar-market",
+ "viewports": {
+  "390": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 27,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 4230,
+   "h1s": [
+    "Hangar space"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "768": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 27,
+   "tiny": [],
+   "fixedCount": 1,
+   "height": 2443,
+   "h1s": [
+    "Hangar space"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "1280": {
+   "overflow": 0,
+   "wide": [],
+   "small": [],
+   "smallCount": 0,
+   "targetCount": 26,
+   "tiny": [],
+   "fixedCount": 0,
+   "height": 1901,
+   "h1s": [
+    "Hangar space"
+   ],
+   "skips": 0,
+   "covered": [],
+   "pageErrors": []
+  },
+  "native": {
+   "width": 390,
+   "height": 844,
+   "sideways": 0
+  }
+ },
+ "errors": [],
+ "warnings": []
+}
