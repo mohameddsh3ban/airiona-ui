@@ -58,7 +58,7 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `splitHero` | SplitHero `ar-split-hero` | `eyebrow`=Fly. Land. Explore.<br>`title`=The sky<br>`accent`=is yours.<br>`lede`=Private jets, hand-picked destinations and hangar space, boo<br>`image`=assets/photos/aviation/landing-hero.webp<br>`video`=assets/video/landing-hero.mp4<br>`focus`=42% 50%<br>`badge`={"value":"28K+","title":"Happy flyers","text":"joined this y<br>`storyLabel`=Watch the story<br>`headingLevel`=1<br>`docked`=true |  | SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, the glass travellers badge and the story ring button; docked children straddle its bottom edge like the reference search pill<br>Not LandingHero: full-bleed photo with copy on top; the reference splits copy and photo side by side<br>Not HeroHeader: compact mobile header, no video, no badge |  |
+| `splitHero` | SplitHero `ar-split-hero` | `eyebrow`=Fly. Land. Explore.<br>`title`=The sky<br>`accent`=is yours.<br>`lede`=Private jets, hand-picked destinations and hangar space, boo<br>`image`=assets/photos/aviation/landing-hero.webp<br>`video`=assets/video/landing-hero.mp4<br>`focus`=42% 50%<br>`badge`={"value":"28K+","title":"Happy flyers","text":"joined this y<br>`headingLevel`=1<br>`docked`=true |  | SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, and the glass travellers badge; docked children straddle its bottom edge like the reference search pill<br>Not LandingHero: full-bleed photo with copy on top; the reference splits copy and photo side by side<br>Not HeroHeader: compact mobile header, no video, no badge |  |
 | `heroBook` [arActions] | Button `button[arButton], a[arButton]` | `variant`=primary<br>`size`=lg<br>`iconEnd`=arrow-right |  | The reference's Start Exploring pill: the one primary action, straight to the booking page |  |
 | `heroSearch` | BookingSearch `ar-booking-search` |  |  | The reference's search pill: trip type, From ⇄ To, dates and travellers with the brand search disc, the system's flight search<br>Not html card with Select and DatePicker fields: the reference is a single compact bar; BookingSearch is that bar and opens each picker from its tile |  |
 
@@ -137,7 +137,7 @@ Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({
 ## Accessibility
 
 - One h1: "The sky is yours." (the SplitHero title and accent are one heading). The AppBar title is not a heading; sections use h2.
-- The hero video is decorative: muted, aria-hidden, no controls; it never plays under reduced motion or data saver. The ring button is labelled "Watch the story" and opens the film with controls.
+- The hero video is decorative: muted, aria-hidden, no controls; it never plays under reduced motion or data saver.
 - The search tiles are buttons that name their field and value; the search disc is labelled Search flights.
 - Destination cards are buttons named by the destination; the heart says Save or Remove from saved.
 - The tab bar is a nav landmark labelled Main, hidden at 1280 where the top navigation takes over.

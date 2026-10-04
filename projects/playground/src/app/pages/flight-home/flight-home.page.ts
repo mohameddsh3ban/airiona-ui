@@ -113,11 +113,6 @@ export class FlightHomePage {
     console.info('openLanguage', event);
   }
 
-  protected openStory(event: unknown): void {
-    // The ring button opens a Dialog with the full brand film (not part of this page). The loop is 5.25s, 555 KB, H.264; the poster is its first frame.
-    console.info('openStory', event);
-  }
-
   protected goToBooking(event: unknown): void {
     // Routes to /flight-booking
     console.info('goToBooking', event);

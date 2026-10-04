@@ -287,14 +287,10 @@
                 }
               ]
             },
-            "storyLabel": "Watch the story",
             "headingLevel": 1,
             "docked": true
           },
-          "events": {
-            "story": "openStory"
-          },
-          "why": "SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, the glass travellers badge and the story ring button; docked children straddle its bottom edge like the reference search pill",
+          "why": "SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, and the glass travellers badge; docked children straddle its bottom edge like the reference search pill",
           "alternatives": [
             {
               "component": "LandingHero",
@@ -305,7 +301,7 @@
               "rejected": "compact mobile header, no video, no badge"
             }
           ],
-          "notes": "The ring button opens a Dialog with the full brand film (not part of this page). The loop is 5.25s, 555 KB, H.264; the poster is its first frame.",
+          "notes": "The loop is 5.25s, 555 KB, H.264; the poster is its first frame. The reference's 'watch travel story' ring button is left out at the owner's request.",
           "children": [
             {
               "id": "heroBook",
@@ -641,7 +637,7 @@
   ],
   "a11y": [
     "One h1: \"The sky is yours.\" (the SplitHero title and accent are one heading). The AppBar title is not a heading; sections use h2.",
-    "The hero video is decorative: muted, aria-hidden, no controls; it never plays under reduced motion or data saver. The ring button is labelled \"Watch the story\" and opens the film with controls.",
+    "The hero video is decorative: muted, aria-hidden, no controls; it never plays under reduced motion or data saver.",
     "The search tiles are buttons that name their field and value; the search disc is labelled Search flights.",
     "Destination cards are buttons named by the destination; the heart says Save or Remove from saved.",
     "The tab bar is a nav landmark labelled Main, hidden at 1280 where the top navigation takes over."
