@@ -118,7 +118,7 @@ export function lint(spec, { target = spec.target || 'angular' } = {}) {
     if (['grid-3', 'grid-4'].includes(s.layout?.base)) W(`${sp}.layout.base`, `${s.layout.base} at 390px leaves columns under 110px wide; use stack, grid-2 or scroll-x on phones`);
     if (s.sticky?.base === 'bottom') stickyBottom = true;
     for (const [bp, v] of Object.entries(s.sticky || {})) { if (!BP.includes(bp)) E(`${sp}.sticky`, `unknown breakpoint "${bp}" (base, md, lg)`); if (!STICKY.includes(v)) E(`${sp}.sticky.${bp}`, `"${v}" is not one of ${STICKY.join(', ')}`); }
-    for (const key of ['show', 'bleed']) for (const [bp, v] of Object.entries(s[key] || {})) { if (!BP.includes(bp)) E(`${sp}.${key}`, `unknown breakpoint "${bp}"`); if (typeof v !== 'boolean') E(`${sp}.${key}.${bp}`, 'true or false'); }
+    for (const key of ['show', 'bleed', 'flush']) for (const [bp, v] of Object.entries(s[key] || {})) { if (!BP.includes(bp)) E(`${sp}.${key}`, `unknown breakpoint "${bp}"`); if (typeof v !== 'boolean') E(`${sp}.${key}.${bp}`, 'true or false'); }
     for (const [bp] of Object.entries(s.layout || {})) if (!BP.includes(bp)) E(`${sp}.layout`, `unknown breakpoint "${bp}"`);
     if (s.form && !forms.has(s.form)) E(`${sp}.form`, `no form "${s.form}" in forms`);
     if (s.area && Object.values(s.area).some((a) => !['main', 'aside', 'full'].includes(a))) E(`${sp}.area`, 'main, aside or full');

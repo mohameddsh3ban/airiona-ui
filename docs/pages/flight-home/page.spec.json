@@ -129,11 +129,13 @@
       "id": "topbar",
       "title": "Airiona",
       "heading": false,
-      "purpose": "Phone brand bar with sign in; the link row does not fit 390px",
+      "purpose": "Tablet brand bar with sign in; phones carry the brand inside the hero, desktops have the link row",
       "layout": {
         "base": "stack"
       },
       "show": {
+        "base": false,
+        "md": true,
         "lg": false
       },
       "elements": [
@@ -249,12 +251,20 @@
       "id": "hero",
       "title": "The sky is yours",
       "heading": false,
-      "purpose": "The reference hero in Airiona style: the promise, proof, the story film and the route search on the first screen",
+      "purpose": "The reference hero in Airiona style: the promise, proof and the route search on the first screen; on phones an app home screen with the video behind the copy",
       "layout": {
         "base": "stack"
       },
       "area": {
         "lg": "full"
+      },
+      "bleed": {
+        "base": true,
+        "md": false
+      },
+      "flush": {
+        "base": true,
+        "md": false
       },
       "elements": [
         {
@@ -268,6 +278,7 @@
             "image": "assets/photos/aviation/landing-hero.webp",
             "video": "assets/video/landing-hero.mp4",
             "focus": "42% 50%",
+            "phoneFocus": "30% 50%",
             "badge": {
               "value": "28K+",
               "title": "Happy flyers",
@@ -320,8 +331,64 @@
               "notes": "Routes to /flight-booking"
             },
             {
+              "id": "heroSignIn",
+              "component": "Button",
+              "slot": "arTop",
+              "text": "Sign in",
+              "inputs": {
+                "variant": "glass",
+                "size": "sm"
+              },
+              "events": {
+                "click": "goToSignIn"
+              },
+              "why": "On phones the brand row sits inside the hero, like an app; sign in is its one action",
+              "notes": "Routes to /login"
+            },
+            {
+              "id": "phoneSearch",
+              "component": "html",
+              "tag": "div",
+              "class": "pg-card pg-card--tight",
+              "children": [
+                {
+                  "id": "phoneSearchTile",
+                  "component": "FieldTile",
+                  "inputs": {
+                    "label": "Where to?",
+                    "placeholder": "Anywhere · Any date · 2 travellers",
+                    "icon": "magnifying-glass",
+                    "trailingIcon": "adjustments-horizontal"
+                  },
+                  "events": {
+                    "click": "goToBooking"
+                  },
+                  "why": "The app search: one large tile that opens the full search sheet, instead of five fields on a 390px screen",
+                  "alternatives": [
+                    {
+                      "component": "BookingSearch",
+                      "rejected": "three rows of tiles on a phone; it buries the first screen"
+                    },
+                    {
+                      "component": "SearchField",
+                      "rejected": "opens the keyboard; a route needs pickers, not typing"
+                    }
+                  ],
+                  "notes": "Opens the booking page (in the app: the FlightSearchSheet)"
+                }
+              ],
+              "show": {
+                "md": false
+              },
+              "why": "A white card so the tile reads over the photo edge"
+            },
+            {
               "id": "heroSearch",
               "component": "BookingSearch",
+              "show": {
+                "base": false,
+                "md": true
+              },
               "events": {
                 "search": "searchFlights",
                 "fieldOpen": "openSearchField"
@@ -336,6 +403,57 @@
               "notes": "Search navigates to /flight-booking with from, to, dates and travellers in the query"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "quick",
+      "title": "Explore",
+      "heading": false,
+      "purpose": "App shortcuts under the hero: what you can do on Airiona, one tap each",
+      "layout": {
+        "base": "stack"
+      },
+      "show": {
+        "md": false
+      },
+      "elements": [
+        {
+          "id": "quickChips",
+          "component": "ChipScroller",
+          "inputs": {
+            "label": "Explore",
+            "tone": "brand",
+            "value": "charter",
+            "options": [
+              {
+                "value": "charter",
+                "label": "Charter",
+                "icon": "paper-airplane"
+              },
+              {
+                "value": "empty-legs",
+                "label": "Empty legs",
+                "icon": "bolt"
+              },
+              {
+                "value": "aircraft",
+                "label": "Aircraft",
+                "icon": "rocket-launch"
+              },
+              {
+                "value": "hangars",
+                "label": "Hangars",
+                "icon": "building-office-2"
+              },
+              {
+                "value": "destinations",
+                "label": "Destinations",
+                "icon": "globe-alt"
+              }
+            ]
+          },
+          "why": "A swipeable chip row is how app home screens offer their main areas without a link bar"
         }
       ]
     },
@@ -382,6 +500,10 @@
             {
               "id": "stats",
               "component": "StatStrip",
+              "show": {
+                "base": false,
+                "md": true
+              },
               "inputs": {
                 "label": "Airiona in numbers",
                 "items": [
@@ -462,10 +584,10 @@
                 }
               ],
               "layout": {
-                "base": "scroll-x",
+                "base": "peek",
                 "md": "carousel"
               },
-              "why": "The reference carousel: one card and a peek on phones, three per view from tablets up, swiping sideways"
+              "why": "The reference carousel: app-style peek row on phones, three per view from tablets up, swiping sideways"
             }
           ],
           "layout": {
@@ -482,13 +604,45 @@
       "intro": "Everything a charter client asks before they book, answered before they ask.",
       "purpose": "Trust: the three promises behind the price",
       "layout": {
-        "base": "scroll-x",
+        "base": "stack",
         "md": "grid-3"
       },
       "elements": [
         {
+          "id": "whyPhone",
+          "component": "AmenityList",
+          "show": {
+            "md": false
+          },
+          "inputs": {
+            "items": [
+              {
+                "icon": "shield-check",
+                "label": "Verified operators"
+              },
+              {
+                "icon": "banknotes",
+                "label": "All-in prices"
+              },
+              {
+                "icon": "clock",
+                "label": "15-min replies"
+              },
+              {
+                "icon": "chat-bubble-left-right",
+                "label": "24/7 concierge"
+              }
+            ]
+          },
+          "why": "On phones the promises are one compact row of icon tiles, like an app; the cards return from tablets up"
+        },
+        {
           "id": "whyVerified",
           "component": "FeatureCard",
+          "show": {
+            "base": false,
+            "md": true
+          },
           "inputs": {
             "icon": "shield-check",
             "title": "Verified operators",
@@ -500,6 +654,10 @@
         {
           "id": "whyPrice",
           "component": "FeatureCard",
+          "show": {
+            "base": false,
+            "md": true
+          },
           "inputs": {
             "icon": "banknotes",
             "title": "All-in prices",
@@ -511,6 +669,10 @@
         {
           "id": "whyFast",
           "component": "FeatureCard",
+          "show": {
+            "base": false,
+            "md": true
+          },
           "inputs": {
             "icon": "clock",
             "title": "Confirmed in minutes",
@@ -528,7 +690,7 @@
       "intro": "Buy an aircraft, lease hangar space or catch an empty leg on the same account.",
       "purpose": "Doors into the aircraft and hangar marketplaces",
       "layout": {
-        "base": "scroll-x",
+        "base": "peek",
         "md": "grid-3"
       },
       "elements": [
@@ -555,10 +717,14 @@
       "id": "footer",
       "title": "Footer",
       "heading": false,
-      "purpose": "Brand line and legal",
+      "purpose": "Brand line and legal; apps have no footer, so phones skip it",
       "layout": {
         "base": "stack",
         "md": "row"
+      },
+      "show": {
+        "base": false,
+        "md": true
       },
       "elements": [
         {
@@ -654,6 +820,6 @@
     "Style: Airiona's own type (Bricolage Grotesque display, Geist text) replaces the reference serif; the italic accent line becomes the Ion Blue accent with a hand-drawn underline. Colours, radii and shadows are the system's.",
     "Hero frame and video: the photo is the first frame of a 5.25s seamless loop generated from it; the video fades in 1200ms after load, so the first paint is the still frame and the page never waits on video.",
     "Copy is Airiona's: the reference is a travel brand; the figures (140 airports, 1,240 aircraft, 28K+ flyers) match the marketplace pages.",
-    "Phone order: brand bar, hero (copy, photo, search docked over its edge), offer and stats, featured destinations (swipe), why Airiona, marketplaces, footer, tab bar."
+    "Phone (below 768px) is an app home screen, not the desktop stacked: the hero starts under the status bar with the video full-bleed behind the copy, the brand and Sign in over it, and one Where to? tile docked over its edge. Then the category chips, the offer, featured destinations and the marketplaces as peek rows, the promises as one row of icon tiles, and the tab bar. No footer and no stats card on phones (the hero badge already carries the proof)."
   ]
 }

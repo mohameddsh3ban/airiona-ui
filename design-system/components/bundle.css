@@ -1382,7 +1382,7 @@
 .m-section { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .m-section__title { margin: 0; font: 700 21px/26px var(--font-display); letter-spacing: -0.02em; }
 .m-section__action { appearance: none; border: 0; background: transparent; padding: 10px 0 10px 10px; margin: -10px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 2px; font: 500 14px/18px var(--font-sans); color: var(--ink-muted); }
-.m-chips { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--m-gutter, 20px)); padding: 4px var(--m-gutter, 20px) 10px; scroll-snap-type: x proximity; }
+.m-chips { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--m-gutter, 20px)); padding: 4px var(--m-gutter, 20px) 10px; scroll-padding-inline: var(--m-gutter, 20px); scroll-snap-type: x proximity; }
 .m-chips::-webkit-scrollbar { display: none; }
 .m-chip { appearance: none; border: 0; cursor: pointer; flex: none; height: 46px; padding: 0 20px; border-radius: 16px; scroll-snap-align: start; background: var(--surface-sunken); color: var(--ink-muted); font: 500 15px/20px var(--font-sans); white-space: nowrap; }
 .m-chip[aria-checked="true"] { background: var(--action); color: var(--on-action); box-shadow: 0 10px 20px -10px rgba(10, 15, 36, 0.6); }
@@ -2425,7 +2425,7 @@
 .ar-split__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
 .ar-split__eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font: 600 12px/16px var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-600); }
 .ar-split__trail { display: inline-flex; align-items: center; color: var(--blue-500); }
-.ar-split__trail svg { width: 64px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; }
+.ar-split__trail > svg:not(.ar-icon) { width: 64px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; }
 .ar-split__trail .ar-icon { margin-left: -4px; transform: translateY(-7px) rotate(-30deg); }
 .ar-split__title { margin: 0; display: flex; flex-direction: column; font: 800 46px/0.98 var(--font-display); letter-spacing: -0.045em; color: var(--ink); text-wrap: balance; }
 .ar-split__accent { position: relative; width: fit-content; color: var(--blue-500); }
@@ -2473,6 +2473,35 @@
   .ar-split__story::before { inset: 10px; }
   .ar-split__ring { animation: ar-split-spin 22s linear infinite; }
   .ar-split__dock { padding: 0 clamp(16px, 5vw, 72px); }
+}
+.ar-split__top { display: none; }
+/* Phones: an app home screen. The photo (and its video) runs full-bleed behind the copy with rounded bottom
+   corners; the brand and the top slot sit over it under the status bar; the dock overlaps its lower edge. */
+@media (max-width: 767.98px) {
+  .ar-split { --ar-split-dock: 36px; }
+  .ar-split__grid { grid-template-areas: "hero"; gap: 0; }
+  .ar-split__copy, .ar-split__media { grid-area: hero; }
+  .ar-split__copy { position: relative; z-index: 1; align-self: start; gap: 12px; padding: calc(var(--m-status-h) + 72px) 20px 0; color: #ffffff; }
+  .ar-split__shape { aspect-ratio: auto; height: clamp(540px, 84svh, 680px); border-radius: 0 0 34px 34px; -webkit-mask: none; mask: none; }
+  .ar-split__poster, .ar-split__video { object-position: var(--ar-split-focus-phone, var(--ar-split-focus, 50% 50%)); }
+  .ar-split__shape::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 11, 42, 0.82) 0%, rgba(7, 11, 42, 0.62) 30%, rgba(7, 11, 42, 0.12) 52%, rgba(7, 11, 42, 0) 70%, rgba(7, 11, 42, 0.32) 100%); }
+  .ar-split__top { position: absolute; z-index: 2; top: calc(var(--m-status-h) + 2px); left: 20px; right: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; }
+  .ar-split__top .ar-wordmark { color: #ffffff; }
+  .ar-split__top .ar-wordmark i { color: var(--blue-300); }
+  .ar-split__top-actions { display: flex; gap: 8px; }
+  .ar-split__eyebrow { color: rgba(255, 255, 255, 0.88); }
+  .ar-split__trail { color: var(--blue-300); }
+  .ar-split__title { color: #ffffff; font-size: 46px; text-shadow: 0 2px 24px rgba(7, 11, 42, 0.3); }
+  .ar-split__accent { color: var(--blue-300); }
+  .ar-split__accent::after { opacity: 0.7; }
+  .ar-split__lede { color: rgba(255, 255, 255, 0.86); font-size: 15px; line-height: 22px; }
+  .ar-split__actions { display: none; }
+  .ar-split__badge { top: auto; right: auto; left: 16px; bottom: calc(var(--ar-split-dock) + 16px); max-width: 156px; padding: 10px 12px; border-radius: 18px; }
+  .ar-split__badge b { font-size: 13px; line-height: 17px; }
+  .ar-split__badge-value { min-width: 32px; height: 32px; font-size: 11px; }
+  .ar-split__story, .ar-split--docked .ar-split__story { top: auto; left: auto; right: 16px; bottom: calc(var(--ar-split-dock) + 16px); width: 84px; height: 84px; }
+  .ar-split__play { width: 42px; height: 42px; }
+  .ar-split__dock { padding: 0 16px; }
 }
 @keyframes ar-split-spin { to { transform: rotate(360deg); } }
 /* Entrance: the copy rises in order, the photo settles, the badge and ring follow */

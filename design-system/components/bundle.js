@@ -2746,7 +2746,7 @@
     }, [props.video]);
     var b = props.badge;
     var label = (props.storyLabel || "").toUpperCase();
-    return h("section", { className: cx("ar ar-split", props.docked && "ar-split--docked", props.className), style: props.focus ? { "--ar-split-focus": props.focus } : undefined },
+    return h("section", { className: cx("ar ar-split", props.docked && "ar-split--docked", props.className), style: props.focus || props.phoneFocus ? { "--ar-split-focus": props.focus, "--ar-split-focus-phone": props.phoneFocus } : undefined },
       h("div", { className: "ar-split__grid" },
         h("div", { className: "ar-split__copy" },
           props.eyebrow ? h("p", { className: "ar-split__eyebrow" },
@@ -2761,6 +2761,7 @@
           props.lede ? h("p", { className: "ar-split__lede" }, props.lede) : null,
           props.actions ? h("div", { className: "ar-split__actions" }, props.actions) : null),
         h("div", { className: "ar-split__media" },
+          h("div", { className: "ar-split__top" }, h(Wordmark), props.top ? h("div", { className: "ar-split__top-actions" }, props.top) : null),
           h("div", { className: "ar-split__shape", "aria-hidden": "true" },
             props.image ? h("img", { className: "ar-split__poster", src: props.image, alt: "" }) : null,
             props.video ? h("video", { ref: videoRef, className: cx("ar-split__video", ready[0] && "is-ready"), muted: true, loop: true, playsInline: true, preload: "none", tabIndex: -1, disablePictureInPicture: true, onPlaying: function () { ready[1](true); } }) : null),

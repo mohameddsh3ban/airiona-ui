@@ -47,13 +47,13 @@ The spec records every decision about one page. `lint` checks it against the rea
   "elements": [ "..." ]
 }
 ```
-- `layout`: `stack` (one column), `row` (wrapping inline row), `grid-2`/`grid-3`/`grid-4`, `split` (2:1), `sidebar` (1:2, a narrow column first), `carousel` (three cards per view, swiping sideways; pair it with `scroll-x` at base), `scroll-x` (snapping horizontal list that bleeds to the screen edge). `base` is the 390px phone layout and is required; `md` (768) and `lg` (1280) override upward.
+- `layout`: `stack` (one column), `row` (wrapping inline row), `grid-2`/`grid-3`/`grid-4`, `split` (2:1), `sidebar` (1:2, a narrow column first), `carousel` (three cards per view, swiping sideways; pair it with `scroll-x` at base), `peek` (app-style row, about one and a half cards per view), `scroll-x` (snapping horizontal list that bleeds to the screen edge). `base` is the 390px phone layout and is required; `md` (768) and `lg` (1280) override upward.
 - `area.lg: "aside"` puts the section in a sticky right column on desktop (order summaries, booking bars, a sign-in form beside art). `area.lg: "full"` spans both columns (top navigation, footers) and starts a new block: an aside sits beside the main sections of its own block.
 - Per-breakpoint values (`layout`, `sticky`, `show`, `bleed`, `span`) cascade upward: a value set at `base` holds at `md` and `lg` until one of them sets its own.
 - `sticky`: `top`, `bottom` or `none` per breakpoint. `bottom` fixes the section to the bottom of the screen (use it for StickyActionBar / BookingBar) and the page keeps room so nothing ends under it; `none` puts it back in the page flow (for example `{ "base": "bottom", "lg": "none" }`).
 - `show: { lg: false }` hides a section from 1280 up; `{ base: false, lg: true }` shows it only on desktop. Same on elements.
 - `intro`: one sentence under the title, outside the layout grid (so a `scroll-x` carousel does not swallow it).
-- `bleed.base: true` lets a header or carousel touch the screen edges on phones.
+- `bleed.base: true` lets a header or carousel touch the screen edges on phones. `flush.base: true` also removes the page's top padding, so an app hero starts under the status bar (put it first).
 - `heading: false` hides the visible `title` (it still labels the section for screen readers).
 - `form` wraps the section in that form; its elements can then place fields and the submit button.
 

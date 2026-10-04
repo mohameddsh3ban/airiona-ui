@@ -718,6 +718,8 @@ export interface SplitHeroProps {
   /** Photo; also the poster frame the video fades in over. */ image?: string;
   /** Looping muted video that replaces the photo once the page has settled. */ video?: string;
   /** object-position for the photo and video. */ focus?: string;
+  /** object-position on phones, where the photo runs full-bleed in portrait. */ phoneFocus?: string;
+  /** Phone brand row actions (sign in), shown over the photo below 768px. */ top?: React.ReactNode;
   badge?: SplitBadge;
   /** Label of the ring button; the button shows only when set. */ storyLabel?: string;
   onStory?: () => void;

@@ -16,7 +16,7 @@ html.is-native::-webkit-scrollbar { display: none; }
 html.is-native body { overscroll-behavior: none; -webkit-user-select: none; user-select: none; }
 html.is-native :is(input, textarea, [contenteditable]) { -webkit-user-select: text; user-select: text; }
 /* Content starts under the status bar; fixed bottom bars clear the home indicator. */
-html.is-native main.pg { padding-top: calc(16px + var(--m-status-h)); }
+html.is-native main.pg { --pg-pad-top: calc(16px + var(--m-status-h)); padding-top: var(--pg-pad-top); }
 html.is-native main.pg:has(> .ar-auth, .ar-auth) { padding-top: 0; }
 html.is-native .ar-auth__col { padding-top: calc(16px + var(--m-status-h)); padding-bottom: calc(16px + var(--m-home-h)); }
 html.is-native .ar-auth__strip { border-radius: 22px; }

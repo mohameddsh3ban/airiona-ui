@@ -13,6 +13,8 @@ const LAYOUT_CSS = {
   'grid-4': 'display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row;',
   split: 'display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-auto-flow: row;',
   sidebar: 'display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); grid-auto-flow: row;',
+  // App-style row: about one and a half cards per view, so the next one peeks in.
+  peek: 'display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px;',
   // Three cards per view from tablets up, swiping sideways; scroll-x is the phone version (one card and a peek).
   carousel: 'display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: 0; padding-inline: 0; padding-bottom: 6px;',
   'scroll-x': 'display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(80%, 320px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px;',
@@ -158,7 +160,7 @@ export function scaffold(spec) {
   /* ---- styles: mobile first ---- */
   css.push(`/* ${spec.title}: generated from docs/pages/${slug}/page.spec.json. Mobile first: base is 390px, then 768 and 1280. */`);
   css.push(':host { display: block; }');
-  css.push('.pg { --m-gutter: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }');
+  css.push('.pg { --m-gutter: 16px; --pg-pad-top: 16px; display: grid; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 16px 16px 40px; }');
   css.push('.pg-s { min-width: 0; display: grid; gap: 12px; align-content: start; }');
   css.push('.pg-h { margin: 0; }');
   css.push('.pg-intro { color: var(--ink-muted); max-width: 65ch; }');
@@ -180,6 +182,7 @@ export function scaffold(spec) {
   css.push('.pg-figure { display: grid; gap: 8px; align-content: start; }');
   css.push('.pg-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 24px; background: var(--surface-sunken); }');
   css.push('.pg-card { padding: 20px; border-radius: 28px; background: var(--surface); box-shadow: var(--shadow-float); }');
+  css.push('.pg-card--tight { padding: 8px; border-radius: 26px; }');
   css.push('.pg-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }');
   // canvas "full": the page draws its own frame edge to edge (an auth shell, a full-screen app view).
   if (spec.canvas === 'full') css.push('.pg { max-width: none; padding: 0; gap: 0; }', '.pg-s, .pg-g { gap: 0; }');
@@ -213,15 +216,18 @@ export function scaffold(spec) {
       const sel = `.pg-s--${s.id}`;
       const lay = s.layout?.[bp];
       if (lay) rules.push(`${sel} > .pg-g { ${LAYOUT_CSS[lay]} }`);
-      if (lay === 'scroll-x') rules.push(`${sel} > .pg-g > * { scroll-snap-align: start; }`);
-      else if (s.layout?.[bp] && bp !== 'base' && s.layout.base === 'scroll-x') rules.push(`${sel} > .pg-g { overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }`);
+      if (lay === 'scroll-x' || lay === 'peek' || lay === 'carousel') rules.push(`${sel} > .pg-g > * { scroll-snap-align: start; }`);
+      else if (s.layout?.[bp] && bp !== 'base' && ['scroll-x', 'peek'].includes(s.layout.base)) rules.push(`${sel} > .pg-g { overflow: visible; margin-inline: 0; padding-inline: 0; scroll-snap-type: none; }`);
       if (s.bleed?.[bp] === true) rules.push(`${sel} { margin-inline: ${bp === 'base' ? '-16px' : bp === 'md' ? '-24px' : '0'}; }`);
       if (s.bleed?.[bp] === false) rules.push(`${sel} { margin-inline: 0; }`);
+      // flush: the section starts at the very top of the screen (an app hero under the status bar).
+      if (s.flush?.[bp] === true) rules.push(`${sel} { margin-top: calc(-1 * var(--pg-pad-top)); }`);
+      if (s.flush?.[bp] === false) rules.push(`${sel} { margin-top: 0; }`);
     }
     for (const { el, section, parent } of walkElements(spec)) {
       const own = el.component === 'html' && el.layout?.[bp];
       if (own) rules.push(`.pg-el-${el.id} { ${LAYOUT_CSS[own]} gap: 16px; align-content: start; }`, `.pg-el-${el.id} > * { min-width: 0; }`);
-      if (own === 'scroll-x' || own === 'carousel') rules.push(`.pg-el-${el.id} > * { scroll-snap-align: start; }`);
+      if (own === 'scroll-x' || own === 'carousel' || own === 'peek') rules.push(`.pg-el-${el.id} > * { scroll-snap-align: start; }`);
       // A span cascades upward like everything else, but in a one-column stack "span 2" would invent a second
       // column; there it means the full row.
       const span = cascade(el.span, null).find(([b]) => b === bp)[1];
@@ -232,7 +238,7 @@ export function scaffold(spec) {
     }
     if (bp === 'md') rules.unshift('.pg { --m-gutter: 24px; padding-inline: 24px; gap: 32px; }');
     if (bp === 'lg') {
-      rules.unshift('.pg { --m-gutter: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }');
+      rules.unshift('.pg { --m-gutter: 32px; --pg-pad-top: 32px; padding-inline: 32px; padding-top: 32px; gap: 36px; }');
       if (asides.length) {
         // Rows at desktop: "full" sections span both columns and split the page into blocks; inside a block the
         // main sections stack in column 1 and the block's aside sits beside them in column 2, sticky.

@@ -74,7 +74,7 @@ export function* walkElements(spec) {
 export const pascal = (s) => s.replace(/(^|[-_ ]+)([a-z0-9])/gi, (_, __, c) => c.toUpperCase());
 export const camel = (s) => { const p = pascal(s); return p[0].toLowerCase() + p.slice(1); };
 export const BREAKPOINTS = { base: 0, md: 768, lg: 1280 };
-export const LAYOUTS = ['stack', 'row', 'grid-2', 'grid-3', 'grid-4', 'split', 'sidebar', 'scroll-x', 'carousel'];
+export const LAYOUTS = ['stack', 'row', 'grid-2', 'grid-3', 'grid-4', 'split', 'sidebar', 'scroll-x', 'peek', 'carousel'];
 export const VALIDATORS = ['required', 'requiredTrue', 'email', 'minLength', 'maxLength', 'min', 'max', 'pattern', 'phone', 'dateRange', 'futureDate', 'minAge', 'passport', 'postalCode'];
 export const VALIDATOR_ARG = { minLength: 'number', maxLength: 'number', min: 'number', max: 'number', pattern: 'string', minAge: 'number' };
 /** The error key Angular puts on a control for each validator type (what `messages` must be keyed by). */

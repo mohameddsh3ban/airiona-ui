@@ -36,6 +36,7 @@
         image="assets/photos/aviation/landing-hero.webp"
         video="assets/video/landing-hero.mp4"
         focus="42% 50%"
+        phoneFocus="30% 50%"
         [badge]="splitHeroBadge"
         [headingLevel]="1"
         [docked]="true"
@@ -49,12 +50,36 @@
           iconEnd="arrow-right"
           (click)="goToBooking($event)"
         >Book a flight</button>
+        <button arButton arTop class="pg-el-heroSignIn" variant="glass" size="sm" (click)="goToSignIn($event)">Sign in</button>
+        <div class="pg-card pg-card--tight pg-el-phoneSearch">
+          <button
+            arFieldTile
+            class="pg-el-phoneSearchTile"
+            label="Where to?"
+            placeholder="Anywhere · Any date · 2 travellers"
+            icon="magnifying-glass"
+            trailingIcon="adjustments-horizontal"
+            (click)="goToBooking($event)"
+          ></button>
+        </div>
         <ar-booking-search
           class="pg-el-heroSearch"
           (search)="searchFlights($event)"
           (fieldOpen)="openSearchField($event)"
         />
       </ar-split-hero>
+    </div>
+  </section>
+
+  <section class="pg-s pg-s--quick" aria-label="Explore">
+    <div class="pg-g">
+      <ar-chip-scroller
+        class="pg-el-quickChips"
+        label="Explore"
+        tone="brand"
+        value="charter"
+        [options]="quickChipsOptions"
+      />
     </div>
   </section>
 
@@ -105,6 +130,7 @@
     <h2 class="pg-h m-title-2" id="pg-h-why">Why fly with Airiona</h2>
     <p class="pg-intro body">Everything a charter client asks before they book, answered before they ask.</p>
     <div class="pg-g">
+      <ar-amenity-list class="pg-el-whyPhone" [items]="whyPhoneItems" />
       <ar-feature-card
         class="pg-el-whyVerified"
         icon="shield-check"

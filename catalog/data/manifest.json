@@ -17966,6 +17966,18 @@
       "doc": "object-position for the photo and video."
      },
      {
+      "name": "phoneFocus",
+      "type": "string",
+      "optional": true,
+      "doc": "object-position on phones, where the photo runs full-bleed in portrait."
+     },
+     {
+      "name": "top",
+      "type": "React.ReactNode",
+      "optional": true,
+      "doc": "Phone brand row actions (sign in), shown over the photo below 768px."
+     },
+     {
       "name": "badge",
       "type": "SplitBadge",
       "optional": true,
@@ -18069,6 +18081,13 @@
       "doc": "object-position for the photo and video, e.g. \"60% 50%\"."
      },
      {
+      "name": "phoneFocus",
+      "kind": "input",
+      "type": "string | null",
+      "default": "null",
+      "doc": "object-position on phones, where the photo runs full-bleed in portrait, e.g. \"30% 50%\"."
+     },
+     {
       "name": "badge",
       "kind": "input",
       "type": "ArSplitBadge | null",
@@ -18105,11 +18124,12 @@
     ],
     "slots": [
      "[arActions]",
+     "[arTop]",
      "(default)"
     ],
     "helpers": [],
     "file": "projects/airiona-ui/src/lib/screens/split-hero.component.ts",
-    "doc": "Short figure in the blue disc, e.g. \"28K+\". */ value?: string; people?: ArPerson[]; } let ringSeq = 0; /** The landing page's opening. Copy on one side (eyebrow with a dashed flight trail, a two-part display headline, lede, actions); on the other a photo in an organic shape that turns into a looping video once the page has settled (after load, paused off screen, never under reduced motion or data saver), a glass badge with faces and a figure, and a \"watch the story\" ring button. With `docked`, the default slot straddles the bottom edge.  /",
+    "doc": "Short figure in the blue disc, e.g. \"28K+\". */ value?: string; people?: ArPerson[]; } let ringSeq = 0; /** The landing page's opening. Copy on one side (eyebrow with a dashed flight trail, a two-part display headline, lede, actions); on the other a photo in an organic shape that turns into a looping video once the page has settled (after load, paused off screen, never under reduced motion or data saver), a glass badge with faces and a figure, and a \"watch the story\" ring button. With `docked`, the default slot straddles the bottom edge. Below 768px it becomes an app home screen: the photo runs full-bleed behind the copy, with the brand and the `[arTop]` slot (sign in) over it under the status bar.  /",
     "code": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { ArSplitHero, ArBookingSearch, ArButton } from '@airiona/ui';\n\n@Component({\n  selector: 'app-example',\n  imports: [ArSplitHero, ArBookingSearch, ArButton],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <ar-split-hero eyebrow=\"Fly. Land. Explore.\" title=\"The sky\" accent=\"is yours.\"\n      lede=\"Private jets, hand-picked destinations and hangar space, booked in minutes with all-in prices.\"\n      image=\"photos/aviation/landing-hero.webp\" video=\"video/landing-hero.mp4\" [badge]=\"badge\" storyLabel=\"Watch the story\" docked>\n      <button arActions arButton variant=\"primary\" size=\"lg\" iconEnd=\"arrow-right\">Book a flight</button>\n      <ar-booking-search />\n    </ar-split-hero>\n  `,\n})\nexport class Example {\n  protected readonly badge = {\n  value: '28K+', title: 'Happy flyers', text: 'joined this year',\n  people: [{ name: 'Lina Haddad', src: 'photos/people/traveller-1.webp' }, { name: 'Omar Saleh', src: 'photos/people/traveller-2.webp' }, { name: 'Mei Tanaka', src: 'photos/people/traveller-3.webp' }],\n  };\n}\n",
     "uses": [
      "ArSplitHero",

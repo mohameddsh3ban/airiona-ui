@@ -28,13 +28,14 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Section | Purpose | 390 | 768 | 1280 | Sticky | Notes |
 |---|---|---|---|---|---|---|
-| **Airiona** `topbar` | Phone brand bar with sign in; the link row does not fit 390px | stack | ↑ | ↑ |  | hidden at lg |
+| **Airiona** `topbar` | Tablet brand bar with sign in; phones carry the brand inside the hero, desktops have the link row | stack | ↑ | ↑ |  | hidden at base, hidden at lg |
 | **Site navigation** `nav` | The reference's top bar: brand, links, language and sign in | stack | ↑ | ↑ |  | hidden at base |
-| **The sky is yours** `hero` | The reference hero in Airiona style: the promise, proof, the story film and the route search on the first screen | stack | ↑ | ↑ |  |  |
+| **The sky is yours** `hero` | The reference hero in Airiona style: the promise, proof and the route search on the first screen; on phones an app home screen with the video behind the copy | stack | ↑ | ↑ |  |  |
+| **Explore** `quick` | App shortcuts under the hero: what you can do on Airiona, one tap each | stack | ↑ | ↑ |  | hidden at md |
 | **Offers and featured destinations** `offers` | The reference's second band: the offer and proof on the left, featured destinations on the right | stack | ↑ | sidebar |  |  |
-| **Why fly with Airiona** `why` | Trust: the three promises behind the price | scroll-x | grid-3 | ↑ |  |  |
-| **More than a flight** `markets` | Doors into the aircraft and hangar marketplaces | scroll-x | grid-3 | ↑ |  |  |
-| **Footer** `footer` | Brand line and legal | stack | row | ↑ |  |  |
+| **Why fly with Airiona** `why` | Trust: the three promises behind the price | stack | grid-3 | ↑ |  |  |
+| **More than a flight** `markets` | Doors into the aircraft and hangar marketplaces | peek | grid-3 | ↑ |  |  |
+| **Footer** `footer` | Brand line and legal; apps have no footer, so phones skip it | stack | row | ↑ |  | hidden at base |
 | **Tabs** `tabs` | Phone and tablet app navigation, always in thumb reach | stack | ↑ | ↑ | base: bottom, lg: none | hidden at lg |
 
 ## Components
@@ -58,9 +59,18 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
-| `splitHero` | SplitHero `ar-split-hero` | `eyebrow`=Fly. Land. Explore.<br>`title`=The sky<br>`accent`=is yours.<br>`lede`=Private jets, hand-picked destinations and hangar space, boo<br>`image`=assets/photos/aviation/landing-hero.webp<br>`video`=assets/video/landing-hero.mp4<br>`focus`=42% 50%<br>`badge`={"value":"28K+","title":"Happy flyers","text":"joined this y<br>`headingLevel`=1<br>`docked`=true |  | SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, and the glass travellers badge; docked children straddle its bottom edge like the reference search pill<br>Not LandingHero: full-bleed photo with copy on top; the reference splits copy and photo side by side<br>Not HeroHeader: compact mobile header, no video, no badge |  |
+| `splitHero` | SplitHero `ar-split-hero` | `eyebrow`=Fly. Land. Explore.<br>`title`=The sky<br>`accent`=is yours.<br>`lede`=Private jets, hand-picked destinations and hangar space, boo<br>`image`=assets/photos/aviation/landing-hero.webp<br>`video`=assets/video/landing-hero.mp4<br>`focus`=42% 50%<br>`phoneFocus`=30% 50%<br>`badge`={"value":"28K+","title":"Happy flyers","text":"joined this y<br>`headingLevel`=1<br>`docked`=true |  | SplitHero is this reference's hero: two-part display headline with the accent line, a photo in the organic shape that starts as a still frame and turns into the looping video after load, and the glass travellers badge; docked children straddle its bottom edge like the reference search pill<br>Not LandingHero: full-bleed photo with copy on top; the reference splits copy and photo side by side<br>Not HeroHeader: compact mobile header, no video, no badge |  |
 | `heroBook` [arActions] | Button `button[arButton], a[arButton]` | `variant`=primary<br>`size`=lg<br>`iconEnd`=arrow-right |  | The reference's Start Exploring pill: the one primary action, straight to the booking page |  |
+| `heroSignIn` [arTop] | Button `button[arButton], a[arButton]` | `variant`=glass<br>`size`=sm |  | On phones the brand row sits inside the hero, like an app; sign in is its one action |  |
+| `phoneSearch` | `<div>` |  |  | A white card so the tile reads over the photo edge |  |
+| `phoneSearchTile` | FieldTile `button[arFieldTile]` | `label`=Where to?<br>`placeholder`=Anywhere · Any date · 2 travellers<br>`icon`=magnifying-glass<br>`trailingIcon`=adjustments-horizontal |  | The app search: one large tile that opens the full search sheet, instead of five fields on a 390px screen<br>Not BookingSearch: three rows of tiles on a phone; it buries the first screen<br>Not SearchField: opens the keyboard; a route needs pickers, not typing |  |
 | `heroSearch` | BookingSearch `ar-booking-search` |  |  | The reference's search pill: trip type, From ⇄ To, dates and travellers with the brand search disc, the system's flight search<br>Not html card with Select and DatePicker fields: the reference is a single compact bar; BookingSearch is that bar and opens each picker from its tile |  |
+
+### Explore
+
+| Element | Component | Inputs | Data | Why this one | States |
+|---|---|---|---|---|---|
+| `quickChips` | ChipScroller `ar-chip-scroller` | `label`=Explore<br>`tone`=brand<br>`value`=charter<br>`options`=[{"value":"charter","label":"Charter","icon":"paper-airplane |  | A swipeable chip row is how app home screens offer their main areas without a link bar |  |
 
 ### Offers and featured destinations
 
@@ -71,13 +81,14 @@ Page checks (`shoot`): 0 errors, 0 warnings. Spec check (`lint`) is at the end o
 | `stats` | StatStrip `ar-stat-strip` | `label`=Airiona in numbers<br>`items`=[{"icon":"globe-alt","value":"140","label":"Airports"},{"ico |  | The reference's three proof figures with tinted icon discs |  |
 | `featuredColumn` | `<div>` |  |  | Heading and cards as one column |  |
 | `featuredHead` | SectionHeader `ar-section-header` | `title`=Featured destinations<br>`action`=View all<br>`chevron`=true |  | Title with the reference's View all link |  |
-| `featuredGrid` | `<div>` |  |  | The reference carousel: one card and a peek on phones, three per view from tablets up, swiping sideways |  |
+| `featuredGrid` | `<div>` |  |  | The reference carousel: app-style peek row on phones, three per view from tablets up, swiping sideways |  |
 | `destination` | PlaceCard `ar-place-card` |  | `title` ← `item.title`<br>`region` ← `item.region`<br>`location` ← `item.location`<br>`rating` ← `item.rating`<br>`image` ← `item.image`<br>`saved` ← `item.saved` | The reference's tall photo card with a heart, the name, a from-price and the rating<br>Not DestinationCard: adds a Book now button the reference cards do not have |  |
 
 ### Why fly with Airiona
 
 | Element | Component | Inputs | Data | Why this one | States |
 |---|---|---|---|---|---|
+| `whyPhone` | AmenityList `ar-amenity-list` | `items`=[{"icon":"shield-check","label":"Verified operators"},{"icon |  | On phones the promises are one compact row of icon tiles, like an app; the cards return from tablets up |  |
 | `whyVerified` | FeatureCard `ar-feature-card` | `icon`=shield-check<br>`title`=Verified operators<br>`text`=Every operator is checked for its air operator certificate, <br>`tone`=light |  | Icon, title and two lines: one promise per card |  |
 | `whyPrice` | FeatureCard `ar-feature-card` | `icon`=banknotes<br>`title`=All-in prices<br>`text`=Crew, fuel, airport fees and VAT in one number before you re<br>`tone`=dark |  | The middle promise in the dark tone draws the eye to price, the first question |  |
 | `whyFast` | FeatureCard `ar-feature-card` | `icon`=clock<br>`title`=Confirmed in minutes<br>`text`=Operators answer within the 15-minute price hold, day or nig<br>`tone`=light |  | Speed is the third question |  |
@@ -153,7 +164,7 @@ Everything settles instantly under `prefers-reduced-motion` or `provideAiriona({
 - Style: Airiona's own type (Bricolage Grotesque display, Geist text) replaces the reference serif; the italic accent line becomes the Ion Blue accent with a hand-drawn underline. Colours, radii and shadows are the system's.
 - Hero frame and video: the photo is the first frame of a 5.25s seamless loop generated from it; the video fades in 1200ms after load, so the first paint is the still frame and the page never waits on video.
 - Copy is Airiona's: the reference is a travel brand; the figures (140 airports, 1,240 aircraft, 28K+ flyers) match the marketplace pages.
-- Phone order: brand bar, hero (copy, photo, search docked over its edge), offer and stats, featured destinations (swipe), why Airiona, marketplaces, footer, tab bar.
+- Phone (below 768px) is an app home screen, not the desktop stacked: the hero starts under the status bar with the video full-bleed behind the copy, the brand and Sign in over it, and one Where to? tile docked over its edge. Then the category chips, the offer, featured destinations and the marketplaces as peek rows, the promises as one row of icon tiles, and the tab bar. No footer and no stats card on phones (the hero badge already carries the proof).
 
 ## Spec check
 

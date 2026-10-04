@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, booleanAttribute, computed, effect, inject, input, output, signal, viewChild } from '@angular/core';
 import { ArIcon } from '../core/icon.component';
-import { ArAvatarStack, type ArPerson } from '../core/primitives';
+import { ArAvatarStack, ArWordmark, type ArPerson } from '../core/primitives';
 import { ArPlatform } from '../core/platform';
 import { arAssetUrl } from '../core/scene.component';
 
@@ -19,6 +19,8 @@ let ringSeq = 0;
  * lede, actions); on the other a photo in an organic shape that turns into a looping video once the page has
  * settled (after load, paused off screen, never under reduced motion or data saver), a glass badge with faces and
  * a figure, and a "watch the story" ring button. With `docked`, the default slot straddles the bottom edge.
+ * Below 768px it becomes an app home screen: the photo runs full-bleed behind the copy, with the brand and the
+ * `[arTop]` slot (sign in) over it under the status bar.
  *
  * ```html
  * <ar-split-hero eyebrow="Fly. Land. Explore." title="The sky" accent="is yours." image="…" video="…"
@@ -30,9 +32,9 @@ let ringSeq = 0;
  */
 @Component({
   selector: 'ar-split-hero',
-  imports: [ArIcon, ArAvatarStack],
+  imports: [ArIcon, ArAvatarStack, ArWordmark],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClass()', '[style.--ar-split-focus]': 'focus()', '[attr.title]': 'null' },
+  host: { '[class]': 'hostClass()', '[style.--ar-split-focus]': 'focus()', '[style.--ar-split-focus-phone]': 'phoneFocus()', '[attr.title]': 'null' },
   template: `
     <div class="ar-split__grid">
       <div class="ar-split__copy">
@@ -53,6 +55,7 @@ let ringSeq = 0;
         <div class="ar-split__actions"><ng-content select="[arActions]" /></div>
       </div>
       <div class="ar-split__media">
+        <div class="ar-split__top"><ar-wordmark /><div class="ar-split__top-actions"><ng-content select="[arTop]" /></div></div>
         <div class="ar-split__shape" aria-hidden="true">
           @if (image()) {
             <img class="ar-split__poster" [src]="imageSrc()" alt="" />
@@ -107,6 +110,8 @@ export class ArSplitHero {
   readonly video = input<string | null>(null);
   /** object-position for the photo and video, e.g. "60% 50%". */
   readonly focus = input<string | null>(null);
+  /** object-position on phones, where the photo runs full-bleed in portrait, e.g. "30% 50%". */
+  readonly phoneFocus = input<string | null>(null);
   readonly badge = input<ArSplitBadge | null>(null);
   /** Label of the ring button ("Watch the story"); the button shows only when set. */
   readonly storyLabel = input<string>();
